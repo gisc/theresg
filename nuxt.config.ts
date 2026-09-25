@@ -11,4 +11,10 @@ export default defineNuxtConfig({
 	site: {
 		name: 'transitsg',
 	},
+
+	css: ['@/assets/css/main.css'],
+
+	future: {
+		compatibilityVersion: 4,
+	},
 });

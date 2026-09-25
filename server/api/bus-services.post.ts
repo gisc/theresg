@@ -1,7 +1,10 @@
 export default defineEventHandler(async (event) => {
 	const apiKey = process.env.NUXT_DATAMALL_API_KEY;
 
-	const serviceNumber = event.headers.get('serviceNumber');
+	const { serviceNumber, skip } = await readBody<{
+		serviceNumber: string;
+		skip: number;
+	}>(event);
 
 	const data = await $fetch('https://datamall2.mytransport.sg/ltaodataservice/BusServices', {
 		method: 'GET',
@@ -9,8 +12,9 @@ export default defineEventHandler(async (event) => {
 			Accept: 'application/json',
 			AccountKey: apiKey || '',
 		},
-		body: {
+		query: {
 			ServiceNo: serviceNumber,
+			$skip: skip || 0,
 		},
 	});
 
