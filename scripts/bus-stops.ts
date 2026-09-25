@@ -41,8 +41,24 @@ async function cacheBusStops() {
 		console.log(`log: fetched ${allStops.length} stops`);
 	} while (fetchedCount === 500);
 
+	const geojson = {
+		type: 'FeatureCollection',
+		features: allStops.map((s) => ({
+			type: 'Feature',
+			geometry: {
+				type: 'Point',
+				coordinates: [s.Longitude, s.Latitude],
+			},
+			properties: {
+				code: s.BusStopCode,
+				name: s.Description,
+				road: s.RoadName,
+			},
+		})),
+	};
+
 	const outputPath = path.join(process.cwd(), 'public/bus-stops.json');
-	await fs.writeFile(outputPath, JSON.stringify(allStops));
+	await fs.writeFile(outputPath, JSON.stringify(geojson));
 	console.info(`info: fetched and cached ${allStops.length} stops`);
 }
 

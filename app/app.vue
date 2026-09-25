@@ -1,6 +1,10 @@
 <script setup lang="ts">
 import type { M3eNavRailElement } from '@m3e/web/nav-rail';
 
+const route = useRoute();
+
+const router = useRouter();
+
 const navRail = useTemplateRef<M3eNavRailElement>('navRail');
 
 function toggleNavRail() {
@@ -10,10 +14,14 @@ function toggleNavRail() {
 		navRail.value.mode = 'compact';
 	}
 }
+
+const routePath = computed(() => {
+	return route.path.toLowerCase() || '';
+});
 </script>
 
 <template>
-	<div class="content light">
+	<div id="content" class="content light">
 		<m3e-app-bar class="app-bar">
 			<m3e-icon-button slot="leading" @click="toggleNavRail()">
 				<Icon name="material-symbols:menu-outline" />
@@ -22,15 +30,21 @@ function toggleNavRail() {
 		</m3e-app-bar>
 		<div class="bottom">
 			<m3e-nav-rail ref="navRail" class="nav-rail">
-				<m3e-nav-item :selected="$route.path === '/'">
+				<m3e-nav-item :selected.prop="routePath === '/'" @click="router.push('/')">
 					<Icon slot="icon" name="material-symbols:home-outline" />
 					Home
 				</m3e-nav-item>
-				<m3e-nav-item :selected="$route.path === '/bus'">
+				<m3e-nav-item
+					:selected.prop="routePath.startsWith('/bus')"
+					@click="router.push('/bus')"
+				>
 					<Icon slot="icon" name="material-symbols:directions-bus-outline" />
 					Bus
 				</m3e-nav-item>
-				<m3e-nav-item :selected="$route.path === '/mrt'">
+				<m3e-nav-item
+					:selected.prop="routePath.startsWith('/mrt')"
+					@click="router.push('/mrt')"
+				>
 					<Icon slot="icon" name="material-symbols:train-outline" />
 					MRT
 				</m3e-nav-item>
