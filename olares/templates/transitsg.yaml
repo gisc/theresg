@@ -15,6 +15,7 @@ spec:
       containers:
         - name: transitsg
           image: ghcr.io/gisc/transitsg:latest
+          imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 3000
           env:
