@@ -17,7 +17,28 @@ const { data: alerts, status, error, refresh } = await useFetch<TrainServiceMess
 <template>
 	<div class="bg">
 		<div class="pg">
-			<m3e-heading class="heading" variant="headline" size="large">MRT Service Alerts</m3e-heading>
+			<m3e-heading class="heading" variant="headline" size="large">MRT</m3e-heading>
+			<MrtRoutePlanner />
+			<m3e-card>
+				<m3e-heading slot="header" variant="title" size="large">System Map</m3e-heading>
+				<div slot="content" class="system-map">
+					<span>
+						View the latest official MRT/LRT system map (July 2026 edition, includes
+						Circle Line Stage 6) from the Land Transport Authority.
+					</span>
+					<a
+						class="map-link"
+						href="https://www.lta.gov.sg/content/dam/ltagov/getting_around/public_transport/rail_network/pdf/SM_EN_(Ver210726)_CCL6.pdf"
+						target="_blank"
+						rel="noopener noreferrer"
+						>Open the LTA system map (PDF)</a
+					>
+					<span class="source">Map: Land Transport Authority</span>
+				</div>
+			</m3e-card>
+			<m3e-heading class="heading" variant="headline" size="medium"
+				>Service Alerts</m3e-heading
+			>
 			<p v-if="status === 'pending'">Loading service alerts...</p>
 			<div v-else-if="error">
 				<p>Service alerts are unavailable right now.</p>
@@ -67,5 +88,30 @@ const { data: alerts, status, error, refresh } = await useFetch<TrainServiceMess
 
 .heading {
 	color: var(--md-sys-color-on-surface);
+}
+
+.system-map {
+	display: flex;
+	flex-direction: column;
+	gap: 8px;
+	margin-top: 8px;
+	color: var(--md-sys-color-on-surface-variant);
+}
+
+.map-link {
+	font-weight: 600;
+	color: var(--md-sys-color-primary);
+}
+
+.source {
+	font-size: 12px;
+}
+
+@media (max-width: 767px) {
+	.pg {
+		border-radius: 20px;
+		padding: 12px;
+		gap: 12px;
+	}
 }
 </style>
