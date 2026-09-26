@@ -1,12 +1,9 @@
 import { formatDistance } from 'date-fns';
 
 export function timeToArrival(arrival: string, now: number): string {
-	console.log('Arrival:', arrival);
-	console.log('Now:', now);
-	const arrivalDate = new Date(arrival);
-	const currentDate = new Date(now);
-	const distance = formatDistance(arrivalDate, currentDate, {
-		addSuffix: true,
-	});
-	return distance;
+	if (!arrival) return 'No estimate';
+	const time = new Date(arrival).getTime();
+	if (!Number.isFinite(time)) return 'No estimate';
+	if (time <= now) return 'Due';
+	return formatDistance(time, now, { addSuffix: true });
 }
