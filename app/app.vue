@@ -28,11 +28,7 @@ const routePath = computed(() => {
 			<m3e-icon-button slot="leading" class="menu-button" @click="toggleNavRail()">
 				<Icon name="material-symbols:menu-outline" />
 			</m3e-icon-button>
-			<span slot="title">{{
-				($route.meta.title as string).toLowerCase() === 'home'
-					? 'transitsg'
-					: $route.meta.title
-			}}</span>
+			<span slot="title" class="brand"><img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA2NCA2NCIgcm9sZT0iaW1nIiBhcmlhLWxhYmVsbGVkYnk9InRpdGxlIj4KICA8dGl0bGUgaWQ9InRpdGxlIj5UcmFuc2l0U0cgY29sb3VyZnVsIHJhaWwgYW5kIGJ1cyByb3V0ZXM8L3RpdGxlPgogIDxkZWZzPjxsaW5lYXJHcmFkaWVudCBpZD0ibmlnaHQiIHgyPSIxIiB5Mj0iMSI+PHN0b3Agc3RvcC1jb2xvcj0iIzE1MzA1YSIvPjxzdG9wIG9mZnNldD0iMSIgc3RvcC1jb2xvcj0iIzEwMjQ0NSIvPjwvbGluZWFyR3JhZGllbnQ+PC9kZWZzPgogIDxyZWN0IHg9IjIiIHk9IjIiIHdpZHRoPSI2MCIgaGVpZ2h0PSI2MCIgcng9IjE3IiBmaWxsPSJ1cmwoI25pZ2h0KSIvPgogIDxwYXRoIGQ9Ik0xMCA0M0MyMCA0MyAxNyAxOCAzMCAxOHM3IDI4IDI0IDI1IiBmaWxsPSJub25lIiBzdHJva2U9IiNmNmJlMzAiIHN0cm9rZS13aWR0aD0iNyIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIi8+CiAgPHBhdGggZD0iTTEwIDI5YzExIDAgMTMgMTYgMjIgMTZzMTAtMjIgMjItMjIiIGZpbGw9Im5vbmUiIHN0cm9rZT0iI2VmNTk2YiIgc3Ryb2tlLXdpZHRoPSI3IiBzdHJva2UtbGluZWNhcD0icm91bmQiLz4KICA8cGF0aCBkPSJNMTEgNDNjMTEgMCAxNi0xMyAyMi0xM3MxMiAxMyAyMSAxMyIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjMzZjOWFkIiBzdHJva2Utd2lkdGg9IjYiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIvPgogIDxjaXJjbGUgY3g9IjMyIiBjeT0iMzEiIHI9IjYuNSIgZmlsbD0iI2ZmZiIvPjxjaXJjbGUgY3g9IjMyIiBjeT0iMzEiIHI9IjIuNiIgZmlsbD0iIzE1MzA1YSIvPgogIDxjaXJjbGUgY3g9IjEwIiBjeT0iMjkiIHI9IjMuNiIgZmlsbD0iI2ZmZiIvPjxjaXJjbGUgY3g9IjU0IiBjeT0iMjMiIHI9IjMuNiIgZmlsbD0iI2ZmZiIvPgo8L3N2Zz4K" alt="" width="32" height="32" /><span>transitsg</span></span>
 		</m3e-app-bar>
 		<div class="bottom">
 			<m3e-nav-rail ref="navRail" class="nav-rail">
@@ -93,6 +89,9 @@ const routePath = computed(() => {
 	flex-shrink: 0;
 	--m3e-app-bar-container-color: var(--md-sys-color-surface-container);
 }
+
+.brand { display: inline-flex; align-items: center; gap: 9px; vertical-align: middle; font-weight: 700; }
+.brand img { width: 32px; height: 32px; border-radius: 8px; }
 
 .bottom {
 	flex-grow: 1;
