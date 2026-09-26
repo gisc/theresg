@@ -31,8 +31,11 @@ const { data: alerts, status, error, refresh } = await useFetch<TrainServiceMess
 						href="https://www.lta.gov.sg/content/dam/ltagov/getting_around/public_transport/rail_network/pdf/SM_EN_(Ver210726)_CCL6.pdf"
 						target="_blank"
 						rel="noopener noreferrer"
-						>Open the LTA system map (PDF)</a
+						aria-label="Open the full LTA MRT and LRT system map PDF in a new tab"
 					>
+						<img src="/lta-system-map-2026.webp" alt="Preview of LTA's July 2026 MRT and LRT system map" width="1000" height="1000" loading="lazy" />
+						<span>Tap map to open the full PDF</span>
+					</a>
 					<span class="source">Map: Land Transport Authority</span>
 				</div>
 			</m3e-card>
@@ -101,7 +104,23 @@ const { data: alerts, status, error, refresh } = await useFetch<TrainServiceMess
 .map-link {
 	font-weight: 600;
 	color: var(--md-sys-color-primary);
+	width: min(100%, 460px);
+	text-decoration: none;
+	display: flex;
+	flex-direction: column;
+	gap: 6px;
 }
+
+.map-link img {
+	display: block;
+	width: 100%;
+	height: auto;
+	border-radius: 12px;
+	border: 1px solid var(--md-sys-color-outline-variant);
+	box-sizing: border-box;
+}
+
+.map-link:focus-visible { outline: 2px solid var(--md-sys-color-primary); outline-offset: 3px; }
 
 .source {
 	font-size: 12px;
