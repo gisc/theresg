@@ -11,6 +11,117 @@ useSeoMeta({
 });
 
 const router = useRouter();
+const route = useRoute();
+const stopQuery = ref('');
+const serviceQuery = ref('');
+const service = ref('');
+const stopFocused = ref(false);
+const serviceFocused = ref(false);
+const routeLoading = ref(false);
+const routeError = ref('');
+const routeDirections = ref<Record<string, string[]>>({});
+const { data: serviceList, status: serviceStatus } = useFetch<string[]>('/api/bus-service-lookup', {
+	default: () => [],
+});
+const { data: geojson } = await useLazyFetch('/bus-stops.json', {
+	server: false,
+});
+
+
+const allStops = computed(() => {
+  const data = geojson.value as Geojson | null;
+  return data?.features?.map((f) => f.properties) ?? [];
+});
+
+const selectedStop = computed(
+	() => allStops.value.find((s) => s.code === route.query.stop) ?? null,
+);
+const stopMatches = computed(() => {
+	const q = stopQuery.value.trim().toLowerCase();
+	if (
+		!q ||
+		(selectedStop.value &&
+			stopQuery.value === `${selectedStop.value.name} (${selectedStop.value.code})`)
+	)
+		return [];
+	const matches = allStops.value.filter(
+		(s) =>
+			s.code.startsWith(q) ||
+			s.name.toLowerCase().includes(q) ||
+			s.road.toLowerCase().includes(q),
+	);
+	return matches.sort((a, b) => Number(b.code === q) - Number(a.code === q)).slice(0, 8);
+});
+const serviceMatches = computed(() => {
+	const q = serviceQuery.value.trim().toUpperCase();
+	if (!q || q === service.value) return [];
+	return (serviceList.value ?? []).filter((s) => s.toUpperCase().startsWith(q)).slice(0, 8);
+});
+const directions = computed(() =>
+	Object.entries(routeDirections.value).sort(([a], [b]) => Number(a) - Number(b)),
+);
+const activeDirection = ref('1');
+const routeStops = computed(() =>
+	(routeDirections.value[activeDirection.value] ?? []).map(
+		(code) =>
+			allStops.value.find((s) => s.code === code) ?? { code, name: `Stop ${code}`, road: '' },
+	),
+);
+function blurSuggestions(which: 'service' | 'stop') {
+	window.setTimeout(() => {
+		if (which === 'service') serviceFocused.value = false;
+		else stopFocused.value = false;
+	}, 180);
+}
+let routeRequest = 0;
+function pickStop(s: BusStop) {
+	stopQuery.value = `${s.name} (${s.code})`;
+	stopFocused.value = false;
+	router.push({ path: '/bus', query: { ...route.query, stop: s.code } });
+}
+async function pickService(s: string) {
+	serviceQuery.value = s;
+	serviceFocused.value = false;
+	service.value = s;
+	routeDirections.value = {};
+	routeError.value = '';
+	routeLoading.value = true;
+	router.replace({ path: '/bus', query: { ...route.query, service: s } });
+	const request = ++routeRequest;
+	try {
+		const result = await $fetch<Record<string, string[]>>('/api/bus-route-lookup', {
+			query: { service: s },
+		});
+		if (request !== routeRequest) return;
+		routeDirections.value = result;
+		activeDirection.value = Object.keys(result).sort()[0] ?? '1';
+	} catch {
+		if (request === routeRequest)
+			routeError.value = 'Could not load this route. Please try again.';
+	} finally {
+		if (request === routeRequest) routeLoading.value = false;
+	}
+}
+function stopInput(e: Event) {
+	stopQuery.value = (e.target as HTMLInputElement).value;
+	stopFocused.value = true;
+}
+function serviceInput(e: Event) {
+	serviceQuery.value = (e.target as HTMLInputElement).value.toUpperCase();
+	serviceFocused.value = true;
+}
+function submitStop() {
+	const exact = allStops.value.find((s) => s.code === stopQuery.value.trim());
+	const match = exact ?? stopMatches.value[0] ?? null;
+	if (match) pickStop(match);
+}
+function submitService() {
+	const exact = (serviceList.value ?? []).find(
+		(s) => s.toUpperCase() === serviceQuery.value.trim().toUpperCase(),
+	);
+	const match = exact ?? serviceMatches.value[0] ?? null;
+	if (match) pickService(match);
+}
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const mapInstance = shallowRef<any>(null);
@@ -19,10 +130,6 @@ const mapInstance = shallowRef<any>(null);
 function handleMapLoad(e: any) {
 	mapInstance.value = e.target;
 }
-
-const { data: geojson } = await useLazyFetch('/bus-stops.json', {
-	server: false,
-});
 
 const style = 'https://tiles.openfreemap.org/styles/liberty';
 const center = {
@@ -35,11 +142,6 @@ const circleColor = ref<string>('#006A66');
 const outlineColor = ref<string>('#6F7978');
 const clusterTextColor = ref<string>('#FFFFFF');
 
-const allStops = computed(() => {
-	const data = geojson.value as Geojson | null;
-	return data?.features?.map((f) => f.properties) ?? [];
-});
-
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 function handleStopClick(e: any) {
 	const feature = e.features[0];
@@ -50,12 +152,7 @@ function handleStopClick(e: any) {
 
 	const properties: BusStop = feature.properties;
 
-	router.push({
-		name: 'bus',
-		query: {
-			stop: properties.code,
-		},
-	});
+	pickStop(properties);
 }
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -103,14 +200,161 @@ onMounted(() => {
 			clusterTextColor.value = onPrimaryVar;
 		}
 	}
+	if (typeof route.query.service === 'string') pickService(route.query.service);
 });
 </script>
 
 <template>
 	<div class="bg">
 		<div class="pg">
-			<m3e-heading class="heading" variant="headline" size="large">Bus Stops</m3e-heading>
-			<BusStop v-if="allStops && allStops.length !== 0" :stops="allStops" />
+			<m3e-heading class="heading" variant="headline" size="large">Bus</m3e-heading>
+			<section class="intro" aria-label="How to use bus search">
+				<h2>Find your bus or stop</h2>
+				<p>
+					Search a bus number to see its route, then tap a stop for live arrivals. Or
+					search a stop by name, road, or 5-digit code to see every bus arriving there.
+				</p>
+				<p class="example">
+					<strong>Example:</strong> Enter <strong>36</strong>, choose a stop on its route,
+					and see when bus 36 arrives. You can also enter <strong>01012</strong> for
+					arrivals at Hotel Grand Pacific.
+				</p>
+			</section>
+			<div class="search-grid">
+				<div class="search-field">
+					<label for="bus-service">Bus number</label>
+					<div class="ac">
+						<input
+							id="bus-service"
+							:value="serviceQuery"
+							placeholder="e.g. 36"
+							autocomplete="off"
+							aria-autocomplete="list"
+							:aria-expanded="serviceFocused && serviceMatches.length > 0"
+							aria-controls="service-options"
+							@input="serviceInput"
+							@focus="serviceFocused = true"
+							@blur="blurSuggestions('service')"
+							@keydown.enter.prevent="submitService"
+						/>
+						<ul
+							v-if="serviceFocused && serviceMatches.length"
+							id="service-options"
+							class="matches"
+							role="listbox"
+							aria-label="Bus numbers"
+						>
+							<li
+								v-for="item in serviceMatches"
+								:key="item"
+								role="option"
+								:aria-selected="false"
+							>
+								<button
+									type="button"
+									@mousedown.prevent="pickService(item)"
+									@click="pickService(item)"
+								>
+									Bus {{ item }}
+								</button>
+							</li>
+						</ul>
+					</div>
+					<small v-if="serviceStatus === 'pending'">Loading bus numbers...</small>
+				</div>
+				<div class="search-field">
+					<label for="bus-stop">Bus stop</label>
+					<div class="ac">
+						<input
+							id="bus-stop"
+							:value="stopQuery"
+							placeholder="Name, road, or 5-digit code"
+							autocomplete="off"
+							aria-autocomplete="list"
+							:aria-expanded="stopFocused && stopMatches.length > 0"
+							aria-controls="stop-options"
+							@input="stopInput"
+							@focus="stopFocused = true"
+							@blur="blurSuggestions('stop')"
+							@keydown.enter.prevent="submitStop"
+						/>
+						<ul
+							v-if="stopFocused && stopMatches.length"
+							id="stop-options"
+							class="matches"
+							role="listbox"
+							aria-label="Bus stops"
+						>
+							<li
+								v-for="item in stopMatches"
+								:key="item.code"
+								role="option"
+								:aria-selected="false"
+							>
+								<button
+									type="button"
+									@mousedown.prevent="pickStop(item)"
+									@click="pickStop(item)"
+								>
+									<strong>{{ item.name }}</strong>
+									<span>{{ item.road }} · {{ item.code }}</span>
+								</button>
+							</li>
+						</ul>
+					</div>
+					<small v-if="!allStops.length">Loading stops...</small>
+				</div>
+			</div>
+			<section v-if="service" class="route-panel" aria-live="polite">
+				<h2>Bus {{ service }} route</h2>
+				<p v-if="routeLoading">Loading the full route...</p>
+				<p v-else-if="routeError">
+					{{ routeError }}
+					<button type="button" class="retry" @click="pickService(service)">Retry</button>
+				</p>
+				<p v-else-if="!directions.length">No route found for this bus.</p>
+				<template v-else>
+					<div
+						v-if="directions.length > 1"
+						class="direction-tabs"
+						role="group"
+						aria-label="Route direction"
+					>
+						<button
+							v-for="[direction, stops] in directions"
+							:key="direction"
+							type="button"
+							:class="{ active: activeDirection === direction }"
+							:aria-pressed="activeDirection === direction"
+							@click="activeDirection = direction"
+						>
+							Direction {{ direction }} ·
+							{{
+								allStops.find((s) => s.code === stops.at(-1))?.name ?? stops.at(-1)
+							}}
+						</button>
+					</div>
+					<p class="route-help">
+						Choose a stop below for live arrivals. {{ routeStops.length }} stops in this
+						direction.
+					</p>
+					<ol class="route-list">
+						<li v-for="(item, i) in routeStops" :key="`${i}-${item.code}`">
+							<button type="button" @click="pickStop(item)">
+								<span class="stop-seq">{{ i + 1 }}</span
+								><span
+									><strong>{{ item.name }}</strong
+									><small>{{ item.road }} · {{ item.code }}</small></span
+								><span aria-hidden="true">›</span>
+							</button>
+						</li>
+					</ol>
+				</template>
+			</section>
+			<BusStop v-if="allStops.length" :stops="allStops" />
+			<p class="map-hint">
+				Prefer the map? Zoom in or tap a cluster, then choose a stop for arrivals.
+			</p>
 			<ClientOnly>
 				<MglMap :map-style="style" :center="center" :zoom="zoom" @map:load="handleMapLoad">
 					<MglGeoJsonSource
@@ -126,7 +370,15 @@ onMounted(() => {
 							:filter="['has', 'point_count']"
 							:paint="{
 								'circle-color': circleColor,
-								'circle-radius': ['step', ['get', 'point_count'], 18, 100, 24, 500, 30],
+								'circle-radius': [
+									'step',
+									['get', 'point_count'],
+									18,
+									100,
+									24,
+									500,
+									30,
+								],
 								'circle-stroke-width': 1,
 								'circle-stroke-color': outlineColor,
 							}"
@@ -148,7 +400,15 @@ onMounted(() => {
 							:filter="['!', ['has', 'point_count']]"
 							:paint="{
 								'circle-color': circleColor,
-								'circle-radius': ['interpolate', ['linear'], ['zoom'], 10, 6, 15, 10],
+								'circle-radius': [
+									'interpolate',
+									['linear'],
+									['zoom'],
+									10,
+									6,
+									15,
+									10,
+								],
 								'circle-stroke-width': 1,
 								'circle-stroke-color': outlineColor,
 							}"
@@ -205,13 +465,208 @@ onMounted(() => {
 .maplibregl-map {
 	border-radius: 16px;
 	min-height: 50svh;
-	flex: 1 1 auto;
+	flex: 0 0 auto;
 	box-sizing: border-box;
 }
 
 @media (max-width: 767px) {
 	.maplibregl-map {
-		min-height: 55svh;
+		min-height: 45svh;
+	}
+}
+</style>
+
+<style scoped>
+.intro,
+.route-panel {
+	padding: 16px;
+	border-radius: 16px;
+	background: var(--md-sys-color-surface-container-low);
+}
+.intro h2,
+.route-panel h2 {
+	font-size: 20px;
+	margin: 0 0 8px;
+}
+.intro p {
+	margin: 0 0 8px;
+	line-height: 1.45;
+}
+.intro p:last-child {
+	margin-bottom: 0;
+}
+.example {
+	color: var(--md-sys-color-on-surface-variant);
+}
+.search-grid {
+	display: grid;
+	grid-template-columns: repeat(2, minmax(0, 1fr));
+	gap: 12px;
+}
+.search-field {
+	min-width: 0;
+}
+.search-field label {
+	display: block;
+	font-weight: 650;
+	margin-bottom: 6px;
+}
+.search-field small {
+	display: block;
+	margin-top: 5px;
+	color: var(--md-sys-color-on-surface-variant);
+}
+.ac {
+	position: relative;
+}
+.ac input {
+	width: 100%;
+	box-sizing: border-box;
+	font: inherit;
+	font-size: 16px;
+	padding: 12px 14px;
+	border: 1px solid var(--md-sys-color-outline);
+	border-radius: 12px;
+	color: var(--md-sys-color-on-surface);
+	background: var(--md-sys-color-surface-container-lowest);
+}
+.ac input:focus {
+	outline: 2px solid var(--md-sys-color-primary);
+	outline-offset: 1px;
+}
+.matches {
+	position: absolute;
+	z-index: 25;
+	top: 100%;
+	left: 0;
+	right: 0;
+	max-height: 280px;
+	overflow-y: auto;
+	list-style: none;
+	padding: 4px;
+	margin: 4px 0;
+	background: var(--md-sys-color-surface-container-highest);
+	border-radius: 12px;
+	box-shadow: 0 6px 20px #0003;
+}
+.matches button {
+	text-align: left;
+	width: 100%;
+	padding: 10px;
+	min-height: 44px;
+	border: 0;
+	border-radius: 8px;
+	font: inherit;
+	cursor: pointer;
+	color: var(--md-sys-color-on-surface);
+	background: transparent;
+}
+.matches button:hover,
+.matches button:focus {
+	background: var(--md-sys-color-primary-container);
+}
+.matches button span {
+	display: block;
+	font-size: 13px;
+	color: var(--md-sys-color-on-surface-variant);
+}
+.route-panel {
+	max-height: 50svh;
+	display: flex;
+	flex-direction: column;
+}
+.route-panel p {
+	margin: 4px 0 10px;
+}
+.direction-tabs {
+	display: flex;
+	gap: 8px;
+	overflow-x: auto;
+	flex-shrink: 0;
+	padding-bottom: 6px;
+}
+.direction-tabs button {
+	flex: 0 0 auto;
+	padding: 8px 10px;
+	border-radius: 20px;
+	border: 1px solid var(--md-sys-color-outline-variant);
+	background: transparent;
+	color: var(--md-sys-color-on-surface);
+	cursor: pointer;
+}
+.direction-tabs button.active {
+	background: var(--md-sys-color-primary-container);
+	color: var(--md-sys-color-on-primary-container);
+	border-color: var(--md-sys-color-primary);
+}
+.route-help {
+	color: var(--md-sys-color-on-surface-variant);
+	font-size: 14px;
+}
+.route-list {
+	overflow-y: auto;
+	padding: 0;
+	margin: 0;
+	list-style: none;
+	border-radius: 12px;
+	background: var(--md-sys-color-surface);
+}
+.route-list li + li {
+	border-top: 1px solid var(--md-sys-color-outline-variant);
+}
+.route-list button {
+	width: 100%;
+	padding: 10px;
+	border: 0;
+	display: flex;
+	gap: 12px;
+	align-items: center;
+	text-align: left;
+	background: transparent;
+	color: var(--md-sys-color-on-surface);
+	font: inherit;
+	cursor: pointer;
+}
+.route-list button:hover,
+.route-list button:focus {
+	background: var(--md-sys-color-primary-container);
+}
+.route-list button > span:nth-child(2) {
+	flex: 1;
+}
+.route-list small {
+	display: block;
+	color: var(--md-sys-color-on-surface-variant);
+}
+.stop-seq {
+	display: grid;
+	place-items: center;
+	width: 28px;
+	height: 28px;
+	flex-shrink: 0;
+	border-radius: 50%;
+	background: var(--md-sys-color-secondary-container);
+	color: var(--md-sys-color-on-secondary-container);
+	font-size: 13px;
+}
+.map-hint {
+	margin: 0;
+	color: var(--md-sys-color-on-surface-variant);
+	font-size: 14px;
+}
+.retry {
+	border: 0;
+	background: none;
+	color: var(--md-sys-color-primary);
+	text-decoration: underline;
+	cursor: pointer;
+}
+@media (max-width: 767px) {
+	.search-grid {
+		grid-template-columns: 1fr;
+	}
+	.route-panel {
+		max-height: 46svh;
 	}
 }
 </style>
