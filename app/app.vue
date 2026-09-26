@@ -25,7 +25,7 @@ const routePath = computed(() => {
 <template>
 	<div id="content" class="content" :class="isDark ? 'dark' : 'light'">
 		<m3e-app-bar class="app-bar">
-			<m3e-icon-button slot="leading" @click="toggleNavRail()">
+			<m3e-icon-button slot="leading" class="menu-button" @click="toggleNavRail()">
 				<Icon name="material-symbols:menu-outline" />
 			</m3e-icon-button>
 			<span slot="title">{{
@@ -57,6 +57,26 @@ const routePath = computed(() => {
 			</m3e-nav-rail>
 			<NuxtPage class="page" />
 		</div>
+		<m3e-nav-bar class="nav-bar">
+			<m3e-nav-item :selected.prop="routePath === '/'" @click="router.push('/')">
+				<Icon slot="icon" name="material-symbols:home-outline" />
+				Home
+			</m3e-nav-item>
+			<m3e-nav-item
+				:selected.prop="routePath.startsWith('/bus')"
+				@click="router.push('/bus')"
+			>
+				<Icon slot="icon" name="material-symbols:directions-bus-outline" />
+				Bus
+			</m3e-nav-item>
+			<m3e-nav-item
+				:selected.prop="routePath.startsWith('/mrt')"
+				@click="router.push('/mrt')"
+			>
+				<Icon slot="icon" name="material-symbols:train-outline" />
+				MRT
+			</m3e-nav-item>
+		</m3e-nav-bar>
 	</div>
 </template>
 
@@ -86,8 +106,30 @@ const routePath = computed(() => {
 	background-color: var(--md-sys-color-surface-container);
 }
 
+.nav-bar {
+	display: none;
+	flex-shrink: 0;
+	padding-bottom: env(safe-area-inset-bottom);
+	background-color: var(--md-sys-color-surface-container);
+}
+
 .page {
 	flex-grow: 1;
 	min-height: 0;
+	min-width: 0;
+}
+
+@media (max-width: 767px) {
+	.nav-rail {
+		display: none;
+	}
+
+	.menu-button {
+		display: none;
+	}
+
+	.nav-bar {
+		display: flex;
+	}
 }
 </style>
