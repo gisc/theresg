@@ -49,6 +49,13 @@ const { data: trafficIncidents } = await useFetch<TrafficIncident[]>('/api/traff
 					</m3e-list-item>
 				</m3e-list>
 			</m3e-card>
+			<p class="credit">
+				TransitSG was originally created by Mr Ethan Lee Qi Yang (Secondary 2, Hwa
+				Chong International School). This app is forked from his
+				<a href="https://github.com/ingStudiosOfficial/transitsg"
+					>original project on GitHub</a
+				>, used under the Apache-2.0 license.
+			</p>
 		</div>
 	</div>
 </template>
@@ -80,5 +87,25 @@ const { data: trafficIncidents } = await useFetch<TrafficIncident[]>('/api/traff
 
 .heading {
 	color: var(--md-sys-color-on-surface);
+}
+
+.credit {
+	margin: auto 0 0;
+	padding-top: 8px;
+	text-align: center;
+	font-size: 13px;
+	color: var(--md-sys-color-on-surface-variant);
+}
+
+.credit a {
+	color: var(--md-sys-color-primary);
+}
+
+@media (max-width: 767px) {
+	.pg {
+		border-radius: 20px;
+		padding: 12px;
+		gap: 12px;
+	}
 }
 </style>
