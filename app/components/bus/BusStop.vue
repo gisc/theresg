@@ -11,6 +11,9 @@ const route = useRoute();
 
 const stop = ref<BusStop | null>(null);
 const arrivals = ref<BusArrival[]>([]);
+const arrivalsLoading = ref(false);
+const arrivalsError = ref(false);
+let arrivalsRequest = 0;
 const now = ref<number>(Date.now());
 
 let timeInterval: ReturnType<typeof setInterval> | null = null;
@@ -20,14 +23,20 @@ const visibleArrivals = computed(() => {
 });
 
 async function refreshArrivals(s: BusStop) {
-	console.log('Refreshing arrivals.');
-
-	arrivals.value = await $fetch('/api/bus-arrivals', {
-		method: 'GET',
-		query: {
-			stopCode: s.code,
-		},
-	});
+	const request = ++arrivalsRequest;
+	arrivalsLoading.value = true;
+	arrivalsError.value = false;
+	try {
+		const result = await $fetch<BusArrival[]>('/api/bus-arrivals', {
+			method: 'GET',
+			query: { stopCode: s.code },
+		});
+		if (request === arrivalsRequest) arrivals.value = result;
+	} catch {
+		if (request === arrivalsRequest) arrivalsError.value = true;
+	} finally {
+		if (request === arrivalsRequest) arrivalsLoading.value = false;
+	}
 }
 
 function hasPassedArrival(a: BusArrival) {
@@ -38,21 +47,26 @@ function hasPassedArrival(a: BusArrival) {
 }
 
 watch(stop, async (s) => {
-	if (!s) return;
+	arrivals.value = [];
+	arrivalsError.value = false;
+	if (!s) {
+		arrivalsRequest++;
+		arrivalsLoading.value = false;
+		return;
+	}
 	await refreshArrivals(s);
 });
 
-onBeforeRouteUpdate((to) => {
-	if (to.query.stop && typeof to.query.stop === 'string') {
-		stop.value = getStop(stops.value, to.query.stop);
-	}
-});
+watch(
+	() => [route.query.stop, stops.value],
+	() => {
+		const code = route.query.stop;
+		stop.value = typeof code === 'string' ? getStop(stops.value, code) : null;
+	},
+	{ immediate: true },
+);
 
 onMounted(() => {
-	if (route.query.stop && typeof route.query.stop === 'string') {
-		stop.value = getStop(stops.value, route.query.stop);
-	}
-
 	timeInterval = setInterval(async () => {
 		now.value = Date.now();
 
@@ -78,7 +92,21 @@ onBeforeUnmount(() => {
 			<span>{{ stop.road }}</span>
 			<m3e-expansion-panel class="arrivals-panel" open>
 				<span slot="header">Bus arrivals</span>
-				<m3e-list v-if="arrivals && arrivals.length !== 0" variant="segmented">
+				<div
+					v-if="arrivalsLoading"
+					class="loading-container"
+					role="status"
+					aria-label="Loading arrivals"
+				>
+					<m3e-loading-indicator />
+				</div>
+				<p v-else-if="arrivalsError" role="alert">
+					Could not load arrivals.
+					<button type="button" class="retry" @click="refreshArrivals(stop)">
+						Retry
+					</button>
+				</p>
+				<m3e-list v-else-if="visibleArrivals.length" variant="segmented">
 					<m3e-list-item v-for="arrival in visibleArrivals" :key="arrival.ServiceNo">
 						<span>
 							<span class="bus-number">{{ arrival.ServiceNo }}</span>
@@ -99,9 +127,7 @@ onBeforeUnmount(() => {
 						</span>
 					</m3e-list-item>
 				</m3e-list>
-				<div v-else class="loading-container">
-					<m3e-loading-indicator />
-				</div>
+				<p v-else>No arrival times available for this stop right now.</p>
 			</m3e-expansion-panel>
 		</div>
 	</m3e-card>
@@ -110,7 +136,7 @@ onBeforeUnmount(() => {
 			Select a stop to view timings
 		</m3e-heading>
 		<div slot="content" class="content">
-			<span>Select a stop from the map below to view bus arrival times and more</span>
+			<span>Search above or choose a stop on the map below to view live bus arrivals.</span>
 		</div>
 	</m3e-card>
 </template>
@@ -151,5 +177,16 @@ onBeforeUnmount(() => {
 	color: var(--md-sys-color-secondary);
 	width: fit-content;
 	height: fit-content;
+}
+</style>
+
+<style scoped>
+.retry {
+	border: 0;
+	background: none;
+	color: var(--md-sys-color-primary);
+	text-decoration: underline;
+	cursor: pointer;
+	font: inherit;
 }
 </style>
