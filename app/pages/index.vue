@@ -20,6 +20,20 @@ const { data: trafficIncidents } = await useFetch<TrafficIncident[]>('/api/traff
 <template>
 	<div class="bg">
 		<div class="pg">
+			<header class="home-intro">
+				<h1>TransitSG</h1>
+				<p>
+					Check live bus arrivals, explore bus routes, plan MRT journeys, and see
+					transport alerts across Singapore.
+				</p>
+				<p class="credit">
+					TransitSG was originally created by Mr Ethan Lee Qi Yang (Secondary 2, Hwa Chong
+					International School). This app is forked from his
+					<a href="https://github.com/ingStudiosOfficial/transitsg"
+						>original project on GitHub</a
+					>, used under the Apache-2.0 license.
+				</p>
+			</header>
 			<m3e-heading class="heading" variant="headline" size="large"
 				>Service Alerts</m3e-heading
 			>
@@ -49,13 +63,6 @@ const { data: trafficIncidents } = await useFetch<TrafficIncident[]>('/api/traff
 					</m3e-list-item>
 				</m3e-list>
 			</m3e-card>
-			<p class="credit">
-				TransitSG was originally created by Mr Ethan Lee Qi Yang (Secondary 2, Hwa
-				Chong International School). This app is forked from his
-				<a href="https://github.com/ingStudiosOfficial/transitsg"
-					>original project on GitHub</a
-				>, used under the Apache-2.0 license.
-			</p>
 		</div>
 	</div>
 </template>
@@ -90,9 +97,7 @@ const { data: trafficIncidents } = await useFetch<TrafficIncident[]>('/api/traff
 }
 
 .credit {
-	margin: auto 0 0;
-	padding-top: 8px;
-	text-align: center;
+	margin: 8px 0 0;
 	font-size: 13px;
 	color: var(--md-sys-color-on-surface-variant);
 }
@@ -107,5 +112,19 @@ const { data: trafficIncidents } = await useFetch<TrafficIncident[]>('/api/traff
 		padding: 12px;
 		gap: 12px;
 	}
+}
+</style>
+
+<style scoped>
+.home-intro {
+	padding: 8px 4px 14px;
+}
+.home-intro h1 {
+	margin: 0 0 8px;
+	font-size: clamp(28px, 6vw, 38px);
+}
+.home-intro > p:not(.credit) {
+	margin: 0;
+	line-height: 1.45;
 }
 </style>
