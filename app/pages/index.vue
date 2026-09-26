@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import type { TrafficIncident } from '~~/shared/types/TrafficIncident';
 import type { TrainServiceMessage } from '~~/shared/types/TrainServiceMessage';
 
 definePageMeta({
@@ -9,7 +10,11 @@ useSeoMeta({
 	title: 'Home',
 });
 
-const { data } = await useFetch<TrainServiceMessage[]>('/api/train-service-alerts');
+const { data: trainServiceMessages } = await useFetch<TrainServiceMessage[]>(
+	'/api/train-service-alerts',
+);
+
+const { data: trafficIncidents } = await useFetch<TrafficIncident[]>('/api/traffic-incidents');
 </script>
 
 <template>
@@ -20,12 +25,27 @@ const { data } = await useFetch<TrainServiceMessage[]>('/api/train-service-alert
 			>
 			<m3e-card>
 				<m3e-list slot="content" variant="segmented">
-					<m3e-list-item v-for="alert in data" :key="alert.Content">
+					<m3e-list-item v-for="alert in trainServiceMessages" :key="alert.Content">
 						<m3e-avatar slot="leading">
 							<Icon :name="getAlertIcon(alert.Content)" />
 						</m3e-avatar>
 						<span slot="overline">{{ alert.CreatedDate }}</span>
 						{{ alert.Content }}
+					</m3e-list-item>
+				</m3e-list>
+			</m3e-card>
+
+			<m3e-heading class="heading" variant="headline" size="large"
+				>Traffic Incidents</m3e-heading
+			>
+			<m3e-card>
+				<m3e-list slot="content" variant="segmented">
+					<m3e-list-item v-for="incident in trafficIncidents" :key="incident.Message">
+						<m3e-avatar slot="leading">
+							<Icon :name="getTrafficIcon(incident.Type)" />
+						</m3e-avatar>
+						<span slot="overline">{{ incident.Type }}</span>
+						{{ incident.Message }}
 					</m3e-list-item>
 				</m3e-list>
 			</m3e-card>

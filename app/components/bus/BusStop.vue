@@ -92,7 +92,7 @@ onBeforeUnmount(() => {
 							</span>
 						</span>
 						<span v-if="arrival.NextBus2.EstimatedArrival" slot="supporting-text">
-							Also in {{ timeToArrival(arrival.NextBus2.EstimatedArrival, now)
+							Also {{ timeToArrival(arrival.NextBus2.EstimatedArrival, now)
 							}}<span v-if="arrival.NextBus3.EstimatedArrival"
 								>, {{ timeToArrival(arrival.NextBus3.EstimatedArrival, now) }}</span
 							>
