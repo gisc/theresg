@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: transitsg
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: transitsg
+  template:
+    metadata:
+      labels:
+        app: transitsg
+    spec:
+      containers:
+        - name: transitsg
+          image: ghcr.io/gisc/transitsg:latest
+          ports:
+            - containerPort: 3000
+          env:
+            - name: NUXT_DATAMALL_API_KEY
+              value: "{{ .Values.olaresEnv.NUXT_DATAMALL_API_KEY }}"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: transitsg
+spec:
+  selector:
+    app: transitsg
+  ports:
+    - port: 3000
+      targetPort: 3000
