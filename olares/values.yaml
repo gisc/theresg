@@ -1,0 +1,4 @@
+# TransitSG chart values
+workloads:
+  transitsg:
+    replicaCount: 1
