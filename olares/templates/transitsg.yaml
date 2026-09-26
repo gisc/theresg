@@ -3,7 +3,7 @@ kind: Deployment
 metadata:
   name: transitsg
 spec:
-  replicas: 1
+  replicas: {{ .Values.workloads.transitsg.replicaCount }}
   selector:
     matchLabels:
       app: transitsg
@@ -15,7 +15,7 @@ spec:
       containers:
         - name: transitsg
           image: ghcr.io/gisc/transitsg:latest
-          imagePullPolicy: IfNotPresent
+          imagePullPolicy: Always
           ports:
             - containerPort: 3000
           env:
