@@ -12,6 +12,14 @@ useSeoMeta({
 
 const router = useRouter();
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const mapInstance = shallowRef<any>(null);
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+function handleMapLoad(e: any) {
+	mapInstance.value = e.target;
+}
+
 const { data: geojson } = await useLazyFetch('/bus-stops.json', {
 	server: false,
 });
@@ -25,6 +33,7 @@ const zoom = 10;
 
 const circleColor = ref<string>('#006A66');
 const outlineColor = ref<string>('#6F7978');
+const clusterTextColor = ref<string>('#FFFFFF');
 
 const allStops = computed(() => {
 	const data = geojson.value as Geojson | null;
@@ -33,8 +42,6 @@ const allStops = computed(() => {
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 function handleStopClick(e: any) {
-	console.log(e);
-
 	const feature = e.features[0];
 	if (!feature) {
 		console.error('No feature found.');
@@ -51,6 +58,30 @@ function handleStopClick(e: any) {
 	});
 }
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+async function handleClusterClick(e: any) {
+	const feature = e.features?.[0];
+	if (!feature) {
+		return;
+	}
+
+	const source = mapInstance.value?.getSource('stops');
+	if (!source) {
+		return;
+	}
+
+	const expansionZoom = await (
+		source as unknown as {
+			getClusterExpansionZoom: (clusterId: number) => Promise<number>;
+		}
+	).getClusterExpansionZoom(feature.properties.cluster_id);
+
+	mapInstance.value?.easeTo({
+		center: feature.geometry.coordinates as [number, number],
+		zoom: expansionZoom + 0.5,
+	});
+}
+
 onMounted(() => {
 	const content = document.querySelector('#content');
 	if (content) {
@@ -58,15 +89,18 @@ onMounted(() => {
 
 		const primaryVar = style.getPropertyValue('--md-sys-color-primary').trim();
 		const outlineVar = style.getPropertyValue('--md-sys-color-outline').trim();
+		const onPrimaryVar = style.getPropertyValue('--md-sys-color-on-primary').trim();
 
 		if (primaryVar) {
-			console.log('Primary variable:', primaryVar);
 			circleColor.value = primaryVar;
 		}
 
 		if (outlineVar) {
-			console.log('Outline variable:', outlineVar);
 			outlineColor.value = outlineVar;
+		}
+
+		if (onPrimaryVar) {
+			clusterTextColor.value = onPrimaryVar;
 		}
 	}
 });
@@ -78,13 +112,43 @@ onMounted(() => {
 			<m3e-heading class="heading" variant="headline" size="large">Bus Stops</m3e-heading>
 			<BusStop v-if="allStops && allStops.length !== 0" :stops="allStops" />
 			<ClientOnly>
-				<MglMap :map-style="style" :center="center" :zoom="zoom">
-					<MglGeoJsonSource v-if="geojson" source-id="stops" :data="geojson">
+				<MglMap :map-style="style" :center="center" :zoom="zoom" @map:load="handleMapLoad">
+					<MglGeoJsonSource
+						v-if="geojson"
+						source-id="stops"
+						:data="geojson"
+						:cluster="true"
+						:cluster-radius="50"
+						:cluster-max-zoom="14"
+					>
 						<MglCircleLayer
-							layer-id="stops"
+							layer-id="clusters"
+							:filter="['has', 'point_count']"
 							:paint="{
 								'circle-color': circleColor,
-								'circle-radius': 12,
+								'circle-radius': ['step', ['get', 'point_count'], 18, 100, 24, 500, 30],
+								'circle-stroke-width': 1,
+								'circle-stroke-color': outlineColor,
+							}"
+							@click="handleClusterClick"
+						/>
+						<MglSymbolLayer
+							layer-id="cluster-count"
+							:filter="['has', 'point_count']"
+							:layout="{
+								'text-field': '{point_count_abbreviated}',
+								'text-size': 13,
+							}"
+							:paint="{
+								'text-color': clusterTextColor,
+							}"
+						/>
+						<MglCircleLayer
+							layer-id="stops"
+							:filter="['!', ['has', 'point_count']]"
+							:paint="{
+								'circle-color': circleColor,
+								'circle-radius': ['interpolate', ['linear'], ['zoom'], 10, 6, 15, 10],
 								'circle-stroke-width': 1,
 								'circle-stroke-color': outlineColor,
 							}"
@@ -127,12 +191,27 @@ onMounted(() => {
 .heading {
 	color: var(--md-sys-color-on-surface);
 }
+
+@media (max-width: 767px) {
+	.pg {
+		border-radius: 20px;
+		padding: 12px;
+		gap: 12px;
+	}
+}
 </style>
 
 <style lang="css">
 .maplibregl-map {
 	border-radius: 16px;
 	min-height: 50svh;
+	flex: 1 1 auto;
 	box-sizing: border-box;
+}
+
+@media (max-width: 767px) {
+	.maplibregl-map {
+		min-height: 55svh;
+	}
 }
 </style>
