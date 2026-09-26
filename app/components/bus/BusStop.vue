@@ -2,12 +2,14 @@
 import type { BusStop } from '~/types/BusStop';
 
 const props = defineProps<{
-	stop: BusStop | null;
 	stops: BusStop[];
 }>();
 
-const { stop } = toRefs(props);
+const { stops } = toRefs(props);
 
+const route = useRoute();
+
+const stop = ref<BusStop | null>(null);
 const arrivals = ref<BusArrival[]>([]);
 const now = ref<number>(Date.now());
 
@@ -40,7 +42,17 @@ watch(stop, async (s) => {
 	await refreshArrivals(s);
 });
 
+onBeforeRouteUpdate((to) => {
+	if (to.query.stop && typeof to.query.stop === 'string') {
+		stop.value = getStop(stops.value, to.query.stop);
+	}
+});
+
 onMounted(() => {
+	if (route.query.stop && typeof route.query.stop === 'string') {
+		stop.value = getStop(stops.value, route.query.stop);
+	}
+
 	timeInterval = setInterval(async () => {
 		now.value = Date.now();
 
@@ -71,9 +83,9 @@ onBeforeUnmount(() => {
 						<span>
 							<span class="bus-number">{{ arrival.ServiceNo }}</span>
 							<span>{{ ' ' }}</span>
-							<span>for</span>
-							<span>{{ ' ' }}</span>
-							<span>{{ getStopName(stops, arrival.NextBus.DestinationCode) }}</span>
+							<span v-if="getStopName(stops, arrival.NextBus.DestinationCode)">
+								for {{ getStopName(stops, arrival.NextBus.DestinationCode) }}
+							</span>
 							<span>{{ ' ' }}</span>
 							<span class="time-to-arrival">
 								{{ timeToArrival(arrival.NextBus.EstimatedArrival, now) }}

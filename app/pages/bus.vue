@@ -10,6 +10,8 @@ useSeoMeta({
 	title: 'Bus',
 });
 
+const router = useRouter();
+
 const { data: geojson } = await useLazyFetch('/bus-stops.json', {
 	server: false,
 });
@@ -23,7 +25,6 @@ const zoom = 10;
 
 const circleColor = ref<string>('#006A66');
 const outlineColor = ref<string>('#6F7978');
-const selectedStop = ref<BusStop | null>(null);
 
 const allStops = computed(() => {
 	const data = geojson.value as Geojson | null;
@@ -41,7 +42,13 @@ function handleStopClick(e: any) {
 	}
 
 	const properties: BusStop = feature.properties;
-	selectedStop.value = properties;
+
+	router.push({
+		name: 'bus',
+		query: {
+			stop: properties.code,
+		},
+	});
 }
 
 onMounted(() => {
@@ -68,8 +75,8 @@ onMounted(() => {
 <template>
 	<div class="bg">
 		<div class="pg">
-			<m3e-heading variant="headline" size="large">Bus Stops</m3e-heading>
-			<BusStop :stop="selectedStop" :stops="allStops" />
+			<m3e-heading class="heading" variant="headline" size="large">Bus Stops</m3e-heading>
+			<BusStop v-if="allStops && allStops.length !== 0" :stops="allStops" />
 			<ClientOnly>
 				<MglMap :map-style="style" :center="center" :zoom="zoom">
 					<MglGeoJsonSource v-if="geojson" source-id="stops" :data="geojson">
@@ -115,6 +122,10 @@ onMounted(() => {
 
 .pg::-webkit-scrollbar {
 	display: none;
+}
+
+.heading {
+	color: var(--md-sys-color-on-surface);
 }
 </style>
 

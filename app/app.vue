@@ -5,6 +5,8 @@ const route = useRoute();
 
 const router = useRouter();
 
+const { isDark } = useTheme();
+
 const navRail = useTemplateRef<M3eNavRailElement>('navRail');
 
 function toggleNavRail() {
@@ -21,12 +23,16 @@ const routePath = computed(() => {
 </script>
 
 <template>
-	<div id="content" class="content light">
+	<div id="content" class="content" :class="isDark ? 'dark' : 'light'">
 		<m3e-app-bar class="app-bar">
 			<m3e-icon-button slot="leading" @click="toggleNavRail()">
 				<Icon name="material-symbols:menu-outline" />
 			</m3e-icon-button>
-			<span slot="title">{{ $route.meta.title }}</span>
+			<span slot="title">{{
+				($route.meta.title as string).toLowerCase() === 'home'
+					? 'transitsg'
+					: $route.meta.title
+			}}</span>
 		</m3e-app-bar>
 		<div class="bottom">
 			<m3e-nav-rail ref="navRail" class="nav-rail">

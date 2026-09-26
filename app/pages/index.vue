@@ -15,7 +15,9 @@ const { data } = await useFetch<TrainServiceMessage[]>('/api/train-service-alert
 <template>
 	<div class="bg">
 		<div class="pg">
-			<m3e-heading variant="headline" size="large">Service Alerts</m3e-heading>
+			<m3e-heading class="heading" variant="headline" size="large"
+				>Service Alerts</m3e-heading
+			>
 			<m3e-card>
 				<m3e-list slot="content" variant="segmented">
 					<m3e-list-item v-for="alert in data" :key="alert.Content">
@@ -54,5 +56,9 @@ const { data } = await useFetch<TrainServiceMessage[]>('/api/train-service-alert
 
 .pg::-webkit-scrollbar {
 	display: none;
+}
+
+.heading {
+	color: var(--md-sys-color-on-surface);
 }
 </style>
