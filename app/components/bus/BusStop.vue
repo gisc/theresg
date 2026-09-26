@@ -76,7 +76,7 @@ onBeforeUnmount(() => {
 		<m3e-heading slot="header" variant="title" size="large">{{ stop.name }}</m3e-heading>
 		<div slot="content" class="content">
 			<span>{{ stop.road }}</span>
-			<m3e-expansion-panel class="arrivals-panel">
+			<m3e-expansion-panel class="arrivals-panel" open>
 				<span slot="header">Bus arrivals</span>
 				<m3e-list v-if="arrivals && arrivals.length !== 0" variant="segmented">
 					<m3e-list-item v-for="arrival in visibleArrivals" :key="arrival.ServiceNo">
