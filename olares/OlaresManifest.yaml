@@ -1,0 +1,42 @@
+olaresManifest.version: '0.12.0'
+olaresManifest.type: app
+apiVersion: 'v3'
+
+workloadReplicas:
+  transitsg: 1
+
+metadata:
+  name: transitsg
+  title: TransitSG
+  description: Singapore bus arrivals, bus routes and train service alerts in one web app
+  icon: https://app.cdn.olares.com/appstore/default/defaulticon.webp
+  version: 0.0.1
+  categories:
+    - Utilities
+
+entrances:
+  - name: transitsg
+    host: transitsg
+    port: 3000
+    title: TransitSG
+    icon: https://app.cdn.olares.com/appstore/default/defaulticon.webp
+    authLevel: public
+    openMethod: default
+
+envs:
+  - envName: NUXT_DATAMALL_API_KEY
+    required: true
+    type: password
+    editable: true
+
+spec:
+  versionName: '0.0.1'
+  fullDescription: |
+    Singapore bus arrivals, bus routes and train service alerts in one web app using the LTA DataMall API.
+  upgradeDescription: |
+    Initial release.
+  developer: Soong Chee Gi
+  website: https://github.com/gisc/transitsg
+  sourceCode: https://github.com/gisc/transitsg
+  locale:
+    - en-US
