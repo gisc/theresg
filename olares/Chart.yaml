@@ -2,4 +2,4 @@ apiVersion: v2
 name: transitsg
 description: Singapore bus arrivals, bus routes and train service alerts in one web app using the LTA DataMall API
 type: application
-version: 0.0.1
+version: 0.0.3
