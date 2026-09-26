@@ -12,9 +12,15 @@ export default defineNuxtConfig({
 		name: 'transitsg',
 	},
 
-	css: ['@/assets/css/main.css'],
+	css: ['~/assets/css/main.css'],
 
 	future: {
 		compatibilityVersion: 4,
+	},
+
+	vue: {
+		compilerOptions: {
+			isCustomElement: (tag) => tag.startsWith('m3e-'),
+		},
 	},
 });

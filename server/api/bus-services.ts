@@ -1,7 +1,7 @@
 export default defineEventHandler(async (event) => {
 	const apiKey = process.env.NUXT_DATAMALL_API_KEY;
 
-	const { serviceNumber, skip } = await readBody<{
+	const { serviceNumber, skip } = getQuery<{
 		serviceNumber: string;
 		skip: number;
 	}>(event);

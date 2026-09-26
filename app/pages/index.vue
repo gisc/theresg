@@ -1,6 +1,14 @@
 <script setup lang="ts">
 import type { TrainServiceMessage } from '~~/shared/types/TrainServiceMessage';
 
+definePageMeta({
+	title: 'Home',
+});
+
+useSeoMeta({
+	title: 'Home',
+});
+
 const { data } = await useFetch<TrainServiceMessage[]>('/api/train-service-alerts');
 </script>
 

@@ -26,7 +26,7 @@ const routePath = computed(() => {
 			<m3e-icon-button slot="leading" @click="toggleNavRail()">
 				<Icon name="material-symbols:menu-outline" />
 			</m3e-icon-button>
-			<span slot="title">transitsg</span>
+			<span slot="title">{{ $route.meta.title }}</span>
 		</m3e-app-bar>
 		<div class="bottom">
 			<m3e-nav-rail ref="navRail" class="nav-rail">
@@ -60,6 +60,7 @@ const routePath = computed(() => {
 	flex-direction: column;
 	width: 100svw;
 	height: 100svh;
+	overflow: hidden;
 }
 
 .app-bar {
@@ -71,6 +72,7 @@ const routePath = computed(() => {
 	flex-grow: 1;
 	display: flex;
 	flex-direction: row;
+	min-height: 0;
 }
 
 .nav-rail {
@@ -80,5 +82,6 @@ const routePath = computed(() => {
 
 .page {
 	flex-grow: 1;
+	min-height: 0;
 }
 </style>

@@ -17,6 +17,7 @@
 		"@nuxt/icon": "^2.5.1",
 		"@nuxtjs/seo": "^5.3.16",
 		"@takumi-rs/core": "^2.14.0",
+		"date-fns": "^4.4.0",
 		"eslint": "^10.11.0",
 		"nuxt": "^4.5.2",
 		"nuxt-maplibre": "^1.2.2",
