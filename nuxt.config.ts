@@ -5,7 +5,7 @@ export default defineNuxtConfig({
 	modules: ['@nuxt/eslint', '@nuxt/icon', '@nuxtjs/seo', 'nuxt-maplibre'],
 
 	routeRules: {
-		'/': { prerender: true },
+		'/': { swr: 60 },
 	},
 
 	site: {
