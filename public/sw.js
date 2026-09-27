@@ -1,8 +1,8 @@
-// TransitSG offline support: cache the app shell, static transit data, and
+// ThereSG offline support: cache the app shell, static transit data, and
 // build assets so previously visited pages (including the MRT planner data)
 // keep working without a connection. Live /api data always comes from the
 // network.
-const CACHE = 'transitsg-v1';
+const CACHE = 'theresg-v1';
 const PRECACHE = ['/manifest.webmanifest'];
 
 self.addEventListener('install', (event) => {
