@@ -1,0 +1,27 @@
+{
+	"name": "TransitSG - Singapore Bus & MRT",
+	"short_name": "TransitSG",
+	"description": "Live bus arrivals, MRT journey planning, station crowd levels, and transport alerts across Singapore.",
+	"start_url": "/",
+	"scope": "/",
+	"display": "standalone",
+	"background_color": "#F4FBF9",
+	"theme_color": "#006A66",
+	"icons": [
+		{ "src": "/icons/icon-192.png", "sizes": "192x192", "type": "image/png" },
+		{ "src": "/icons/icon-512.png", "sizes": "512x512", "type": "image/png" },
+		{
+			"src": "/icons/maskable-192.png",
+			"sizes": "192x192",
+			"type": "image/png",
+			"purpose": "maskable"
+		},
+		{
+			"src": "/icons/maskable-512.png",
+			"sizes": "512x512",
+			"type": "image/png",
+			"purpose": "maskable"
+		},
+		{ "src": "/icons/apple-touch-icon.png", "sizes": "180x180", "type": "image/png" }
+	]
+}
