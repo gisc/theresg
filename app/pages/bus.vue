@@ -125,6 +125,16 @@ function submitService() {
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const mapInstance = shallowRef<any>(null);
+const arrivalsSection = ref<HTMLElement | null>(null);
+
+watch(
+	() => route.query.stop,
+	async (code, previous) => {
+		if (!code || code === previous || !window.matchMedia('(max-width: 767px)').matches) return;
+		await nextTick();
+		arrivalsSection.value?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+	},
+);
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 function handleMapLoad(e: any) {
@@ -357,80 +367,85 @@ onMounted(() => {
 					</ol>
 				</template>
 			</section>
-			<BusStop v-if="allStops.length" :stops="allStops" />
+			<div ref="arrivalsSection" class="arrivals-section">
+				<BusStop v-if="allStops.length" :stops="allStops" />
+			</div>
 			<p class="map-hint">
 				Prefer the map? Zoom in or tap a cluster, then choose a stop for arrivals.
 			</p>
-			<ClientOnly>
-				<MglMap
-					:map-style="style"
-					:center="center"
-					:zoom="zoom"
-					:min-zoom="minZoom"
-					:max-bounds="maxBounds"
-					@map:load="handleMapLoad"
-				>
-					<MglGeoJsonSource
-						v-if="geojson"
-						source-id="stops"
-						:data="geojson"
-						:cluster="true"
-						:cluster-radius="50"
-						:cluster-max-zoom="14"
+			<div class="map-container">
+				<ClientOnly>
+					<MglMap
+						:map-style="style"
+						:center="center"
+						:zoom="zoom"
+						:min-zoom="minZoom"
+						:max-bounds="maxBounds"
+						:cooperative-gestures="true"
+						@map:load="handleMapLoad"
 					>
-						<MglCircleLayer
-							layer-id="clusters"
-							:filter="['has', 'point_count']"
-							:paint="{
-								'circle-color': circleColor,
-								'circle-radius': [
-									'step',
-									['get', 'point_count'],
-									18,
-									100,
-									24,
-									500,
-									30,
-								],
-								'circle-stroke-width': 1,
-								'circle-stroke-color': outlineColor,
-							}"
-							@click="handleClusterClick"
-						/>
-						<MglSymbolLayer
-							layer-id="cluster-count"
-							:filter="['has', 'point_count']"
-							:layout="{
-								'text-field': '{point_count_abbreviated}',
-								'text-size': 13,
-							}"
-							:paint="{
-								'text-color': clusterTextColor,
-							}"
-						/>
-						<MglCircleLayer
-							layer-id="stops"
-							:filter="['!', ['has', 'point_count']]"
-							:paint="{
-								'circle-color': circleColor,
-								'circle-radius': [
-									'interpolate',
-									['linear'],
-									['zoom'],
-									10,
-									6,
-									15,
-									10,
-								],
-								'circle-stroke-width': 1,
-								'circle-stroke-color': outlineColor,
-							}"
-							@click="handleStopClick"
-						/>
-					</MglGeoJsonSource>
-					<MglNavigationControl />
-				</MglMap>
-			</ClientOnly>
+						<MglGeoJsonSource
+							v-if="geojson"
+							source-id="stops"
+							:data="geojson"
+							:cluster="true"
+							:cluster-radius="50"
+							:cluster-max-zoom="14"
+						>
+							<MglCircleLayer
+								layer-id="clusters"
+								:filter="['has', 'point_count']"
+								:paint="{
+									'circle-color': circleColor,
+									'circle-radius': [
+										'step',
+										['get', 'point_count'],
+										18,
+										100,
+										24,
+										500,
+										30,
+									],
+									'circle-stroke-width': 1,
+									'circle-stroke-color': outlineColor,
+								}"
+								@click="handleClusterClick"
+							/>
+							<MglSymbolLayer
+								layer-id="cluster-count"
+								:filter="['has', 'point_count']"
+								:layout="{
+									'text-field': '{point_count_abbreviated}',
+									'text-size': 13,
+								}"
+								:paint="{
+									'text-color': clusterTextColor,
+								}"
+							/>
+							<MglCircleLayer
+								layer-id="stops"
+								:filter="['!', ['has', 'point_count']]"
+								:paint="{
+									'circle-color': circleColor,
+									'circle-radius': [
+										'interpolate',
+										['linear'],
+										['zoom'],
+										10,
+										6,
+										15,
+										10,
+									],
+									'circle-stroke-width': 1,
+									'circle-stroke-color': outlineColor,
+								}"
+								@click="handleStopClick"
+							/>
+						</MglGeoJsonSource>
+						<MglNavigationControl />
+					</MglMap>
+				</ClientOnly>
+			</div>
 		</div>
 	</div>
 </template>
@@ -474,17 +489,22 @@ onMounted(() => {
 }
 </style>
 
-<style lang="css">
-.maplibregl-map {
-	border-radius: 16px;
-	min-height: 50svh;
-	flex: 0 0 auto;
-	box-sizing: border-box;
+<style lang="css" scoped>
+.arrivals-section {
+	scroll-margin-top: 12px;
 }
-
+.map-container {
+	height: 50svh;
+	min-height: 320px;
+	flex: 0 0 auto;
+}
+.map-container :deep(.maplibregl-map) {
+	border-radius: 16px;
+}
 @media (max-width: 767px) {
-	.maplibregl-map {
-		min-height: 45svh;
+	.map-container {
+		height: min(45svh, 380px);
+		min-height: 280px;
 	}
 }
 </style>
