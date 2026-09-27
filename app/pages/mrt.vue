@@ -19,6 +19,7 @@ const { data: alerts, status, error, refresh } = await useFetch<TrainServiceMess
 		<div class="pg">
 			<m3e-heading class="heading" variant="headline" size="large">MRT</m3e-heading>
 			<MrtRoutePlanner />
+			<MrtCrowdLevels />
 			<m3e-card>
 				<m3e-heading slot="header" variant="title" size="large">System Map</m3e-heading>
 				<div slot="content" class="system-map">
