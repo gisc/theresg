@@ -34,6 +34,7 @@ const { data: trafficIncidents } = await useFetch<TrafficIncident[]>('/api/traff
 					>, used under the Apache-2.0 license.
 				</p>
 			</header>
+			<MyCommute />
 			<m3e-heading class="heading" variant="headline" size="large"
 				>Service Alerts</m3e-heading
 			>
