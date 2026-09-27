@@ -1,6 +1,6 @@
 {
-	"name": "TransitSG - Singapore Bus & MRT",
-	"short_name": "TransitSG",
+	"name": "ThereSG - Singapore Bus & MRT",
+	"short_name": "ThereSG",
 	"description": "Live bus arrivals, MRT journey planning, station crowd levels, and transport alerts across Singapore.",
 	"start_url": "/",
 	"scope": "/",
