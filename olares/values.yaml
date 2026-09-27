@@ -1,4 +1,4 @@
-# TransitSG chart values
+# ThereSG chart values
 workloads:
-  transitsg:
+  theresg:
     replicaCount: 1
