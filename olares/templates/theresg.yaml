@@ -1,0 +1,34 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: theresg
+spec:
+  replicas: {{ .Values.workloads.theresg.replicaCount }}
+  selector:
+    matchLabels:
+      app: theresg
+  template:
+    metadata:
+      labels:
+        app: theresg
+    spec:
+      containers:
+        - name: theresg
+          image: ghcr.io/gisc/theresg:latest
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 3000
+          env:
+            - name: NUXT_DATAMALL_API_KEY
+              value: "{{ .Values.olaresEnv.NUXT_DATAMALL_API_KEY }}"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: theresg
+spec:
+  selector:
+    app: theresg
+  ports:
+    - port: 3000
+      targetPort: 3000
