@@ -132,7 +132,12 @@ watch(
 	async (code, previous) => {
 		if (!code || code === previous || !window.matchMedia('(max-width: 767px)').matches) return;
 		await nextTick();
-		arrivalsSection.value?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+		const page = arrivalsSection.value?.closest('.pg');
+		if (!page || !arrivalsSection.value) return;
+		page.scrollTo({
+			top: page.scrollTop + arrivalsSection.value.getBoundingClientRect().top - page.getBoundingClientRect().top - 12,
+			behavior: 'instant',
+		});
 	},
 );
 
