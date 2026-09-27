@@ -137,6 +137,12 @@ const center = {
 	lat: 1.2897,
 };
 const zoom = 10;
+// Bus arrivals only cover Singapore, so keep the map within the country.
+const minZoom = 10;
+const maxBounds = [
+	[103.55, 1.15], // south-west
+	[104.1, 1.5], // north-east
+];
 
 const circleColor = ref<string>('#006A66');
 const outlineColor = ref<string>('#6F7978');
@@ -356,7 +362,14 @@ onMounted(() => {
 				Prefer the map? Zoom in or tap a cluster, then choose a stop for arrivals.
 			</p>
 			<ClientOnly>
-				<MglMap :map-style="style" :center="center" :zoom="zoom" @map:load="handleMapLoad">
+				<MglMap
+					:map-style="style"
+					:center="center"
+					:zoom="zoom"
+					:min-zoom="minZoom"
+					:max-bounds="maxBounds"
+					@map:load="handleMapLoad"
+				>
 					<MglGeoJsonSource
 						v-if="geojson"
 						source-id="stops"
