@@ -9,6 +9,8 @@ const { stops } = toRefs(props);
 
 const route = useRoute();
 
+const { isFavourite, toggleFavourite } = useFavouriteStops();
+
 const stop = ref<BusStop | null>(null);
 const arrivals = ref<BusArrival[]>([]);
 const arrivalsLoading = ref(false);
@@ -90,6 +92,23 @@ onBeforeUnmount(() => {
 		<m3e-heading slot="header" variant="title" size="large">{{ stop.name }}</m3e-heading>
 		<div slot="content" class="content">
 			<span>{{ stop.road }}</span>
+			<button
+				type="button"
+				class="pin"
+				:aria-pressed="isFavourite(stop.code)"
+				@click="toggleFavourite(stop)"
+			>
+				<Icon
+					:name="
+						isFavourite(stop.code)
+							? 'material-symbols:star'
+							: 'material-symbols:star-outline'
+					"
+				/>
+				{{
+					isFavourite(stop.code) ? 'Pinned to My commute' : 'Pin to My commute'
+				}}
+			</button>
 			<m3e-expansion-panel class="arrivals-panel" open>
 				<span slot="header">Bus arrivals</span>
 				<div
@@ -148,6 +167,28 @@ onBeforeUnmount(() => {
 	gap: 4px;
 	box-sizing: border-box;
 	margin-top: 8px;
+}
+
+.pin {
+	display: inline-flex;
+	align-items: center;
+	gap: 6px;
+	width: fit-content;
+	padding: 6px 14px;
+	border: 1px solid var(--md-sys-color-outline-variant);
+	border-radius: 999px;
+	background: none;
+	font: inherit;
+	font-size: 13px;
+	font-weight: 600;
+	color: var(--md-sys-color-primary);
+	cursor: pointer;
+}
+
+.pin[aria-pressed='true'] {
+	background-color: var(--md-sys-color-primary-container);
+	border-color: transparent;
+	color: var(--md-sys-color-on-primary-container);
 }
 
 .arrivals-panel {
