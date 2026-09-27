@@ -51,7 +51,7 @@ watch(
 		);
 		if (nearest && !route.query.stop) pickStop(nearest.properties);
 	},
-});
+);
 
 const selectedStop = computed(
 	() => allStops.value.find((s) => s.code === route.query.stop) ?? null,
