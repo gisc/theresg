@@ -1,21 +1,21 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-labelledby="t">
   <title id="t">ThereSG - bus and MRT train mark (maskable)</title>
-  <rect x="0" y="0" width="64" height="64" fill="#E62333"/>
+  <rect x="0" y="0" width="64" height="64" fill="#ffffff"/>
   <g transform="translate(32 32) scale(0.72) translate(-32 -31.5)">
     <g>
-      <rect x="10" y="14" width="20" height="27" rx="5" fill="#ffffff"/>
-      <rect x="13.4" y="17.8" width="13.2" height="8.6" rx="2" fill="#E62333"/>
-      <circle cx="15.4" cy="33.6" r="1.9" fill="#E62333"/>
-      <circle cx="24.6" cy="33.6" r="1.9" fill="#E62333"/>
-      <rect x="12" y="41" width="16" height="3.4" rx="1.7" fill="#ffffff"/>
+      <rect x="10" y="14" width="20" height="27" rx="5" fill="#E62333"/>
+      <rect x="13.4" y="17.8" width="13.2" height="8.6" rx="2" fill="#ffffff"/>
+      <circle cx="15.4" cy="33.6" r="1.9" fill="#ffffff"/>
+      <circle cx="24.6" cy="33.6" r="1.9" fill="#ffffff"/>
+      <rect x="12" y="41" width="16" height="3.4" rx="1.7" fill="#E62333"/>
     </g>
     <g>
-      <path d="M37.5 14 h11.5 a5 5 0 0 1 5 5 v12.5 l-4.3 8.6 h-12.4 l-4.3 -8.6 v-12.5 a5 5 0 0 1 5 -5 z" fill="#ffffff"/>
-      <rect x="37" y="17.8" width="13.2" height="7.6" rx="2" fill="#E62333"/>
-      <circle cx="39" cy="32.4" r="1.9" fill="#E62333"/>
-      <circle cx="48.2" cy="32.4" r="1.9" fill="#E62333"/>
-      <line x1="37.5" y1="44" x2="34.5" y2="49" stroke="#ffffff" stroke-width="3" stroke-linecap="round"/>
-      <line x1="50" y1="44" x2="53" y2="49" stroke="#ffffff" stroke-width="3" stroke-linecap="round"/>
+      <path d="M37.5 14 h11.5 a5 5 0 0 1 5 5 v12.5 l-4.3 8.6 h-12.4 l-4.3 -8.6 v-12.5 a5 5 0 0 1 5 -5 z" fill="#E62333"/>
+      <rect x="37" y="17.8" width="13.2" height="7.6" rx="2" fill="#ffffff"/>
+      <circle cx="39" cy="32.4" r="1.9" fill="#ffffff"/>
+      <circle cx="48.2" cy="32.4" r="1.9" fill="#ffffff"/>
+      <line x1="37.5" y1="44" x2="34.5" y2="49" stroke="#E62333" stroke-width="3" stroke-linecap="round"/>
+      <line x1="50" y1="44" x2="53" y2="49" stroke="#E62333" stroke-width="3" stroke-linecap="round"/>
     </g>
   </g>
 </svg>
