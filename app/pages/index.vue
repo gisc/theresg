@@ -28,7 +28,7 @@ const { data: trafficIncidents } = await useFetch<TrafficIncident[]>('/api/traff
 					transport alerts across Singapore.
 				</p>
 				<p class="credit">
-					ThereSG was motivated by TransitSG, a project created by Mr Ethan Lee Qi Yang
+					Project motivated by TransitSG, a project created by Mr Ethan Lee Qi Yang
 					(Secondary 2, Hwa Chong International School). The initial version was forked from
 					<a href="https://github.com/ingStudiosOfficial/transitsg"
 						>github.com/ingStudiosOfficial/transitsg</a
