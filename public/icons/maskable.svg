@@ -1,17 +1,21 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-labelledby="t">
-  <title id="t">ThereSG - Singapore flag mark</title>
-  <defs>
-    <clipPath id="rr"><rect x="0" y="0" width="64" height="64" rx="0"/></clipPath>
-    <mask id="cres"><rect x="0" y="0" width="64" height="64" fill="white"/><circle cx="20.5" cy="16.5" r="8.6" fill="black"/></mask>
-  </defs>
-  <g clip-path="url(#rr)">
-    <rect x="0" y="0" width="64" height="38.4" fill="#E62333"/>
-    <rect x="0" y="38.4" width="64" height="25.6" fill="#ffffff"/>
+  <title id="t">ThereSG - bus and MRT train mark (maskable)</title>
+  <rect x="0" y="0" width="64" height="64" fill="#E62333"/>
+  <g transform="translate(32 32) scale(0.72) translate(-32 -31.5)">
+    <g>
+      <rect x="10" y="14" width="20" height="27" rx="5" fill="#ffffff"/>
+      <rect x="13.4" y="17.8" width="13.2" height="8.6" rx="2" fill="#E62333"/>
+      <circle cx="15.4" cy="33.6" r="1.9" fill="#E62333"/>
+      <circle cx="24.6" cy="33.6" r="1.9" fill="#E62333"/>
+      <rect x="12" y="41" width="16" height="3.4" rx="1.7" fill="#ffffff"/>
+    </g>
+    <g>
+      <path d="M37.5 14 h11.5 a5 5 0 0 1 5 5 v12.5 l-4.3 8.6 h-12.4 l-4.3 -8.6 v-12.5 a5 5 0 0 1 5 -5 z" fill="#ffffff"/>
+      <rect x="37" y="17.8" width="13.2" height="7.6" rx="2" fill="#E62333"/>
+      <circle cx="39" cy="32.4" r="1.9" fill="#E62333"/>
+      <circle cx="48.2" cy="32.4" r="1.9" fill="#E62333"/>
+      <line x1="37.5" y1="44" x2="34.5" y2="49" stroke="#ffffff" stroke-width="3" stroke-linecap="round"/>
+      <line x1="50" y1="44" x2="53" y2="49" stroke="#ffffff" stroke-width="3" stroke-linecap="round"/>
+    </g>
   </g>
-  <circle cx="16.5" cy="16.5" r="10.2" fill="#ffffff" mask="url(#cres)"/>
-  <polygon points="27.50,7.00 28.12,8.85 30.07,8.87 28.50,10.02 29.09,11.88 27.50,10.75 25.91,11.88 26.50,10.02 24.93,8.87 26.88,8.85" fill="#ffffff"/>
-  <polygon points="33.97,11.70 34.58,13.55 36.54,13.56 34.97,14.72 35.55,16.58 33.97,15.45 32.38,16.58 32.97,14.72 31.40,13.56 33.35,13.55" fill="#ffffff"/>
-  <polygon points="31.50,19.30 32.11,21.15 34.06,21.17 32.50,22.33 33.08,24.19 31.50,23.05 29.91,24.19 30.50,22.33 28.93,21.17 30.88,21.15" fill="#ffffff"/>
-  <polygon points="23.50,19.30 24.12,21.15 26.07,21.17 24.50,22.33 25.09,24.19 23.50,23.05 21.92,24.19 22.50,22.33 20.94,21.17 22.89,21.15" fill="#ffffff"/>
-  <polygon points="21.03,11.70 21.65,13.55 23.60,13.56 22.03,14.72 22.62,16.58 21.03,15.45 19.45,16.58 20.03,14.72 18.46,13.56 20.42,13.55" fill="#ffffff"/>
 </svg>
