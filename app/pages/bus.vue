@@ -33,6 +33,26 @@ const allStops = computed(() => {
   return data?.features?.map((f) => f.properties) ?? [];
 });
 
+// Default to the bus stop nearest the user (Singapore only). Leaves the
+// field blank when location is unavailable, denied, or outside Singapore.
+const triedGeoDefault = ref(false);
+watch(
+	() => (geojson.value as Geojson | null)?.features?.length ?? 0,
+	async (count) => {
+		if (triedGeoDefault.value || !count || route.query.stop) return;
+		triedGeoDefault.value = true;
+		const coords = await getSingaporeCoords();
+		if (!coords || route.query.stop) return;
+		const features = (geojson.value as Geojson | null)?.features ?? [];
+		const nearest = nearestByCoords(
+			features,
+			(f) => ({ lat: f.geometry.coordinates[1], lon: f.geometry.coordinates[0] }),
+			coords,
+		);
+		if (nearest && !route.query.stop) pickStop(nearest.properties);
+	},
+});
+
 const selectedStop = computed(
 	() => allStops.value.find((s) => s.code === route.query.stop) ?? null,
 );

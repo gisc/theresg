@@ -10,6 +10,26 @@ const stations = computed(() => (network.value ? buildStationIndex(network.value
 const from = ref<StationInfo | null>(null);
 const to = ref<StationInfo | null>(null);
 
+// Default the journey start to the station nearest the user (Singapore
+// only); stays blank when location is unavailable or outside Singapore.
+const triedGeoDefault = ref(false);
+watch(
+	() => network.value,
+	async (net) => {
+		if (triedGeoDefault.value || !net || from.value) return;
+		triedGeoDefault.value = true;
+		const coords = await getSingaporeCoords();
+		if (!coords || from.value) return;
+		const entries = net.lines.flatMap((line) =>
+			line.stations.map((s) => ({ name: s.name, lat: s.lat, lon: s.lon })),
+		);
+		const nearest = nearestByCoords(entries, (e) => ({ lat: e.lat, lon: e.lon }), coords);
+		if (!nearest || from.value) return;
+		const match = stations.value.find((s) => s.name === nearest.name);
+		if (match) from.value = match;
+	},
+);
+
 const segments = computed<RouteSegment[] | null>(() => {
 	if (!network.value || !from.value || !to.value) {
 		return null;

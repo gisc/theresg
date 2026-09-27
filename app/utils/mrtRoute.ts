@@ -1,6 +1,8 @@
 export interface MrtStationEntry {
 	code: string;
 	name: string;
+	lat?: number;
+	lon?: number;
 }
 
 export interface MrtLine {

@@ -7,111 +7,165 @@
 			"stations": [
 				{
 					"code": "NS1",
-					"name": "Jurong East"
+					"name": "Jurong East",
+					"lat": 1.333050284679782,
+					"lon": 103.74210748182318
 				},
 				{
 					"code": "NS2",
-					"name": "Bukit Batok"
+					"name": "Bukit Batok",
+					"lat": 1.3489967490688684,
+					"lon": 103.74954069134954
 				},
 				{
 					"code": "NS3",
-					"name": "Bukit Gombak"
+					"name": "Bukit Gombak",
+					"lat": 1.3586719216098169,
+					"lon": 103.75191010899835
 				},
 				{
 					"code": "NS4",
-					"name": "Choa Chu Kang"
+					"name": "Choa Chu Kang",
+					"lat": 1.3851254680366532,
+					"lon": 103.74434408893133
 				},
 				{
 					"code": "NS5",
-					"name": "Yew Tee"
+					"name": "Yew Tee",
+					"lat": 1.3975496334690805,
+					"lon": 103.74740209303708
 				},
 				{
 					"code": "NS7",
-					"name": "Kranji"
+					"name": "Kranji",
+					"lat": 1.4251892314695478,
+					"lon": 103.76205895494209
 				},
 				{
 					"code": "NS8",
-					"name": "Marsiling"
+					"name": "Marsiling",
+					"lat": 1.4325784529165027,
+					"lon": 103.77404281322656
 				},
 				{
 					"code": "NS9",
-					"name": "Woodlands"
+					"name": "Woodlands",
+					"lat": 1.436448687872568,
+					"lon": 103.78705527389394
 				},
 				{
 					"code": "NS10",
-					"name": "Admiralty"
+					"name": "Admiralty",
+					"lat": 1.4405887099902668,
+					"lon": 103.80097510574198
 				},
 				{
 					"code": "NS11",
-					"name": "Sembawang"
+					"name": "Sembawang",
+					"lat": 1.4490674618976647,
+					"lon": 103.82018789692005
 				},
 				{
 					"code": "NS12",
-					"name": "Canberra"
+					"name": "Canberra",
+					"lat": 1.4432345901096362,
+					"lon": 103.82953968335984
 				},
 				{
 					"code": "NS13",
-					"name": "Yishun"
+					"name": "Yishun",
+					"lat": 1.4295722438817275,
+					"lon": 103.83497264860424
 				},
 				{
 					"code": "NS14",
-					"name": "Khatib"
+					"name": "Khatib",
+					"lat": 1.4175753810979856,
+					"lon": 103.83303809149398
 				},
 				{
 					"code": "NS15",
-					"name": "Yio Chu Kang"
+					"name": "Yio Chu Kang",
+					"lat": 1.3817534968318599,
+					"lon": 103.84480693849162
 				},
 				{
 					"code": "NS16",
-					"name": "Ang Mo Kio"
+					"name": "Ang Mo Kio",
+					"lat": 1.3696725253555933,
+					"lon": 103.85025142310502
 				},
 				{
 					"code": "NS17",
-					"name": "Bishan"
+					"name": "Bishan",
+					"lat": 1.3510484822751936,
+					"lon": 103.84868243429734
 				},
 				{
 					"code": "NS18",
-					"name": "Braddell"
+					"name": "Braddell",
+					"lat": 1.3403574630140758,
+					"lon": 103.84679533583812
 				},
 				{
 					"code": "NS19",
-					"name": "Toa Payoh"
+					"name": "Toa Payoh",
+					"lat": 1.332667992247838,
+					"lon": 103.8474452071861
 				},
 				{
 					"code": "NS20",
-					"name": "Novena"
+					"name": "Novena",
+					"lat": 1.3204300814932564,
+					"lon": 103.8438181306018
 				},
 				{
 					"code": "NS21",
-					"name": "Newton"
+					"name": "Newton",
+					"lat": 1.3129117966563681,
+					"lon": 103.83803477211077
 				},
 				{
 					"code": "NS22",
-					"name": "Orchard"
+					"name": "Orchard",
+					"lat": 1.303444646304231,
+					"lon": 103.83187416773077
 				},
 				{
 					"code": "NS23",
-					"name": "Somerset"
+					"name": "Somerset",
+					"lat": 1.3002600545835286,
+					"lon": 103.83907516220226
 				},
 				{
 					"code": "NS24",
-					"name": "Dhoby Ghaut"
+					"name": "Dhoby Ghaut",
+					"lat": 1.2991489615370466,
+					"lon": 103.8458117190266
 				},
 				{
 					"code": "NS25",
-					"name": "City Hall"
+					"name": "City Hall",
+					"lat": 1.292935458131331,
+					"lon": 103.85260777099556
 				},
 				{
 					"code": "NS26",
-					"name": "Raffles Place"
+					"name": "Raffles Place",
+					"lat": 1.284067270989306,
+					"lon": 103.85145931539898
 				},
 				{
 					"code": "NS27",
-					"name": "Marina Bay"
+					"name": "Marina Bay",
+					"lat": 1.2758094294533002,
+					"lon": 103.85498166544687
 				},
 				{
 					"code": "NS28",
-					"name": "Marina South Pier"
+					"name": "Marina South Pier",
+					"lat": 1.2713773812015394,
+					"lon": 103.86291089300765
 				}
 			]
 		},
@@ -122,135 +176,201 @@
 			"stations": [
 				{
 					"code": "EW1",
-					"name": "Pasir Ris"
+					"name": "Pasir Ris",
+					"lat": 1.3720098191020362,
+					"lon": 103.94933430267868
 				},
 				{
 					"code": "EW2",
-					"name": "Tampines"
+					"name": "Tampines",
+					"lat": 1.3542205476839944,
+					"lon": 103.94408991606302
 				},
 				{
 					"code": "EW3",
-					"name": "Simei"
+					"name": "Simei",
+					"lat": 1.3431974397954487,
+					"lon": 103.9533771182992
 				},
 				{
 					"code": "EW4",
-					"name": "Tanah Merah"
+					"name": "Tanah Merah",
+					"lat": 1.3272540817777472,
+					"lon": 103.94654794367561
 				},
 				{
 					"code": "EW5",
-					"name": "Bedok"
+					"name": "Bedok",
+					"lat": 1.3240113189246734,
+					"lon": 103.93017251986417
 				},
 				{
 					"code": "EW6",
-					"name": "Kembangan"
+					"name": "Kembangan",
+					"lat": 1.3210380145636937,
+					"lon": 103.91294742959236
 				},
 				{
 					"code": "EW7",
-					"name": "Eunos"
+					"name": "Eunos",
+					"lat": 1.3197611173392314,
+					"lon": 103.90325558730702
 				},
 				{
 					"code": "EW8",
-					"name": "Paya Lebar"
+					"name": "Paya Lebar",
+					"lat": 1.3177432141186658,
+					"lon": 103.89267068880001
 				},
 				{
 					"code": "EW9",
-					"name": "Aljunied"
+					"name": "Aljunied",
+					"lat": 1.316433494695341,
+					"lon": 103.88290452869101
 				},
 				{
 					"code": "EW10",
-					"name": "Kallang"
+					"name": "Kallang",
+					"lat": 1.3114123456496802,
+					"lon": 103.87131236090362
 				},
 				{
 					"code": "EW11",
-					"name": "Lavender"
+					"name": "Lavender",
+					"lat": 1.3073717305725638,
+					"lon": 103.86283780154915
 				},
 				{
 					"code": "EW12",
-					"name": "Bugis"
+					"name": "Bugis",
+					"lat": 1.2999975124848677,
+					"lon": 103.85626865113218
 				},
 				{
 					"code": "EW13",
-					"name": "City Hall"
+					"name": "City Hall",
+					"lat": 1.292935458131331,
+					"lon": 103.85260777099556
 				},
 				{
 					"code": "EW14",
-					"name": "Raffles Place"
+					"name": "Raffles Place",
+					"lat": 1.284067270989306,
+					"lon": 103.85145931539898
 				},
 				{
 					"code": "EW15",
-					"name": "Tanjong Pagar"
+					"name": "Tanjong Pagar",
+					"lat": 1.2766311508227064,
+					"lon": 103.84601318730437
 				},
 				{
 					"code": "EW16",
-					"name": "Outram Park"
+					"name": "Outram Park",
+					"lat": 1.2808389346699285,
+					"lon": 103.83925001411495
 				},
 				{
 					"code": "EW17",
-					"name": "Tiong Bahru"
+					"name": "Tiong Bahru",
+					"lat": 1.286219740332733,
+					"lon": 103.82703434044352
 				},
 				{
 					"code": "EW18",
-					"name": "Redhill"
+					"name": "Redhill",
+					"lat": 1.2896302709624783,
+					"lon": 103.81677319412825
 				},
 				{
 					"code": "EW19",
-					"name": "Queenstown"
+					"name": "Queenstown",
+					"lat": 1.294611331801812,
+					"lon": 103.80604523672386
 				},
 				{
 					"code": "EW20",
-					"name": "Commonwealth"
+					"name": "Commonwealth",
+					"lat": 1.3024476459449514,
+					"lon": 103.79829071929134
 				},
 				{
 					"code": "EW21",
-					"name": "Buona Vista"
+					"name": "Buona Vista",
+					"lat": 1.3068710122280809,
+					"lon": 103.79028747130236
 				},
 				{
 					"code": "EW22",
-					"name": "Dover"
+					"name": "Dover",
+					"lat": 1.3113946900971238,
+					"lon": 103.77864915499143
 				},
 				{
 					"code": "EW23",
-					"name": "Clementi"
+					"name": "Clementi",
+					"lat": 1.3159314667201611,
+					"lon": 103.76560394593672
 				},
 				{
 					"code": "EW24",
-					"name": "Jurong East"
+					"name": "Jurong East",
+					"lat": 1.333050284679782,
+					"lon": 103.74210748182318
 				},
 				{
 					"code": "EW25",
-					"name": "Chinese Garden"
+					"name": "Chinese Garden",
+					"lat": 1.3421449762957498,
+					"lon": 103.73281439405886
 				},
 				{
 					"code": "EW26",
-					"name": "Lakeside"
+					"name": "Lakeside",
+					"lat": 1.3442638155664695,
+					"lon": 103.72096682017924
 				},
 				{
 					"code": "EW27",
-					"name": "Boon Lay"
+					"name": "Boon Lay",
+					"lat": 1.3383562390412558,
+					"lon": 103.70531990031637
 				},
 				{
 					"code": "EW28",
-					"name": "Pioneer"
+					"name": "Pioneer",
+					"lat": 1.3375950972528237,
+					"lon": 103.69741522528173
 				},
 				{
 					"code": "EW29",
-					"name": "Joo Koon"
+					"name": "Joo Koon",
+					"lat": 1.327744942268679,
+					"lon": 103.67828617916503
 				},
 				{
 					"code": "EW30",
-					"name": "Gul Circle"
+					"name": "Gul Circle",
+					"lat": 1.3197032592130764,
+					"lon": 103.66073679407967
 				},
 				{
 					"code": "EW31",
-					"name": "Tuas Crescent"
+					"name": "Tuas Crescent",
+					"lat": 1.3211383595667519,
+					"lon": 103.64896525737075
 				},
 				{
 					"code": "EW32",
-					"name": "Tuas West Road"
+					"name": "Tuas West Road",
+					"lat": 1.3300371270042406,
+					"lon": 103.63957309721583
 				},
 				{
 					"code": "EW33",
-					"name": "Tuas Link"
+					"name": "Tuas Link",
+					"lat": 1.340270406495732,
+					"lon": 103.63675132373392
 				}
 			]
 		},
@@ -261,11 +381,15 @@
 			"stations": [
 				{
 					"code": "CG1",
-					"name": "Expo"
+					"name": "Expo",
+					"lat": 1.3348980488177347,
+					"lon": 103.96196341596709
 				},
 				{
 					"code": "CG2",
-					"name": "Changi Airport"
+					"name": "Changi Airport",
+					"lat": 1.3573189576183131,
+					"lon": 103.98834814909442
 				}
 			]
 		},
@@ -276,71 +400,105 @@
 			"stations": [
 				{
 					"code": "NE1",
-					"name": "HarbourFront"
+					"name": "HarbourFront",
+					"lat": 1.265310691626473,
+					"lon": 103.82150740808491
 				},
 				{
 					"code": "NE3",
-					"name": "Outram Park"
+					"name": "Outram Park",
+					"lat": 1.2808389346699285,
+					"lon": 103.83925001411495
 				},
 				{
 					"code": "NE4",
-					"name": "Chinatown"
+					"name": "Chinatown",
+					"lat": 1.2844979891931358,
+					"lon": 103.84400359690841
 				},
 				{
 					"code": "NE5",
-					"name": "Clarke Quay"
+					"name": "Clarke Quay",
+					"lat": 1.2886057308902332,
+					"lon": 103.84664481271456
 				},
 				{
 					"code": "NE6",
-					"name": "Dhoby Ghaut"
+					"name": "Dhoby Ghaut",
+					"lat": 1.2991489615370466,
+					"lon": 103.8458117190266
 				},
 				{
 					"code": "NE7",
-					"name": "Little India"
+					"name": "Little India",
+					"lat": 1.3071641923108004,
+					"lon": 103.84927785171979
 				},
 				{
 					"code": "NE8",
-					"name": "Farrer Park"
+					"name": "Farrer Park",
+					"lat": 1.3124482283293788,
+					"lon": 103.85427015841306
 				},
 				{
 					"code": "NE9",
-					"name": "Boon Keng"
+					"name": "Boon Keng",
+					"lat": 1.3194470900320243,
+					"lon": 103.86168108544172
 				},
 				{
 					"code": "NE10",
-					"name": "Potong Pasir"
+					"name": "Potong Pasir",
+					"lat": 1.3313873892306496,
+					"lon": 103.86906995828527
 				},
 				{
 					"code": "NE11",
-					"name": "Woodleigh"
+					"name": "Woodleigh",
+					"lat": 1.3391607697389176,
+					"lon": 103.87079168986061
 				},
 				{
 					"code": "NE12",
-					"name": "Serangoon"
+					"name": "Serangoon",
+					"lat": 1.3500741477714449,
+					"lon": 103.87304885351502
 				},
 				{
 					"code": "NE13",
-					"name": "Kovan"
+					"name": "Kovan",
+					"lat": 1.3601798707280965,
+					"lon": 103.88509111597133
 				},
 				{
 					"code": "NE14",
-					"name": "Hougang"
+					"name": "Hougang",
+					"lat": 1.37121513084043,
+					"lon": 103.8917486395222
 				},
 				{
 					"code": "NE15",
-					"name": "Buangkok"
+					"name": "Buangkok",
+					"lat": 1.3827715837771788,
+					"lon": 103.89309246881164
 				},
 				{
 					"code": "NE16",
-					"name": "Sengkang"
+					"name": "Sengkang",
+					"lat": 1.3915510620007674,
+					"lon": 103.8954261698915
 				},
 				{
 					"code": "NE17",
-					"name": "Punggol"
+					"name": "Punggol",
+					"lat": 1.405165442795008,
+					"lon": 103.90240395660469
 				},
 				{
 					"code": "NE18",
-					"name": "Punggol Coast"
+					"name": "Punggol Coast",
+					"lat": 1.4149388181616607,
+					"lon": 103.91021424530948
 				}
 			]
 		},
@@ -352,135 +510,201 @@
 			"stations": [
 				{
 					"code": "CC1",
-					"name": "Dhoby Ghaut"
+					"name": "Dhoby Ghaut",
+					"lat": 1.2991489615370466,
+					"lon": 103.8458117190266
 				},
 				{
 					"code": "CC2",
-					"name": "Bras Basah"
+					"name": "Bras Basah",
+					"lat": 1.2968300501137628,
+					"lon": 103.85065880858372
 				},
 				{
 					"code": "CC3",
-					"name": "Esplanade"
+					"name": "Esplanade",
+					"lat": 1.2932723026397464,
+					"lon": 103.85561426886412
 				},
 				{
 					"code": "CC4",
-					"name": "Promenade"
+					"name": "Promenade",
+					"lat": 1.293143901003921,
+					"lon": 103.86094756856582
 				},
 				{
 					"code": "CC5",
-					"name": "Nicoll Highway"
+					"name": "Nicoll Highway",
+					"lat": 1.299802829852342,
+					"lon": 103.86363313784665
 				},
 				{
 					"code": "CC6",
-					"name": "Stadium"
+					"name": "Stadium",
+					"lat": 1.3028540998999254,
+					"lon": 103.87534796400688
 				},
 				{
 					"code": "CC7",
-					"name": "Mountbatten"
+					"name": "Mountbatten",
+					"lat": 1.306193786928982,
+					"lon": 103.8825470150979
 				},
 				{
 					"code": "CC8",
-					"name": "Dakota"
+					"name": "Dakota",
+					"lat": 1.3083751546374272,
+					"lon": 103.88866829951886
 				},
 				{
 					"code": "CC9",
-					"name": "Paya Lebar"
+					"name": "Paya Lebar",
+					"lat": 1.3177432141186658,
+					"lon": 103.89267068880001
 				},
 				{
 					"code": "CC10",
-					"name": "MacPherson"
+					"name": "MacPherson",
+					"lat": 1.3262293288956457,
+					"lon": 103.8898166121914
 				},
 				{
 					"code": "CC11",
-					"name": "Tai Seng"
+					"name": "Tai Seng",
+					"lat": 1.3354531033466337,
+					"lon": 103.88816447575532
 				},
 				{
 					"code": "CC12",
-					"name": "Bartley"
+					"name": "Bartley",
+					"lat": 1.3428468439645,
+					"lon": 103.87972518719033
 				},
 				{
 					"code": "CC13",
-					"name": "Serangoon"
+					"name": "Serangoon",
+					"lat": 1.3500741477714449,
+					"lon": 103.87304885351502
 				},
 				{
 					"code": "CC14",
-					"name": "Lorong Chuan"
+					"name": "Lorong Chuan",
+					"lat": 1.3516197558599472,
+					"lon": 103.86414412658448
 				},
 				{
 					"code": "CC15",
-					"name": "Bishan"
+					"name": "Bishan",
+					"lat": 1.3510484822751936,
+					"lon": 103.84868243429734
 				},
 				{
 					"code": "CC16",
-					"name": "Marymount"
+					"name": "Marymount",
+					"lat": 1.3487780553384583,
+					"lon": 103.8394101808655
 				},
 				{
 					"code": "CC17",
-					"name": "Caldecott"
+					"name": "Caldecott",
+					"lat": 1.3375387677791497,
+					"lon": 103.83986538570805
 				},
 				{
 					"code": "CC19",
-					"name": "Botanic Gardens"
+					"name": "Botanic Gardens",
+					"lat": 1.3222556032290131,
+					"lon": 103.81561860443068
 				},
 				{
 					"code": "CC20",
-					"name": "Farrer Road"
+					"name": "Farrer Road",
+					"lat": 1.3174545708323449,
+					"lon": 103.80748912456241
 				},
 				{
 					"code": "CC21",
-					"name": "Holland Village"
+					"name": "Holland Village",
+					"lat": 1.3119456175150919,
+					"lon": 103.79623333601177
 				},
 				{
 					"code": "CC22",
-					"name": "Buona Vista"
+					"name": "Buona Vista",
+					"lat": 1.3068710122280809,
+					"lon": 103.79028747130236
 				},
 				{
 					"code": "CC23",
-					"name": "one-north"
+					"name": "one-north",
+					"lat": 1.2996514573113378,
+					"lon": 103.78739137925261
 				},
 				{
 					"code": "CC24",
-					"name": "Kent Ridge"
+					"name": "Kent Ridge",
+					"lat": 1.2934009381438487,
+					"lon": 103.78449793835178
 				},
 				{
 					"code": "CC25",
-					"name": "Haw Par Villa"
+					"name": "Haw Par Villa",
+					"lat": 1.2825029022300132,
+					"lon": 103.78182132863023
 				},
 				{
 					"code": "CC26",
-					"name": "Pasir Panjang"
+					"name": "Pasir Panjang",
+					"lat": 1.2762296702371938,
+					"lon": 103.79134196573705
 				},
 				{
 					"code": "CC27",
-					"name": "Labrador Park"
+					"name": "Labrador Park",
+					"lat": 1.2723234942957917,
+					"lon": 103.80292770476869
 				},
 				{
 					"code": "CC28",
-					"name": "Telok Blangah"
+					"name": "Telok Blangah",
+					"lat": 1.2705817890107285,
+					"lon": 103.809739740652
 				},
 				{
 					"code": "CC29",
-					"name": "HarbourFront"
+					"name": "HarbourFront",
+					"lat": 1.265310691626473,
+					"lon": 103.82150740808491
 				},
 				{
 					"code": "CC30",
-					"name": "Keppel"
+					"name": "Keppel",
+					"lat": 1.2701719539198713,
+					"lon": 103.83029594184094
 				},
 				{
 					"code": "CC31",
-					"name": "Cantonment"
+					"name": "Cantonment",
+					"lat": 1.2730817331802042,
+					"lon": 103.8367402503118
 				},
 				{
 					"code": "CC32",
-					"name": "Prince Edward Road"
+					"name": "Prince Edward Road",
+					"lat": 1.2732407280310234,
+					"lon": 103.84726563653462
 				},
 				{
 					"code": "CC33",
-					"name": "Marina Bay"
+					"name": "Marina Bay",
+					"lat": 1.2758094294533002,
+					"lon": 103.85498166544687
 				},
 				{
 					"code": "CC34",
-					"name": "Bayfront"
+					"name": "Bayfront",
+					"lat": 1.2818722431382803,
+					"lon": 103.85907514177777
 				}
 			]
 		},
@@ -491,143 +715,213 @@
 			"stations": [
 				{
 					"code": "DT1",
-					"name": "Bukit Panjang"
+					"name": "Bukit Panjang",
+					"lat": 1.378485469375234,
+					"lon": 103.76235265975984
 				},
 				{
 					"code": "DT2",
-					"name": "Cashew"
+					"name": "Cashew",
+					"lat": 1.3693663697456693,
+					"lon": 103.76469934064848
 				},
 				{
 					"code": "DT3",
-					"name": "Hillview"
+					"name": "Hillview",
+					"lat": 1.362336809808497,
+					"lon": 103.76742281566246
 				},
 				{
 					"code": "DT4",
-					"name": "Hume"
+					"name": "Hume",
+					"lat": 1.3545108355374271,
+					"lon": 103.76910392897064
 				},
 				{
 					"code": "DT5",
-					"name": "Beauty World"
+					"name": "Beauty World",
+					"lat": 1.3412269612555616,
+					"lon": 103.77579158431996
 				},
 				{
 					"code": "DT6",
-					"name": "King Albert Park"
+					"name": "King Albert Park",
+					"lat": 1.3347417534979744,
+					"lon": 103.78308418937229
 				},
 				{
 					"code": "DT7",
-					"name": "Sixth Avenue"
+					"name": "Sixth Avenue",
+					"lat": 1.330801546139581,
+					"lon": 103.79726347741008
 				},
 				{
 					"code": "DT8",
-					"name": "Tan Kah Kee"
+					"name": "Tan Kah Kee",
+					"lat": 1.3258724508086044,
+					"lon": 103.80733103974738
 				},
 				{
 					"code": "DT9",
-					"name": "Botanic Gardens"
+					"name": "Botanic Gardens",
+					"lat": 1.3222556032290131,
+					"lon": 103.81561860443068
 				},
 				{
 					"code": "DT10",
-					"name": "Stevens"
+					"name": "Stevens",
+					"lat": 1.3199006799927198,
+					"lon": 103.82583341635527
 				},
 				{
 					"code": "DT11",
-					"name": "Newton"
+					"name": "Newton",
+					"lat": 1.3129117966563681,
+					"lon": 103.83803477211077
 				},
 				{
 					"code": "DT12",
-					"name": "Little India"
+					"name": "Little India",
+					"lat": 1.3071641923108004,
+					"lon": 103.84927785171979
 				},
 				{
 					"code": "DT13",
-					"name": "Rochor"
+					"name": "Rochor",
+					"lat": 1.3039277778520966,
+					"lon": 103.8524399625922
 				},
 				{
 					"code": "DT14",
-					"name": "Bugis"
+					"name": "Bugis",
+					"lat": 1.2999975124848677,
+					"lon": 103.85626865113218
 				},
 				{
 					"code": "DT15",
-					"name": "Promenade"
+					"name": "Promenade",
+					"lat": 1.293143901003921,
+					"lon": 103.86094756856582
 				},
 				{
 					"code": "DT16",
-					"name": "Bayfront"
+					"name": "Bayfront",
+					"lat": 1.2818722431382803,
+					"lon": 103.85907514177777
 				},
 				{
 					"code": "DT17",
-					"name": "Downtown"
+					"name": "Downtown",
+					"lat": 1.279441953085253,
+					"lon": 103.85284216745879
 				},
 				{
 					"code": "DT18",
-					"name": "Telok Ayer"
+					"name": "Telok Ayer",
+					"lat": 1.2822804876308553,
+					"lon": 103.84832342237205
 				},
 				{
 					"code": "DT19",
-					"name": "Chinatown"
+					"name": "Chinatown",
+					"lat": 1.2844979891931358,
+					"lon": 103.84400359690841
 				},
 				{
 					"code": "DT20",
-					"name": "Fort Canning"
+					"name": "Fort Canning",
+					"lat": 1.292403234699504,
+					"lon": 103.84428910026826
 				},
 				{
 					"code": "DT21",
-					"name": "Bencoolen"
+					"name": "Bencoolen",
+					"lat": 1.2987383503712773,
+					"lon": 103.85026001961103
 				},
 				{
 					"code": "DT22",
-					"name": "Jalan Besar"
+					"name": "Jalan Besar",
+					"lat": 1.30537670263359,
+					"lon": 103.85542874970528
 				},
 				{
 					"code": "DT23",
-					"name": "Bendemeer"
+					"name": "Bendemeer",
+					"lat": 1.3136595922847918,
+					"lon": 103.86296930045476
 				},
 				{
 					"code": "DT24",
-					"name": "Geylang Bahru"
+					"name": "Geylang Bahru",
+					"lat": 1.3215103924352716,
+					"lon": 103.87190108504024
 				},
 				{
 					"code": "DT25",
-					"name": "Mattar"
+					"name": "Mattar",
+					"lat": 1.3268656821831755,
+					"lon": 103.88325305986126
 				},
 				{
 					"code": "DT26",
-					"name": "MacPherson"
+					"name": "MacPherson",
+					"lat": 1.3262293288956457,
+					"lon": 103.8898166121914
 				},
 				{
 					"code": "DT27",
-					"name": "Ubi"
+					"name": "Ubi",
+					"lat": 1.329955264485481,
+					"lon": 103.89924886684018
 				},
 				{
 					"code": "DT28",
-					"name": "Kaki Bukit"
+					"name": "Kaki Bukit",
+					"lat": 1.334962978665666,
+					"lon": 103.9084551578921
 				},
 				{
 					"code": "DT29",
-					"name": "Bedok North"
+					"name": "Bedok North",
+					"lat": 1.3347556340643625,
+					"lon": 103.91787672264688
 				},
 				{
 					"code": "DT30",
-					"name": "Bedok Reservoir"
+					"name": "Bedok Reservoir",
+					"lat": 1.3365987355758024,
+					"lon": 103.93228754719657
 				},
 				{
 					"code": "DT31",
-					"name": "Tampines West"
+					"name": "Tampines West",
+					"lat": 1.345514318345991,
+					"lon": 103.93843404854924
 				},
 				{
 					"code": "DT32",
-					"name": "Tampines"
+					"name": "Tampines",
+					"lat": 1.3542205476839944,
+					"lon": 103.94408991606302
 				},
 				{
 					"code": "DT33",
-					"name": "Tampines East"
+					"name": "Tampines East",
+					"lat": 1.3562123851881451,
+					"lon": 103.95485813749899
 				},
 				{
 					"code": "DT34",
-					"name": "Upper Changi"
+					"name": "Upper Changi",
+					"lat": 1.3417403773362115,
+					"lon": 103.9614732441236
 				},
 				{
 					"code": "DT35",
-					"name": "Expo"
+					"name": "Expo",
+					"lat": 1.3348980488177347,
+					"lon": 103.96196341596709
 				}
 			]
 		},
@@ -638,111 +932,165 @@
 			"stations": [
 				{
 					"code": "TE1",
-					"name": "Woodlands North"
+					"name": "Woodlands North",
+					"lat": 1.448392319968309,
+					"lon": 103.78596634244951
 				},
 				{
 					"code": "TE2",
-					"name": "Woodlands"
+					"name": "Woodlands",
+					"lat": 1.436448687872568,
+					"lon": 103.78705527389394
 				},
 				{
 					"code": "TE3",
-					"name": "Woodlands South"
+					"name": "Woodlands South",
+					"lat": 1.4271151532156638,
+					"lon": 103.79389794677142
 				},
 				{
 					"code": "TE4",
-					"name": "Springleaf"
+					"name": "Springleaf",
+					"lat": 1.398140978256675,
+					"lon": 103.817921140757
 				},
 				{
 					"code": "TE5",
-					"name": "Lentor"
+					"name": "Lentor",
+					"lat": 1.3849445080193759,
+					"lon": 103.83633988787422
 				},
 				{
 					"code": "TE6",
-					"name": "Mayflower"
+					"name": "Mayflower",
+					"lat": 1.3721081386146197,
+					"lon": 103.83678152029555
 				},
 				{
 					"code": "TE7",
-					"name": "Bright Hill"
+					"name": "Bright Hill",
+					"lat": 1.3632817842745766,
+					"lon": 103.83447249683356
 				},
 				{
 					"code": "TE8",
-					"name": "Upper Thomson"
+					"name": "Upper Thomson",
+					"lat": 1.3544290003129547,
+					"lon": 103.83285966545392
 				},
 				{
 					"code": "TE9",
-					"name": "Caldecott"
+					"name": "Caldecott",
+					"lat": 1.3375387677791497,
+					"lon": 103.83986538570805
 				},
 				{
 					"code": "TE11",
-					"name": "Stevens"
+					"name": "Stevens",
+					"lat": 1.3199006799927198,
+					"lon": 103.82583341635527
 				},
 				{
 					"code": "TE12",
-					"name": "Napier"
+					"name": "Napier",
+					"lat": 1.3066656512811499,
+					"lon": 103.81908277343493
 				},
 				{
 					"code": "TE13",
-					"name": "Orchard Boulevard"
+					"name": "Orchard Boulevard",
+					"lat": 1.3026661094847591,
+					"lon": 103.8238476357721
 				},
 				{
 					"code": "TE14",
-					"name": "Orchard"
+					"name": "Orchard",
+					"lat": 1.303444646304231,
+					"lon": 103.83187416773077
 				},
 				{
 					"code": "TE15",
-					"name": "Great World"
+					"name": "Great World",
+					"lat": 1.2944678378851269,
+					"lon": 103.83342645789939
 				},
 				{
 					"code": "TE16",
-					"name": "Havelock"
+					"name": "Havelock",
+					"lat": 1.2884419658075472,
+					"lon": 103.83358978009632
 				},
 				{
 					"code": "TE17",
-					"name": "Outram Park"
+					"name": "Outram Park",
+					"lat": 1.2808389346699285,
+					"lon": 103.83925001411495
 				},
 				{
 					"code": "TE18",
-					"name": "Maxwell"
+					"name": "Maxwell",
+					"lat": 1.2805964098154925,
+					"lon": 103.84392436857507
 				},
 				{
 					"code": "TE19",
-					"name": "Shenton Way"
+					"name": "Shenton Way",
+					"lat": 1.2775905171046742,
+					"lon": 103.85067510451763
 				},
 				{
 					"code": "TE20",
-					"name": "Marina Bay"
+					"name": "Marina Bay",
+					"lat": 1.2758094294533002,
+					"lon": 103.85498166544687
 				},
 				{
 					"code": "TE22",
-					"name": "Gardens by the Bay"
+					"name": "Gardens by the Bay",
+					"lat": 1.2792004698563675,
+					"lon": 103.8679548831892
 				},
 				{
 					"code": "TE23",
-					"name": "Tanjong Rhu"
+					"name": "Tanjong Rhu",
+					"lat": 1.2972452874437077,
+					"lon": 103.87345501889277
 				},
 				{
 					"code": "TE24",
-					"name": "Katong Park"
+					"name": "Katong Park",
+					"lat": 1.2978010415628742,
+					"lon": 103.88623636531406
 				},
 				{
 					"code": "TE25",
-					"name": "Tanjong Katong"
+					"name": "Tanjong Katong",
+					"lat": 1.2993705596361003,
+					"lon": 103.89744885045332
 				},
 				{
 					"code": "TE26",
-					"name": "Marine Parade"
+					"name": "Marine Parade",
+					"lat": 1.302865993021082,
+					"lon": 103.90550807454038
 				},
 				{
 					"code": "TE27",
-					"name": "Marine Terrace"
+					"name": "Marine Terrace",
+					"lat": 1.306767424002779,
+					"lon": 103.91526558461837
 				},
 				{
 					"code": "TE28",
-					"name": "Siglap"
+					"name": "Siglap",
+					"lat": 1.3098814892597002,
+					"lon": 103.9299170480523
 				},
 				{
 					"code": "TE29",
-					"name": "Bayshore"
+					"name": "Bayshore",
+					"lat": 1.3129364944627582,
+					"lon": 103.94184163653021
 				}
 			]
 		},
@@ -753,55 +1101,81 @@
 			"stations": [
 				{
 					"code": "BP1",
-					"name": "Choa Chu Kang"
+					"name": "Choa Chu Kang",
+					"lat": 1.3851254680366532,
+					"lon": 103.74434408893133
 				},
 				{
 					"code": "BP2",
-					"name": "South View"
+					"name": "South View",
+					"lat": 1.380298286261839,
+					"lon": 103.74529179982976
 				},
 				{
 					"code": "BP3",
-					"name": "Keat Hong"
+					"name": "Keat Hong",
+					"lat": 1.3786121668142508,
+					"lon": 103.74905150388537
 				},
 				{
 					"code": "BP4",
-					"name": "Teck Whye"
+					"name": "Teck Whye",
+					"lat": 1.3766592934552422,
+					"lon": 103.75369963153
 				},
 				{
 					"code": "BP5",
-					"name": "Phoenix"
+					"name": "Phoenix",
+					"lat": 1.3786249492919498,
+					"lon": 103.75803362307677
 				},
 				{
 					"code": "BP6",
-					"name": "Bukit Panjang"
+					"name": "Bukit Panjang",
+					"lat": 1.378485469375234,
+					"lon": 103.76235265975984
 				},
 				{
 					"code": "BP7",
-					"name": "Petir"
+					"name": "Petir",
+					"lat": 1.3777549868542922,
+					"lon": 103.76666727587175
 				},
 				{
 					"code": "BP8",
-					"name": "Pending"
+					"name": "Pending",
+					"lat": 1.3761265381792571,
+					"lon": 103.7712797503296
 				},
 				{
 					"code": "BP9",
-					"name": "Bangkit"
+					"name": "Bangkit",
+					"lat": 1.3800154942226468,
+					"lon": 103.77266121907934
 				},
 				{
 					"code": "BP10",
-					"name": "Fajar"
+					"name": "Fajar",
+					"lat": 1.3845326784759364,
+					"lon": 103.77083795595894
 				},
 				{
 					"code": "BP11",
-					"name": "Segar"
+					"name": "Segar",
+					"lat": 1.387756408019682,
+					"lon": 103.76965965382928
 				},
 				{
 					"code": "BP12",
-					"name": "Jelapang"
+					"name": "Jelapang",
+					"lat": 1.3866966768351228,
+					"lon": 103.7645005796885
 				},
 				{
 					"code": "BP13",
-					"name": "Senja"
+					"name": "Senja",
+					"lat": 1.3826992425630433,
+					"lon": 103.76236875414202
 				}
 			]
 		},
@@ -813,27 +1187,39 @@
 			"stations": [
 				{
 					"code": "STC",
-					"name": "Sengkang"
+					"name": "Sengkang",
+					"lat": 1.3915510620007674,
+					"lon": 103.8954261698915
 				},
 				{
 					"code": "SE1",
-					"name": "Compassvale"
+					"name": "Compassvale",
+					"lat": 1.3944787834510037,
+					"lon": 103.90055527782525
 				},
 				{
 					"code": "SE2",
-					"name": "Rumbia"
+					"name": "Rumbia",
+					"lat": 1.3915644449909599,
+					"lon": 103.90589048292587
 				},
 				{
 					"code": "SE3",
-					"name": "Bakau"
+					"name": "Bakau",
+					"lat": 1.3881050159515416,
+					"lon": 103.90552634690918
 				},
 				{
 					"code": "SE4",
-					"name": "Kangkar"
+					"name": "Kangkar",
+					"lat": 1.3840307673031464,
+					"lon": 103.90225755089236
 				},
 				{
 					"code": "SE5",
-					"name": "Ranggung"
+					"name": "Ranggung",
+					"lat": 1.3839214795181578,
+					"lon": 103.89749260343731
 				}
 			]
 		},
@@ -845,39 +1231,57 @@
 			"stations": [
 				{
 					"code": "STC",
-					"name": "Sengkang"
+					"name": "Sengkang",
+					"lat": 1.3915510620007674,
+					"lon": 103.8954261698915
 				},
 				{
 					"code": "SW1",
-					"name": "Cheng Lim"
+					"name": "Cheng Lim",
+					"lat": 1.3962489160522749,
+					"lon": 103.89390790780313
 				},
 				{
 					"code": "SW2",
-					"name": "Farmway"
+					"name": "Farmway",
+					"lat": 1.3971619025464026,
+					"lon": 103.88938286120671
 				},
 				{
 					"code": "SW3",
-					"name": "Kupang"
+					"name": "Kupang",
+					"lat": 1.3981975780716305,
+					"lon": 103.88137428305878
 				},
 				{
 					"code": "SW4",
-					"name": "Thanggam"
+					"name": "Thanggam",
+					"lat": 1.397436993718034,
+					"lon": 103.87565537171609
 				},
 				{
 					"code": "SW5",
-					"name": "Fernvale"
+					"name": "Fernvale",
+					"lat": 1.391944192658048,
+					"lon": 103.87627965694506
 				},
 				{
 					"code": "SW6",
-					"name": "Layar"
+					"name": "Layar",
+					"lat": 1.3920928721400994,
+					"lon": 103.88015787551086
 				},
 				{
 					"code": "SW7",
-					"name": "Tongkang"
+					"name": "Tongkang",
+					"lat": 1.3893387809146653,
+					"lon": 103.88593735859335
 				},
 				{
 					"code": "SW8",
-					"name": "Renjong"
+					"name": "Renjong",
+					"lat": 1.3867475129068825,
+					"lon": 103.89042878850033
 				}
 			]
 		},
@@ -889,35 +1293,51 @@
 			"stations": [
 				{
 					"code": "PTC",
-					"name": "Punggol"
+					"name": "Punggol",
+					"lat": 1.405165442795008,
+					"lon": 103.90240395660469
 				},
 				{
 					"code": "PE1",
-					"name": "Cove"
+					"name": "Cove",
+					"lat": 1.3993617068685738,
+					"lon": 103.90591744030328
 				},
 				{
 					"code": "PE2",
-					"name": "Meridian"
+					"name": "Meridian",
+					"lat": 1.3968523391605283,
+					"lon": 103.90899093841303
 				},
 				{
 					"code": "PE3",
-					"name": "Coral Edge"
+					"name": "Coral Edge",
+					"lat": 1.3939263504344506,
+					"lon": 103.91256353486817
 				},
 				{
 					"code": "PE4",
-					"name": "Riviera"
+					"name": "Riviera",
+					"lat": 1.3953581720237742,
+					"lon": 103.91593242521265
 				},
 				{
 					"code": "PE5",
-					"name": "Kadaloor"
+					"name": "Kadaloor",
+					"lat": 1.399638509666885,
+					"lon": 103.91639497890144
 				},
 				{
 					"code": "PE6",
-					"name": "Oasis"
+					"name": "Oasis",
+					"lat": 1.4023508798916595,
+					"lon": 103.9126318514526
 				},
 				{
 					"code": "PE7",
-					"name": "Damai"
+					"name": "Damai",
+					"lat": 1.4053160221202112,
+					"lon": 103.90850357756092
 				}
 			]
 		},
@@ -929,35 +1349,51 @@
 			"stations": [
 				{
 					"code": "PTC",
-					"name": "Punggol"
+					"name": "Punggol",
+					"lat": 1.405165442795008,
+					"lon": 103.90240395660469
 				},
 				{
 					"code": "PW1",
-					"name": "Sam Kee"
+					"name": "Sam Kee",
+					"lat": 1.4096126869238204,
+					"lon": 103.90483155144202
 				},
 				{
 					"code": "PW2",
-					"name": "Teck Lee"
+					"name": "Teck Lee",
+					"lat": 1.4128738705379404,
+					"lon": 103.90662621184427
 				},
 				{
 					"code": "PW3",
-					"name": "Punggol Point"
+					"name": "Punggol Point",
+					"lat": 1.4169108526509417,
+					"lon": 103.90653551158488
 				},
 				{
 					"code": "PW4",
-					"name": "Samudera"
+					"name": "Samudera",
+					"lat": 1.4158186977409486,
+					"lon": 103.90208724260933
 				},
 				{
 					"code": "PW5",
-					"name": "Nibong"
+					"name": "Nibong",
+					"lat": 1.4117555862084634,
+					"lon": 103.90029894847919
 				},
 				{
 					"code": "PW6",
-					"name": "Sumang"
+					"name": "Sumang",
+					"lat": 1.408353296668723,
+					"lon": 103.89851028670412
 				},
 				{
 					"code": "PW7",
-					"name": "Soo Teck"
+					"name": "Soo Teck",
+					"lat": 1.4052096476198659,
+					"lon": 103.89723440885503
 				}
 			]
 		}
