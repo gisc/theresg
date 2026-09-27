@@ -3,22 +3,22 @@ olaresManifest.type: app
 apiVersion: 'v3'
 
 workloadReplicas:
-  transitsg: 1
+  theresg: 1
 
 metadata:
-  name: transitsg
-  title: TransitSG
+  name: theresg
+  title: ThereSG
   description: Singapore bus arrivals, bus routes and train service alerts in one web app
   icon: https://app.cdn.olares.com/appstore/default/defaulticon.webp
-  version: 0.0.3
+  version: 0.1.0
   categories:
     - Utilities
 
 entrances:
-  - name: transitsg
-    host: transitsg
+  - name: theresg
+    host: theresg
     port: 3000
-    title: TransitSG
+    title: ThereSG
     icon: https://app.cdn.olares.com/appstore/default/defaulticon.webp
     authLevel: public
     openMethod: default
@@ -30,7 +30,7 @@ envs:
     editable: true
 
 spec:
-  versionName: '0.0.3'
+  versionName: '0.1.0'
   requiredCpu: 250m
   limitedCpu: 1000m
   requiredMemory: 256Mi
@@ -44,8 +44,8 @@ spec:
   upgradeDescription: |
     Initial release.
   developer: Soong Chee Gi
-  website: https://github.com/gisc/transitsg
-  sourceCode: https://github.com/gisc/transitsg
+  website: https://github.com/gisc/theresg
+  sourceCode: https://github.com/gisc/theresg
   locale:
     - en-US
 options:
