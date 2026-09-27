@@ -98,7 +98,7 @@ const routePath = computed(() => {
 }
 
 .brand { display: inline-flex; align-items: center; gap: 9px; vertical-align: middle; font-weight: 700; color: var(--sg-on-brand); letter-spacing: 0.2px; }
-.brand img { width: 32px; height: 32px; border-radius: 8px; }
+.brand img { width: 32px; height: 32px; border-radius: 8px; box-shadow: 0 0 0 2px rgb(255 255 255 / 0.95); }
 
 .bottom {
 	flex-grow: 1;
@@ -116,6 +116,7 @@ const routePath = computed(() => {
 	display: none;
 	flex-shrink: 0;
 	padding-bottom: env(safe-area-inset-bottom);
+	--m3e-nav-bar-container-color: var(--md-sys-color-surface-container);
 	background-color: var(--md-sys-color-surface-container);
 }
 
