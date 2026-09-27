@@ -22,16 +22,18 @@ const { data: trafficIncidents } = await useFetch<TrafficIncident[]>('/api/traff
 		<div class="pg">
 			<header class="home-intro">
 				<h1>ThereSG</h1>
+				<div class="flag-accent" aria-hidden="true"></div>
 				<p>
 					Check live bus arrivals, explore bus routes, plan MRT journeys, and see
 					transport alerts across Singapore.
 				</p>
 				<p class="credit">
-					ThereSG was originally created by Mr Ethan Lee Qi Yang (Secondary 2, Hwa Chong
-					International School) as TransitSG. This app is forked from his
+					ThereSG was motivated by TransitSG, a project created by Mr Ethan Lee Qi Yang
+					(Secondary 2, Hwa Chong International School). The initial version was forked from
 					<a href="https://github.com/ingStudiosOfficial/transitsg"
-						>original project on GitHub</a
-					>, used under the Apache-2.0 license.
+						>github.com/ingStudiosOfficial/transitsg</a
+					>
+					under the Apache-2.0 license.
 				</p>
 			</header>
 			<MyCommute />
@@ -109,9 +111,9 @@ const { data: trafficIncidents } = await useFetch<TrafficIncident[]>('/api/traff
 
 @media (max-width: 767px) {
 	.pg {
-		border-radius: 20px;
-		padding: 12px;
-		gap: 12px;
+		border-radius: 0;
+		padding: 14px 14px calc(14px + env(safe-area-inset-bottom));
+		gap: 14px;
 	}
 }
 </style>
@@ -121,11 +123,24 @@ const { data: trafficIncidents } = await useFetch<TrafficIncident[]>('/api/traff
 	padding: 8px 4px 14px;
 }
 .home-intro h1 {
-	margin: 0 0 8px;
-	font-size: clamp(28px, 6vw, 38px);
+	margin: 0;
+	font-size: clamp(32px, 7vw, 42px);
+	font-weight: 800;
+	letter-spacing: -0.5px;
+	color: var(--sg-brand);
+}
+.flag-accent {
+	width: 60px;
+	height: 7px;
+	margin: 10px 0 12px;
+	border-radius: 4px;
+	background: linear-gradient(to bottom, var(--sg-brand) 50%, #ffffff 50%);
+	box-shadow: inset 0 0 0 1px var(--md-sys-color-outline-variant);
 }
 .home-intro > p:not(.credit) {
 	margin: 0;
-	line-height: 1.45;
+	line-height: 1.5;
+	font-size: 15px;
+	color: var(--md-sys-color-on-surface-variant);
 }
 </style>

@@ -487,9 +487,9 @@ onMounted(() => {
 
 @media (max-width: 767px) {
 	.pg {
-		border-radius: 20px;
-		padding: 12px;
-		gap: 12px;
+		border-radius: 0;
+		padding: 14px 14px calc(14px + env(safe-area-inset-bottom));
+		gap: 14px;
 	}
 }
 </style>

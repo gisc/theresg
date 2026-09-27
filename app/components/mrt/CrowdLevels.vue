@@ -74,7 +74,8 @@ const LEVEL_META = {
 
 const updatedLabel = computed(() => {
 	if (!crowd.value?.updated) return '';
-	return new Date(crowd.value.updated).toLocaleTimeString([], {
+	return new Date(crowd.value.updated).toLocaleTimeString('en-SG', {
+		timeZone: 'Asia/Singapore',
 		hour: '2-digit',
 		minute: '2-digit',
 	});

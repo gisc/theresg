@@ -17,9 +17,10 @@ export default defineEventHandler(async () => {
 
 	const formattedAlerts: TrainServiceMessage[] = [];
 	for (const alert of data.value.Message) {
+		if (!isAlertCurrent(alert.Content)) continue;
 		formattedAlerts.push({
 			Content: alert.Content,
-			CreatedDate: new Date(alert.CreatedDate).toLocaleDateString(),
+			CreatedDate: formatSgDate(alert.CreatedDate),
 		});
 	}
 
