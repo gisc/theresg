@@ -21,14 +21,14 @@ const { data: trafficIncidents } = await useFetch<TrafficIncident[]>('/api/traff
 	<div class="bg">
 		<div class="pg">
 			<header class="home-intro">
-				<h1>TransitSG</h1>
+				<h1>ThereSG</h1>
 				<p>
 					Check live bus arrivals, explore bus routes, plan MRT journeys, and see
 					transport alerts across Singapore.
 				</p>
 				<p class="credit">
-					TransitSG was originally created by Mr Ethan Lee Qi Yang (Secondary 2, Hwa Chong
-					International School). This app is forked from his
+					ThereSG was originally created by Mr Ethan Lee Qi Yang (Secondary 2, Hwa Chong
+					International School) as TransitSG. This app is forked from his
 					<a href="https://github.com/ingStudiosOfficial/transitsg"
 						>original project on GitHub</a
 					>, used under the Apache-2.0 license.
