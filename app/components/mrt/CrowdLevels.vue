@@ -76,6 +76,7 @@ interface CrowdRow {
 	color: string;
 	level: 'l' | 'm' | 'h';
 	inService: boolean;
+	levelSuspect: boolean;
 }
 
 const nowTick = ref(Date.now());
@@ -96,6 +97,9 @@ const rows = computed<CrowdRow[]>(() => {
 			color: known?.color ?? lineColors.value.get(line) ?? '#6F7978',
 			level: entry.level,
 			inService: isLineInService(line, new Date(nowTick.value)),
+			// DataMall reports "High" for these two new stations even before
+			// service starts; suppress untrusted crowd levels pending validation.
+			levelSuspect: entry.station === 'DT36' || entry.station === 'DT37',
 		});
 	}
 	return mapped;
@@ -213,6 +217,7 @@ onBeforeUnmount(() => {
 						}}</span>
 						<span class="station-name">{{ row.name }}</span>
 						<span v-if="!row.inService" class="level offline">Not in service</span>
+						<span v-else-if="row.levelSuspect" class="level offline">Data unavailable</span>
 						<span v-else class="level" :class="LEVEL_META[row.level].class">{{
 							LEVEL_META[row.level].label
 						}}</span>
