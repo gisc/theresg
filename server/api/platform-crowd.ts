@@ -1,4 +1,3 @@
-import { datamallFetch } from '~~/server/utils/datamall-fetch';
 import type {
 	CrowdLevel,
 	PlatformCrowdEntry,
@@ -50,7 +49,7 @@ export default defineEventHandler(async () => {
 	const results = await Promise.all(
 		FEED_LINES.map(async (line) => {
 			try {
-				const data = await datamallFetch<PcdResponse>(
+				const data = await $fetch<PcdResponse>(
 					`https://datamall2.mytransport.sg/ltaodataservice/PCDRealTime?TrainLine=${line}`,
 					{
 						method: 'GET',
@@ -61,9 +60,7 @@ export default defineEventHandler(async () => {
 					},
 				);
 				return data.value ?? [];
-			} catch (error) {
-				// A quota failure is not a quiet missing line; do not mask exhaustion as empty crowd data.
-				if ((error as { statusCode?: number })?.statusCode === 503) throw error;
+			} catch {
 				return [] as PcdItem[];
 			}
 		}),

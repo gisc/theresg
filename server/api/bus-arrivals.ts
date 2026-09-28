@@ -1,4 +1,3 @@
-import { datamallFetch } from '~~/server/utils/datamall-fetch';
 import type { BusArrival } from '~~/shared/types/BusArrival';
 import { createTtlCache } from '~~/server/utils/ttl-cache';
 
@@ -24,7 +23,7 @@ export default defineEventHandler(async (event) => {
 	}
 
 	return cachedArrivals(`${stopCode}:${serviceNumber ?? ''}`, async () => {
-		const data = await datamallFetch<{
+		const data = await $fetch<{
 			Services: BusArrival[];
 		}>('https://datamall2.mytransport.sg/ltaodataservice/v3/BusArrival', {
 			method: 'GET',
