@@ -107,10 +107,16 @@ const pointGeojson = computed(() => ({
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 function handleMapLoad(e: any) {
 	mapInstance.value = e.target;
-	// eslint-disable-next-line @typescript-eslint/no-explicit-any
-	mapInstance.value.on('click', (ev: any) => {
-		if (!ev.lngLat) return;
-		setPoint({ lat: ev.lngLat.lat, lon: ev.lngLat.lng }, 'map');
+	// Listen at the DOM level: maplibre's own click synthesis can be swallowed
+	// by the cooperative-gestures overlay on touch devices.
+	const canvas = mapInstance.value.getCanvas();
+	canvas.addEventListener('click', (ev: MouseEvent) => {
+		const rect = canvas.getBoundingClientRect();
+		const lngLat = mapInstance.value.unproject([
+			ev.clientX - rect.left,
+			ev.clientY - rect.top,
+		]);
+		setPoint({ lat: lngLat.lat, lon: lngLat.lng }, 'map');
 	});
 }
 
