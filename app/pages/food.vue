@@ -170,6 +170,7 @@ const filtered = computed(() => {
 }
 .go-row {
 	display: flex;
+	justify-content: flex-end;
 	gap: 8px;
 	margin-top: 4px;
 }
@@ -186,7 +187,7 @@ const filtered = computed(() => {
 	color: #ffffff;
 }
 .go-btn.mrt {
-	background-color: #005ec4;
+	background-color: #e62333;
 }
 
 .chip {
