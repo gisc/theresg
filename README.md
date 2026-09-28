@@ -1,75 +1,52 @@
-# Nuxt Minimal Starter
+# ThereSG
 
-Look at the [Nuxt documentation](https://nuxt.com/docs/getting-started/introduction) to learn more.
+A one-stop public transport hub for Singapore: live bus arrivals, an MRT
+journey planner with estimated fares, train and traffic alerts, platform crowd
+levels, bicycle parking and park connectors, hawker centre listings, and
+tourist attractions. Live at [www.there.sg](https://www.there.sg).
 
-## Setup
+## Credits and licence
 
-Make sure to install dependencies:
+ThereSG started as a fork of
+[TransitSG](https://github.com/ingStudiosOfficial/transitsg) by ingStudios,
+used under the [Apache License 2.0](LICENSE) (the upstream repository has no
+NOTICE file). This fork has been substantially modified and extended since
+September 2026: renamed to ThereSG, redesigned, and expanded with new
+sections, a server API layer, and features beyond the original codebase.
+Check out the original at
+[transitsg.ingstudios.dev](https://transitsg.ingstudios.dev).
+
+ThereSG is built with the help of AI tools.
+
+## Data attribution
+
+- Contains information from [LTA DataMall](https://datamall.lta.gov.sg)
+  accessed on 26 September 2026 from datamall.lta.gov.sg which is made
+  available under the terms of the
+  [Singapore Open Data Licence version 1.0](https://data.gov.sg/open-data-licence).
+  Live bus, train, traffic, crowd and bicycle-parking feeds refresh daily.
+- Contains information from
+  [NParks Tracks](https://data.gov.sg/datasets/d_306cc1018cb733346681883ee6d73054/view)
+  accessed on 28 September 2026 from data.gov.sg which is made available
+  under the terms of the Singapore Open Data Licence version 1.0.
+- Hawker centre listings from
+  [NEA's directory of markets & hawker centres](https://www.nea.gov.sg/docs/default-source/hawker-centres-documents/list-of-hcs_-17-august-2026.pdf)
+  (PDF, 17 August 2026).
+- Maps by [OpenFreeMap](https://openfreemap.org) ©
+  [OpenMapTiles](https://www.openmaptiles.org/), with data from
+  [OpenStreetMap](https://www.openstreetmap.org/copyright) contributors.
+
+ThereSG is not affiliated with or endorsed by LTA, NEA, NParks or any
+government agency.
+
+## Development
 
 ```bash
-# npm
 npm install
-
-# pnpm
-pnpm install
-
-# yarn
-yarn install
-
-# bun
-bun install
-```
-
-## Development Server
-
-Start the development server on `http://localhost:3000`:
-
-```bash
-# npm
 npm run dev
-
-# pnpm
-pnpm dev
-
-# yarn
-yarn dev
-
-# bun
-bun run dev
 ```
 
-## Production
-
-Build the application for production:
-
-```bash
-# npm
-npm run build
-
-# pnpm
-pnpm build
-
-# yarn
-yarn build
-
-# bun
-bun run build
-```
-
-Locally preview production build:
-
-```bash
-# npm
-npm run preview
-
-# pnpm
-pnpm preview
-
-# yarn
-yarn preview
-
-# bun
-bun run preview
-```
-
-Check out the [deployment documentation](https://nuxt.com/docs/getting-started/deployment) for more information.
+`NUXT_DATAMALL_API_KEY` must be set for the live data API routes. A push to
+`main` rebuilds the Docker image through GitHub Actions; on the Olares host,
+apply the new build with Settings > Applications > ThereSG > Stop, then
+Resume.

@@ -73,16 +73,19 @@ const { toggleBlue } = useBlueTheme();
 						About this project &amp; credits
 					</summary>
 					<p class="credit">
-						Project motivated by TransitSG, a project created by Mr Ethan Lee Qi Yang
-						(Secondary 2, Hwa Chong International School). The initial version was forked from
-						<a href="https://github.com/ingStudiosOfficial/transitsg"
-							>github.com/ingStudiosOfficial/transitsg</a
+						ThereSG started as a fork of
+						<a href="https://github.com/ingStudiosOfficial/transitsg" rel="noopener"
+							>TransitSG</a
 						>
-						under the Apache-2.0 license. Check out TransitSG at
-						<a href="https://transitsg.ingstudios.dev">https://transitsg.ingstudios.dev</a>.
-						He believes AI-generated content is AI slop.
+						by ingStudios, used under the
+						<a href="https://www.apache.org/licenses/LICENSE-2.0" rel="noopener"
+							>Apache License 2.0</a
+						>. Check out the original at
+						<a href="https://transitsg.ingstudios.dev" rel="noopener"
+							>transitsg.ingstudios.dev</a
+						>.
 					</p>
-					<p class="ai-note">ThereSG is AI-generated. :)</p>
+					<p class="ai-note">ThereSG is built with the help of AI tools.</p>
 				</details>
 			</header>
 			<m3e-heading id="service-alerts" class="heading" variant="headline" size="large"
@@ -114,6 +117,7 @@ const { toggleBlue } = useBlueTheme();
 					</m3e-list-item>
 				</m3e-list>
 			</m3e-card>
+			<DataCredits />
 		</div>
 	</div>
 </template>

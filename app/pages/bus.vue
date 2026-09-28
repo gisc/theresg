@@ -471,6 +471,7 @@ onMounted(() => {
 					</MglMap>
 				</ClientOnly>
 			</div>
+			<DataCredits />
 		</div>
 	</div>
 </template>

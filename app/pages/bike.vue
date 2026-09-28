@@ -293,6 +293,7 @@ onMounted(async () => {
 				Parking: LTA DataMall · Park connectors: NParks Tracks via data.gov.sg
 				(Singapore Open Data Licence)
 			</p>
+			<DataCredits />
 		</div>
 	</div>
 </template>

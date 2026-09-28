@@ -60,6 +60,7 @@ const { data: alerts, status, error, refresh } = await useFetch<TrainServiceMess
 					</m3e-list-item>
 				</m3e-list>
 			</m3e-card>
+			<DataCredits />
 		</div>
 	</div>
 </template>

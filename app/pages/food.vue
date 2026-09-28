@@ -114,6 +114,7 @@ const filtered = computed(() => {
 					</m3e-list-item>
 				</m3e-list>
 			</m3e-card>
+			<DataCredits />
 		</div>
 	</div>
 </template>
