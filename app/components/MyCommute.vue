@@ -1,6 +1,8 @@
 <script setup lang="ts">
 import type { BusArrival } from '~~/shared/types/BusArrival';
 
+defineProps<{ hero?: boolean }>();
+
 const { favourites, removeFavourite } = useFavouriteStops();
 
 interface StopArrivals {
@@ -71,8 +73,18 @@ watch(favourites, (list) => {
 
 <template>
 	<section class="my-commute" aria-label="My commute">
-		<m3e-heading class="heading" variant="headline" size="large">My commute</m3e-heading>
-		<m3e-card v-if="!favourites.length">
+		<m3e-heading v-if="!hero" class="heading" variant="headline" size="large"
+			>My commute</m3e-heading
+		>
+		<div v-if="hero && !favourites.length" class="hero-empty">
+			<p>
+				Pin your home, school, or work bus stops and their live arrivals will show
+				here every time you open the app. Saved only in this browser &middot; no
+				login needed.
+			</p>
+			<NuxtLink class="hero-link" to="/bus">Find a stop on the Bus page</NuxtLink>
+		</div>
+		<m3e-card v-if="!hero && !favourites.length">
 			<div slot="content" class="empty">
 				<p>
 					Pin your home, school, or work bus stops and their live arrivals will show
@@ -133,6 +145,21 @@ watch(favourites, (list) => {
 
 .heading {
 	color: var(--md-sys-color-on-surface);
+}
+
+.hero-empty p {
+	margin: 0 0 10px;
+	font-size: 14px;
+	line-height: 1.5;
+	color: #ffe9e9;
+}
+
+.hero-link {
+	color: #ffffff;
+	font-weight: 700;
+	font-size: 14px;
+	text-decoration: underline;
+	text-underline-offset: 3px;
 }
 
 .empty {

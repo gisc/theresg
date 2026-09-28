@@ -15,6 +15,14 @@ const { data: trainServiceMessages } = await useFetch<TrainServiceMessage[]>(
 );
 
 const { data: trafficIncidents } = await useFetch<TrafficIncident[]>('/api/traffic-incidents');
+
+const alertCount = computed(
+	() =>
+		(trainServiceMessages.value?.length ?? 0) + (trafficIncidents.value?.length ?? 0),
+);
+const alertCountLabel = computed(() =>
+	alertCount.value === 0 ? 'No active alerts' : `${alertCount.value} active right now`,
+);
 </script>
 
 <template>
@@ -26,21 +34,64 @@ const { data: trafficIncidents } = await useFetch<TrafficIncident[]>('/api/traff
 					Check live bus arrivals, plan MRT journeys, find bicycle parking, see
 					transport alerts, and discover food and attractions across Singapore.
 				</p>
-				<p class="credit">
-					Project motivated by TransitSG, a project created by Mr Ethan Lee Qi Yang
-					(Secondary 2, Hwa Chong International School). The initial version was forked from
-					<a href="https://github.com/ingStudiosOfficial/transitsg"
-						>github.com/ingStudiosOfficial/transitsg</a
-					>
-					under the Apache-2.0 license. Check out TransitSG at
-					<a href="https://transitsg.ingstudios.dev">https://transitsg.ingstudios.dev</a>.
-					He believes AI-generated content is AI slop.
-				</p>
-				<p class="ai-note">ThereSG is AI-generated. :)</p>
-				<p class="ai-note gap">Life is a journey. Enjoy the ride.</p>
+				<div class="tile-grid">
+					<div class="tile hero-tile">
+						<Icon class="hero-ic" name="material-symbols:push-pin-outline" />
+						<span class="hero-title">My commute</span>
+						<MyCommute hero />
+					</div>
+					<NuxtLink class="tile" to="/bus">
+						<Icon name="material-symbols:directions-bus-outline" />
+						<span class="tile-title">Bus</span>
+						<span class="tile-desc">Live arrivals at any stop</span>
+					</NuxtLink>
+					<NuxtLink class="tile" to="/mrt">
+						<Icon name="material-symbols:train-outline" />
+						<span class="tile-title">MRT</span>
+						<span class="tile-desc">Journey planner &amp; fares</span>
+					</NuxtLink>
+					<NuxtLink class="tile" to="/bike">
+						<Icon name="material-symbols:pedal-bike-outline" />
+						<span class="tile-title">Bike</span>
+						<span class="tile-desc">Parking near you</span>
+					</NuxtLink>
+					<NuxtLink class="tile" to="/food">
+						<Icon name="material-symbols:restaurant-outline" />
+						<span class="tile-title">Food</span>
+						<span class="tile-desc">Hawker &amp; eats nearby</span>
+					</NuxtLink>
+					<NuxtLink class="tile" to="/tourist">
+						<Icon name="material-symbols:photo-camera-outline" />
+						<span class="tile-title">Tourist</span>
+						<span class="tile-desc">Attractions &amp; guides</span>
+					</NuxtLink>
+					<a class="tile" href="#service-alerts">
+						<Icon name="material-symbols:warning-outline" />
+						<span class="tile-title">Alerts</span>
+						<span class="tile-desc">{{ alertCountLabel }}</span>
+					</a>
+				</div>
+				<details class="about">
+					<summary>
+						<Icon name="material-symbols:expand-more" />
+						About this project &amp; credits
+					</summary>
+					<p class="credit">
+						Project motivated by TransitSG, a project created by Mr Ethan Lee Qi Yang
+						(Secondary 2, Hwa Chong International School). The initial version was forked from
+						<a href="https://github.com/ingStudiosOfficial/transitsg"
+							>github.com/ingStudiosOfficial/transitsg</a
+						>
+						under the Apache-2.0 license. Check out TransitSG at
+						<a href="https://transitsg.ingstudios.dev">https://transitsg.ingstudios.dev</a>.
+						He believes AI-generated content is AI slop.
+					</p>
+					<p class="ai-note">ThereSG is AI-generated. :)</p>
+					<p class="ai-note gap">Life is a journey. Enjoy the ride.</p>
+				</details>
 			</header>
 			<MyCommute />
-			<m3e-heading class="heading" variant="headline" size="large"
+			<m3e-heading id="service-alerts" class="heading" variant="headline" size="large"
 				>Service Alerts</m3e-heading
 			>
 			<m3e-card>
@@ -143,13 +194,6 @@ const { data: trafficIncidents } = await useFetch<TrafficIncident[]>('/api/traff
 .home-intro {
 	padding: 8px 4px 14px;
 }
-.home-intro h1 {
-	margin: 0;
-	font-size: clamp(32px, 7vw, 42px);
-	font-weight: 800;
-	letter-spacing: -0.5px;
-	color: var(--sg-brand);
-}
 .sr-only {
 	position: absolute;
 	width: 1px;
@@ -175,5 +219,86 @@ const { data: trafficIncidents } = await useFetch<TrafficIncident[]>('/api/traff
 	line-height: 1.4;
 	letter-spacing: 0.1px;
 	color: var(--sg-brand);
+}
+
+.tile-grid {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	gap: 10px;
+	margin-top: 14px;
+}
+@media (min-width: 768px) {
+	.tile-grid {
+		grid-template-columns: repeat(3, 1fr);
+	}
+}
+.tile {
+	display: flex;
+	flex-direction: column;
+	gap: 3px;
+	background: var(--md-sys-color-surface-container-lowest);
+	border: 1px solid var(--md-sys-color-surface-variant);
+	border-radius: 18px;
+	padding: 13px 12px;
+	text-decoration: none;
+}
+.tile svg {
+	width: 26px;
+	height: 26px;
+	color: var(--sg-brand);
+}
+.tile-title {
+	font-weight: 700;
+	font-size: 14px;
+	color: var(--md-sys-color-on-surface);
+	margin-top: 5px;
+}
+.tile-desc {
+	font-size: 11.5px;
+	line-height: 1.35;
+	color: var(--md-sys-color-on-surface-variant);
+}
+.hero-tile {
+	grid-column: 1 / -1;
+	background: linear-gradient(135deg, var(--sg-brand), var(--sg-brand-strong));
+	border: none;
+}
+.hero-tile svg.hero-ic {
+	color: #ffffff;
+}
+.hero-title {
+	font-weight: 700;
+	font-size: 16px;
+	color: #ffffff;
+	margin-top: 6px;
+	margin-bottom: 8px;
+}
+.about {
+	margin-top: 14px;
+	background: var(--md-sys-color-surface-container-lowest);
+	border: 1px solid var(--md-sys-color-surface-variant);
+	border-radius: 14px;
+	padding: 12px 14px;
+}
+.about summary {
+	display: flex;
+	align-items: center;
+	gap: 6px;
+	font-weight: 700;
+	font-size: 14px;
+	color: var(--sg-brand);
+	cursor: pointer;
+	list-style: none;
+}
+.about summary::-webkit-details-marker {
+	display: none;
+}
+.about summary svg {
+	width: 18px;
+	height: 18px;
+	transition: transform 0.15s ease;
+}
+.about[open] summary svg {
+	transform: rotate(180deg);
 }
 </style>
