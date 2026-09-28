@@ -99,14 +99,6 @@ const routePath = computed(() => {
 			</m3e-nav-item>
 
 			<m3e-nav-item
-				:selected.prop="routePath.startsWith('/bike')"
-				@click="router.push('/bike')"
-			>
-				<Icon slot="icon" name="material-symbols:pedal-bike" />
-				Bike
-			</m3e-nav-item>
-
-			<m3e-nav-item
 				:selected.prop="routePath.startsWith('/food')"
 				@click="router.push('/food')"
 			>
