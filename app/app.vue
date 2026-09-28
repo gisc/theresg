@@ -167,7 +167,7 @@ const routePath = computed(() => {
 	padding-bottom: env(safe-area-inset-bottom);
 	--m3e-nav-bar-container-color: var(--md-sys-color-surface-container);
 	/* Let items shrink on narrow phones instead of overflowing and clipping. */
-	--m3e-nav-bar-vertical-item-width: min(64px, 18%);
+	--m3e-nav-bar-vertical-item-width: min(64px, 16%);
 	background-color: var(--md-sys-color-surface-container);
 }
 
