@@ -29,7 +29,8 @@ middleware:
     databases:
       - name: theresgquota
         scripts:
-          - CREATE TABLE IF NOT EXISTS lta_daily_budget (day date PRIMARY KEY, calls integer NOT NULL CHECK (calls >= 0));
+          - CREATE TABLE IF NOT EXISTS public.lta_daily_budget (day date PRIMARY KEY, calls integer NOT NULL CHECK (calls >= 0));
+          - GRANT SELECT, INSERT, UPDATE ON TABLE public.lta_daily_budget TO $dbusername;
 
 envs:
   - envName: NUXT_DATAMALL_API_KEY
