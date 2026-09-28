@@ -35,10 +35,8 @@ const { data: trafficIncidents } = await useFetch<TrafficIncident[]>('/api/traff
 					>
 					under the Apache-2.0 license. He believes AI-generated content is AI slop.
 				</p>
-				<p class="ai-note">
-					ThereSG is AI-generated. :)<br />
-					Life is a journey. Enjoy the ride.
-				</p>
+				<p class="ai-note">ThereSG is AI-generated. :)</p>
+				<p class="ai-note gap">Life is a journey. Enjoy the ride.</p>
 			</header>
 			<MyCommute />
 			<m3e-heading class="heading" variant="headline" size="large"
@@ -107,6 +105,10 @@ const { data: trafficIncidents } = await useFetch<TrafficIncident[]>('/api/traff
 	margin: 8px 0 0;
 	font-size: 13px;
 	color: var(--md-sys-color-on-surface-variant);
+}
+
+.ai-note.gap {
+	margin-top: 1em;
 }
 
 .ai-note {
