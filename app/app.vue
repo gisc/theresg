@@ -7,6 +7,8 @@ const router = useRouter();
 
 const { isDark } = useTheme();
 
+const { isBlue } = useBlueTheme();
+
 const navRail = useTemplateRef<M3eNavRailElement>('navRail');
 
 function toggleNavRail() {
@@ -23,7 +25,7 @@ const routePath = computed(() => {
 </script>
 
 <template>
-	<div id="content" class="content" :class="isDark ? 'dark' : 'light'">
+	<div id="content" class="content" :class="[isDark ? 'dark' : 'light', { blue: isBlue }]">
 		<m3e-app-bar class="app-bar">
 			<m3e-icon-button slot="leading" class="menu-button" @click="toggleNavRail()">
 				<Icon name="material-symbols:menu-outline" />
@@ -140,6 +142,14 @@ const routePath = computed(() => {
 .brand {
 	cursor: pointer; display: inline-flex; align-items: center; gap: 9px; vertical-align: middle; font-weight: 700; color: var(--sg-on-brand); letter-spacing: 0.2px; }
 .brand img { width: 32px; height: 32px; border-radius: 50%; }
+
+.dedication {
+	font-size: 12px;
+	font-weight: 500;
+	letter-spacing: 0.2px;
+	opacity: 0.92;
+	align-self: center;
+}
 
 .bottom {
 	flex-grow: 1;

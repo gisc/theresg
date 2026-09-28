@@ -187,7 +187,7 @@ const filtered = computed(() => {
 	color: #ffffff;
 }
 .go-btn.mrt {
-	background-color: #e62333;
+	background-color: var(--sg-brand);
 }
 
 .chip {

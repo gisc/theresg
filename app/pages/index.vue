@@ -16,6 +16,8 @@ const { data: trainServiceMessages } = await useFetch<TrainServiceMessage[]>(
 
 const { data: trafficIncidents } = await useFetch<TrafficIncident[]>('/api/traffic-incidents');
 
+
+const { toggleBlue } = useBlueTheme();
 </script>
 
 <template>
@@ -27,7 +29,7 @@ const { data: trafficIncidents } = await useFetch<TrafficIncident[]>('/api/traff
 					Check live bus arrivals, plan MRT journeys, find bicycle parking, see
 					transport alerts, and discover food and attractions across Singapore.
 				</p>
-				<p class="quote">Life is a journey. Enjoy the ride. :)</p>
+				<p class="quote">Life is a journey. <span class="enjoy" @click="toggleBlue()">Enjoy</span> the ride. :)</p>
 				<div class="tile-grid">
 					<div class="tile hero-tile">
 						<Icon class="hero-ic" name="material-symbols:push-pin-outline" />
