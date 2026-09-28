@@ -21,8 +21,7 @@ const { data: trafficIncidents } = await useFetch<TrafficIncident[]>('/api/traff
 	<div class="bg">
 		<div class="pg">
 			<header class="home-intro">
-				<h1>ThereSG</h1>
-				<div class="flag-accent" aria-hidden="true"></div>
+				<h1 class="sr-only">ThereSG</h1>
 				<p class="tagline">
 					Check live bus arrivals, plan MRT journeys, find bicycle parking, see
 					transport alerts, and discover food and attractions across Singapore.
@@ -151,13 +150,16 @@ const { data: trafficIncidents } = await useFetch<TrafficIncident[]>('/api/traff
 	letter-spacing: -0.5px;
 	color: var(--sg-brand);
 }
-.flag-accent {
-	width: 60px;
-	height: 7px;
-	margin: 10px 0 12px;
-	border-radius: 4px;
-	background: linear-gradient(to bottom, var(--sg-brand) 50%, #ffffff 50%);
-	box-shadow: inset 0 0 0 1px var(--md-sys-color-outline-variant);
+.sr-only {
+	position: absolute;
+	width: 1px;
+	height: 1px;
+	padding: 0;
+	margin: -1px;
+	overflow: hidden;
+	clip: rect(0 0 0 0);
+	white-space: nowrap;
+	border: 0;
 }
 .home-intro > p.tagline {
 	margin: 0;
@@ -168,10 +170,10 @@ const { data: trafficIncidents } = await useFetch<TrafficIncident[]>('/api/traff
 		'Segoe UI',
 		Roboto,
 		sans-serif;
-	font-weight: 500;
+	font-weight: 700;
 	font-size: 20px;
 	line-height: 1.4;
 	letter-spacing: 0.1px;
-	color: var(--md-sys-color-on-surface);
+	color: var(--sg-brand);
 }
 </style>
