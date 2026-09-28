@@ -35,6 +35,10 @@ const { data: trafficIncidents } = await useFetch<TrafficIncident[]>('/api/traff
 					>
 					under the Apache-2.0 license.
 				</p>
+				<p class="ai-note">
+					ThereSG is AI-generated. :)<br />
+					Life is a journey. Enjoy the ride.
+				</p>
 			</header>
 			<MyCommute />
 			<m3e-heading class="heading" variant="headline" size="large"
@@ -103,6 +107,20 @@ const { data: trafficIncidents } = await useFetch<TrafficIncident[]>('/api/traff
 	margin: 8px 0 0;
 	font-size: 13px;
 	color: var(--md-sys-color-on-surface-variant);
+}
+
+.ai-note {
+	margin: 10px 0 0;
+	font-family:
+		'Space Grotesk',
+		system-ui,
+		-apple-system,
+		'Segoe UI',
+		Roboto,
+		sans-serif;
+	font-weight: 500;
+	font-size: 16px;
+	color: var(--md-sys-color-on-surface);
 }
 
 .credit a {
