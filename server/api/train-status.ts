@@ -1,20 +1,9 @@
-import type { TrainServiceAlerts } from '~~/server/types/TrainServiceAlerts';
+import { getTrainAlertFeed } from '~~/server/utils/train-alert-feed';
 import type { TrainServiceMessage } from '~~/shared/types/TrainServiceMessage';
 import type { TrainStatus } from '~~/shared/types/TrainStatus';
 
 export default defineEventHandler(async () => {
-	const apiKey = process.env.NUXT_DATAMALL_API_KEY;
-
-	const data = await $fetch<TrainServiceAlerts>(
-		'https://datamall2.mytransport.sg/ltaodataservice/TrainServiceAlerts',
-		{
-			method: 'GET',
-			headers: {
-				Accept: 'application/json',
-				AccountKey: apiKey || '',
-			},
-		},
-	);
+	const data = await getTrainAlertFeed();
 
 	const messages: TrainServiceMessage[] = [];
 	for (const alert of data.value.Message) {
