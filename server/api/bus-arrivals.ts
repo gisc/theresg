@@ -8,6 +8,13 @@ export default defineEventHandler(async (event) => {
 		serviceNumber?: string;
 	}>(event);
 
+	if (typeof stopCode !== 'string' || !/^\d{5}$/.test(stopCode)) {
+		throw createError({ statusCode: 400, statusMessage: 'Select a valid bus stop' });
+	}
+	if (serviceNumber !== undefined && (typeof serviceNumber !== 'string' || !/^[0-9]{1,3}[A-Z]{0,2}$/.test(serviceNumber))) {
+		throw createError({ statusCode: 400, statusMessage: 'Select a valid bus service' });
+	}
+
 	const data = await $fetch<{
 		Services: BusArrival[];
 	}>('https://datamall2.mytransport.sg/ltaodataservice/v3/BusArrival', {

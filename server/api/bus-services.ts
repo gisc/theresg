@@ -6,6 +6,14 @@ export default defineEventHandler(async (event) => {
 		skip: number;
 	}>(event);
 
+	const page = skip === undefined ? 0 : Number(skip);
+	if (!Number.isInteger(page) || page < 0 || page > 5000 || page % 500 !== 0) {
+		throw createError({ statusCode: 400, statusMessage: 'Invalid page' });
+	}
+	if (serviceNumber !== undefined && (typeof serviceNumber !== 'string' || !/^[0-9]{1,3}[A-Z]{0,2}$/.test(serviceNumber))) {
+		throw createError({ statusCode: 400, statusMessage: 'Invalid bus service' });
+	}
+
 	const data = await $fetch('https://datamall2.mytransport.sg/ltaodataservice/BusServices', {
 		method: 'GET',
 		headers: {
@@ -14,7 +22,7 @@ export default defineEventHandler(async (event) => {
 		},
 		query: {
 			ServiceNo: serviceNumber,
-			$skip: skip || 0,
+			$skip: page,
 		},
 	});
 

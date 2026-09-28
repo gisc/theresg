@@ -11,10 +11,14 @@ export default defineEventHandler(async (event) => {
 
 	const latitude = Number(lat);
 	const longitude = Number(lon);
-	if (!Number.isFinite(latitude) || !Number.isFinite(longitude)) {
+	if (typeof lat !== 'string' || typeof lon !== 'string' || lat.trim() === '' || lon.trim() === '' || !Number.isFinite(latitude) || !Number.isFinite(longitude) || latitude < 1.1 || latitude > 1.5 || longitude < 103.5 || longitude > 104.2) {
 		throw createError({ statusCode: 400, statusMessage: 'lat and lon are required' });
 	}
-	const distanceKm = Math.min(Math.max(Number(dist) || 0.5, 0.1), 2);
+	const distance = dist === undefined ? 0.5 : Number(dist);
+	if (dist !== undefined && (typeof dist !== 'string' || !Number.isFinite(distance))) {
+		throw createError({ statusCode: 400, statusMessage: 'Invalid distance' });
+	}
+	const distanceKm = Math.min(Math.max(distance, 0.1), 2);
 
 	const data = await $fetch<{ value: BicycleParking[] }>(
 		'https://datamall2.mytransport.sg/ltaodataservice/BicycleParkingv2',
