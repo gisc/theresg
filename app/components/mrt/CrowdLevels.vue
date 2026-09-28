@@ -37,6 +37,7 @@ const {
 
 // Order lines are listed in, matching how commuters know them.
 const LINE_ORDER = ['NS', 'EW', 'CG', 'NE', 'CC', 'DT', 'TE', 'BP', 'SE', 'SW', 'PE', 'PW', 'CE'];
+const FEED_FOR_LINE: Record<string, string> = { NS: 'NSL', EW: 'EWL', CG: 'CGL', NE: 'NEL', CC: 'CCL', DT: 'DTL', TE: 'TEL', BP: 'BPL', SE: 'SLRT', SW: 'SLRT', PE: 'PLRT', PW: 'PLRT', CE: 'CEL' };
 
 const stationIndex = computed(() => {
 	const map = new Map<string, { name: string; line: string; color: string }>();
@@ -100,10 +101,19 @@ const rows = computed<CrowdRow[]>(() => {
 	return mapped;
 });
 
-const availableLines = computed(() => {
-	const present = new Set(rows.value.map((row) => row.line));
-	return LINE_ORDER.filter((code) => present.has(code));
+// Keep lines in the filter even if DataMall omits an entire feed.
+const availableLines = computed(() => LINE_ORDER.filter((code) => lineColors.value.has(code)));
+
+const selectedUnavailable = computed(() => {
+	if (selectedLine.value === 'all') return false;
+	const feed = FEED_FOR_LINE[selectedLine.value];
+	return Boolean(feed && crowd.value?.lineStatus?.[feed] === 'unavailable');
 });
+
+const unavailableLines = computed(() => availableLines.value.filter((code) => {
+	const feed = FEED_FOR_LINE[code];
+	return feed && crowd.value?.lineStatus?.[feed] === 'unavailable';
+}));
 
 const selectedLine = ref<string>('all');
 
@@ -167,6 +177,7 @@ onBeforeUnmount(() => {
 				>.
 			</p>
 			<p v-if="status === 'pending'">Loading crowd levels...</p>
+			<p v-else-if="status === 'error'">Crowd data unavailable. Try again shortly.</p>
 			<template v-else>
 				<div class="line-chips" role="group" aria-label="Filter by line">
 					<button
@@ -190,7 +201,11 @@ onBeforeUnmount(() => {
 						{{ code }}
 					</button>
 				</div>
-				<p v-if="!filteredRows.length">No crowd data for this line right now.</p>
+				<p v-if="selectedLine === 'all' && unavailableLines.length" class="unavailable-note">
+					Data unavailable for {{ unavailableLines.join(', ') }}. Other lines may still have readings.
+				</p>
+				<p v-if="selectedUnavailable" class="unavailable-note">Data unavailable for {{ selectedLine }} right now. Try again shortly.</p>
+				<p v-else-if="!filteredRows.length">No crowd data for this line right now.</p>
 				<ul v-else class="stations">
 					<li v-for="row in filteredRows" :key="row.station" class="station">
 						<span class="station-code" :style="{ backgroundColor: row.color }">{{
@@ -218,6 +233,12 @@ onBeforeUnmount(() => {
 }
 
 .blurb {
+	margin: 0;
+	font-size: 13px;
+	color: var(--md-sys-color-on-surface-variant);
+}
+
+.unavailable-note {
 	margin: 0;
 	font-size: 13px;
 	color: var(--md-sys-color-on-surface-variant);

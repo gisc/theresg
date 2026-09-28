@@ -61,25 +61,34 @@ export default defineEventHandler(async () => {
 						},
 					},
 				);
-				return data.value ?? [];
+				const items = data.value ?? [];
+				if (!items.length) console.warn(`[crowd] ${line}: empty upstream response`);
+				return { items, failed: false };
 			} catch (error) {
 				// A quota failure is not a quiet missing line; do not mask exhaustion as empty crowd data.
 				if ((error as { statusCode?: number })?.statusCode === 503) throw error;
-				return [] as PcdItem[];
+				console.warn(`[crowd] ${line}: upstream request failed`, error instanceof Error ? error.message : String(error));
+				return { items: [] as PcdItem[], failed: true };
 			}
 		}),
 	);
 
 	const freshAfter = now - STALE_MS;
 	const entries: PlatformCrowdEntry[] = [];
-	results.forEach((items, i) => {
+	const lineStatus: NonNullable<PlatformCrowdResponse['lineStatus']> = {};
+	results.forEach(({ items, failed }, i) => {
 		const line = FEED_LINES[i];
-		for (const item of items) {
+		if (!line) return;
+		const freshItems = items.filter((item) => {
 			const end = Date.parse(item.EndTime);
-			if (!line || Number.isNaN(end) || end < freshAfter) continue;
-			const level = (
-				['l', 'm', 'h'].includes(item.CrowdLevel) ? item.CrowdLevel : 'l'
-			) as CrowdLevel;
+			return !Number.isNaN(end) && end >= freshAfter;
+		});
+		lineStatus[line] = !failed && freshItems.some((item) => ['l', 'm', 'h'].includes(item.CrowdLevel)) ? 'available' : 'unavailable';
+		if (items.length && !freshItems.length) console.warn(`[crowd] ${line}: no fresh intervals`);
+		for (const item of freshItems) {
+			// NA is a documented upstream value. Never turn unknown into "Low".
+			if (!['l', 'm', 'h'].includes(item.CrowdLevel)) continue;
+			const level = item.CrowdLevel as CrowdLevel;
 			entries.push({
 				line,
 				station: item.Station,
@@ -95,6 +104,7 @@ export default defineEventHandler(async () => {
 	const data: PlatformCrowdResponse = {
 		updated: new Date(now).toISOString(),
 		entries,
+		lineStatus,
 	};
 
 	cache = { at: now, data };

@@ -10,11 +10,15 @@ useSeoMeta({
 	title: 'Home',
 });
 
-const { data: trainServiceMessages } = await useFetch<TrainServiceMessage[]>(
-	'/api/train-service-alerts',
+// These calls require Cloudflare request headers. SSR self-fetches bypass the
+// proxy and receive 403, then SWR caches an empty initial Home page.
+const { data: trainServiceMessages, status: trainStatus, refresh: refreshTrain } = useLazyFetch<TrainServiceMessage[]>(
+	'/api/train-service-alerts', { server: false },
 );
 
-const { data: trafficIncidents } = await useFetch<TrafficIncident[]>('/api/traffic-incidents');
+const { data: trafficIncidents, status: trafficStatus, refresh: refreshTraffic } = useLazyFetch<TrafficIncident[]>(
+	'/api/traffic-incidents', { server: false },
+);
 
 
 const { toggleBlue } = useBlueTheme();
@@ -92,9 +96,9 @@ const { toggleBlue } = useBlueTheme();
 				>Service Alerts</m3e-heading
 			>
 			<m3e-card>
-				<p v-if="trainServiceMessages && !trainServiceMessages.length" slot="content" class="empty-note">
-					No current alerts.
-				</p>
+				<p v-if="trainStatus === 'pending'" slot="content" class="empty-note">Loading service alerts...</p>
+				<p v-else-if="trainStatus === 'error'" slot="content" class="empty-note">Service alerts unavailable. <button type="button" @click="refreshTrain()">Retry</button></p>
+				<p v-else-if="!trainServiceMessages?.length" slot="content" class="empty-note">No current alerts.</p>
 				<m3e-list v-else slot="content" variant="segmented">
 					<m3e-list-item v-for="alert in trainServiceMessages" :key="alert.Content">
 						<m3e-avatar slot="leading">
@@ -111,9 +115,9 @@ const { toggleBlue } = useBlueTheme();
 				>Traffic Incidents</m3e-heading
 			>
 			<m3e-card>
-				<p v-if="trafficIncidents && !trafficIncidents.length" slot="content" class="empty-note">
-					No current traffic incidents.
-				</p>
+				<p v-if="trafficStatus === 'pending'" slot="content" class="empty-note">Loading traffic incidents...</p>
+				<p v-else-if="trafficStatus === 'error'" slot="content" class="empty-note">Traffic incidents unavailable. <button type="button" @click="refreshTraffic()">Retry</button></p>
+				<p v-else-if="!trafficIncidents?.length" slot="content" class="empty-note">No current traffic incidents.</p>
 				<m3e-list v-else slot="content" variant="segmented">
 					<m3e-list-item v-for="incident in trafficIncidents" :key="incident.Message">
 						<m3e-avatar slot="leading">

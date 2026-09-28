@@ -11,4 +11,5 @@ export interface PlatformCrowdEntry {
 export interface PlatformCrowdResponse {
 	updated: string;
 	entries: PlatformCrowdEntry[];
+	lineStatus?: Record<string, 'available' | 'unavailable'>;
 }
