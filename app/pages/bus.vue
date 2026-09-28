@@ -1,6 +1,8 @@
 <script setup lang="ts">
 import type { BusStop } from '~/types/BusStop';
 import type { Geojson } from '~/types/Geojson';
+import type { BusArrival } from '~~/shared/types/BusArrival';
+import type { BusArrivalsResponse } from '~~/shared/types/BusArrivalsResponse';
 
 definePageMeta({
 	title: 'Bus',
@@ -56,6 +58,66 @@ watch(
 const selectedStop = computed(
 	() => allStops.value.find((s) => s.code === route.query.stop) ?? null,
 );
+
+// Stops near me: stops within 300m of the user with their next arrivals.
+interface NearStop {
+	stop: BusStop;
+	distance: number;
+	arrivals: BusArrival[];
+	error: boolean;
+}
+
+const nearMe = ref<NearStop[] | null>(null);
+const nearMeLoading = ref(false);
+const nearMeNote = ref('');
+
+async function findStopsNearMe() {
+	nearMeLoading.value = true;
+	nearMeNote.value = '';
+	nearMe.value = null;
+	const coords = await getSingaporeCoords();
+	if (!coords) {
+		nearMeLoading.value = false;
+		nearMeNote.value =
+			'Location is unavailable. Allow location access and try again (Singapore only).';
+		return;
+	}
+	const features = ((geojson.value as Geojson | null)?.features ?? [])
+		.map((f) => ({
+			feature: f,
+			distance: haversineM(coords, {
+				lat: f.geometry.coordinates[1] as number,
+				lon: f.geometry.coordinates[0] as number,
+			}),
+		}))
+		.filter((x) => x.distance <= 300)
+		.sort((a, b) => a.distance - b.distance)
+		.slice(0, 6);
+	if (!features.length) {
+		nearMeLoading.value = false;
+		nearMeNote.value = 'No bus stops within 300 m of you.';
+		return;
+	}
+	const results: NearStop[] = await Promise.all(
+		features.map(async ({ feature, distance }) => {
+			try {
+				const result = await $fetch<BusArrivalsResponse>('/api/bus-arrivals', {
+					query: { stopCode: feature.properties.code },
+				});
+				return {
+					stop: feature.properties,
+					distance,
+					arrivals: result.services,
+					error: Boolean(result.error),
+				};
+			} catch {
+				return { stop: feature.properties, distance, arrivals: [], error: true };
+			}
+		}),
+	);
+	nearMe.value = results;
+	nearMeLoading.value = false;
+}
 const stopMatches = computed(() => {
 	const q = stopQuery.value.trim().toLowerCase();
 	if (
@@ -261,6 +323,36 @@ onMounted(() => {
 					arrivals at Hotel Grand Pacific.
 				</p>
 			</section>
+			<div class="near-me">
+				<button type="button" class="near-me-button" :disabled="nearMeLoading" @click="findStopsNearMe()">
+					<Icon name="material-symbols:my-location" />
+					{{ nearMeLoading ? 'Finding stops near you...' : 'Stops near me' }}
+				</button>
+				<p v-if="nearMeNote" class="near-me-note">{{ nearMeNote }}</p>
+			</div>
+			<m3e-card v-if="nearMe?.length" class="near-me-card">
+				<m3e-heading slot="header" variant="title" size="large"
+					>Stops within 300 m</m3e-heading
+				>
+				<m3e-list slot="content" variant="segmented">
+					<m3e-list-item v-for="item in nearMe" :key="item.stop.code">
+						<button type="button" class="near-stop" @click="pickStop(item.stop)">
+							<strong>{{ item.stop.name }}</strong>
+							<small>{{ item.stop.road }} &middot; {{ item.stop.code }} &middot; {{ Math.round(item.distance) }} m</small>
+						</button>
+						<span slot="supporting-text" class="near-arrivals">
+							<template v-if="item.error">Could not load arrivals.</template>
+							<template v-else-if="!item.arrivals.length">No buses running right now.</template>
+							<template v-else>
+								<span v-for="a in item.arrivals.slice(0, 3)" :key="a.ServiceNo" class="near-arrival">
+									<strong>{{ a.ServiceNo }}</strong>
+									{{ timeToArrival(a.NextBus.EstimatedArrival, Date.now()) }}
+								</span>
+							</template>
+						</span>
+					</m3e-list-item>
+				</m3e-list>
+			</m3e-card>
 			<div class="search-grid">
 				<div class="search-field">
 					<label for="bus-service">Bus number</label>
@@ -516,6 +608,72 @@ onMounted(() => {
 </style>
 
 <style lang="css" scoped>
+.near-me {
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+	gap: 6px;
+	margin-bottom: 16px;
+}
+
+.near-me-button {
+	display: inline-flex;
+	align-items: center;
+	gap: 6px;
+	padding: 8px 18px;
+	border: 0;
+	border-radius: 999px;
+	background-color: var(--sg-brand);
+	color: var(--sg-on-brand);
+	font: inherit;
+	font-size: 14px;
+	font-weight: 700;
+	cursor: pointer;
+}
+
+.near-me-button:disabled {
+	opacity: 0.6;
+	cursor: default;
+}
+
+.near-me-note {
+	margin: 0;
+	font-size: 13px;
+	color: var(--md-sys-color-on-surface-variant);
+}
+
+.near-me-card {
+	margin-bottom: 16px;
+}
+
+.near-stop {
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+	gap: 2px;
+	border: 0;
+	background: none;
+	padding: 0;
+	font: inherit;
+	color: inherit;
+	text-align: left;
+	cursor: pointer;
+}
+
+.near-stop small {
+	color: var(--md-sys-color-on-surface-variant);
+}
+
+.near-arrivals {
+	display: inline-flex;
+	flex-wrap: wrap;
+	gap: 10px;
+}
+
+.near-arrival {
+	white-space: nowrap;
+}
+
 .arrivals-section {
 	scroll-margin-top: 12px;
 }

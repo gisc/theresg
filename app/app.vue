@@ -22,6 +22,18 @@ function toggleNavRail() {
 const routePath = computed(() => {
 	return route.path.toLowerCase() || '';
 });
+
+useSeoMeta({
+	description:
+		'Live Singapore bus arrivals, MRT journey planner with fares, train and traffic alerts, platform crowd levels, bicycle parking, hawker centres and attractions.',
+	ogTitle: 'ThereSG - Singapore public transport, live',
+	ogDescription:
+		'Live bus arrivals, MRT planner and fares, service alerts, crowd levels, bicycle parking, hawker food and attractions across Singapore.',
+	ogType: 'website',
+	ogUrl: 'https://www.there.sg',
+	ogImage: 'https://www.there.sg/img/og-cover.png',
+	twitterCard: 'summary_large_image',
+});
 </script>
 
 <template>

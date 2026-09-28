@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { TrainServiceMessage } from '~~/shared/types/TrainServiceMessage';
+import type { TrainStatus } from '~~/shared/types/TrainStatus';
 
 definePageMeta({
 	title: 'MRT',
@@ -9,9 +9,12 @@ useSeoMeta({
 	title: 'MRT',
 });
 
-const { data: alerts, status, error, refresh } = await useFetch<TrainServiceMessage[]>(
-	'/api/train-service-alerts',
+const { data: trainStatus, status, error, refresh } = await useFetch<TrainStatus>(
+	'/api/train-status',
 );
+
+const alerts = computed(() => trainStatus.value?.messages ?? []);
+const disrupted = computed(() => Boolean(trainStatus.value?.disrupted));
 </script>
 
 <template>
@@ -48,17 +51,32 @@ const { data: alerts, status, error, refresh } = await useFetch<TrainServiceMess
 				<p>Service alerts are unavailable right now.</p>
 				<button type="button" @click="refresh()">Try again</button>
 			</div>
-			<p v-else-if="!alerts?.length">No train service alerts reported.</p>
-			<m3e-card v-else>
+			<p v-else-if="!alerts.length">No train service alerts reported.</p>
+			<m3e-card v-else-if="disrupted">
 				<m3e-list slot="content" variant="segmented">
 					<m3e-list-item v-for="(alert, index) in alerts" :key="`${alert.CreatedDate}-${index}`">
 						<m3e-avatar slot="leading">
 							<Icon :name="getAlertIcon(alert.Content)" />
 						</m3e-avatar>
 						<span slot="overline">{{ alert.CreatedDate }}</span>
-						{{ alert.Content }}
+						<span v-if="alert.LineTag" class="line-tag">{{ alert.LineTag }}</span>
+						{{ alert.ParsedText ?? alert.Content }}
 					</m3e-list-item>
 				</m3e-list>
+			</m3e-card>
+			<!-- No live disruption: planned works sit here as a small notice, not the top banner. -->
+			<m3e-card v-else class="planned-card">
+				<div slot="content" class="planned">
+					<p class="planned-title">
+						<Icon name="material-symbols:info-outline" />
+						Planned works
+					</p>
+					<p v-for="(alert, index) in alerts" :key="`${alert.CreatedDate}-${index}`" class="planned-item">
+						<span v-if="alert.LineTag" class="line-tag">{{ alert.LineTag }}</span>
+						{{ alert.ParsedText ?? alert.Content }}
+						<span class="planned-date">Notice dated {{ alert.CreatedDate }}</span>
+					</p>
+				</div>
 			</m3e-card>
 			<DataCredits />
 		</div>
@@ -123,6 +141,50 @@ const { data: alerts, status, error, refresh } = await useFetch<TrainServiceMess
 }
 
 .map-link:focus-visible { outline: 2px solid var(--md-sys-color-primary); outline-offset: 3px; }
+
+.line-tag {
+	display: inline-block;
+	margin-right: 6px;
+	padding: 2px 8px;
+	border-radius: 6px;
+	background-color: var(--md-sys-color-primary);
+	color: var(--md-sys-color-on-primary);
+	font-size: 11px;
+	font-weight: 700;
+	vertical-align: baseline;
+}
+
+.planned-card {
+	border: 1px solid var(--md-sys-color-outline-variant);
+}
+
+.planned {
+	display: flex;
+	flex-direction: column;
+	gap: 8px;
+	font-size: 13px;
+	color: var(--md-sys-color-on-surface-variant);
+}
+
+.planned-title {
+	display: flex;
+	align-items: center;
+	gap: 6px;
+	margin: 0;
+	font-weight: 700;
+	color: var(--md-sys-color-on-surface);
+}
+
+.planned-item {
+	margin: 0;
+	line-height: 1.5;
+}
+
+.planned-date {
+	display: block;
+	margin-top: 2px;
+	font-size: 11px;
+}
 
 .source {
 	font-size: 12px;

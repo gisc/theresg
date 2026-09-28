@@ -98,7 +98,8 @@ const { toggleBlue } = useBlueTheme();
 							<Icon :name="getAlertIcon(alert.Content)" />
 						</m3e-avatar>
 						<span slot="overline">{{ alert.CreatedDate }}</span>
-						{{ alert.Content }}
+						<span v-if="alert.LineTag" class="line-tag">{{ alert.LineTag }}</span>
+						{{ alert.ParsedText ?? alert.Content }}
 					</m3e-list-item>
 				</m3e-list>
 			</m3e-card>
@@ -149,6 +150,18 @@ const { toggleBlue } = useBlueTheme();
 
 .heading {
 	color: var(--md-sys-color-on-surface);
+}
+
+.line-tag {
+	display: inline-block;
+	margin-right: 6px;
+	padding: 2px 8px;
+	border-radius: 6px;
+	background-color: var(--md-sys-color-primary);
+	color: var(--md-sys-color-on-primary);
+	font-size: 11px;
+	font-weight: 700;
+	vertical-align: baseline;
 }
 
 .credit {

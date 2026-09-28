@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import type { BusStop } from '~/types/BusStop';
+import type { BusArrivalsResponse } from '~~/shared/types/BusArrivalsResponse';
 
 const props = defineProps<{
 	stops: BusStop[];
@@ -29,11 +30,14 @@ async function refreshArrivals(s: BusStop) {
 	arrivalsLoading.value = true;
 	arrivalsError.value = false;
 	try {
-		const result = await $fetch<BusArrival[]>('/api/bus-arrivals', {
+		const result = await $fetch<BusArrivalsResponse>('/api/bus-arrivals', {
 			method: 'GET',
 			query: { stopCode: s.code },
 		});
-		if (request === arrivalsRequest) arrivals.value = result;
+		if (request === arrivalsRequest) {
+			arrivals.value = result.services;
+			arrivalsError.value = Boolean(result.error);
+		}
 	} catch {
 		if (request === arrivalsRequest) arrivalsError.value = true;
 	} finally {
@@ -120,7 +124,7 @@ onBeforeUnmount(() => {
 					<m3e-loading-indicator />
 				</div>
 				<p v-else-if="arrivalsError" role="alert">
-					Could not load arrivals.
+					Could not reach LTA DataMall for live arrivals.
 					<button type="button" class="retry" @click="refreshArrivals(stop)">
 						Retry
 					</button>
@@ -137,6 +141,26 @@ onBeforeUnmount(() => {
 							<span class="time-to-arrival">
 								{{ timeToArrival(arrival.NextBus.EstimatedArrival, now) }}
 							</span>
+							<span class="bus-meta">
+								<span
+									v-if="busLoadLabel(arrival.NextBus.Load)"
+									class="meta-chip"
+									:class="busLoadClass(arrival.NextBus.Load)"
+									>{{ busLoadLabel(arrival.NextBus.Load) }}</span
+								>
+								<span
+									v-if="isWheelchairAccessible(arrival.NextBus.Feature)"
+									class="meta-chip"
+									title="Wheelchair accessible"
+									>♿</span
+								>
+								<span v-if="busDeckLabel(arrival.NextBus.Type)" class="meta-chip">{{
+									busDeckLabel(arrival.NextBus.Type)
+								}}</span>
+								<span v-if="!isLiveEstimate(arrival.NextBus)" class="meta-chip scheduled"
+									>Scheduled</span
+								>
+							</span>
 						</span>
 						<span v-if="arrival.NextBus2.EstimatedArrival" slot="supporting-text">
 							Also {{ timeToArrival(arrival.NextBus2.EstimatedArrival, now)
@@ -146,7 +170,10 @@ onBeforeUnmount(() => {
 						</span>
 					</m3e-list-item>
 				</m3e-list>
-				<p v-else>No arrival times available for this stop right now.</p>
+				<p v-else>
+					No buses running at this stop right now. Services may have ended for
+					the night.
+				</p>
 			</m3e-expansion-panel>
 		</div>
 	</m3e-card>
@@ -212,6 +239,43 @@ onBeforeUnmount(() => {
 	color: var(--md-sys-color-on-primary-container);
 	width: fit-content;
 	height: fit-content;
+}
+
+.bus-meta {
+	display: inline-flex;
+	flex-wrap: wrap;
+	gap: 4px;
+	margin-left: 6px;
+}
+
+.meta-chip {
+	padding: 1px 7px;
+	border-radius: 999px;
+	font-size: 10.5px;
+	font-weight: 600;
+	background-color: var(--md-sys-color-surface-variant);
+	color: var(--md-sys-color-on-surface-variant);
+	white-space: nowrap;
+}
+
+.meta-chip.load-seats {
+	background-color: #dcf5e3;
+	color: #14532d;
+}
+
+.meta-chip.load-standing {
+	background-color: #fdf0c8;
+	color: #713f12;
+}
+
+.meta-chip.load-limited {
+	background-color: var(--md-sys-color-error-container);
+	color: var(--md-sys-color-on-error-container);
+}
+
+.meta-chip.scheduled {
+	border: 1px dashed var(--md-sys-color-outline);
+	background: none;
 }
 
 .time-to-arrival {

@@ -31,8 +31,9 @@ interface PcdResponse {
 	value: PcdItem[];
 }
 
-// The feed updates every 10 minutes; serve a 1-minute cache to be polite.
-const CACHE_TTL_MS = 60_000;
+// The feed updates every 10 minutes; serve a 5-minute cache so a traffic
+// spike cannot multiply our DataMall calls.
+const CACHE_TTL_MS = 300_000;
 // Entries whose interval ended more than this long ago are stale (some branches
 // rarely update, and the feed itself can lag an interval or two) and are dropped.
 const STALE_MS = 3 * 60 * 60_000;

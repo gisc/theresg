@@ -1,9 +1,11 @@
 import { datamallFetch } from '~~/server/utils/datamall-fetch';
 import type { BusArrival } from '~~/shared/types/BusArrival';
+import type { BusArrivalsResponse } from '~~/shared/types/BusArrivalsResponse';
 import { createTtlCache } from '~~/server/utils/ttl-cache';
 
-// Arrivals update quickly; cap staleness at 15 seconds per stop/service pair.
-const cachedArrivals = createTtlCache<BusArrival[]>(15_000, 256);
+
+// DataMall refreshes arrivals about every 20s; one cached copy per stop serves everyone.
+const cachedArrivals = createTtlCache<BusArrivalsResponse>(20_000, 256);
 
 export default defineEventHandler(async (event) => {
 	const apiKey = process.env.NUXT_DATAMALL_API_KEY;
@@ -24,19 +26,28 @@ export default defineEventHandler(async (event) => {
 	}
 
 	return cachedArrivals(`${stopCode}:${serviceNumber ?? ''}`, async () => {
-		const data = await datamallFetch<{
-			Services: BusArrival[];
-		}>('https://datamall2.mytransport.sg/ltaodataservice/v3/BusArrival', {
-			method: 'GET',
-			headers: {
-				Accept: 'application/json',
-				AccountKey: apiKey || '',
-			},
-			query: {
-				BusStopCode: stopCode,
-				ServiceNo: serviceNumber,
-			},
-		});
+		const fetchedAt = new Date().toISOString();
+		let data: { Services: BusArrival[] };
+		try {
+			data = await datamallFetch<{
+				Services: BusArrival[];
+			}>('https://datamall2.mytransport.sg/ltaodataservice/v3/BusArrival', {
+				method: 'GET',
+				headers: {
+					Accept: 'application/json',
+					AccountKey: apiKey || '',
+				},
+				query: {
+					BusStopCode: stopCode,
+					ServiceNo: serviceNumber,
+				},
+			});
+		} catch (error) {
+			// A quota failure stays a hard error; anything else is reported in the
+			// envelope so the page can tell "LTA unreachable" from "no buses".
+			if ((error as { statusCode?: number })?.statusCode === 503) throw error;
+			return { services: [], fetchedAt, error: 'upstream' };
+		}
 
 		const sortedServices = data.Services.sort((a, b) => {
 			return (
@@ -45,6 +56,6 @@ export default defineEventHandler(async (event) => {
 			);
 		});
 
-		return sortedServices;
+		return { services: sortedServices, fetchedAt };
 	});
 });

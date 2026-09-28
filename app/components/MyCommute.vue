@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import type { BusArrival } from '~~/shared/types/BusArrival';
+import type { BusArrivalsResponse } from '~~/shared/types/BusArrivalsResponse';
 
 defineProps<{ hero?: boolean }>();
 
@@ -21,12 +22,16 @@ async function loadArrivals(code: string) {
 		[code]: { loading: true, error: false, arrivals: [] },
 	};
 	try {
-		const result = await $fetch<BusArrival[]>('/api/bus-arrivals', {
+		const result = await $fetch<BusArrivalsResponse>('/api/bus-arrivals', {
 			query: { stopCode: code },
 		});
 		arrivalsByStop.value = {
 			...arrivalsByStop.value,
-			[code]: { loading: false, error: false, arrivals: result },
+			[code]: {
+				loading: false,
+				error: Boolean(result.error),
+				arrivals: result.services,
+			},
 		};
 	} catch {
 		arrivalsByStop.value = {
@@ -102,7 +107,7 @@ watch(favourites, (list) => {
 				<span class="road">{{ favourite.road }} &middot; {{ favourite.code }}</span>
 				<p v-if="arrivalsByStop[favourite.code]?.loading">Loading arrivals...</p>
 				<p v-else-if="arrivalsByStop[favourite.code]?.error">
-					Could not load arrivals.
+					Could not reach LTA DataMall for live arrivals.
 					<button type="button" class="retry" @click="loadArrivals(favourite.code)">
 						Retry
 					</button>
@@ -110,6 +115,21 @@ watch(favourites, (list) => {
 				<ul v-else-if="upcoming(favourite.code).length" class="services">
 					<li v-for="arrival in upcoming(favourite.code).slice(0, 4)" :key="arrival.ServiceNo">
 						<span class="bus-number">{{ arrival.ServiceNo }}</span>
+						<span
+							v-if="busLoadLabel(arrival.NextBus.Load)"
+							class="meta-chip"
+							:class="busLoadClass(arrival.NextBus.Load)"
+							>{{ busLoadLabel(arrival.NextBus.Load) }}</span
+						>
+						<span
+							v-if="isWheelchairAccessible(arrival.NextBus.Feature)"
+							class="meta-chip"
+							title="Wheelchair accessible"
+							>♿</span
+						>
+						<span v-if="!isLiveEstimate(arrival.NextBus)" class="meta-chip scheduled"
+							>Scheduled</span
+						>
 						<span class="eta">{{
 							timeToArrival(arrival.NextBus.EstimatedArrival, now)
 						}}</span>
@@ -118,7 +138,7 @@ watch(favourites, (list) => {
 						</span>
 					</li>
 				</ul>
-				<p v-else>No arrival times available for this stop right now.</p>
+				<p v-else>No buses running at this stop right now.</p>
 				<div class="actions">
 					<NuxtLink class="link" :to="`/bus?stop=${favourite.code}`">
 						Open in Bus
@@ -185,6 +205,36 @@ watch(favourites, (list) => {
 .road {
 	font-size: 13px;
 	color: var(--md-sys-color-on-surface-variant);
+}
+
+.meta-chip {
+	padding: 1px 7px;
+	border-radius: 999px;
+	font-size: 10.5px;
+	font-weight: 600;
+	background-color: var(--md-sys-color-surface-variant);
+	color: var(--md-sys-color-on-surface-variant);
+	white-space: nowrap;
+}
+
+.meta-chip.load-seats {
+	background-color: #dcf5e3;
+	color: #14532d;
+}
+
+.meta-chip.load-standing {
+	background-color: #fdf0c8;
+	color: #713f12;
+}
+
+.meta-chip.load-limited {
+	background-color: var(--md-sys-color-error-container);
+	color: var(--md-sys-color-on-error-container);
+}
+
+.meta-chip.scheduled {
+	border: 1px dashed var(--md-sys-color-outline);
+	background: none;
 }
 
 .services {

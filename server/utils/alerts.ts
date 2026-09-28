@@ -94,3 +94,40 @@ export function formatSgDate(value: string | number | Date): string {
 		year: 'numeric',
 	}).format(new Date(value));
 }
+
+// LTA alert texts sometimes carry a machine prefix: "05:00-SK-Planned Service
+// Adjustment. ..." - a time, then a line code. Parse it into a tag and body,
+// and fall back to the raw text when the format does not match.
+const ALERT_LINE_TAGS: Record<string, string> = {
+	NS: 'NSL',
+	EW: 'EWL',
+	CG: 'CGL',
+	NE: 'NEL',
+	CC: 'CCL',
+	CE: 'CEL',
+	DT: 'DTL',
+	TE: 'TEL',
+	BP: 'BP LRT',
+	SK: 'SK LRT',
+	PG: 'PG LRT',
+	SE: 'SE LRT',
+	SW: 'SW LRT',
+	PE: 'PE LRT',
+	PW: 'PW LRT',
+};
+
+export interface ParsedAlertContent {
+	time?: string;
+	lineTag?: string;
+	text: string;
+}
+
+export function parseAlertContent(content: string): ParsedAlertContent {
+	const m = content.match(/^(\d{1,2}:\d{2})-([A-Z]{2})-([\s\S]+)$/);
+	if (!m) return { text: content };
+	return {
+		time: m[1],
+		lineTag: ALERT_LINE_TAGS[m[2]!] ?? m[2],
+		text: m[3]!.trim(),
+	};
+}

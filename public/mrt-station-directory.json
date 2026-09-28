@@ -1,0 +1,8 @@
+{
+	"_note": "Stations the data feeds can report that are not yet in mrt-lines.json. One line per station; when a station opens, set open to true (and add it to mrt-lines.json for the planner). Used by the crowd-levels display for names and to hide unopened stations.",
+	"stations": [
+		{ "code": "DT36", "name": "Xilin", "line": "DT", "open": true },
+		{ "code": "DT37", "name": "Sungei Bedok", "line": "DT", "open": true },
+		{ "code": "CC18", "name": "Bukit Brown", "line": "CC", "open": false }
+	]
+}

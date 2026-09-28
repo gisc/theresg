@@ -12,6 +12,10 @@ const collapsed = ref(false);
 
 const messages = computed(() => status.value?.messages ?? []);
 
+// The top banner is for live disruptions only. Planned-works notices stay on
+// the MRT page as a small card.
+const showBanner = computed(() => Boolean(status.value?.disrupted) && messages.value.length > 0);
+
 // Dismissal is keyed to the current set of alerts: the banner stays
 // collapsed until a new or different alert appears. Client-side only.
 const STORAGE_KEY = 'theresg-dismissed-alerts';
@@ -45,7 +49,7 @@ const hiddenCount = computed(() => messages.value.length - shownMessages.value.l
 
 <template>
 	<button
-		v-if="messages.length && collapsed"
+		v-if="showBanner && collapsed"
 		type="button"
 		class="banner-collapsed"
 		:class="{ disrupted: status?.disrupted }"
@@ -64,7 +68,7 @@ const hiddenCount = computed(() => messages.value.length - shownMessages.value.l
 		<Icon name="material-symbols:expand-more" />
 	</button>
 	<div
-		v-else-if="messages.length"
+		v-else-if="showBanner"
 		class="banner"
 		:class="{ disrupted: status?.disrupted }"
 		role="alert"

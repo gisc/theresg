@@ -2,7 +2,7 @@ import { datamallFetch } from '~~/server/utils/datamall-fetch';
 import type { TrainServiceAlerts } from '~~/server/types/TrainServiceAlerts';
 import { createTtlCache } from '~~/server/utils/ttl-cache';
 
-const cachedFeed = createTtlCache<TrainServiceAlerts>(30_000, 1);
+const cachedFeed = createTtlCache<TrainServiceAlerts>(60_000, 1);
 
 export function getTrainAlertFeed() {
 	return cachedFeed('alerts', () =>

@@ -8,6 +8,24 @@ const { data: network } = useLazyFetch<MrtNetwork>('/mrt-lines.json', {
 	getCachedData: (key, nuxtApp) => nuxtApp.payload.data[key] ?? nuxtApp.static.data[key],
 });
 
+interface StationDirectoryEntry {
+	code: string;
+	name: string;
+	line: string;
+	open: boolean;
+}
+
+// Stations the feeds can report that are not yet in mrt-lines.json (new
+// openings, unopened stations). One-line edit per station when things change.
+const { data: directory } = useLazyFetch<{ stations: StationDirectoryEntry[] }>(
+	'/mrt-station-directory.json',
+	{
+		server: false,
+		key: 'mrt-station-directory',
+		getCachedData: (key, nuxtApp) => nuxtApp.payload.data[key] ?? nuxtApp.static.data[key],
+	},
+);
+
 const {
 	data: crowd,
 	status,
@@ -33,25 +51,53 @@ const stationIndex = computed(() => {
 	return map;
 });
 
+const lineColors = computed(() => {
+	const map = new Map<string, string>();
+	if (!network.value) return map;
+	for (const line of network.value.lines) {
+		if (!map.has(line.code)) map.set(line.code, line.color);
+	}
+	return map;
+});
+
+const directoryIndex = computed(() => {
+	const map = new Map<string, StationDirectoryEntry>();
+	for (const station of directory.value?.stations ?? []) {
+		map.set(station.code, station);
+	}
+	return map;
+});
+
 interface CrowdRow {
 	station: string;
 	name: string;
 	line: string;
 	color: string;
 	level: 'l' | 'm' | 'h';
+	inService: boolean;
 }
 
+const nowTick = ref(Date.now());
+
 const rows = computed<CrowdRow[]>(() => {
-	return (crowd.value?.entries ?? []).map((entry) => {
+	const mapped: CrowdRow[] = [];
+	for (const entry of crowd.value?.entries ?? []) {
 		const known = stationIndex.value.get(entry.station);
-		return {
+		const extra = directoryIndex.value.get(entry.station);
+		// Skip stations that are not open yet (e.g. CC18 Bukit Brown) and codes
+		// we cannot name at all, rather than showing a bare code.
+		if (!known && !extra?.open) continue;
+		const line = known?.line ?? extra?.line ?? entry.line;
+		mapped.push({
 			station: entry.station,
-			name: known?.name ?? entry.station,
-			line: known?.line ?? entry.line,
-			color: known?.color ?? '#6F7978',
+			name: known?.name ?? extra?.name ?? entry.station,
+			line,
+			color: known?.color ?? lineColors.value.get(line) ?? '#6F7978',
 			level: entry.level,
-		};
-	});
+			inService: isLineInService(line, new Date(nowTick.value)),
+		});
+	}
+	return mapped;
 });
 
 const availableLines = computed(() => {
@@ -72,18 +118,34 @@ const LEVEL_META = {
 	h: { label: 'High', class: 'high' },
 } as const;
 
+function sgTime(value: string | number | Date): string {
+	return new Date(value).toLocaleTimeString('en-SG', {
+		timeZone: 'Asia/Singapore',
+		hour: 'numeric',
+		minute: '2-digit',
+		hour12: true,
+	});
+}
+
+// The feed's own 10-minute window, not the page-load time.
+const windowLabel = computed(() => {
+	const entries = crowd.value?.entries ?? [];
+	if (!entries.length) return '';
+	const latest = entries.reduce((a, b) => (Date.parse(b.end) > Date.parse(a.end) ? b : a));
+	return `${sgTime(latest.start)}–${sgTime(latest.end)}`;
+});
+
 const updatedLabel = computed(() => {
 	if (!crowd.value?.updated) return '';
-	return new Date(crowd.value.updated).toLocaleTimeString('en-SG', {
-		timeZone: 'Asia/Singapore',
-		hour: '2-digit',
-		minute: '2-digit',
-	});
+	return sgTime(crowd.value.updated);
 });
 
 let timer: ReturnType<typeof setInterval> | null = null;
 onMounted(() => {
-	timer = setInterval(() => refresh(), 60_000);
+	timer = setInterval(() => {
+		nowTick.value = Date.now();
+		refresh();
+	}, 60_000);
 });
 onBeforeUnmount(() => {
 	if (timer) clearInterval(timer);
@@ -98,9 +160,10 @@ onBeforeUnmount(() => {
 		<div slot="content" class="crowd">
 			<p class="blurb">
 				Live platform crowd density from LTA DataMall, in 10-minute intervals<span
-					v-if="updatedLabel"
+					v-if="windowLabel"
 				>
-					&middot; updated {{ updatedLabel }}</span
+					&middot; crowd as of {{ windowLabel }}</span
+				><span v-else-if="updatedLabel"> &middot; updated {{ updatedLabel }}</span
 				>.
 			</p>
 			<p v-if="status === 'pending'">Loading crowd levels...</p>
@@ -134,7 +197,8 @@ onBeforeUnmount(() => {
 							row.station
 						}}</span>
 						<span class="station-name">{{ row.name }}</span>
-						<span class="level" :class="LEVEL_META[row.level].class">{{
+						<span v-if="!row.inService" class="level offline">Not in service</span>
+						<span v-else class="level" :class="LEVEL_META[row.level].class">{{
 							LEVEL_META[row.level].label
 						}}</span>
 					</li>
@@ -241,6 +305,11 @@ onBeforeUnmount(() => {
 .level.high {
 	background-color: var(--md-sys-color-error-container);
 	color: var(--md-sys-color-on-error-container);
+}
+
+.level.offline {
+	background-color: var(--md-sys-color-surface-variant);
+	color: var(--md-sys-color-on-surface-variant);
 }
 
 .dark .level.low {

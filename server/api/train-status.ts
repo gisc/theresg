@@ -8,9 +8,13 @@ export default defineEventHandler(async () => {
 	const messages: TrainServiceMessage[] = [];
 	for (const alert of data.value.Message) {
 		if (!isAlertCurrent(alert.Content)) continue;
+		const parsed = parseAlertContent(alert.Content);
 		messages.push({
 			Content: alert.Content,
 			CreatedDate: formatSgDate(alert.CreatedDate),
+			AlertTime: parsed.time,
+			LineTag: parsed.lineTag,
+			ParsedText: parsed.text,
 		});
 	}
 
