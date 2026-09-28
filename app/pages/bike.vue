@@ -110,7 +110,9 @@ function handleMapLoad(e: any) {
 	// Listen at the DOM level: maplibre's own click synthesis can be swallowed
 	// by the cooperative-gestures overlay on touch devices.
 	const canvas = mapInstance.value.getCanvas();
-	canvas.addEventListener('click', (ev: MouseEvent) => {
+	// Attach to the container, not the canvas: the cooperative-gestures
+	// overlay sits above the canvas and becomes the click target.
+	mapInstance.value.getContainer().addEventListener('click', (ev: MouseEvent) => {
 		const rect = canvas.getBoundingClientRect();
 		const lngLat = mapInstance.value.unproject([
 			ev.clientX - rect.left,
