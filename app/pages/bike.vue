@@ -20,6 +20,8 @@ const parkingStatus = ref<'idle' | 'pending' | 'success' | 'error'>('idle');
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const mapInstance = ref<any>(null);
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const bikeMapRef = useTemplateRef<any>('bikeMap');
 
 const { data: pcn } = await useLazyFetch('/pcn.json', {
 	server: false,
@@ -104,22 +106,25 @@ const pointGeojson = computed(() => ({
 		: [],
 }));
 
+let tapAttached = false;
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-function handleMapLoad(e: any) {
-	mapInstance.value = e.target;
-	// Listen at the DOM level: maplibre's own click synthesis can be swallowed
-	// by the cooperative-gestures overlay on touch devices.
-	const canvas = mapInstance.value.getCanvas();
-	// Attach to the container, not the canvas: the cooperative-gestures
-	// overlay sits above the canvas and becomes the click target.
-	mapInstance.value.getContainer().addEventListener('click', (ev: MouseEvent) => {
+function attachTapHandler(map: any) {
+	if (tapAttached || !map?.getContainer) return;
+	tapAttached = true;
+	mapInstance.value = map;
+	// Listen at the DOM level on the container: maplibre's own click synthesis
+	// and the cooperative-gestures overlay can swallow canvas-level clicks.
+	const canvas = map.getCanvas();
+	map.getContainer().addEventListener('click', (ev: MouseEvent) => {
 		const rect = canvas.getBoundingClientRect();
-		const lngLat = mapInstance.value.unproject([
-			ev.clientX - rect.left,
-			ev.clientY - rect.top,
-		]);
+		const lngLat = map.unproject([ev.clientX - rect.left, ev.clientY - rect.top]);
 		setPoint({ lat: lngLat.lat, lon: lngLat.lng }, 'map');
 	});
+}
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+function handleMapLoad(e: any) {
+	attachTapHandler(e.target);
 }
 
 const style = 'https://tiles.openfreemap.org/styles/liberty';
@@ -149,6 +154,18 @@ onMounted(async () => {
 
 	// Default to the user's location when inside Singapore. Leaves the page
 	// blank otherwise - the user can tap the map to pick a point manually.
+	// map:load is not always reliable; poll for the exposed map instance too.
+	const tapTimer = window.setInterval(() => {
+		if (tapAttached) {
+			window.clearInterval(tapTimer);
+			return;
+		}
+		// eslint-disable-next-line @typescript-eslint/no-explicit-any
+		const exposed = (bikeMapRef.value as any)?.map;
+		if (exposed) attachTapHandler(exposed);
+	}, 500);
+	setTimeout(() => window.clearInterval(tapTimer), 30000);
+
 	const coords = await getSingaporeCoords();
 	if (coords && !point.value) {
 		setPoint(coords, 'location');
@@ -201,6 +218,7 @@ onMounted(async () => {
 			<div class="map-container">
 				<ClientOnly>
 					<MglMap
+						ref="bikeMap"
 						:map-style="style"
 						:center="center"
 						:zoom="zoom"
