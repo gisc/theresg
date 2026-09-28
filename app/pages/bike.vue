@@ -216,6 +216,27 @@ onMounted(async () => {
 				</div>
 			</m3e-card>
 
+			<m3e-card>
+				<m3e-heading slot="header" variant="title" size="large">
+					Foldable bikes on the MRT
+				</m3e-heading>
+				<div slot="content" class="foldie">
+					<p>
+						Foldable bikes are allowed on the MRT and buses all day when
+						folded to no more than 120 × 70 × 40 cm. Keep them folded in
+						stations and on trains, and don't block or inconvenience other
+						passengers.
+					</p>
+					<a
+						href="https://www.lta.gov.sg/content/dam/ltagov/getting_around/active_mobility/pdf/foldable_bike_and_pmds_on_public_transport.pdf"
+						target="_blank"
+						rel="noopener"
+					>
+						Source: LTA - Foldable bikes and PMDs on public transport (PDF)
+					</a>
+				</div>
+			</m3e-card>
+
 			<p class="map-hint">
 				Tap the map to search parking around any point. Green lines are park
 				connectors.
@@ -315,6 +336,20 @@ onMounted(async () => {
 	font-size: 14px;
 	line-height: 1.5;
 	color: var(--md-sys-color-on-surface-variant);
+}
+
+.foldie {
+	margin-top: 8px;
+}
+.foldie p {
+	margin: 0 0 8px;
+	font-size: 14px;
+	line-height: 1.5;
+	color: var(--md-sys-color-on-surface);
+}
+.foldie a {
+	font-size: 13px;
+	color: var(--md-sys-color-primary);
 }
 
 .note {
