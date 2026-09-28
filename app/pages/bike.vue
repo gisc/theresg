@@ -174,7 +174,7 @@ onMounted(async () => {
 					<m3e-list v-else variant="segmented">
 						<m3e-list-item v-for="(spot, index) in parking" :key="index">
 							{{ spot.Description || 'Bicycle parking' }}
-							<span slot="supporting">{{ spotMeta(spot) }}</span>
+							<span slot="supporting-text">{{ spotMeta(spot) }}</span>
 						</m3e-list-item>
 					</m3e-list>
 					<p v-if="searchedWider && parking.length" class="hint">
