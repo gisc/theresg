@@ -212,7 +212,7 @@ const { toggleBlue } = useBlueTheme();
 	font-size: 20px;
 	line-height: 1.4;
 	letter-spacing: 0.1px;
-	color: var(--sg-brand);
+	color: var(--sg-brand-text);
 }
 
 .home-intro > p.quote {
@@ -253,7 +253,7 @@ const { toggleBlue } = useBlueTheme();
 .tile .iconify {
 	width: 26px;
 	height: 26px;
-	color: var(--sg-brand);
+	color: var(--sg-brand-text);
 }
 .tile-title {
 	font-weight: 700;
@@ -294,7 +294,7 @@ const { toggleBlue } = useBlueTheme();
 	gap: 6px;
 	font-weight: 700;
 	font-size: 14px;
-	color: var(--sg-brand);
+	color: var(--sg-brand-text);
 	cursor: pointer;
 	list-style: none;
 }

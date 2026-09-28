@@ -2,6 +2,7 @@
 	--sg-brand: #e62333;
 	--sg-brand-strong: #c0001d;
 	--sg-on-brand: #ffffff;
+	--sg-brand-text: var(--sg-brand);
 }
 
 .light {
@@ -115,6 +116,7 @@
 	--sg-brand: #1b4fd8;
 	--sg-brand-strong: #0f3ab0;
 	--sg-on-brand: #ffffff;
+	--sg-brand-text: #8db4ff;
 
 	--md-sys-color-primary: rgb(166 199 255);
 	--md-sys-color-surface-tint: rgb(166 199 255);
