@@ -533,6 +533,8 @@ onMounted(() => {
 								:filter="['has', 'point_count']"
 								:layout="{
 									'text-field': '{point_count_abbreviated}',
+									// OpenFreeMap hosts Noto only; MapLibre's default fontstack 404s.
+									'text-font': ['Noto Sans Regular'],
 									'text-size': 13,
 								}"
 								:paint="{

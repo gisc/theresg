@@ -2,7 +2,9 @@
 	--sg-brand: #e62333;
 	--sg-brand-strong: #c0001d;
 	--sg-on-brand: #ffffff;
-	--sg-brand-text: var(--sg-brand);
+	/* #E62333 is 4.3:1 on the tinted page background, short of 4.5:1 for small
+   text; #C8102E passes at 5.6:1 and reads as the same red. */
+	--sg-brand-text: #c8102e;
 }
 
 .light {

@@ -92,7 +92,10 @@ const { toggleBlue } = useBlueTheme();
 				>Service Alerts</m3e-heading
 			>
 			<m3e-card>
-				<m3e-list slot="content" variant="segmented">
+				<p v-if="trainServiceMessages && !trainServiceMessages.length" slot="content" class="empty-note">
+					No current alerts.
+				</p>
+				<m3e-list v-else slot="content" variant="segmented">
 					<m3e-list-item v-for="alert in trainServiceMessages" :key="alert.Content">
 						<m3e-avatar slot="leading">
 							<Icon :name="getAlertIcon(alert.Content)" />
@@ -108,7 +111,10 @@ const { toggleBlue } = useBlueTheme();
 				>Traffic Incidents</m3e-heading
 			>
 			<m3e-card>
-				<m3e-list slot="content" variant="segmented">
+				<p v-if="trafficIncidents && !trafficIncidents.length" slot="content" class="empty-note">
+					No current traffic incidents.
+				</p>
+				<m3e-list v-else slot="content" variant="segmented">
 					<m3e-list-item v-for="incident in trafficIncidents" :key="incident.Message">
 						<m3e-avatar slot="leading">
 							<Icon :name="getTrafficIcon(incident.Type)" />
@@ -298,6 +304,13 @@ const { toggleBlue } = useBlueTheme();
 	margin-top: 6px;
 	margin-bottom: 8px;
 }
+.empty-note {
+	margin: 0;
+	padding: 4px 2px;
+	font-size: 13.5px;
+	color: var(--md-sys-color-on-surface-variant);
+}
+
 .about {
 	margin-top: 14px;
 	background: var(--md-sys-color-surface-container-lowest);

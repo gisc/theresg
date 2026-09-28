@@ -70,7 +70,7 @@ const hiddenCount = computed(() => messages.value.length - shownMessages.value.l
 	<div
 		v-else-if="showBanner"
 		class="banner"
-		:class="{ disrupted: status?.disrupted }"
+		:class="{ disrupted: status?.disrupted, expanded }"
 		role="alert"
 	>
 		<Icon
@@ -81,18 +81,14 @@ const hiddenCount = computed(() => messages.value.length - shownMessages.value.l
 					: 'material-symbols:info-outline'
 			"
 		/>
-		<div class="banner-body">
+		<div class="banner-body" role="button" tabindex="0" @click="expanded = !expanded" @keydown.enter="expanded = !expanded">
 			<p v-for="(message, index) in shownMessages" :key="index" class="banner-text">
-				{{ message.Content }}
+				<span v-if="message.LineTag" class="banner-tag">{{ message.LineTag }}</span>
+				{{ message.ParsedText ?? message.Content }}
 			</p>
-			<button
-				v-if="hiddenCount > 0 || expanded"
-				type="button"
-				class="banner-toggle"
-				@click="expanded = !expanded"
-			>
-				{{ expanded ? 'Show less' : `${hiddenCount} more alert${hiddenCount > 1 ? 's' : ''}` }}
-			</button>
+			<span class="banner-toggle">
+				{{ expanded ? 'Show less' : hiddenCount > 0 ? `${hiddenCount} more alert${hiddenCount > 1 ? 's' : ''}` : 'Show more' }}
+			</span>
 		</div>
 		<span v-if="status?.hasBridging" class="bridging-chip">
 			<Icon name="material-symbols:directions-bus-outline" />
@@ -142,16 +138,32 @@ const hiddenCount = computed(() => messages.value.length - shownMessages.value.l
 	margin: 0;
 }
 
+/* Phones first: one line, expands on tap. */
+.banner:not(.expanded) .banner-text {
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
+.banner-body {
+	cursor: pointer;
+}
+
 .banner-toggle {
 	align-self: flex-start;
-	border: 0;
-	background: none;
-	padding: 0;
-	font: inherit;
 	font-weight: 600;
-	color: inherit;
 	text-decoration: underline;
-	cursor: pointer;
+}
+
+.banner-tag {
+	display: inline-block;
+	margin-right: 6px;
+	padding: 1px 7px;
+	border-radius: 6px;
+	background-color: var(--md-sys-color-primary);
+	color: var(--md-sys-color-on-primary);
+	font-size: 11px;
+	font-weight: 700;
 }
 
 .bridging-chip {
