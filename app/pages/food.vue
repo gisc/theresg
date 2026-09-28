@@ -7,9 +7,15 @@ useSeoMeta({
 	title: 'Food',
 });
 
+interface HawkerLine {
+	code: string;
+	color: string;
+}
 interface HawkerItem {
 	name: string;
 	address: string;
+	mrt?: { name: string; lines: HawkerLine[]; dist: number };
+	bus?: { code: string; name: string; dist: number };
 }
 interface HawkerData {
 	source: string;
@@ -21,6 +27,10 @@ interface HawkerData {
 const { data } = await useLazyFetch<HawkerData>('/hawker-centres.json', {
 	server: false,
 });
+
+function fmtDist(m: number): string {
+	return m < 950 ? `${Math.round(m / 10) * 10} m` : `${(m / 1000).toFixed(1)} km`;
+}
 
 const query = ref('');
 const filtered = computed(() => {
@@ -72,7 +82,23 @@ const filtered = computed(() => {
 				<m3e-list slot="content" variant="segmented">
 					<m3e-list-item v-for="item in filtered" :key="item.name">
 						{{ item.name }}
-						<span slot="supporting-text">{{ item.address }}</span>
+						<span slot="supporting-text" class="supporting">
+							<span class="addr">{{ item.address }}</span>
+							<span v-if="item.mrt" class="near">
+								<span
+									v-for="ln in item.mrt.lines"
+									:key="ln.code"
+									class="chip"
+									:style="{ backgroundColor: ln.color }"
+									>{{ ln.code }}</span
+								>
+								{{ item.mrt.name }} · {{ fmtDist(item.mrt.dist) }}
+							</span>
+							<span v-if="item.bus" class="near">
+								Bus stop {{ item.bus.code }} ({{ item.bus.name }}) ·
+								{{ fmtDist(item.bus.dist) }}
+							</span>
+						</span>
 					</m3e-list-item>
 					<m3e-list-item v-if="data && !filtered.length">
 						No matches.
@@ -122,6 +148,26 @@ const filtered = computed(() => {
 .intro a {
 	font-size: 13px;
 	color: var(--md-sys-color-primary);
+}
+
+.supporting {
+	display: flex;
+	flex-direction: column;
+	gap: 2px;
+}
+.near {
+	font-size: 12px;
+	color: var(--md-sys-color-on-surface-variant);
+}
+.chip {
+	display: inline-block;
+	padding: 0 5px;
+	margin-right: 3px;
+	border-radius: 4px;
+	font-size: 11px;
+	font-weight: 700;
+	line-height: 16px;
+	color: #ffffff;
 }
 
 .filter {
