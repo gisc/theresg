@@ -28,7 +28,7 @@ const routePath = computed(() => {
 			<m3e-icon-button slot="leading" class="menu-button" @click="toggleNavRail()">
 				<Icon name="material-symbols:menu-outline" />
 			</m3e-icon-button>
-			<span slot="title" class="brand" role="link" tabindex="0" @click="router.push('/')" @keydown.enter="router.push('/')"><img src="/icons/icon.svg" alt="" width="32" height="32" /><span>ThereSG</span></span>
+			<span slot="title" class="brand" role="link" tabindex="0" @click="router.push('/')" @keydown.enter="router.push('/')"><img src="/icons/logo.svg" alt="" width="32" height="32" /><span>ThereSG</span></span>
 		</m3e-app-bar>
 		<ServiceAlertBanner />
 		<div class="bottom">
