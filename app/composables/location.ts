@@ -20,7 +20,7 @@ export function isInSingapore(coords: UserCoords): boolean {
 	);
 }
 
-function haversineM(a: UserCoords, b: UserCoords): number {
+export function haversineM(a: UserCoords, b: UserCoords): number {
 	const rad = Math.PI / 180;
 	const dLat = (b.lat - a.lat) * rad;
 	const dLon = (b.lon - a.lon) * rad;

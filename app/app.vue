@@ -51,6 +51,14 @@ const routePath = computed(() => {
 					<Icon slot="icon" name="material-symbols:train-outline" />
 					MRT
 				</m3e-nav-item>
+
+				<m3e-nav-item
+					:selected.prop="routePath.startsWith('/bike')"
+					@click="router.push('/bike')"
+				>
+					<Icon slot="icon" name="material-symbols:pedal-bike" />
+					Bike
+				</m3e-nav-item>
 			</m3e-nav-rail>
 			<NuxtPage class="page" />
 		</div>
@@ -72,6 +80,14 @@ const routePath = computed(() => {
 			>
 				<Icon slot="icon" name="material-symbols:train-outline" />
 				MRT
+			</m3e-nav-item>
+
+			<m3e-nav-item
+				:selected.prop="routePath.startsWith('/bike')"
+				@click="router.push('/bike')"
+			>
+				<Icon slot="icon" name="material-symbols:pedal-bike" />
+				Bike
 			</m3e-nav-item>
 		</m3e-nav-bar>
 	</div>
