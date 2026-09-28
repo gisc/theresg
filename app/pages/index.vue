@@ -24,8 +24,8 @@ const { data: trafficIncidents } = await useFetch<TrafficIncident[]>('/api/traff
 				<h1>ThereSG</h1>
 				<div class="flag-accent" aria-hidden="true"></div>
 				<p class="tagline">
-					Check live bus arrivals, explore bus routes, plan MRT journeys, and see
-					transport alerts across Singapore.
+					Check live bus arrivals, plan MRT journeys, find bicycle parking, see
+					transport alerts, and discover food and attractions across Singapore.
 				</p>
 				<p class="credit">
 					Project motivated by TransitSG, a project created by Mr Ethan Lee Qi Yang
