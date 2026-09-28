@@ -2,7 +2,7 @@
 // build assets so previously visited pages (including the MRT planner data)
 // keep working without a connection. Live /api data always comes from the
 // network.
-const CACHE = 'theresg-v2';
+const CACHE = 'theresg-v3';
 const PRECACHE = ['/manifest.webmanifest'];
 
 self.addEventListener('install', (event) => {
