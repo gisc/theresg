@@ -10,6 +10,21 @@ const stations = computed(() => (network.value ? buildStationIndex(network.value
 const from = ref<StationInfo | null>(null);
 const to = ref<StationInfo | null>(null);
 
+// Deep-link support: /mrt?to=<station name> pre-fills the destination
+// (used by "Go there" actions on the Food and Tourist pages).
+const route = useRoute();
+watch(
+	() => stations.value.length,
+	(n) => {
+		if (!n || to.value) return;
+		const q = route.query.to;
+		if (typeof q !== 'string' || !q) return;
+		const match = stations.value.find((s) => s.name.toLowerCase() === q.toLowerCase());
+		if (match) to.value = match;
+	},
+	{ immediate: true },
+);
+
 // Default the journey start to the station nearest the user (Singapore
 // only); stays blank when location is unavailable or outside Singapore.
 const triedGeoDefault = ref(false);

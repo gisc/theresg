@@ -98,6 +98,15 @@ const filtered = computed(() => {
 								Bus stop {{ item.bus.code }} ({{ item.bus.name }}) ·
 								{{ fmtDist(item.bus.dist) }}
 							</span>
+							<span v-if="item.mrt" class="go-row">
+								<NuxtLink
+									class="go-btn mrt"
+									:to="`/mrt?to=${encodeURIComponent(item.mrt.name)}`"
+								>
+									<Icon name="material-symbols:train" />
+									Go by MRT
+								</NuxtLink>
+							</span>
 						</span>
 					</m3e-list-item>
 					<m3e-list-item v-if="data && !filtered.length">
@@ -159,6 +168,27 @@ const filtered = computed(() => {
 	font-size: 12px;
 	color: var(--md-sys-color-on-surface-variant);
 }
+.go-row {
+	display: flex;
+	gap: 8px;
+	margin-top: 4px;
+}
+.go-btn {
+	display: inline-flex;
+	align-items: center;
+	gap: 4px;
+	padding: 4px 12px;
+	border-radius: 16px;
+	font-size: 12px;
+	font-weight: 600;
+	line-height: 18px;
+	text-decoration: none;
+	color: #ffffff;
+}
+.go-btn.mrt {
+	background-color: #005ec4;
+}
+
 .chip {
 	display: inline-block;
 	padding: 0 5px;
