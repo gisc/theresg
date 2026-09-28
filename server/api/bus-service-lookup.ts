@@ -1,3 +1,4 @@
+import { datamallFetch } from '~~/server/utils/datamall-fetch';
 let services: string[] | undefined;
 let loadedAt = 0;
 let pending: Promise<string[]> | undefined;
@@ -9,7 +10,7 @@ async function loadServices() {
 	const all = new Set<string>();
 	let skip = 0;
 	while (skip < 5000) {
-		const data = await $fetch<{ value: { ServiceNo: string }[] }>(
+		const data = await datamallFetch<{ value: { ServiceNo: string }[] }>(
 			'https://datamall2.mytransport.sg/ltaodataservice/BusServices',
 			{
 				headers: { Accept: 'application/json', AccountKey: apiKey },

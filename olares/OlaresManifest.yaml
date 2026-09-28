@@ -23,6 +23,14 @@ entrances:
     authLevel: public
     openMethod: default
 
+middleware:
+  postgres:
+    username: theresg
+    databases:
+      - name: theresgquota
+        scripts:
+          - CREATE TABLE IF NOT EXISTS lta_daily_budget (day date PRIMARY KEY, calls integer NOT NULL CHECK (calls >= 0));
+
 envs:
   - envName: NUXT_DATAMALL_API_KEY
     required: true

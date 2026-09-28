@@ -1,3 +1,4 @@
+import { datamallFetch } from '~~/server/utils/datamall-fetch';
 interface RouteRow {
 	ServiceNo: string;
 	Direction: number;
@@ -19,7 +20,7 @@ async function loadRoutes() {
 	while (skip < 100000) {
 		const pages = await Promise.all(
 			Array.from({ length: 6 }, (_, i) =>
-				$fetch<{ value: RouteRow[] }>(
+				datamallFetch<{ value: RouteRow[] }>(
 					'https://datamall2.mytransport.sg/ltaodataservice/BusRoutes',
 					{
 						headers: { Accept: 'application/json', AccountKey: apiKey },
