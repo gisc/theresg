@@ -59,6 +59,14 @@ const routePath = computed(() => {
 					<Icon slot="icon" name="material-symbols:pedal-bike" />
 					Bike
 				</m3e-nav-item>
+
+				<m3e-nav-item
+					:selected.prop="routePath.startsWith('/food')"
+					@click="router.push('/food')"
+				>
+					<Icon slot="icon" name="material-symbols:restaurant" />
+					Food
+				</m3e-nav-item>
 			</m3e-nav-rail>
 			<NuxtPage class="page" />
 		</div>
@@ -88,6 +96,14 @@ const routePath = computed(() => {
 			>
 				<Icon slot="icon" name="material-symbols:pedal-bike" />
 				Bike
+			</m3e-nav-item>
+
+			<m3e-nav-item
+				:selected.prop="routePath.startsWith('/food')"
+				@click="router.push('/food')"
+			>
+				<Icon slot="icon" name="material-symbols:restaurant" />
+				Food
 			</m3e-nav-item>
 		</m3e-nav-bar>
 	</div>
@@ -135,7 +151,7 @@ const routePath = computed(() => {
 	padding-bottom: env(safe-area-inset-bottom);
 	--m3e-nav-bar-container-color: var(--md-sys-color-surface-container);
 	/* Let items shrink on narrow phones instead of overflowing and clipping. */
-	--m3e-nav-bar-vertical-item-width: min(72px, 23%);
+	--m3e-nav-bar-vertical-item-width: min(64px, 18%);
 	background-color: var(--md-sys-color-surface-container);
 }
 
