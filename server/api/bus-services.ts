@@ -1,3 +1,4 @@
+import { datamallFetch } from '~~/server/utils/datamall-fetch';
 export default defineEventHandler(async (event) => {
 	const apiKey = process.env.NUXT_DATAMALL_API_KEY;
 
@@ -14,7 +15,7 @@ export default defineEventHandler(async (event) => {
 		throw createError({ statusCode: 400, statusMessage: 'Invalid bus service' });
 	}
 
-	const data = await $fetch('https://datamall2.mytransport.sg/ltaodataservice/BusServices', {
+	const data = await datamallFetch('https://datamall2.mytransport.sg/ltaodataservice/BusServices', {
 		method: 'GET',
 		headers: {
 			Accept: 'application/json',

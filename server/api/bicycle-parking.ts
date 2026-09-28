@@ -1,3 +1,4 @@
+import { datamallFetch } from '~~/server/utils/datamall-fetch';
 import type { BicycleParking } from '~~/shared/types/BicycleParking';
 import { createTtlCache } from '~~/server/utils/ttl-cache';
 
@@ -36,7 +37,7 @@ export default defineEventHandler(async (event) => {
 
 	// Exact validated coordinates preserve the requested search radius and results.
 	return cachedParking(`${latitude}:${longitude}:${distanceKm}`, async () => {
-		const data = await $fetch<{ value: BicycleParking[] }>(
+		const data = await datamallFetch<{ value: BicycleParking[] }>(
 			'https://datamall2.mytransport.sg/ltaodataservice/BicycleParkingv2',
 			{
 				method: 'GET',
