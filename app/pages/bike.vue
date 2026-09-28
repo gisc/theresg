@@ -208,6 +208,11 @@ onMounted(async () => {
 					<p v-if="pointLabel === 'map'" class="hint">
 						Showing parking near the point you picked on the map.
 					</p>
+					<p class="note">
+						These are parking racks, not rental bikes. Shared bikes
+						(Anywheel, HelloRide, SG Bike) don't publish live locations, so
+						use their apps to find the nearest available bike.
+					</p>
 				</div>
 			</m3e-card>
 
@@ -308,6 +313,13 @@ onMounted(async () => {
 .hint {
 	margin: 0 0 8px;
 	font-size: 14px;
+	line-height: 1.5;
+	color: var(--md-sys-color-on-surface-variant);
+}
+
+.note {
+	margin: 10px 0 0;
+	font-size: 12px;
 	line-height: 1.5;
 	color: var(--md-sys-color-on-surface-variant);
 }
