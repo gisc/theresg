@@ -1,5 +1,14 @@
 @import url('./base.css');
 
+@font-face {
+	font-family: 'Space Grotesk';
+	font-style: normal;
+	font-weight: 500;
+	font-display: swap;
+	src: url('/fonts/space-grotesk-500.woff2') format('woff2');
+}
+
+
 body {
 	margin: 0;
 	padding: 0;

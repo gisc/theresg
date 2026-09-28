@@ -23,7 +23,7 @@ const { data: trafficIncidents } = await useFetch<TrafficIncident[]>('/api/traff
 			<header class="home-intro">
 				<h1>ThereSG</h1>
 				<div class="flag-accent" aria-hidden="true"></div>
-				<p>
+				<p class="tagline">
 					Check live bus arrivals, explore bus routes, plan MRT journeys, and see
 					transport alerts across Singapore.
 				</p>
@@ -137,10 +137,19 @@ const { data: trafficIncidents } = await useFetch<TrafficIncident[]>('/api/traff
 	background: linear-gradient(to bottom, var(--sg-brand) 50%, #ffffff 50%);
 	box-shadow: inset 0 0 0 1px var(--md-sys-color-outline-variant);
 }
-.home-intro > p:not(.credit) {
+.home-intro > p.tagline {
 	margin: 0;
-	line-height: 1.5;
-	font-size: 15px;
-	color: var(--md-sys-color-on-surface-variant);
+	font-family:
+		'Space Grotesk',
+		system-ui,
+		-apple-system,
+		'Segoe UI',
+		Roboto,
+		sans-serif;
+	font-weight: 500;
+	font-size: 20px;
+	line-height: 1.4;
+	letter-spacing: 0.1px;
+	color: var(--md-sys-color-on-surface);
 }
 </style>
