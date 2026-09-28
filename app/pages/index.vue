@@ -16,13 +16,6 @@ const { data: trainServiceMessages } = await useFetch<TrainServiceMessage[]>(
 
 const { data: trafficIncidents } = await useFetch<TrafficIncident[]>('/api/traffic-incidents');
 
-const alertCount = computed(
-	() =>
-		(trainServiceMessages.value?.length ?? 0) + (trafficIncidents.value?.length ?? 0),
-);
-const alertCountLabel = computed(() =>
-	alertCount.value === 0 ? 'No active alerts' : `${alertCount.value} active right now`,
-);
 </script>
 
 <template>
@@ -68,7 +61,7 @@ const alertCountLabel = computed(() =>
 					<a class="tile" href="#service-alerts">
 						<Icon name="material-symbols:warning-outline" />
 						<span class="tile-title">Alerts</span>
-						<span class="tile-desc">{{ alertCountLabel }}</span>
+						<span class="tile-desc">Service &amp; traffic updates</span>
 					</a>
 				</div>
 				<details class="about">
@@ -90,7 +83,6 @@ const alertCountLabel = computed(() =>
 					<p class="ai-note gap">Life is a journey. Enjoy the ride.</p>
 				</details>
 			</header>
-			<MyCommute />
 			<m3e-heading id="service-alerts" class="heading" variant="headline" size="large"
 				>Service Alerts</m3e-heading
 			>
@@ -242,7 +234,7 @@ const alertCountLabel = computed(() =>
 	padding: 13px 12px;
 	text-decoration: none;
 }
-.tile svg {
+.tile .iconify {
 	width: 26px;
 	height: 26px;
 	color: var(--sg-brand);
@@ -263,7 +255,7 @@ const alertCountLabel = computed(() =>
 	background: linear-gradient(135deg, var(--sg-brand), var(--sg-brand-strong));
 	border: none;
 }
-.hero-tile svg.hero-ic {
+.hero-tile .hero-ic {
 	color: #ffffff;
 }
 .hero-title {
@@ -293,12 +285,12 @@ const alertCountLabel = computed(() =>
 .about summary::-webkit-details-marker {
 	display: none;
 }
-.about summary svg {
+.about summary .iconify {
 	width: 18px;
 	height: 18px;
 	transition: transform 0.15s ease;
 }
-.about[open] summary svg {
+.about[open] summary .iconify {
 	transform: rotate(180deg);
 }
 </style>
