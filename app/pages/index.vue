@@ -33,7 +33,7 @@ const { data: trafficIncidents } = await useFetch<TrafficIncident[]>('/api/traff
 					<a href="https://github.com/ingStudiosOfficial/transitsg"
 						>github.com/ingStudiosOfficial/transitsg</a
 					>
-					under the Apache-2.0 license.
+					under the Apache-2.0 license. He believes AI-generated content is AI slop.
 				</p>
 				<p class="ai-note">
 					ThereSG is AI-generated. :)<br />
