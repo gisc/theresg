@@ -24,7 +24,7 @@ ThereSG is built with the help of AI tools.
   accessed on 26 September 2026 from datamall.lta.gov.sg which is made
   available under the terms of the
   [Singapore Open Data Licence version 1.0](https://data.gov.sg/open-data-licence).
-  Live bus, train, traffic, crowd and bicycle-parking feeds refresh daily.
+  Live feeds are fetched from LTA DataMall in near real time.
 - Contains information from
   [NParks Tracks](https://data.gov.sg/datasets/d_306cc1018cb733346681883ee6d73054/view)
   accessed on 28 September 2026 from data.gov.sg which is made available

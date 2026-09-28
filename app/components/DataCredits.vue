@@ -7,7 +7,7 @@
 			under the terms of the
 			<a href="https://data.gov.sg/open-data-licence" target="_blank" rel="noopener"
 				>Singapore Open Data Licence version 1.0</a
-			>. Live bus, train, traffic, crowd and bicycle-parking feeds refresh daily.
+			>. Live feeds are fetched from LTA DataMall in near real time.
 		</p>
 		<p>
 			Contains information from
