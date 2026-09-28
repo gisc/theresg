@@ -27,6 +27,7 @@ const { data: trafficIncidents } = await useFetch<TrafficIncident[]>('/api/traff
 					Check live bus arrivals, plan MRT journeys, find bicycle parking, see
 					transport alerts, and discover food and attractions across Singapore.
 				</p>
+				<p class="quote">Life is a journey. Enjoy the ride. :)</p>
 				<div class="tile-grid">
 					<div class="tile hero-tile">
 						<Icon class="hero-ic" name="material-symbols:push-pin-outline" />
@@ -80,7 +81,6 @@ const { data: trafficIncidents } = await useFetch<TrafficIncident[]>('/api/traff
 						He believes AI-generated content is AI slop.
 					</p>
 					<p class="ai-note">ThereSG is AI-generated. :)</p>
-					<p class="ai-note gap">Life is a journey. Enjoy the ride.</p>
 				</details>
 			</header>
 			<m3e-heading id="service-alerts" class="heading" variant="headline" size="large"
@@ -211,6 +211,20 @@ const { data: trafficIncidents } = await useFetch<TrafficIncident[]>('/api/traff
 	line-height: 1.4;
 	letter-spacing: 0.1px;
 	color: var(--sg-brand);
+}
+
+.home-intro > p.quote {
+	margin: 10px 0 0;
+	font-family:
+		'Space Grotesk',
+		system-ui,
+		-apple-system,
+		'Segoe UI',
+		Roboto,
+		sans-serif;
+	font-weight: 500;
+	font-size: 16px;
+	color: var(--md-sys-color-on-surface);
 }
 
 .tile-grid {
