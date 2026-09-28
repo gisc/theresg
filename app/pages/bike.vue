@@ -36,12 +36,21 @@ function spotMeta(spot: ParkingSpot): string {
 	return parts.join(' · ');
 }
 
+const searchedWider = ref(false);
+
 async function fetchParking(p: UserCoords) {
 	parkingStatus.value = 'pending';
+	searchedWider.value = false;
 	try {
-		const rows = await $fetch<BicycleParking[]>('/api/bicycle-parking', {
+		let rows = await $fetch<BicycleParking[]>('/api/bicycle-parking', {
 			query: { lat: p.lat, lon: p.lon, dist: 0.5 },
 		});
+		if (!rows.length) {
+			rows = await $fetch<BicycleParking[]>('/api/bicycle-parking', {
+				query: { lat: p.lat, lon: p.lon, dist: 1.5 },
+			});
+			searchedWider.value = true;
+		}
 		parking.value = rows
 			.map((r) => ({
 				...r,
@@ -160,14 +169,17 @@ onMounted(async () => {
 						Could not load parking data. Tap the map to try again.
 					</p>
 					<p v-else-if="!parking.length" class="hint">
-						No bicycle parking found within 500 m of this point.
+						No bicycle parking found within 1.5 km of this point.
 					</p>
 					<m3e-list v-else variant="segmented">
-						<m3e-list-item v-for="spot in parking" :key="spot.ID">
-							{{ spot.Address || 'Bicycle parking' }}
+						<m3e-list-item v-for="(spot, index) in parking" :key="index">
+							{{ spot.Description || 'Bicycle parking' }}
 							<span slot="supporting">{{ spotMeta(spot) }}</span>
 						</m3e-list-item>
 					</m3e-list>
+					<p v-if="searchedWider && parking.length" class="hint">
+						Nothing within 500 m - showing the closest spots within 1.5 km.
+					</p>
 					<p v-if="pointLabel === 'map'" class="hint">
 						Showing parking near the point you picked on the map.
 					</p>
