@@ -13,6 +13,7 @@ interface AttractionLine {
 }
 interface AttractionItem {
 	name: string;
+	img?: string;
 	address: string;
 	mrt?: { name: string; lines: AttractionLine[]; dist: number };
 	bus?: { code: string; name: string; dist: number };
@@ -62,8 +63,8 @@ const filtered = computed(() => {
 						The Mandai wildlife parks (Singapore Zoo, Night Safari, River Wonders, Bird
 						Paradise, Rainforest Wild Asia) are best reached by the M2 Mandai Khatib Bus
 						shuttle from Khatib MRT (NS14) - the geographically nearest stations have no
-						practical walking route. Sentosa attractions are reached via HarbourFront MRT
-						(NE1/CC29), then the Sentosa Express, cable car or bus.
+						practical walking route. Sentosa attractions are reached via HarbourFront
+						MRT (NE1/CC29), then the Sentosa Express, cable car or bus.
 					</p>
 				</div>
 			</m3e-card>
@@ -80,6 +81,18 @@ const filtered = computed(() => {
 				<m3e-list slot="content" variant="segmented">
 					<m3e-list-item v-for="item in filtered" :key="item.name">
 						{{ item.name }}
+						<img
+							v-if="item.img"
+							class="art"
+							:src="`/img/attractions/${item.img}-640.webp`"
+							:srcset="`/img/attractions/${item.img}-320.webp 320w, /img/attractions/${item.img}-640.webp 640w`"
+							sizes="(max-width: 767px) 100vw, 640px"
+							:alt="`Illustration of ${item.name}`"
+							width="640"
+							height="360"
+							loading="lazy"
+							decoding="async"
+						/>
 						<span slot="supporting-text" class="supporting">
 							<span class="addr">{{ item.address }}</span>
 							<span v-if="item.mrt" class="near">
@@ -154,6 +167,17 @@ const filtered = computed(() => {
 .intro a {
 	font-size: 13px;
 	color: var(--md-sys-color-primary);
+}
+
+.art {
+	display: block;
+	width: 100%;
+	max-width: 640px;
+	height: auto;
+	aspect-ratio: 16 / 9;
+	margin: 6px 0 4px;
+	border-radius: 12px;
+	background-color: var(--md-sys-color-surface-container);
 }
 
 .supporting {
