@@ -54,6 +54,17 @@ const segments = computed<RouteSegment[] | null>(() => {
 
 const totalStops = computed(() => segments.value?.reduce((n, s) => n + s.stops, 0) ?? 0);
 
+const fareText = computed(() => {
+	if (!network.value || !segments.value || segments.value.length === 0) {
+		return null;
+	}
+	const km = routeDistanceKm(network.value, segments.value);
+	if (km === null) {
+		return null;
+	}
+	return `~$${(adultCardFareCents(km) / 100).toFixed(2)}`;
+});
+
 function swap() {
 	const f = from.value;
 	from.value = to.value;
@@ -88,6 +99,19 @@ function codesFor(name: string): StationInfo | undefined {
 							&middot; {{ segments.length - 1 }}
 							{{ segments.length - 1 === 1 ? 'transfer' : 'transfers' }}</template
 						>
+					</p>
+					<p v-if="fareText" class="fare">
+						{{ fareText }}
+						<span class="fare-note">
+							estimated adult card fare, from route distance &middot; 50&cent; off
+							before 7.45am on weekdays &middot; exact fares on
+							<a
+								href="https://simplygo.com.sg/travel-fares/adult-fares/"
+								target="_blank"
+								rel="noopener noreferrer"
+								>SimplyGo</a
+							>
+						</span>
 					</p>
 					<div v-for="(segment, i) in segments" :key="i" class="segment">
 						<div class="segment-header">
@@ -166,6 +190,23 @@ function codesFor(name: string): StationInfo | undefined {
 	margin: 0;
 	font-weight: 600;
 	color: var(--md-sys-color-on-surface);
+}
+
+.fare {
+	margin: 0;
+	font-weight: 700;
+	color: var(--md-sys-color-on-surface);
+}
+
+.fare-note {
+	display: block;
+	font-weight: 400;
+	font-size: 12px;
+	color: var(--md-sys-color-on-surface-variant);
+}
+
+.fare-note a {
+	color: var(--md-sys-color-primary);
 }
 
 .hint {
