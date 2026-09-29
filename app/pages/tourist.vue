@@ -11,11 +11,18 @@ interface AttractionLine {
 	code: string;
 	color: string;
 }
+interface MrtAccess {
+	name: string;
+	lines: AttractionLine[];
+	entrance: string;
+	access: string;
+}
 interface AttractionItem {
 	name: string;
 	img?: string;
 	address: string;
 	mrt?: { name: string; lines: AttractionLine[]; dist: number };
+	mrtOptions?: MrtAccess[];
 	bus?: { code: string; name: string; dist: number };
 	note?: string;
 }
@@ -56,8 +63,9 @@ const filtered = computed(() => {
 				</m3e-heading>
 				<div slot="content" class="intro">
 					<p>
-						A curated list of Singapore's major attractions with addresses, the nearest
-						MRT station (with line colours) and bus stop by straight-line distance.
+						A curated list of Singapore's major attractions with addresses, MRT access
+						(including entrance options where available) and the nearest bus stop.
+						Distances are straight-line from the listed address, not walking distance.
 					</p>
 					<p>
 						The Mandai wildlife parks (Singapore Zoo, Night Safari, River Wonders, Bird
@@ -93,9 +101,9 @@ const filtered = computed(() => {
 							loading="lazy"
 							decoding="async"
 						/>
-						<span slot="supporting-text" class="supporting">
+						<div slot="supporting-text" class="supporting">
 							<span class="addr">{{ item.address }}</span>
-							<span v-if="item.mrt" class="near">
+							<span v-if="item.mrt && !item.mrtOptions" class="near">
 								<span
 									v-for="ln in item.mrt.lines"
 									:key="ln.code"
@@ -105,11 +113,39 @@ const filtered = computed(() => {
 								>
 								{{ item.mrt.name }} · {{ fmtDist(item.mrt.dist) }}
 							</span>
+							<div v-if="item.mrtOptions" class="access-options">
+								<span class="access-label">MRT options</span>
+								<div
+									v-for="option in item.mrtOptions"
+									:key="option.name"
+									class="access-row"
+								>
+									<span class="near">
+										<span
+											v-for="ln in option.lines"
+											:key="ln.code"
+											class="chip"
+											:style="{ backgroundColor: ln.color }"
+											>{{ ln.code }}</span
+										>
+										<strong>{{ option.name }}</strong
+										><template v-if="option.entrance">
+											· {{ option.entrance }}</template
+										><br />
+										<span class="access-hint">{{ option.access }}</span>
+									</span>
+									<NuxtLink
+										class="go-btn mrt"
+										:to="`/mrt?to=${encodeURIComponent(option.name)}`"
+										>Go</NuxtLink
+									>
+								</div>
+							</div>
 							<span v-if="item.bus" class="near">
 								Bus stop {{ item.bus.code }} ({{ item.bus.name }}) ·
 								{{ fmtDist(item.bus.dist) }}
 							</span>
-							<span v-if="item.mrt" class="go-row">
+							<span v-if="item.mrt && !item.mrtOptions" class="go-row">
 								<NuxtLink
 									class="go-btn mrt"
 									:to="`/mrt?to=${encodeURIComponent(item.mrt.name)}`"
@@ -119,7 +155,7 @@ const filtered = computed(() => {
 								</NuxtLink>
 							</span>
 							<span v-if="item.note" class="near note">{{ item.note }}</span>
-						</span>
+						</div>
 					</m3e-list-item>
 					<m3e-list-item v-if="data && !filtered.length"> No matches. </m3e-list-item>
 				</m3e-list>
@@ -248,5 +284,37 @@ const filtered = computed(() => {
 		padding: 14px 14px calc(14px + env(safe-area-inset-bottom));
 		gap: 14px;
 	}
+}
+
+.access-options {
+	display: grid;
+	gap: 5px;
+	margin-top: 5px;
+}
+.access-label {
+	font-size: 12px;
+	font-weight: 650;
+	color: var(--md-sys-color-on-surface-variant);
+}
+.access-row {
+	display: flex;
+	align-items: center;
+	gap: 8px;
+	justify-content: space-between;
+	padding: 7px 9px;
+	border-radius: 10px;
+	background: var(--md-sys-color-surface-container);
+}
+.access-row .near {
+	line-height: 1.5;
+}
+.access-row .chip {
+	margin-right: 2px;
+}
+.access-hint {
+	margin-left: 2px;
+}
+.access-row .go-btn {
+	flex: none;
 }
 </style>
