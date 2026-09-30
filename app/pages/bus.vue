@@ -13,6 +13,7 @@ useSeoMeta({
 });
 
 const router = useRouter();
+const { favourites } = useFavouriteStops();
 const route = useRoute();
 const stopQuery = ref('');
 const serviceQuery = ref('');
@@ -311,6 +312,7 @@ onMounted(() => {
 	<div class="bg">
 		<div class="pg">
 			<m3e-heading class="heading" variant="headline" size="large">Bus</m3e-heading>
+			<MyCommute v-if="favourites.length" compact show-all class="saved-stops" />
 			<section class="intro" aria-label="How to use bus search">
 				<h2>Find your bus or stop</h2>
 				<p>
@@ -599,6 +601,7 @@ onMounted(() => {
 .heading {
 	color: var(--md-sys-color-on-surface);
 }
+.saved-stops { margin-bottom: 4px; }
 
 @media (max-width: 767px) {
 	.pg {

@@ -147,6 +147,29 @@ useSeoMeta({
 	padding-top: env(safe-area-inset-top);
 }
 
+/* Keep a recognisable shell while the custom elements upgrade on first load. */
+.app-bar:not(:defined) {
+	display: flex;
+	align-items: center;
+	box-sizing: border-box;
+	min-height: 64px;
+	padding-inline: 18px;
+	background: var(--sg-brand);
+}
+
+.nav-rail:not(:defined),
+.nav-bar:not(:defined) {
+	visibility: hidden;
+}
+
+.nav-rail:not(:defined) {
+	width: 96px;
+}
+
+.nav-bar:not(:defined) {
+	height: 68px;
+}
+
 .menu-button {
 	color: var(--sg-on-brand);
 }

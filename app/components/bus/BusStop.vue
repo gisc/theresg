@@ -110,7 +110,7 @@ onBeforeUnmount(() => {
 					"
 				/>
 				{{
-					isFavourite(stop.code) ? 'Pinned to My commute' : 'Pin to My commute'
+					isFavourite(stop.code) ? 'Pinned to My commute' : 'Pin this stop'
 				}}
 			</button>
 			<m3e-expansion-panel class="arrivals-panel" open>

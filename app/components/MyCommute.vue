@@ -2,7 +2,7 @@
 import type { BusArrival } from '~~/shared/types/BusArrival';
 import type { BusArrivalsResponse } from '~~/shared/types/BusArrivalsResponse';
 
-defineProps<{ hero?: boolean }>();
+defineProps<{ compact?: boolean; showAll?: boolean }>();
 
 const { favourites, removeFavourite } = useFavouriteStops();
 
@@ -78,14 +78,10 @@ watch(favourites, (list) => {
 
 <template>
 	<section class="my-commute" aria-label="My commute">
-		<m3e-heading v-if="!hero" class="heading" variant="headline" size="large"
+		<m3e-heading v-if="!compact" class="heading" variant="headline" size="large"
 			>My commute</m3e-heading
 		>
-		<div v-if="hero && !favourites.length" class="hero-empty">
-			<p>Save your regular stops for live arrivals. No login needed.</p>
-			<NuxtLink class="hero-link" to="/bus">Choose a stop to pin</NuxtLink>
-		</div>
-		<m3e-card v-if="!hero && !favourites.length">
+		<m3e-card v-if="!compact && !favourites.length">
 			<div slot="content" class="empty">
 				<p>
 					Pin your home, school, or work bus stops and their live arrivals will show
@@ -95,6 +91,22 @@ watch(favourites, (list) => {
 				<NuxtLink class="link" to="/bus">Find a stop on the Bus page</NuxtLink>
 			</div>
 		</m3e-card>
+		<div v-if="compact && favourites.length" class="compact-card">
+			<h2>My commute</h2>
+			<div v-for="favourite in (showAll ? favourites : favourites.slice(0, 3))" :key="favourite.code" class="compact-stop">
+				<NuxtLink :to="`/bus?stop=${favourite.code}`" class="compact-name">{{ favourite.name }}</NuxtLink>
+				<span v-if="arrivalsByStop[favourite.code]?.loading">Loading arrivals...</span>
+				<span v-else-if="arrivalsByStop[favourite.code]?.error">Arrivals unavailable</span>
+				<span v-else-if="upcoming(favourite.code).length" class="compact-etas">
+					<span v-for="arrival in upcoming(favourite.code).slice(0, 2)" :key="arrival.ServiceNo">
+						<strong>{{ arrival.ServiceNo }}</strong> {{ timeToArrival(arrival.NextBus.EstimatedArrival, now) }}
+					</span>
+				</span>
+				<span v-else>No buses now</span>
+			</div>
+			<p v-if="!showAll && favourites.length > 3" class="compact-more">+{{ favourites.length - 3 }} more saved stops. View all on the Bus page</p>
+		</div>
+		<template v-if="!compact">
 		<m3e-card v-for="favourite in favourites" :key="favourite.code">
 			<m3e-heading slot="header" variant="title" size="large">{{
 				favourite.name
@@ -149,6 +161,7 @@ watch(favourites, (list) => {
 				</div>
 			</div>
 		</m3e-card>
+		</template>
 	</section>
 </template>
 
@@ -163,20 +176,19 @@ watch(favourites, (list) => {
 	color: var(--md-sys-color-on-surface);
 }
 
-.hero-empty p {
-	margin: 0 0 10px;
-	font-size: 14px;
-	line-height: 1.5;
-	color: #ffe9e9;
+.compact-card {
+	padding: 14px 16px;
+	border: 1px solid var(--md-sys-color-surface-variant);
+	border-radius: 16px;
+	background: var(--md-sys-color-surface-container-lowest);
+	color: var(--md-sys-color-on-surface);
 }
-
-.hero-link {
-	color: #ffffff;
-	font-weight: 700;
-	font-size: 14px;
-	text-decoration: underline;
-	text-underline-offset: 3px;
-}
+.compact-card h2 { margin: 0 0 8px; font-size: 16px; }
+.compact-stop { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 4px 12px; padding: 6px 0; font-size: 13px; }
+.compact-stop + .compact-stop { border-top: 1px solid var(--md-sys-color-surface-variant); }
+.compact-name { color: var(--md-sys-color-primary); font-weight: 700; }
+.compact-etas { display: flex; flex-wrap: wrap; gap: 12px; }
+.compact-more { margin: 8px 0 0; font-size: 12px; }
 
 .empty {
 	display: flex;

@@ -25,11 +25,6 @@ const { toggleBlue } = useBlueTheme();
 				</p>
 				<p class="quote">Life is a journey. <span class="enjoy" @click="toggleBlue()">Enjoy</span> the ride. :)</p>
 				<div class="tile-grid">
-					<div class="tile hero-tile" :class="{ 'commute-empty': !favourites.length }">
-						<Icon class="hero-ic" name="material-symbols:push-pin-outline" />
-						<span class="hero-title">My commute</span>
-						<MyCommute hero />
-					</div>
 					<NuxtLink class="tile" to="/bus">
 						<Icon name="material-symbols:directions-bus-outline" />
 						<span class="tile-title">Bus</span>
@@ -61,6 +56,7 @@ const { toggleBlue } = useBlueTheme();
 						<span class="tile-desc">Service &amp; traffic updates</span>
 					</NuxtLink>
 				</div>
+				<MyCommute v-if="favourites.length" compact class="home-commute" />
 				<details class="about">
 					<summary>
 						<Icon name="material-symbols:expand-more" />
@@ -247,27 +243,9 @@ const { toggleBlue } = useBlueTheme();
 	line-height: 1.35;
 	color: var(--md-sys-color-on-surface-variant);
 }
-.hero-tile {
-	grid-column: 1 / -1;
-	background: linear-gradient(135deg, var(--sg-brand), var(--sg-brand-strong));
-	border: none;
-}
-.commute-empty {
-	display: grid;
-	grid-template-columns: 24px 1fr;
-	column-gap: 8px;
-}
-.commute-empty .hero-title { margin: 0; align-self: center; }
-.commute-empty :deep(.my-commute) { grid-column: 1 / -1; }
-.hero-tile .hero-ic {
-	color: #ffffff;
-}
-.hero-title {
-	font-weight: 700;
-	font-size: 16px;
-	color: #ffffff;
-	margin-top: 6px;
-	margin-bottom: 8px;
+/* Saved stops appear below the equal-weight portal grid, not as a seventh tile. */
+.home-commute {
+	margin-top: 14px;
 }
 .empty-note {
 	margin: 0;
