@@ -178,13 +178,7 @@ useSeoMeta({
 	cursor: pointer; display: inline-flex; align-items: center; gap: 9px; vertical-align: middle; font-weight: 700; color: var(--sg-on-brand); letter-spacing: 0.2px; }
 .brand img { width: 32px; height: 32px; border-radius: 50%; }
 
-.dedication {
-	font-size: 12px;
-	font-weight: 500;
-	letter-spacing: 0.2px;
-	opacity: 0.92;
-	align-self: center;
-}
+
 
 .bottom {
 	flex-grow: 1;

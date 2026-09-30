@@ -111,9 +111,7 @@
 	--md-sys-color-surface-container-highest: rgb(63 48 46);
 }
 
-/* Hidden blue-and-black theme  (toggled via the
-   homepage quote). Dark near-black surfaces with blue accents; placed last
-   so it overrides both .light and .dark on the same element. */
+/* Optional blue-and-black colour theme, toggled with Enjoy. */
 .blue {
 	--sg-brand: #1b4fd8;
 	--sg-brand-strong: #0f3ab0;

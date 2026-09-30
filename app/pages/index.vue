@@ -23,7 +23,7 @@ const { toggleBlue } = useBlueTheme();
 				<p class="tagline">
 					Get around and experience Singapore.
 				</p>
-				<p class="quote">Life is a journey. <span class="enjoy" @click="toggleBlue()">Enjoy</span> the ride. :)</p>
+				<p class="quote">Life is a journey. <button type="button" class="enjoy" aria-label="Toggle blue theme" @click="toggleBlue()">Enjoy</button> the ride. :)</p>
 				<div class="tile-grid">
 					<NuxtLink class="tile" to="/bus">
 						<Icon name="material-symbols:directions-bus-outline" />
@@ -206,6 +206,9 @@ const { toggleBlue } = useBlueTheme();
 	color: var(--md-sys-color-on-surface);
 }
 
+.enjoy { appearance: none; background: none; border: 0; padding: 0; color: inherit; font: inherit; cursor: pointer; }
+.enjoy:focus-visible { outline: 2px solid currentColor; outline-offset: 3px; }
+
 .tile-grid {
 	display: grid;
 	grid-template-columns: 1fr 1fr;
@@ -217,6 +220,7 @@ const { toggleBlue } = useBlueTheme();
 		grid-template-columns: repeat(3, 1fr);
 	}
 }
+
 .tile {
 	display: flex;
 	flex-direction: column;

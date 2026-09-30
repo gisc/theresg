@@ -1,7 +1,4 @@
-// Hidden blue-and-black theme , toggled by tapping the
-// word "Enjoy" in the homepage quote. Invisible by design: no visual hint.
-// Persisted in localStorage so it survives navigation and reloads. Read on
-// mount (not during setup) so SSR and the first client render agree.
+// Optional blue theme. Read after mount to keep initial hydration consistent.
 const isBlue = ref<boolean>(false);
 let blueInitialised = false;
 
