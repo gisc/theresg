@@ -1,0 +1,14 @@
+import assert from 'node:assert/strict';
+import { isPlannedAlert } from '../shared/utils/planned-alert';
+const planned = '05:00-SK-Planned Service Adjustment. From 19 Apr to 18 Oct 2026, the Inner Loop will be closed. Commuters can use shuttle bus services.';
+assert.equal(isPlannedAlert(planned), true);
+assert.equal(isPlannedAlert('Planned engineering works. Late opening on Sunday.'), true);
+assert.equal(isPlannedAlert('Scheduled maintenance tonight.'), true);
+assert.equal(isPlannedAlert('10:20-EW-Train service disruption due to a fault. Shuttle buses available.'), false);
+assert.equal(isPlannedAlert('Train fault near planned works. Additional travel time.'), false);
+assert.equal(isPlannedAlert('Unknown service notice'), false);
+const banner = (messages: string[]) => messages.filter(m => !isPlannedAlert(m));
+assert.equal(banner([planned]).length, 0);
+assert.deepEqual(banner([planned, 'Train fault']), ['Train fault']);
+assert.equal(banner(['Unknown service notice']).length, 1);
+console.log('9 planned-alert assertions passed');

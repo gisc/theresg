@@ -82,12 +82,8 @@ watch(favourites, (list) => {
 			>My commute</m3e-heading
 		>
 		<div v-if="hero && !favourites.length" class="hero-empty">
-			<p>
-				Pin your home, school, or work bus stops and their live arrivals will show
-				here every time you open the app. Saved only in this browser &middot; no
-				login needed.
-			</p>
-			<NuxtLink class="hero-link" to="/bus">Find a stop on the Bus page</NuxtLink>
+			<p>Save your regular stops for live arrivals. No login needed.</p>
+			<NuxtLink class="hero-link" to="/bus">Choose a stop to pin</NuxtLink>
 		</div>
 		<m3e-card v-if="!hero && !favourites.length">
 			<div slot="content" class="empty">

@@ -14,7 +14,8 @@ const { data: trainStatus, status, error, refresh } = await useFetch<TrainStatus
 );
 
 const alerts = computed(() => trainStatus.value?.messages ?? []);
-const disrupted = computed(() => Boolean(trainStatus.value?.disrupted));
+const plannedAlerts = computed(() => alerts.value.filter((m) => isPlannedAlert(m.Content)));
+const disruptionAlerts = computed(() => alerts.value.filter((m) => !isPlannedAlert(m.Content)));
 </script>
 
 <template>
@@ -52,9 +53,9 @@ const disrupted = computed(() => Boolean(trainStatus.value?.disrupted));
 				<button type="button" @click="refresh()">Try again</button>
 			</div>
 			<p v-else-if="!alerts.length">No train service alerts reported.</p>
-			<m3e-card v-else-if="disrupted">
+			<m3e-card v-else-if="disruptionAlerts.length">
 				<m3e-list slot="content" variant="segmented">
-					<m3e-list-item v-for="(alert, index) in alerts" :key="`${alert.CreatedDate}-${index}`">
+					<m3e-list-item v-for="(alert, index) in disruptionAlerts" :key="`${alert.CreatedDate}-${index}`">
 						<m3e-avatar slot="leading">
 							<Icon :name="getAlertIcon(alert.Content)" />
 						</m3e-avatar>
@@ -64,14 +65,14 @@ const disrupted = computed(() => Boolean(trainStatus.value?.disrupted));
 					</m3e-list-item>
 				</m3e-list>
 			</m3e-card>
-			<!-- No live disruption: planned works sit here as a small notice, not the top banner. -->
-			<m3e-card v-else class="planned-card">
+			<!-- Planned notices remain visible even when there is a separate disruption. -->
+			<m3e-card v-if="plannedAlerts.length" class="planned-card">
 				<div slot="content" class="planned">
 					<p class="planned-title">
 						<Icon name="material-symbols:info-outline" />
 						Planned works
 					</p>
-					<p v-for="(alert, index) in alerts" :key="`${alert.CreatedDate}-${index}`" class="planned-item">
+					<p v-for="(alert, index) in plannedAlerts" :key="`${alert.CreatedDate}-${index}`" class="planned-item">
 						<span v-if="alert.LineTag" class="line-tag">{{ alert.LineTag }}</span>
 						{{ alert.ParsedText ?? alert.Content }}
 						<span class="planned-date">Notice dated {{ alert.CreatedDate }}</span>

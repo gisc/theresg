@@ -83,11 +83,11 @@ useSeoMeta({
 				</m3e-nav-item>
 
 				<m3e-nav-item
-					:selected.prop="routePath.startsWith('/tourist')"
-					@click="router.push('/tourist')"
+					:selected.prop="routePath.startsWith('/explore')"
+					@click="router.push('/explore')"
 				>
 					<Icon slot="icon" name="material-symbols:attractions" />
-					Tourist
+					Explore
 				</m3e-nav-item>
 			</m3e-nav-rail>
 			<NuxtPage class="page" />
@@ -121,11 +121,11 @@ useSeoMeta({
 			</m3e-nav-item>
 
 			<m3e-nav-item
-				:selected.prop="routePath.startsWith('/tourist')"
-				@click="router.push('/tourist')"
+				:selected.prop="routePath.startsWith('/explore')"
+				@click="router.push('/explore')"
 			>
 				<Icon slot="icon" name="material-symbols:attractions" />
-				Tourist
+				Explore
 			</m3e-nav-item>
 		</m3e-nav-bar>
 	</div>

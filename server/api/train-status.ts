@@ -1,3 +1,4 @@
+import { isPlannedAlert } from '~~/shared/utils/planned-alert';
 import { getTrainAlertFeed } from '~~/server/utils/train-alert-feed';
 import type { TrainServiceMessage } from '~~/shared/types/TrainServiceMessage';
 import type { TrainStatus } from '~~/shared/types/TrainStatus';
@@ -18,11 +19,12 @@ export default defineEventHandler(async () => {
 		});
 	}
 
-	const hasBridging = messages.some((m) => /bridg|shuttle|free bus/i.test(m.Content));
+	const disruptionMessages = messages.filter((m) => !isPlannedAlert(m.Content));
+	const hasBridging = disruptionMessages.some((m) => /bridg|shuttle|free bus/i.test(m.Content));
 
 	const status: TrainStatus = {
 		status: data.value.Status,
-		disrupted: data.value.Status !== 1,
+		disrupted: data.value.Status !== 1 && disruptionMessages.length > 0,
 		hasBridging,
 		messages,
 	};

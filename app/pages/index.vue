@@ -1,6 +1,4 @@
 <script setup lang="ts">
-import type { TrafficIncident } from '~~/shared/types/TrafficIncident';
-import type { TrainServiceMessage } from '~~/shared/types/TrainServiceMessage';
 
 definePageMeta({
 	title: 'Home',
@@ -10,16 +8,9 @@ useSeoMeta({
 	title: 'Home',
 });
 
-// These calls require Cloudflare request headers. SSR self-fetches bypass the
-// proxy and receive 403, then SWR caches an empty initial Home page.
-const { data: trainServiceMessages, status: trainStatus, refresh: refreshTrain } = useLazyFetch<TrainServiceMessage[]>(
-	'/api/train-service-alerts', { server: false },
-);
+const { favourites } = useFavouriteStops();
 
-const { data: trafficIncidents, status: trafficStatus, refresh: refreshTraffic } = useLazyFetch<TrafficIncident[]>(
-	'/api/traffic-incidents', { server: false },
-);
-
+onMounted(() => { if (window.location.hash === '#service-alerts') navigateTo('/alerts', { replace: true }); });
 
 const { toggleBlue } = useBlueTheme();
 </script>
@@ -30,12 +21,11 @@ const { toggleBlue } = useBlueTheme();
 			<header class="home-intro">
 				<h1 class="sr-only">ThereSG</h1>
 				<p class="tagline">
-					Check live bus arrivals, plan MRT journeys, find bicycle parking, see
-					transport alerts, and discover food and attractions across Singapore.
+					Get around and experience Singapore.
 				</p>
 				<p class="quote">Life is a journey. <span class="enjoy" @click="toggleBlue()">Enjoy</span> the ride. :)</p>
 				<div class="tile-grid">
-					<div class="tile hero-tile">
+					<div class="tile hero-tile" :class="{ 'commute-empty': !favourites.length }">
 						<Icon class="hero-ic" name="material-symbols:push-pin-outline" />
 						<span class="hero-title">My commute</span>
 						<MyCommute hero />
@@ -53,23 +43,23 @@ const { toggleBlue } = useBlueTheme();
 					<NuxtLink class="tile" to="/bike">
 						<Icon name="material-symbols:pedal-bike-outline" />
 						<span class="tile-title">Bike</span>
-						<span class="tile-desc">Parking near you</span>
+						<span class="tile-desc">Parking &amp; park connectors</span>
 					</NuxtLink>
 					<NuxtLink class="tile" to="/food">
 						<Icon name="material-symbols:restaurant-outline" />
 						<span class="tile-title">Food</span>
 						<span class="tile-desc">Hawker &amp; eats nearby</span>
 					</NuxtLink>
-					<NuxtLink class="tile" to="/tourist">
+					<NuxtLink class="tile" to="/explore">
 						<Icon name="material-symbols:photo-camera-outline" />
-						<span class="tile-title">Tourist</span>
+						<span class="tile-title">Explore</span>
 						<span class="tile-desc">Attractions &amp; guides</span>
 					</NuxtLink>
-					<a class="tile" href="#service-alerts">
+					<NuxtLink class="tile" to="/alerts">
 						<Icon name="material-symbols:warning-outline" />
 						<span class="tile-title">Alerts</span>
 						<span class="tile-desc">Service &amp; traffic updates</span>
-					</a>
+					</NuxtLink>
 				</div>
 				<details class="about">
 					<summary>
@@ -92,42 +82,6 @@ const { toggleBlue } = useBlueTheme();
 					<p class="ai-note">ThereSG is built with the help of AI tools.</p>
 				</details>
 			</header>
-			<m3e-heading id="service-alerts" class="heading" variant="headline" size="large"
-				>Service Alerts</m3e-heading
-			>
-			<m3e-card>
-				<p v-if="trainStatus === 'pending'" slot="content" class="empty-note">Loading service alerts...</p>
-				<p v-else-if="trainStatus === 'error'" slot="content" class="empty-note">Service alerts unavailable. <button type="button" @click="refreshTrain()">Retry</button></p>
-				<p v-else-if="!trainServiceMessages?.length" slot="content" class="empty-note">No current alerts.</p>
-				<m3e-list v-else slot="content" variant="segmented">
-					<m3e-list-item v-for="alert in trainServiceMessages" :key="alert.Content">
-						<m3e-avatar slot="leading">
-							<Icon :name="getAlertIcon(alert.Content)" />
-						</m3e-avatar>
-						<span slot="overline">{{ alert.CreatedDate }}</span>
-						<span v-if="alert.LineTag" class="line-tag">{{ alert.LineTag }}</span>
-						{{ alert.ParsedText ?? alert.Content }}
-					</m3e-list-item>
-				</m3e-list>
-			</m3e-card>
-
-			<m3e-heading class="heading" variant="headline" size="large"
-				>Traffic Incidents</m3e-heading
-			>
-			<m3e-card>
-				<p v-if="trafficStatus === 'pending'" slot="content" class="empty-note">Loading traffic incidents...</p>
-				<p v-else-if="trafficStatus === 'error'" slot="content" class="empty-note">Traffic incidents unavailable. <button type="button" @click="refreshTraffic()">Retry</button></p>
-				<p v-else-if="!trafficIncidents?.length" slot="content" class="empty-note">No current traffic incidents.</p>
-				<m3e-list v-else slot="content" variant="segmented">
-					<m3e-list-item v-for="incident in trafficIncidents" :key="incident.Message">
-						<m3e-avatar slot="leading">
-							<Icon :name="getTrafficIcon(incident.Type)" />
-						</m3e-avatar>
-						<span slot="overline">{{ incident.Type }}</span>
-						{{ incident.Message }}
-					</m3e-list-item>
-				</m3e-list>
-			</m3e-card>
 			<DataCredits />
 		</div>
 	</div>
@@ -298,6 +252,13 @@ const { toggleBlue } = useBlueTheme();
 	background: linear-gradient(135deg, var(--sg-brand), var(--sg-brand-strong));
 	border: none;
 }
+.commute-empty {
+	display: grid;
+	grid-template-columns: 24px 1fr;
+	column-gap: 8px;
+}
+.commute-empty .hero-title { margin: 0; align-self: center; }
+.commute-empty :deep(.my-commute) { grid-column: 1 / -1; }
 .hero-tile .hero-ic {
 	color: #ffffff;
 }

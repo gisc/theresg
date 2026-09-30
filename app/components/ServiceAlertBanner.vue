@@ -10,7 +10,7 @@ const { data: status } = useLazyFetch<TrainStatus>('/api/train-status', {
 const expanded = ref(false);
 const collapsed = ref(false);
 
-const messages = computed(() => status.value?.messages ?? []);
+const messages = computed(() => (status.value?.messages ?? []).filter((m) => !isPlannedAlert(m.Content)));
 
 // The top banner is for live disruptions only. Planned-works notices stay on
 // the MRT page as a small card.
