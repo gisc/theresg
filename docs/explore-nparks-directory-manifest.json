@@ -1,0 +1,3411 @@
+[
+  {
+    "name": "Adam Park Connector",
+    "url": "https://pcn.nparks.gov.sg/adam-pc/",
+    "area": "",
+    "lat": null,
+    "lon": null
+  },
+  {
+    "name": "Admiralty Park",
+    "url": "https://www.nparks.gov.sg/visit/parks/park-detail/admiralty-park",
+    "area": "North",
+    "lat": 1.4441704295,
+    "lon": 103.7820589311
+  },
+  {
+    "name": "Admiralty West Park Connector",
+    "url": "https://pcn.nparks.gov.sg/admiralty-west-pc/",
+    "area": "",
+    "lat": null,
+    "lon": null
+  },
+  {
+    "name": "Aida Park",
+    "url": "https://www.nparks.gov.sg/visit/parks/park-detail/aida-park",
+    "area": "East",
+    "lat": 1.3193862149,
+    "lon": 103.9279182975
+  },
+  {
+    "name": "Airport Road Park Connector",
+    "url": "https://pcn.nparks.gov.sg/airport-road-pc/",
+    "area": "",
+    "lat": null,
+    "lon": null
+  },
+  {
+    "name": "Alexandra Canal Linear Park",
+    "url": "https://pcn.nparks.gov.sg/alexandra-canal-linear-park/",
+    "area": "",
+    "lat": null,
+    "lon": null
+  },
+  {
+    "name": "Alexandra Garden Trail",
+    "url": "https://pcn.nparks.gov.sg/alexandra-garden-trail/",
+    "area": "",
+    "lat": null,
+    "lon": null
+  },
+  {
+    "name": "Alexandra Park Connector",
+    "url": "https://pcn.nparks.gov.sg/alexandra-pc/",
+    "area": "",
+    "lat": null,
+    "lon": null
+  },
+  {
+    "name": "Alexandra-Queensway Park Connector",
+    "url": "https://pcn.nparks.gov.sg/alexandra-queensway-pc/",
+    "area": "",
+    "lat": null,
+    "lon": null
+  },
+  {
+    "name": "Aljunied Park",
+    "url": "https://www.nparks.gov.sg/visit/parks/park-detail/aljunied-park",
+    "area": "",
+    "lat": 1.3294612188,
+    "lon": 103.879916509
+  },
+  {
+    "name": "Almond Crescent Playground",
+    "url": "https://www.nparks.gov.sg/visit/parks/park-detail/almond-crescent-playground",
+    "area": "West",
+    "lat": 1.3732514335,
+    "lon": 103.772118873
+  },
+  {
+    "name": "Ang Mo Kio Avenue 5 Park Connector",
+    "url": "https://pcn.nparks.gov.sg/ang-mo-kio-ave5-pc/",
+    "area": "",
+    "lat": null,
+    "lon": null
+  },
+  {
+    "name": "Ang Mo Kio Avenue 8 Park Connector",
+    "url": "https://pcn.nparks.gov.sg/ang-mo-kio-ave-8-pc/",
+    "area": "",
+    "lat": null,
+    "lon": null
+  },
+  {
+    "name": "Ang Mo Kio Linear Park",
+    "url": "https://www.nparks.gov.sg/visit/parks/park-detail/ang-mo-kio-linear-park",
+    "area": "North",
+    "lat": 1.3793458,
+    "lon": 103.8718323
+  },
+  {
+    "name": "Ang Mo Kio Park Connector",
+    "url": "https://pcn.nparks.gov.sg/ang-mo-kio-pc/",
+    "area": "",
+    "lat": null,
+    "lon": null
+  },
+  {
+    "name": "Ang Mo Kio Town Garden East",
+    "url": "https://www.nparks.gov.sg/visit/parks/park-detail/ang-mo-kio-town-garden-east",
+    "area": "North",
+    "lat": 1.370571,
+    "lon": 103.850286
+  },
+  {
+    "name": "Ang Mo Kio Town Garden West",
+    "url": "https://www.nparks.gov.sg/visit/parks/park-detail/ang-mo-kio-town-garden-west",
+    "area": "North",
+    "lat": 1.374025,
+    "lon": 103.842887
+  },
+  {
+    "name": "Ann Siang Hill Park",
+    "url": "https://www.nparks.gov.sg/visit/parks/park-detail/ann-siang-hill-park",
+    "area": "South",
+    "lat": 1.2807926551,
+    "lon": 103.846275795
+  },
+  {
+    "name": "Aroozoo Avenue Playground",
+    "url": "https://www.nparks.gov.sg/visit/parks/park-detail/aroozoo-avenue-playground",
+    "area": "East",
+    "lat": 1.3551959999,
+    "lon": 103.8859549999
+  },
+  {
+    "name": "Arthur Park",
+    "url": "https://www.nparks.gov.sg/visit/parks/park-detail/arthur-park",
+    "area": "East",
+    "lat": 1.3039128,
+    "lon": 103.8882
+  },
+  {
+    "name": "Balam Park Connector",
+    "url": "https://pcn.nparks.gov.sg/balam-pc/",
+    "area": "",
+    "lat": null,
+    "lon": null
+  },
+  {
+    "name": "Bangsawan Park",
+    "url": "https://www.nparks.gov.sg/visit/parks/park-detail/bangsawan-park",
+    "area": "East",
+    "lat": 1.3211861357,
+    "lon": 103.9237999435
+  },
+  {
+    "name": "Banyan Villas Playground",
+    "url": "https://www.nparks.gov.sg/visit/parks/park-detail/banyan-villas-playground",
+    "area": "Central",
+    "lat": 1.3872496,
+    "lon": 103.8388257
+  },
+  {
+    "name": "Bedok Park Connector",
+    "url": "https://pcn.nparks.gov.sg/bedok-pc/",
+    "area": "",
+    "lat": null,
+    "lon": null
+  },
+  {
+    "name": "Bedok Reservoir Park",
+    "url": "https://www.nparks.gov.sg/visit/parks/park-detail/bedok-reservoir-park",
+    "area": "",
+    "lat": 1.339094,
+    "lon": 103.92681
+  },
+  {
+    "name": "Bedok Ria Crescent Playground",
+    "url": "https://www.nparks.gov.sg/visit/parks/park-detail/bedok-ria-crescent-playground",
+    "area": "East",
+    "lat": 1.3274221,
+    "lon": 103.9530786
+  },
+  {
+    "name": "Bedok Terrace Playground",
+    "url": "https://www.nparks.gov.sg/visit/parks/park-detail/bedok-terrace-playground",
+    "area": "East",
+    "lat": 1.3255456,
+    "lon": 103.9474856
+  },
+  {
+    "name": "Bedok Town Park",
+    "url": "https://www.nparks.gov.sg/visit/parks/park-detail/bedok-town-park",
+    "area": "East",
+    "lat": 1.3343354,
+    "lon": 103.9208701
+  },
+  {
+    "name": "Begonia Road Playground",
+    "url": "https://www.nparks.gov.sg/visit/parks/park-detail/begonia-road-playground",
+    "area": "Central",
+    "lat": 1.3878651,
+    "lon": 103.8633802
+  },
+  {
+    "name": "Beng Wan Road Playground",
+    "url": "https://www.nparks.gov.sg/visit/parks/park-detail/beng-wan-road-playground",
+    "area": "Central",
+    "lat": 1.323809,
+    "lon": 103.865838
+  },
+  {
+    "name": "Bidadari Park",
+    "url": "https://www.nparks.gov.sg/visit/parks/park-detail/bidadari-park",
+    "area": "East",
+    "lat": 1.34068,
+    "lon": 103.8743881
+  },
+  {
+    "name": "Bidadari Park Connector",
+    "url": "https://pcn.nparks.gov.sg/bidadari-pc/",
+    "area": "",
+    "lat": null,
+    "lon": null
+  },
+  {
+    "name": "Binchang Rise Park",
+    "url": "https://www.nparks.gov.sg/visit/parks/park-detail/binchang-rise-park",
+    "area": "Central",
+    "lat": 1.3486992,
+    "lon": 103.8436153
+  },
+  {
+    "name": "Bishan-Ang Mo Kio Park",
+    "url": "https://www.nparks.gov.sg/visit/parks/park-detail/bishan-ang-mo-kio-park",
+    "area": "North",
+    "lat": 1.361456,
+    "lon": 103.847295
+  },
+  {
+    "name": "Bougainvillea Park",
+    "url": "https://www.nparks.gov.sg/visit/parks/park-detail/bougainvillea-park",
+    "area": "West",
+    "lat": 1.3267333,
+    "lon": 103.8076306
+  },
+  {
+    "name": "Boundary Road Park",
+    "url": "https://www.nparks.gov.sg/visit/parks/park-detail/boundary-road-park",
+    "area": "East",
+    "lat": 1.3540396,
+    "lon": 103.8747789
+  },
+  {
+    "name": "Brooks Park",
+    "url": "https://www.nparks.gov.sg/visit/parks/park-detail/brooks-park",
+    "area": "North",
+    "lat": 1.405592,
+    "lon": 103.8230218
+  },
+  {
+    "name": "Buangkok Park Connector",
+    "url": "https://pcn.nparks.gov.sg/buangkok-pc/",
+    "area": "",
+    "lat": null,
+    "lon": null
+  },
+  {
+    "name": "Bukit Batok East Park Connector",
+    "url": "https://pcn.nparks.gov.sg/bukit-batok-east-pc/",
+    "area": "",
+    "lat": null,
+    "lon": null
+  },
+  {
+    "name": "Bukit Batok Nature Park",
+    "url": "https://www.nparks.gov.sg/visit/parks/park-detail/bukit-batok-nature-park",
+    "area": "West",
+    "lat": 1.3501401073,
+    "lon": 103.764197119
+  },
+  {
+    "name": "Bukit Batok Park Connector",
+    "url": "https://pcn.nparks.gov.sg/bukit-batok-pc/",
+    "area": "",
+    "lat": null,
+    "lon": null
+  },
+  {
+    "name": "Bukit Batok Town Park",
+    "url": "https://www.nparks.gov.sg/visit/parks/park-detail/bukit-batok-town-park",
+    "area": "West",
+    "lat": 1.3573609999,
+    "lon": 103.756069999
+  },
+  {
+    "name": "Bukit Batok West Park Connector",
+    "url": "https://pcn.nparks.gov.sg/bukit-batok-west-pc/",
+    "area": "",
+    "lat": null,
+    "lon": null
+  },
+  {
+    "name": "Bukit Canberra - Themed gardens",
+    "url": "https://www.nparks.gov.sg/visit/parks/park-detail/bukit-canberra-themed-gardens",
+    "area": "North",
+    "lat": 1.4478758,
+    "lon": 103.8250121
+  },
+  {
+    "name": "Bukit Gombak Park",
+    "url": "https://www.nparks.gov.sg/visit/parks/park-detail/bukit-gombak-park",
+    "area": "West",
+    "lat": 1.3673101205,
+    "lon": 103.7524397806
+  },
+  {
+    "name": "Bukit Panjang Park Connector",
+    "url": "https://pcn.nparks.gov.sg/bukit-panjang-pc/",
+    "area": "",
+    "lat": null,
+    "lon": null
+  },
+  {
+    "name": "Bukit Timah Nature Reserve",
+    "url": "https://www.nparks.gov.sg/visit/parks/park-detail/bukit-timah-nature-reserve",
+    "area": "West",
+    "lat": 1.3485224,
+    "lon": 103.776716
+  },
+  {
+    "name": "Bukit Timah Park Connector",
+    "url": "https://pcn.nparks.gov.sg/bukit-timah-pc/",
+    "area": "",
+    "lat": null,
+    "lon": null
+  },
+  {
+    "name": "Bulim Park",
+    "url": "https://www.nparks.gov.sg/visit/parks/park-detail/bulim-park",
+    "area": "West",
+    "lat": 1.354497,
+    "lon": 103.7056744
+  },
+  {
+    "name": "Bunga Rampai Park",
+    "url": "https://www.nparks.gov.sg/visit/parks/park-detail/bunga-rampai-park",
+    "area": "East",
+    "lat": 1.3404529,
+    "lon": 103.8842746
+  },
+  {
+    "name": "Burgundy Crescent Playground",
+    "url": "https://www.nparks.gov.sg/visit/parks/park-detail/burgundy-crescent-playground",
+    "area": "West",
+    "lat": 1.3397331,
+    "lon": 103.7610089
+  },
+  {
+    "name": "Butterfly Avenue Playground",
+    "url": "https://www.nparks.gov.sg/visit/parks/park-detail/butterfly-avenue-playground",
+    "area": "Central",
+    "lat": 1.3344706,
+    "lon": 103.8773528
+  },
+  {
+    "name": "Cactus Road Park",
+    "url": "https://www.nparks.gov.sg/visit/parks/park-detail/cactus-road-playground",
+    "area": "Central",
+    "lat": 1.3901466,
+    "lon": 103.8521869
+  },
+  {
+    "name": "Cambridge Park",
+    "url": "https://www.nparks.gov.sg/visit/parks/park-detail/cambridge-park",
+    "area": "Central",
+    "lat": 1.313660983,
+    "lon": 103.84684565
+  },
+  {
+    "name": "Camp Road Interim Park",
+    "url": "https://www.nparks.gov.sg/visit/parks/park-detail/camp-road-interim-park",
+    "area": "Central",
+    "lat": 1.3024237,
+    "lon": 103.8184885
+  },
+  {
+    "name": "Canberra Park Connector",
+    "url": "https://pcn.nparks.gov.sg/canberra-pc/",
+    "area": "",
+    "lat": null,
+    "lon": null
+  },
+  {
+    "name": "Canberra-Sembawang Park Connector",
+    "url": "https://pcn.nparks.gov.sg/canberra-sembawang-pc/",
+    "area": "",
+    "lat": null,
+    "lon": null
+  },
+  {
+    "name": "Carmichael Road Playground",
+    "url": "https://www.nparks.gov.sg/visit/parks/park-detail/carmichael-road-playground",
+    "area": "Central",
+    "lat": 1.3426726,
+    "lon": 103.8630996
+  },
+  {
+    "name": "Carpmael Park",
+    "url": "https://www.nparks.gov.sg/visit/parks/park-detail/carpmael-park",
+    "area": "East",
+    "lat": 1.3115027,
+    "lon": 103.8989519
+  },
+  {
+    "name": "Cashew Crescent Fitness Corner",
+    "url": "https://www.nparks.gov.sg/visit/parks/park-detail/cashew-crescent-fitness-corner",
+    "area": "West",
+    "lat": 1.3721751764,
+    "lon": 103.7693566806
+  },
+  {
+    "name": "Cashew Link Playground",
+    "url": "https://www.nparks.gov.sg/visit/parks/park-detail/cashew-link-playground",
+    "area": "West",
+    "lat": 1.371358888,
+    "lon": 103.7689250135
+  },
+  {
+    "name": "Cashew Road Interim Park",
+    "url": "https://www.nparks.gov.sg/visit/parks/park-detail/cashew-road-interim-park",
+    "area": "West",
+    "lat": 1.3724144126,
+    "lon": 103.7679939516
+  },
+  {
+    "name": "Cashew Road Playground",
+    "url": "https://www.nparks.gov.sg/visit/parks/park-detail/cashew-road-playground",
+    "area": "West",
+    "lat": 1.3706628996,
+    "lon": 103.764689757
+  },
+  {
+    "name": "Central Catchment Nature Reserve",
+    "url": "https://www.nparks.gov.sg/visit/parks/park-detail/central-catchment-nature-reserve",
+    "area": "North",
+    "lat": 1.377305,
+    "lon": 103.805474
+  },
+  {
+    "name": "Central Catchment Park Connector",
+    "url": "https://pcn.nparks.gov.sg/central-catchment-pc/",
+    "area": "",
+    "lat": null,
+    "lon": null
+  },
+  {
+    "name": "Central Urban Loop",
+    "url": "https://pcn.nparks.gov.sg/the-pcn-experience/cul/",
+    "area": "",
+    "lat": null,
+    "lon": null
+  },
+  {
+    "name": "Ceylon Road Interim Park",
+    "url": "https://www.nparks.gov.sg/visit/parks/park-detail/ceylon-road-interim-park",
+    "area": "East",
+    "lat": 1.3097275,
+    "lon": 103.8995035
+  },
+  {
+    "name": "Changi Bay Park Connector",
+    "url": "https://pcn.nparks.gov.sg/changi-bay-pc/",
+    "area": "",
+    "lat": null,
+    "lon": null
+  },
+  {
+    "name": "Changi Beach Park",
+    "url": "https://www.nparks.gov.sg/visit/parks/park-detail/changi-beach-park",
+    "area": "East",
+    "lat": 1.3834009999,
+    "lon": 104.001675
+  },
+  {
+    "name": "Changi Boardwalk",
+    "url": "https://www.nparks.gov.sg/visit/parks/park-detail/changi-boardwalk",
+    "area": "East",
+    "lat": 1.3922311,
+    "lon": 103.9838669
+  },
+  {
+    "name": "Changi Heights Playground",
+    "url": "https://www.nparks.gov.sg/visit/parks/park-detail/changi-heights-playground",
+    "area": "East",
+    "lat": 1.3628759,
+    "lon": 103.9721147
+  },
+  {
+    "name": "Chartwell Drive Park",
+    "url": "https://www.nparks.gov.sg/visit/parks/park-detail/chartwell-drive-park",
+    "area": "East",
+    "lat": 1.3596309999,
+    "lon": 103.8638719999
+  },
+  {
+    "name": "Chempaka Avenue Playground",
+    "url": "https://www.nparks.gov.sg/visit/parks/park-detail/chempaka-avenue-playground",
+    "area": "Central",
+    "lat": 1.3318741,
+    "lon": 103.8756156
+  },
+  {
+    "name": "Cheng Soon Garden Playground",
+    "url": "https://www.nparks.gov.sg/visit/parks/park-detail/cheng-soon-garden-playground",
+    "area": "West",
+    "lat": 1.3161139456,
+    "lon": 103.7830996513
+  },
+  {
+    "name": "Chestnut Close Park",
+    "url": "https://www.nparks.gov.sg/visit/parks/park-detail/chestnut-close-park",
+    "area": "West",
+    "lat": 1.3689514391,
+    "lon": 103.7733406782
+  },
+  {
+    "name": "Chestnut Drive Playground",
+    "url": "https://www.nparks.gov.sg/visit/parks/park-detail/chestnut-drive-playground",
+    "area": "West",
+    "lat": 1.3676242689,
+    "lon": 103.7688308054
+  },
+  {
+    "name": "Chestnut Nature Park",
+    "url": "https://www.nparks.gov.sg/visit/parks/park-detail/chestnut-nature-park",
+    "area": "West",
+    "lat": 1.3709715,
+    "lon": 103.7808374
+  },
+  {
+    "name": "Chiltern Drive Interim Park",
+    "url": "https://www.nparks.gov.sg/visit/parks/park-detail/chiltern-drive-interim-park",
+    "area": "East",
+    "lat": 1.3485679,
+    "lon": 103.8620025
+  },
+  {
+    "name": "Choa Chu Kang North Park Connector",
+    "url": "https://pcn.nparks.gov.sg/choa-chu-kang-north-pc/",
+    "area": "",
+    "lat": null,
+    "lon": null
+  },
+  {
+    "name": "Choa Chu Kang Park",
+    "url": "https://www.nparks.gov.sg/visit/parks/park-detail/choa-chu-kang-park",
+    "area": "West",
+    "lat": 1.389139,
+    "lon": 103.748433
+  },
+  {
+    "name": "Choa Chu Kang Park Connector",
+    "url": "https://pcn.nparks.gov.sg/choa-chu-kang-pc/",
+    "area": "",
+    "lat": null,
+    "lon": null
+  },
+  {
+    "name": "Chu Yen Playground",
+    "url": "https://www.nparks.gov.sg/visit/parks/park-detail/chu-yen-playground",
+    "area": "West",
+    "lat": 1.3586405,
+    "lon": 103.7589705
+  },
+  {
+    "name": "Chuan Green Playground",
+    "url": "https://www.nparks.gov.sg/visit/parks/park-detail/chuan-green-playground",
+    "area": "East",
+    "lat": 1.3604799999,
+    "lon": 103.8660079999
+  },
+  {
+    "name": "Chuan Lane Park",
+    "url": "https://www.nparks.gov.sg/visit/parks/park-detail/chuan-lane-park",
+    "area": "East",
+    "lat": 1.3522286617,
+    "lon": 103.8581727374
+  },
+  {
+    "name": "Chuan Walk Playground",
+    "url": "https://www.nparks.gov.sg/visit/parks/park-detail/chuan-walk-playground",
+    "area": "East",
+    "lat": 1.357222,
+    "lon": 103.867553
+  },
+  {
+    "name": "Chwee Chian Playground",
+    "url": "https://www.nparks.gov.sg/visit/parks/park-detail/chwee-chian-playground",
+    "area": "West",
+    "lat": 1.2794325,
+    "lon": 103.7889095
+  },
+  {
+    "name": "Clementi Crescent Playground",
+    "url": "https://www.nparks.gov.sg/visit/parks/park-detail/clementi-crescent-playground",
+    "area": "West",
+    "lat": 1.3161139456,
+    "lon": 103.7830996513
+  },
+  {
+    "name": "Clementi Woods Park",
+    "url": "https://www.nparks.gov.sg/visit/parks/park-detail/clementi-woods-park",
+    "area": "South",
+    "lat": 1.298934,
+    "lon": 103.767617
+  },
+  {
+    "name": "Clover Crescent Park",
+    "url": "https://www.nparks.gov.sg/visit/parks/park-detail/clover-crescent-park",
+    "area": "Central",
+    "lat": 1.3510254,
+    "lon": 103.8446038
+  },
+  {
+    "name": "Clover Way Park",
+    "url": "https://www.nparks.gov.sg/visit/parks/park-detail/clover-way-park",
+    "area": "Central",
+    "lat": 1.350187,
+    "lon": 103.8463667
+  },
+  {
+    "name": "Coastal Park Connector",
+    "url": "https://pcn.nparks.gov.sg/coastal-pc/",
+    "area": "",
+    "lat": null,
+    "lon": null
+  },
+  {
+    "name": "Colchester Grove Interim Open Space",
+    "url": "https://www.nparks.gov.sg/visit/parks/park-detail/colchester-grove-interim-open-space",
+    "area": "East",
+    "lat": 1.3564642,
+    "lon": 103.8667196
+  },
+  {
+    "name": "Colchester Grove Open Space",
+    "url": "https://www.nparks.gov.sg/visit/parks/park-detail/colchester-grove-open-space",
+    "area": "East",
+    "lat": 1.357585,
+    "lon": 103.8674539999
+  },
+  {
+    "name": "Compassvale Walk Park",
+    "url": "https://www.nparks.gov.sg/visit/parks/park-detail/compassvale-walk-park",
+    "area": "East",
+    "lat": 1.3888296256,
+    "lon": 103.9001445623
+  },
+  {
+    "name": "Coney Island Park",
+    "url": "https://www.nparks.gov.sg/visit/parks/park-detail/coney-island-park",
+    "area": "East",
+    "lat": 1.409913,
+    "lon": 103.923131
+  },
+  {
+    "name": "Coronation Park",
+    "url": "https://www.nparks.gov.sg/visit/parks/park-detail/coronation-park",
+    "area": "West",
+    "lat": 1.3219885,
+    "lon": 103.7964198
+  },
+  {
+    "name": "Countryside Playground",
+    "url": "https://www.nparks.gov.sg/visit/parks/park-detail/countryside-playground",
+    "area": "Central",
+    "lat": 1.3900653,
+    "lon": 103.838591
+  },
+  {
+    "name": "Dairy Farm Nature Park",
+    "url": "https://www.nparks.gov.sg/visit/parks/park-detail/dairy-farm-nature-park",
+    "area": "West",
+    "lat": 1.362688,
+    "lon": 103.7740867
+  },
+  {
+    "name": "Dairy Farm Park Connector",
+    "url": "https://pcn.nparks.gov.sg/dairy-farm-pc/",
+    "area": "",
+    "lat": null,
+    "lon": null
+  },
+  {
+    "name": "Dedap Place Playground",
+    "url": "https://www.nparks.gov.sg/visit/parks/park-detail/dedap-place-playground",
+    "area": "Central",
+    "lat": 1.3877877,
+    "lon": 103.8684288
+  },
+  {
+    "name": "Dew Garden",
+    "url": "https://www.nparks.gov.sg/visit/parks/park-detail/dew-garden",
+    "area": "Central",
+    "lat": 1.3992181,
+    "lon": 103.8710804
+  },
+  {
+    "name": "Dhoby Ghaut Green",
+    "url": "https://www.nparks.gov.sg/visit/parks/park-detail/dhoby-ghaut-green",
+    "area": "South",
+    "lat": 1.2981838248,
+    "lon": 103.8465041249
+  },
+  {
+    "name": "Duchess Park",
+    "url": "https://www.nparks.gov.sg/visit/parks/park-detail/duchess-park",
+    "area": "West",
+    "lat": 1.3242834,
+    "lon": 103.8054827
+  },
+  {
+    "name": "Duxton Plain Park",
+    "url": "https://www.nparks.gov.sg/visit/parks/park-detail/duxton-plain-park",
+    "area": "South",
+    "lat": 1.279232,
+    "lon": 103.84156
+  },
+  {
+    "name": "East Coast Park",
+    "url": "https://www.nparks.gov.sg/visit/parks/park-detail/east-coast-park",
+    "area": "East",
+    "lat": 1.3031689999,
+    "lon": 103.9206049999
+  },
+  {
+    "name": "East Coast Terrace Park",
+    "url": "https://www.nparks.gov.sg/visit/parks/park-detail/east-coast-terrace-park",
+    "area": "East",
+    "lat": 1.3109384668,
+    "lon": 103.92381504
+  },
+  {
+    "name": "Eastern Coastal Loop",
+    "url": "https://pcn.nparks.gov.sg/the-pcn-experience/ecl/",
+    "area": "",
+    "lat": null,
+    "lon": null
+  },
+  {
+    "name": "Eastern Corridor",
+    "url": "https://pcn.nparks.gov.sg/recreational-connectivity/eastern-corridor",
+    "area": "",
+    "lat": null,
+    "lon": null
+  },
+  {
+    "name": "Eastwood Park Playground",
+    "url": "https://www.nparks.gov.sg/visit/parks/park-detail/eastwood-park-playground",
+    "area": "East",
+    "lat": 1.3231407,
+    "lon": 103.9575768
+  },
+  {
+    "name": "Elias Terrace Playground",
+    "url": "https://www.nparks.gov.sg/visit/parks/park-detail/elias-terrace-playground",
+    "area": "East",
+    "lat": 1.3721952813,
+    "lon": 103.9411145082
+  },
+  {
+    "name": "Elite Terrace Park",
+    "url": "https://www.nparks.gov.sg/visit/parks/park-detail/elite-terrace-park",
+    "area": "East",
+    "lat": 1.3155938058,
+    "lon": 103.9243035859
+  },
+  {
+    "name": "Ellington Square Playground",
+    "url": "https://www.nparks.gov.sg/visit/parks/park-detail/ellington-square-playground",
+    "area": "North",
+    "lat": 1.3720248,
+    "lon": 103.8345427
+  },
+  {
+    "name": "Empress Place",
+    "url": "https://www.nparks.gov.sg/visit/parks/park-detail/empress-place",
+    "area": "South",
+    "lat": 1.286824,
+    "lon": 103.851957
+  },
+  {
+    "name": "Eng Kong Garden Playground",
+    "url": "https://www.nparks.gov.sg/visit/parks/park-detail/eng-kong-garden-playground",
+    "area": "West",
+    "lat": 1.3161139456,
+    "lon": 103.7830996513
+  },
+  {
+    "name": "Eng Kong Place Fitness Corner",
+    "url": "https://www.nparks.gov.sg/visit/parks/park-detail/eng-kong-place-fitness-corner",
+    "area": "West",
+    "lat": 1.3161139456,
+    "lon": 103.7830996513
+  },
+  {
+    "name": "Esplanade Park",
+    "url": "https://www.nparks.gov.sg/visit/parks/park-detail/esplanade-park",
+    "area": "South",
+    "lat": 1.289417,
+    "lon": 103.853597
+  },
+  {
+    "name": "Faber Heights Open Space",
+    "url": "https://www.nparks.gov.sg/visit/parks/park-detail/faber-heights-open-space",
+    "area": "West",
+    "lat": 1.3225279,
+    "lon": 103.7575849
+  },
+  {
+    "name": "Faber Heights Park",
+    "url": "https://www.nparks.gov.sg/visit/parks/park-detail/faber-heights-park",
+    "area": "West",
+    "lat": 1.3238791,
+    "lon": 103.7552835
+  },
+  {
+    "name": "Faber Hills Playground",
+    "url": "https://www.nparks.gov.sg/visit/parks/park-detail/faber-hills-playground",
+    "area": "West",
+    "lat": 1.3197805,
+    "lon": 103.7579803
+  },
+  {
+    "name": "Faber Island Gardens Park",
+    "url": "https://www.nparks.gov.sg/visit/parks/park-detail/faber-island-gardens-park",
+    "area": "Central",
+    "lat": 1.362022,
+    "lon": 103.828415
+  },
+  {
+    "name": "Fernvale Park",
+    "url": "https://www.nparks.gov.sg/visit/parks/park-detail/fernvale-park",
+    "area": "Central",
+    "lat": 1.3975704,
+    "lon": 103.8747267
+  },
+  {
+    "name": "Florissa Park Playground",
+    "url": "https://www.nparks.gov.sg/visit/parks/park-detail/florissa-park-playground",
+    "area": "Central",
+    "lat": 1.386971,
+    "lon": 103.8350723
+  },
+  {
+    "name": "Fort Canning Park",
+    "url": "https://www.nparks.gov.sg/visit/parks/park-detail/fort-canning-park",
+    "area": "Central",
+    "lat": 1.291778,
+    "lon": 103.846609
+  },
+  {
+    "name": "Fudu Walk Playground",
+    "url": "https://www.nparks.gov.sg/visit/parks/park-detail/fudu-walk-playground",
+    "area": "Central",
+    "lat": 1.3898464,
+    "lon": 103.8372177
+  },
+  {
+    "name": "Fulton Avenue Playground",
+    "url": "https://www.nparks.gov.sg/visit/parks/park-detail/fulton-avenue-playground",
+    "area": "Central",
+    "lat": 1.362126,
+    "lon": 103.833558
+  },
+  {
+    "name": "Fuyong Interim Park",
+    "url": "https://www.nparks.gov.sg/visit/parks/park-detail/fuyong-interim-park",
+    "area": "West",
+    "lat": 1.3574145428,
+    "lon": 103.7687491641
+  },
+  {
+    "name": "Garden View Playground",
+    "url": "https://www.nparks.gov.sg/visit/parks/park-detail/garden-view-playground",
+    "area": "East",
+    "lat": 1.3603836,
+    "lon": 103.8656671
+  },
+  {
+    "name": "Gelenggang Park",
+    "url": "https://www.nparks.gov.sg/visit/parks/park-detail/gelenggang-park",
+    "area": "North",
+    "lat": 1.3734878,
+    "lon": 103.8298299
+  },
+  {
+    "name": "Gentle Drive Playground",
+    "url": "https://www.nparks.gov.sg/visit/parks/park-detail/gentle-drive-playground",
+    "area": "Central",
+    "lat": 1.3203681943,
+    "lon": 103.84069022
+  },
+  {
+    "name": "Geylang East Park",
+    "url": "https://www.nparks.gov.sg/visit/parks/park-detail/geylang-east-park",
+    "area": "East",
+    "lat": 1.3217731,
+    "lon": 103.8876546
+  },
+  {
+    "name": "Geylang Park Connector",
+    "url": "https://pcn.nparks.gov.sg/geylang-pc/",
+    "area": "",
+    "lat": null,
+    "lon": null
+  },
+  {
+    "name": "Golden Rise Playground",
+    "url": "https://www.nparks.gov.sg/visit/parks/park-detail/golden-rise-playground",
+    "area": "West",
+    "lat": 1.3362688198,
+    "lon": 103.7648950762
+  },
+  {
+    "name": "Goldhill Avenue Playground",
+    "url": "https://www.nparks.gov.sg/visit/parks/park-detail/goldhill-avenue-playground",
+    "area": "Central",
+    "lat": 1.3210963,
+    "lon": 103.8331471
+  },
+  {
+    "name": "Goodlink Park Playground",
+    "url": "https://www.nparks.gov.sg/visit/parks/park-detail/goodlink-park-playground",
+    "area": "North",
+    "lat": 1.4272971,
+    "lon": 103.8253396
+  },
+  {
+    "name": "Green Lane Park",
+    "url": "https://www.nparks.gov.sg/visit/parks/park-detail/green-lane-park",
+    "area": "East",
+    "lat": 1.3109121,
+    "lon": 103.8922988
+  },
+  {
+    "name": "Greenfield Drive Playground",
+    "url": "https://www.nparks.gov.sg/visit/parks/park-detail/greenfield-drive-playground",
+    "area": "East",
+    "lat": 1.3130417767,
+    "lon": 103.9176535577
+  },
+  {
+    "name": "Greenleaf View Playground",
+    "url": "https://www.nparks.gov.sg/visit/parks/park-detail/greenleaf-view-playground",
+    "area": "West",
+    "lat": 1.3222868,
+    "lon": 103.7880135
+  },
+  {
+    "name": "Greenridge Crescent Playground",
+    "url": "https://www.nparks.gov.sg/visit/parks/park-detail/greenridge-crescent-playground",
+    "area": "West",
+    "lat": 1.3161139456,
+    "lon": 103.7830996513
+  },
+  {
+    "name": "Greenwood Crescent Playground",
+    "url": "https://www.nparks.gov.sg/visit/parks/park-detail/greenwood-crescent-playground",
+    "area": "West",
+    "lat": 1.3355193,
+    "lon": 103.8054612
+  },
+  {
+    "name": "Grove Lane Playground",
+    "url": "https://www.nparks.gov.sg/visit/parks/park-detail/grove-lane-playground",
+    "area": "West",
+    "lat": 1.3137274082,
+    "lon": 103.7840223312
+  },
+  {
+    "name": "Guillemard Road Open Space",
+    "url": "https://www.nparks.gov.sg/visit/parks/park-detail/guillemard-road-open-space",
+    "area": "",
+    "lat": 1.3145409067,
+    "lon": 103.8924079027
+  },
+  {
+    "name": "Haig Walk",
+    "url": "https://www.nparks.gov.sg/visit/parks/park-detail/haig-walk",
+    "area": "East",
+    "lat": 1.3065194,
+    "lon": 103.9007403
+  },
+  {
+    "name": "Hampstead Wetlands Park",
+    "url": "https://www.nparks.gov.sg/visit/parks/park-detail/hampstead-wetlands-park",
+    "area": "North",
+    "lat": 1.4091654,
+    "lon": 103.8696591
+  },
+  {
+    "name": "Handy Road Open Space",
+    "url": "https://www.nparks.gov.sg/visit/parks/park-detail/handy-road-open-space",
+    "area": "South",
+    "lat": 1.298970742,
+    "lon": 103.847775108
+  },
+  {
+    "name": "Harvey Crescent Playground",
+    "url": "https://www.nparks.gov.sg/visit/parks/park-detail/harvey-crescent-playground",
+    "area": "East",
+    "lat": 1.3406547,
+    "lon": 103.9552186
+  },
+  {
+    "name": "Haus Linear Park",
+    "url": "https://www.nparks.gov.sg/visit/parks/park-detail/haus-linear-park",
+    "area": "East",
+    "lat": 1.3644857964,
+    "lon": 103.8597944803
+  },
+  {
+    "name": "Hazel Park Open Space",
+    "url": "https://www.nparks.gov.sg/visit/parks/park-detail/hazel-park-open-space",
+    "area": "West",
+    "lat": 1.3715982433,
+    "lon": 103.763649491
+  },
+  {
+    "name": "Henderson Park Connector",
+    "url": "https://pcn.nparks.gov.sg/henderson-pc/",
+    "area": "",
+    "lat": null,
+    "lon": null
+  },
+  {
+    "name": "Henry Park",
+    "url": "https://www.nparks.gov.sg/visit/parks/park-detail/henry-park",
+    "area": "West",
+    "lat": 1.3161139456,
+    "lon": 103.7830996513
+  },
+  {
+    "name": "Highgate Walk Playground",
+    "url": "https://www.nparks.gov.sg/visit/parks/park-detail/highgate-walk-playground",
+    "area": "West",
+    "lat": 1.3404781,
+    "lon": 103.7660723
+  },
+  {
+    "name": "Hillview Crescent Playground",
+    "url": "https://www.nparks.gov.sg/visit/parks/park-detail/hillview-crescent-playground",
+    "area": "West",
+    "lat": 1.3553413,
+    "lon": 103.7610038
+  },
+  {
+    "name": "Hillview Park Connector",
+    "url": "https://pcn.nparks.gov.sg/hillview-pc/",
+    "area": "",
+    "lat": null,
+    "lon": null
+  },
+  {
+    "name": "Hindhede Nature Park",
+    "url": "https://www.nparks.gov.sg/visit/parks/park-detail/hindhede-nature-park",
+    "area": "West",
+    "lat": 1.3501432,
+    "lon": 103.7759835
+  },
+  {
+    "name": "Holland Green Linear Park",
+    "url": "https://www.nparks.gov.sg/visit/parks/park-detail/holland-green-linear-park",
+    "area": "West",
+    "lat": 1.3270008,
+    "lon": 103.7879384
+  },
+  {
+    "name": "Holland Green Playground",
+    "url": "https://www.nparks.gov.sg/visit/parks/park-detail/holland-green-playground",
+    "area": "West",
+    "lat": 1.3268426,
+    "lon": 103.7828931
+  },
+  {
+    "name": "Holland Grove View Fitness Corner",
+    "url": "https://www.nparks.gov.sg/visit/parks/park-detail/holland-grove-view-fitness-corner",
+    "area": "West",
+    "lat": 1.3124349,
+    "lon": 103.7827885
+  },
+  {
+    "name": "Holland Grove View Playground",
+    "url": "https://www.nparks.gov.sg/visit/parks/park-detail/holland-grove-view-playground",
+    "area": "West",
+    "lat": 1.3129417,
+    "lon": 103.7813696
+  },
+  {
+    "name": "Holland Village Park",
+    "url": "https://www.nparks.gov.sg/visit/parks/park-detail/holland-village-park",
+    "area": "Central",
+    "lat": 1.3116727771,
+    "lon": 103.795633288
+  },
+  {
+    "name": "Hong Lim Park",
+    "url": "https://www.nparks.gov.sg/visit/parks/park-detail/hong-lim-park",
+    "area": "South",
+    "lat": 1.286639,
+    "lon": 103.846578
+  },
+  {
+    "name": "Hooper Road Playground",
+    "url": "https://www.nparks.gov.sg/visit/parks/park-detail/hooper-road-playground",
+    "area": "Central",
+    "lat": 1.3123487047,
+    "lon": 103.8431091914
+  },
+  {
+    "name": "Hoover Park (Lor Pisang Hijau Playground)",
+    "url": "https://www.nparks.gov.sg/visit/parks/park-detail/hoover-park-(lor-pisang-hijau-playground)",
+    "area": "West",
+    "lat": 1.3438613043,
+    "lon": 103.7730429704
+  },
+  {
+    "name": "HortPark",
+    "url": "https://www.nparks.gov.sg/visit/parks/park-detail/hortpark",
+    "area": "",
+    "lat": 1.2786306576,
+    "lon": 103.8014811878
+  },
+  {
+    "name": "Hougang Avenue 3 Park Connector",
+    "url": "https://pcn.nparks.gov.sg/hougang-avenue-3-pc/",
+    "area": "",
+    "lat": null,
+    "lon": null
+  },
+  {
+    "name": "How Sun Drive Linear Park",
+    "url": "https://www.nparks.gov.sg/visit/parks/park-detail/how-sun-drive-linear-park",
+    "area": "East",
+    "lat": 1.3445903,
+    "lon": 103.8789275
+  },
+  {
+    "name": "Hua Guan Crescent Playground",
+    "url": "https://www.nparks.gov.sg/visit/parks/park-detail/hua-guan-crescent-playground",
+    "area": "West",
+    "lat": 1.342622,
+    "lon": 103.863115
+  },
+  {
+    "name": "Irau Drive Playground",
+    "url": "https://www.nparks.gov.sg/visit/parks/park-detail/irau-drive-playground",
+    "area": "North",
+    "lat": 1.4620942,
+    "lon": 103.8398482
+  },
+  {
+    "name": "Istana Park",
+    "url": "https://www.nparks.gov.sg/visit/parks/park-detail/istana-park",
+    "area": "Central",
+    "lat": 1.2992639999,
+    "lon": 103.843839
+  },
+  {
+    "name": "Jalan Angin Laut Playground",
+    "url": "https://www.nparks.gov.sg/visit/parks/park-detail/jalan-angin-laut-playground",
+    "area": "East",
+    "lat": 1.3371555,
+    "lon": 103.9562296
+  },
+  {
+    "name": "Jalan Awang Interim Park",
+    "url": "https://www.nparks.gov.sg/visit/parks/park-detail/jalan-awang-interim-park",
+    "area": "East",
+    "lat": 1.3238827,
+    "lon": 103.9058679
+  },
+  {
+    "name": "Jalan Buloh Perindu Playground",
+    "url": "https://www.nparks.gov.sg/visit/parks/park-detail/jalan-buloh-perindu-playground",
+    "area": "East",
+    "lat": 1.308485722,
+    "lon": 103.919387915
+  },
+  {
+    "name": "Jalan Chempaka Kuning Playground",
+    "url": "https://www.nparks.gov.sg/visit/parks/park-detail/jalan-chempaka-kuning-playground",
+    "area": "East",
+    "lat": 1.3297453,
+    "lon": 103.950175
+  },
+  {
+    "name": "Jalan Daud Interim Park",
+    "url": "https://www.nparks.gov.sg/visit/parks/park-detail/jalan-daud-interim-park",
+    "area": "East",
+    "lat": 1.3255719,
+    "lon": 103.9065035
+  },
+  {
+    "name": "Jalan Daud Park",
+    "url": "https://www.nparks.gov.sg/visit/parks/park-detail/jalan-daud-park",
+    "area": "East",
+    "lat": 1.3258513,
+    "lon": 103.907103
+  },
+  {
+    "name": "Jalan Dermawan Playground",
+    "url": "https://www.nparks.gov.sg/visit/parks/park-detail/jalan-dermawan-playground",
+    "area": "West",
+    "lat": 1.3606369,
+    "lon": 103.7586161
+  },
+  {
+    "name": "Jalan Eunos Interim Park",
+    "url": "https://www.nparks.gov.sg/visit/parks/park-detail/jalan-eunos-interim-park",
+    "area": "East",
+    "lat": 1.3249301,
+    "lon": 103.9060094
+  },
+  {
+    "name": "Jalan Geneng Interim Park",
+    "url": "https://www.nparks.gov.sg/visit/parks/park-detail/jalan-geneng-interim-park",
+    "area": "East",
+    "lat": 1.353338,
+    "lon": 103.8808749999
+  },
+  {
+    "name": "Jalan Ishak Park",
+    "url": "https://www.nparks.gov.sg/visit/parks/park-detail/jalan-ishak-park",
+    "area": "East",
+    "lat": 1.3244054,
+    "lon": 103.9071606
+  },
+  {
+    "name": "Jalan Ismail Park",
+    "url": "https://www.nparks.gov.sg/visit/parks/park-detail/jalan-ismail-park",
+    "area": "East",
+    "lat": 1.3231994,
+    "lon": 103.9058377
+  },
+  {
+    "name": "Jalan Kayu Park",
+    "url": "https://www.nparks.gov.sg/visit/parks/park-detail/jalan-kayu-park",
+    "area": "Central",
+    "lat": 1.3981029,
+    "lon": 103.8728813
+  },
+  {
+    "name": "Jalan Kebaya Playground",
+    "url": "https://www.nparks.gov.sg/visit/parks/park-detail/jalan-kebaya-playground",
+    "area": "West",
+    "lat": 1.3141189,
+    "lon": 103.7803048
+  },
+  {
+    "name": "Jalan Kelichap Playground",
+    "url": "https://www.nparks.gov.sg/visit/parks/park-detail/jalan-kelichap-playground",
+    "area": "East",
+    "lat": 1.3467912,
+    "lon": 103.8818265
+  },
+  {
+    "name": "Jalan Limau Kasturi Open Space",
+    "url": "https://www.nparks.gov.sg/visit/parks/park-detail/jalan-limau-kasturi-open-space",
+    "area": "East",
+    "lat": 1.3244495,
+    "lon": 103.9462287
+  },
+  {
+    "name": "Jalan Limau Kasturi Playground",
+    "url": "https://www.nparks.gov.sg/visit/parks/park-detail/jalan-limau-kasturi-playground",
+    "area": "East",
+    "lat": 1.3239803,
+    "lon": 103.9463833
+  },
+  {
+    "name": "Jalan Limau Manis Playground",
+    "url": "https://www.nparks.gov.sg/visit/parks/park-detail/jalan-limau-manis-playground",
+    "area": "East",
+    "lat": 1.3247255,
+    "lon": 103.9490542
+  },
+  {
+    "name": "Jalan Mas Kuning Playground",
+    "url": "https://www.nparks.gov.sg/visit/parks/park-detail/jalan-mas-kuning-playground",
+    "area": "West",
+    "lat": 1.307831,
+    "lon": 103.763558
+  },
+  {
+    "name": "Jalan Mas Puteh Playground",
+    "url": "https://www.nparks.gov.sg/visit/parks/park-detail/jalan-mas-puteh-playground",
+    "area": "West",
+    "lat": 1.308995,
+    "lon": 103.761987
+  },
+  {
+    "name": "Jalan Naung Playground",
+    "url": "https://www.nparks.gov.sg/visit/parks/park-detail/jalan-naung-playground",
+    "area": "East",
+    "lat": 1.3695629999,
+    "lon": 103.892822
+  },
+  {
+    "name": "Jalan Pari Burong Playground",
+    "url": "https://www.nparks.gov.sg/visit/parks/park-detail/jalan-pari-burong-playground",
+    "area": "East",
+    "lat": 1.3338263,
+    "lon": 103.9469418
+  },
+  {
+    "name": "Jalan Pari Dedap Playground",
+    "url": "https://www.nparks.gov.sg/visit/parks/park-detail/jalan-pari-dedap-playground",
+    "area": "East",
+    "lat": 1.3329985,
+    "lon": 103.9439097
+  },
+  {
+    "name": "Jalan Pelatok Park",
+    "url": "https://www.nparks.gov.sg/visit/parks/park-detail/jalan-pelatok-park",
+    "area": "East",
+    "lat": 1.3461458,
+    "lon": 103.960269
+  },
+  {
+    "name": "Jalan Pelikat Park Connector",
+    "url": "https://pcn.nparks.gov.sg/jalan-pelikat-pc/",
+    "area": "",
+    "lat": null,
+    "lon": null
+  },
+  {
+    "name": "Jalan Pintau Playground",
+    "url": "https://www.nparks.gov.sg/visit/parks/park-detail/jalan-pintau-playground",
+    "area": "Central",
+    "lat": 1.3540358,
+    "lon": 103.8399449
+  },
+  {
+    "name": "Jalan Rasok Park",
+    "url": "https://www.nparks.gov.sg/visit/parks/park-detail/jalan-rasok-park",
+    "area": "West",
+    "lat": 1.4165855011,
+    "lon": 103.759033647
+  },
+  {
+    "name": "Jalan Remaja Interim Park",
+    "url": "https://www.nparks.gov.sg/visit/parks/park-detail/jalan-remaja-interim-park",
+    "area": "West",
+    "lat": 1.3575468,
+    "lon": 103.760787
+  },
+  {
+    "name": "Jalan Riang Playground",
+    "url": "https://www.nparks.gov.sg/visit/parks/park-detail/jalan-riang-playground",
+    "area": "",
+    "lat": 1.3471311,
+    "lon": 103.8673685
+  },
+  {
+    "name": "Jalan Selaseh Playground",
+    "url": "https://www.nparks.gov.sg/visit/parks/park-detail/jalan-selaseh-playground",
+    "area": "Central",
+    "lat": 1.3856054,
+    "lon": 103.8733811
+  },
+  {
+    "name": "Jalan Sembilang\u00a0Park",
+    "url": "https://www.nparks.gov.sg/visit/parks/park-detail/jalan-sembilang-park",
+    "area": "Central",
+    "lat": 1.356563,
+    "lon": 103.8340255
+  },
+  {
+    "name": "Jalan Senang Linear Park",
+    "url": "https://www.nparks.gov.sg/visit/parks/park-detail/jalan-senang-linear-park",
+    "area": "East",
+    "lat": 1.3255724,
+    "lon": 103.9171843
+  },
+  {
+    "name": "Jalan Senang Playground",
+    "url": "https://www.nparks.gov.sg/visit/parks/park-detail/jalan-senang-playground",
+    "area": "East",
+    "lat": 1.328967,
+    "lon": 103.9156278
+  },
+  {
+    "name": "Jalan Sendudok Park",
+    "url": "https://www.nparks.gov.sg/visit/parks/park-detail/jalan-sendudok-park",
+    "area": "North",
+    "lat": 1.4438059,
+    "lon": 103.8272027
+  },
+  {
+    "name": "Jalan Singa Park",
+    "url": "https://www.nparks.gov.sg/visit/parks/park-detail/jalan-singa-park",
+    "area": "East",
+    "lat": 1.3309538,
+    "lon": 103.9069101
+  },
+  {
+    "name": "Jalan Tekukor Playground",
+    "url": "https://www.nparks.gov.sg/visit/parks/park-detail/jalan-tekukor-playground",
+    "area": "",
+    "lat": 1.346151053,
+    "lon": 103.7667721287
+  },
+  {
+    "name": "Jalan Yasin Interim Park",
+    "url": "https://www.nparks.gov.sg/visit/parks/park-detail/jalan-yasin-interim-park",
+    "area": "East",
+    "lat": 1.3213782,
+    "lon": 103.9055273
+  },
+  {
+    "name": "Jambol Place Park",
+    "url": "https://www.nparks.gov.sg/visit/parks/park-detail/jambol-place-park",
+    "area": "West",
+    "lat": 1.279109,
+    "lon": 103.7901835
+  },
+  {
+    "name": "Janggus Garden",
+    "url": "https://www.nparks.gov.sg/visit/parks/park-detail/janggus-garden",
+    "area": "North",
+    "lat": 1.4575292,
+    "lon": 103.836996
+  },
+  {
+    "name": "Joo Chiat Terrace Park",
+    "url": "https://www.nparks.gov.sg/visit/parks/park-detail/joo-chiat-terrace-park",
+    "area": "East",
+    "lat": 1.3143828,
+    "lon": 103.9017352
+  },
+  {
+    "name": "Jupiter Playground",
+    "url": "https://www.nparks.gov.sg/visit/parks/park-detail/jupiter-playground",
+    "area": "Central",
+    "lat": 1.358262,
+    "lon": 103.825203
+  },
+  {
+    "name": "Jurong Central Park",
+    "url": "https://www.nparks.gov.sg/visit/parks/park-detail/jurong-central-park",
+    "area": "West",
+    "lat": 1.3380169999,
+    "lon": 103.7078759999
+  },
+  {
+    "name": "Jurong Lake Gardens",
+    "url": "https://juronglakegardens.nparks.gov.sg/",
+    "area": "West",
+    "lat": null,
+    "lon": null
+  },
+  {
+    "name": "Jurong Park Connector",
+    "url": "https://pcn.nparks.gov.sg/jurong-pc/",
+    "area": "",
+    "lat": null,
+    "lon": null
+  },
+  {
+    "name": "Jurong West Park Connector",
+    "url": "https://pcn.nparks.gov.sg/jurong-west-pc/",
+    "area": "",
+    "lat": null,
+    "lon": null
+  },
+  {
+    "name": "Kallang Park Connector",
+    "url": "https://pcn.nparks.gov.sg/kallang-pc/",
+    "area": "",
+    "lat": null,
+    "lon": null
+  },
+  {
+    "name": "Kallang Riverside Park",
+    "url": "https://www.nparks.gov.sg/visit/parks/park-detail/kallang-riverside-park",
+    "area": "South",
+    "lat": 1.30723,
+    "lon": 103.8683257
+  },
+  {
+    "name": "Kampong Glam Park",
+    "url": "https://www.nparks.gov.sg/visit/parks/park-detail/kampong-glam-park",
+    "area": "Central",
+    "lat": 1.3026644,
+    "lon": 103.8629867
+  },
+  {
+    "name": "Kandis Garden",
+    "url": "https://www.nparks.gov.sg/visit/parks/park-detail/kandis-garden",
+    "area": "North",
+    "lat": 1.4561841,
+    "lon": 103.8356894
+  },
+  {
+    "name": "Katong Park",
+    "url": "https://www.nparks.gov.sg/visit/parks/park-detail/katong-park",
+    "area": "",
+    "lat": 1.2971749999,
+    "lon": 103.886367
+  },
+  {
+    "name": "Kemuning Park",
+    "url": "https://www.nparks.gov.sg/visit/parks/park-detail/kemuning-park",
+    "area": "North",
+    "lat": 1.4392933,
+    "lon": 103.82695
+  },
+  {
+    "name": "Kent Ridge Park",
+    "url": "https://www.nparks.gov.sg/visit/parks/park-detail/kent-ridge-park",
+    "area": "South",
+    "lat": 1.284353,
+    "lon": 103.790319
+  },
+  {
+    "name": "Kew Avenue Playground",
+    "url": "https://www.nparks.gov.sg/visit/parks/park-detail/kew-avenue-playground",
+    "area": "East",
+    "lat": 1.3216265,
+    "lon": 103.9484504
+  },
+  {
+    "name": "Kew Crescent Playground",
+    "url": "https://www.nparks.gov.sg/visit/parks/park-detail/kew-crescent-playground",
+    "area": "East",
+    "lat": 1.3192877,
+    "lon": 103.9485392
+  },
+  {
+    "name": "Kew Drive Playground",
+    "url": "https://www.nparks.gov.sg/visit/parks/park-detail/kew-drive-playground",
+    "area": "East",
+    "lat": 1.3207509,
+    "lon": 103.9517497
+  },
+  {
+    "name": "Khatib Bongsu (Opposite Bank) Park Connector",
+    "url": "https://pcn.nparks.gov.sg/khatib-bongsu-opp-bank-pc/",
+    "area": "",
+    "lat": null,
+    "lon": null
+  },
+  {
+    "name": "Khatib Bongsu Park Connector",
+    "url": "https://pcn.nparks.gov.sg/khatib-bongsu-pc/",
+    "area": "",
+    "lat": null,
+    "lon": null
+  },
+  {
+    "name": "Kheam Hock Park",
+    "url": "https://www.nparks.gov.sg/visit/parks/park-detail/kheam-hock-park",
+    "area": "West",
+    "lat": 1.322853,
+    "lon": 103.8199113
+  },
+  {
+    "name": "Kim Pong Park",
+    "url": "https://www.nparks.gov.sg/visit/parks/park-detail/kim-pong-park",
+    "area": "Central",
+    "lat": 1.2836022,
+    "lon": 103.8297475
+  },
+  {
+    "name": "Kim Seng Park",
+    "url": "https://www.nparks.gov.sg/visit/parks/park-detail/kim-seng-park",
+    "area": "Central",
+    "lat": 1.2928402,
+    "lon": 103.8349573
+  },
+  {
+    "name": "King's Drive Playground",
+    "url": "https://www.nparks.gov.sg/visit/parks/park-detail/king's-drive-playground",
+    "area": "West",
+    "lat": 1.3190940681,
+    "lon": 103.8060631246
+  },
+  {
+    "name": "King's Road Park",
+    "url": "https://www.nparks.gov.sg/visit/parks/park-detail/king's-road-park",
+    "area": "West",
+    "lat": 1.3168182,
+    "lon": 103.8048611
+  },
+  {
+    "name": "Koon Seng Park",
+    "url": "https://www.nparks.gov.sg/visit/parks/park-detail/koon-seng-park",
+    "area": "",
+    "lat": 1.311048077,
+    "lon": 103.9028344248
+  },
+  {
+    "name": "Kranji Marshes",
+    "url": "https://www.nparks.gov.sg/visit/parks/park-detail/kranji-marshes",
+    "area": "North",
+    "lat": 1.420227,
+    "lon": 103.719891
+  },
+  {
+    "name": "Kranji Reservoir Park",
+    "url": "https://www.nparks.gov.sg/visit/parks/park-detail/kranji-reservoir-park",
+    "area": "North",
+    "lat": 1.4388059999,
+    "lon": 103.7400569999
+  },
+  {
+    "name": "Labrador Nature Reserve and Nature Park",
+    "url": "https://www.nparks.gov.sg/visit/parks/park-detail/labrador-nature-reserve",
+    "area": "South",
+    "lat": 1.2657609999,
+    "lon": 103.803133
+  },
+  {
+    "name": "Lakeside Grove Fitness Corner",
+    "url": "https://www.nparks.gov.sg/visit/parks/park-detail/lakeside-grove-fitness-corner",
+    "area": "West",
+    "lat": 1.340005,
+    "lon": 103.717436
+  },
+  {
+    "name": "Lakeside Grove Playground",
+    "url": "https://www.nparks.gov.sg/visit/parks/park-detail/lakeside-grove-playground",
+    "area": "West",
+    "lat": 1.340082,
+    "lon": 103.718612
+  },
+  {
+    "name": "Leban Park",
+    "url": "https://www.nparks.gov.sg/visit/parks/park-detail/leban-park",
+    "area": "North",
+    "lat": 1.37253,
+    "lon": 103.8292574
+  },
+  {
+    "name": "Legundi Park",
+    "url": "https://www.nparks.gov.sg/visit/parks/park-detail/legundi-park",
+    "area": "North",
+    "lat": 1.4411586,
+    "lon": 103.8220865
+  },
+  {
+    "name": "Lengkong Enam Park",
+    "url": "https://www.nparks.gov.sg/visit/parks/park-detail/lengkong-enam-park",
+    "area": "",
+    "lat": 1.3273639999,
+    "lon": 103.914737
+  },
+  {
+    "name": "Lentor Green Playground",
+    "url": "https://www.nparks.gov.sg/visit/parks/park-detail/lentor-green-playground",
+    "area": "Central",
+    "lat": 1.3852475,
+    "lon": 103.8370407
+  },
+  {
+    "name": "Lentor Grove Playground",
+    "url": "https://www.nparks.gov.sg/visit/parks/park-detail/lentor-grove-playground",
+    "area": "Central",
+    "lat": 1.3863847,
+    "lon": 103.8383359
+  },
+  {
+    "name": "Lentor Road Playground",
+    "url": "https://www.nparks.gov.sg/visit/parks/park-detail/lentor-road-playground",
+    "area": "Central",
+    "lat": 1.3883112,
+    "lon": 103.8375742
+  },
+  {
+    "name": "Lentor Street Playground",
+    "url": "https://www.nparks.gov.sg/visit/parks/park-detail/lentor-street-playground",
+    "area": "Central",
+    "lat": 1.3900968,
+    "lon": 103.8342895
+  },
+  {
+    "name": "Lentor Vale Playground",
+    "url": "https://www.nparks.gov.sg/visit/parks/park-detail/lentor-vale-playground",
+    "area": "Central",
+    "lat": 1.3879942,
+    "lon": 103.8361415
+  },
+  {
+    "name": "Lentor Walk Playground",
+    "url": "https://www.nparks.gov.sg/visit/parks/park-detail/lentor-walk-playground",
+    "area": "Central",
+    "lat": 1.3886055,
+    "lon": 103.8383798
+  },
+  {
+    "name": "Lilac Drive Playground",
+    "url": "https://www.nparks.gov.sg/visit/parks/park-detail/lilac-drive-playground",
+    "area": "Central",
+    "lat": 1.3811555,
+    "lon": 103.8609421
+  },
+  {
+    "name": "Limau Garden Playground",
+    "url": "https://www.nparks.gov.sg/visit/parks/park-detail/limau-garden-playground",
+    "area": "East",
+    "lat": 1.3224681,
+    "lon": 103.9507337
+  },
+  {
+    "name": "Limau Villas Playground",
+    "url": "https://www.nparks.gov.sg/visit/parks/park-detail/limau-villas-playground",
+    "area": "East",
+    "lat": 1.3238586,
+    "lon": 103.9504461
+  },
+  {
+    "name": "Lornie Park Connector",
+    "url": "https://pcn.nparks.gov.sg/lornie-pc/",
+    "area": "",
+    "lat": null,
+    "lon": null
+  },
+  {
+    "name": "Lorong 40 Geylang Playground",
+    "url": "https://www.nparks.gov.sg/visit/parks/park-detail/lorong-40-geylang-playground",
+    "area": "East",
+    "lat": 1.3136462,
+    "lon": 103.8893636
+  },
+  {
+    "name": "Lorong Halus Park Connector",
+    "url": "https://pcn.nparks.gov.sg/lorong-halus-pc/",
+    "area": "",
+    "lat": null,
+    "lon": null
+  },
+  {
+    "name": "Lorong Kemunchup Playground",
+    "url": "https://www.nparks.gov.sg/visit/parks/park-detail/lorong-kemunchup-playground",
+    "area": "West",
+    "lat": 1.3603956,
+    "lon": 103.7609353
+  },
+  {
+    "name": "Lorong Marican Park",
+    "url": "https://www.nparks.gov.sg/visit/parks/park-detail/lorong-marican-park",
+    "area": "East",
+    "lat": 1.324041,
+    "lon": 103.907887
+  },
+  {
+    "name": "Lorong Marzuki Park",
+    "url": "https://www.nparks.gov.sg/visit/parks/park-detail/lorong-marzuki-park",
+    "area": "East",
+    "lat": 1.3237975,
+    "lon": 103.9083401
+  },
+  {
+    "name": "Lorong Melayu Park",
+    "url": "https://www.nparks.gov.sg/visit/parks/park-detail/lorong-melayu-park",
+    "area": "East",
+    "lat": 1.3239931,
+    "lon": 103.9092645
+  },
+  {
+    "name": "Lorong N Telok Kurau Park",
+    "url": "https://www.nparks.gov.sg/visit/parks/park-detail/lorong-n-telok-kurau-park",
+    "area": "East",
+    "lat": 1.3103253,
+    "lon": 103.9128049
+  },
+  {
+    "name": "Lorong Ong Lye Park",
+    "url": "https://www.nparks.gov.sg/visit/parks/park-detail/lorong-ong-lye-park",
+    "area": "East",
+    "lat": 1.3478912,
+    "lon": 103.8788815
+  },
+  {
+    "name": "Lorong Sarina Interim Park",
+    "url": "https://www.nparks.gov.sg/visit/parks/park-detail/lorong-sarina-interim-park",
+    "area": "East",
+    "lat": 1.3201475,
+    "lon": 103.9061032
+  },
+  {
+    "name": "Lorong Tanggam Park",
+    "url": "https://www.nparks.gov.sg/visit/parks/park-detail/lorong-tanggam-park",
+    "area": "Central",
+    "lat": 1.3990162,
+    "lon": 103.8737999
+  },
+  {
+    "name": "Lower Peirce Reservoir Park",
+    "url": "https://www.nparks.gov.sg/visit/parks/park-detail/lower-peirce-reservoir-park",
+    "area": "North",
+    "lat": 1.3690649999,
+    "lon": 103.8262959999
+  },
+  {
+    "name": "Lower Seletar Reservoir Park",
+    "url": "https://www.nparks.gov.sg/visit/parks/park-detail/lower-seletar-reservoir-park",
+    "area": "North",
+    "lat": 1.409974,
+    "lon": 103.832171
+  },
+  {
+    "name": "Lower Seletar Reservoir Park Connector",
+    "url": "https://pcn.nparks.gov.sg/lower-seletar-reservoir-pc/",
+    "area": "",
+    "lat": null,
+    "lon": null
+  },
+  {
+    "name": "Loyang Park Connector",
+    "url": "https://pcn.nparks.gov.sg/loyang-pc/",
+    "area": "",
+    "lat": null,
+    "lon": null
+  },
+  {
+    "name": "Loyang View Playground",
+    "url": "https://www.nparks.gov.sg/visit/parks/park-detail/loyang-view-playground",
+    "area": "East",
+    "lat": 1.3634676,
+    "lon": 103.9664003
+  },
+  {
+    "name": "Lucky Gardens Playground",
+    "url": "https://www.nparks.gov.sg/visit/parks/park-detail/lucky-gardens-playground",
+    "area": "East",
+    "lat": 1.3192546778,
+    "lon": 103.9414575331
+  },
+  {
+    "name": "Luxus Hills Park",
+    "url": "https://www.nparks.gov.sg/visit/parks/park-detail/luxus-hills-park",
+    "area": "Central",
+    "lat": 1.3795263,
+    "lon": 103.8750323
+  },
+  {
+    "name": "Macpherson Linear Park",
+    "url": "https://www.nparks.gov.sg/visit/parks/park-detail/macpherson-linear-park",
+    "area": "East",
+    "lat": 1.3329194,
+    "lon": 103.8819256
+  },
+  {
+    "name": "Malcolm Park",
+    "url": "https://www.nparks.gov.sg/visit/parks/park-detail/malcolm-park",
+    "area": "Central",
+    "lat": 1.3225962,
+    "lon": 103.8268055
+  },
+  {
+    "name": "Mandai Park Connector",
+    "url": "https://pcn.nparks.gov.sg/mandai-pc/",
+    "area": "",
+    "lat": null,
+    "lon": null
+  },
+  {
+    "name": "Maple Lane Park",
+    "url": "https://www.nparks.gov.sg/visit/parks/park-detail/maple-lane-park",
+    "area": "West",
+    "lat": 1.3301757,
+    "lon": 103.7927073
+  },
+  {
+    "name": "Mar Thoma Road Park",
+    "url": "https://www.nparks.gov.sg/visit/parks/park-detail/mar-thoma-road-park",
+    "area": "Central",
+    "lat": 1.327438,
+    "lon": 103.862092
+  },
+  {
+    "name": "Mariam Walk Playground",
+    "url": "https://www.nparks.gov.sg/visit/parks/park-detail/mariam-walk-playground",
+    "area": "East",
+    "lat": 1.3595399,
+    "lon": 103.9685503
+  },
+  {
+    "name": "Mariam Way Playground",
+    "url": "https://www.nparks.gov.sg/visit/parks/park-detail/mariam-way-playground",
+    "area": "East",
+    "lat": 1.3619645,
+    "lon": 103.9661896
+  },
+  {
+    "name": "Marine Parade Road Park",
+    "url": "https://www.nparks.gov.sg/visit/parks/park-detail/marine-parade-road-park",
+    "area": "East",
+    "lat": 1.3052997,
+    "lon": 103.908931
+  },
+  {
+    "name": "Market Street Park",
+    "url": "https://www.nparks.gov.sg/visit/parks/park-detail/market-street-park",
+    "area": "Central",
+    "lat": null,
+    "lon": null
+  },
+  {
+    "name": "Marsiling Park",
+    "url": "https://www.nparks.gov.sg/visit/parks/park-detail/marsiling-park",
+    "area": "North",
+    "lat": 1.437633,
+    "lon": 103.7699339999
+  },
+  {
+    "name": "Marsiling Park Connector",
+    "url": "https://pcn.nparks.gov.sg/marsiling-pc/",
+    "area": "",
+    "lat": null,
+    "lon": null
+  },
+  {
+    "name": "Mayfair Park",
+    "url": "https://www.nparks.gov.sg/visit/parks/park-detail/mayfair-park",
+    "area": "West",
+    "lat": 1.341396,
+    "lon": 103.7808949999
+  },
+  {
+    "name": "Mayflower Crescent Park",
+    "url": "https://www.nparks.gov.sg/visit/parks/park-detail/mayflower-crescent-park",
+    "area": "North",
+    "lat": 1.3727241,
+    "lon": 103.8395454
+  },
+  {
+    "name": "Mei Hwan Crescent Playground",
+    "url": "https://www.nparks.gov.sg/visit/parks/park-detail/mei-hwan-crescent-playground",
+    "area": "East",
+    "lat": 1.352767,
+    "lon": 103.8617429999
+  },
+  {
+    "name": "Mei Hwan Drive Playground",
+    "url": "https://www.nparks.gov.sg/visit/parks/park-detail/mei-hwan-drive-playground",
+    "area": "East",
+    "lat": 1.35335,
+    "lon": 103.863473
+  },
+  {
+    "name": "Meng Suan Interim Park",
+    "url": "https://www.nparks.gov.sg/visit/parks/park-detail/meng-suan-interim-park",
+    "area": "North",
+    "lat": null,
+    "lon": null
+  },
+  {
+    "name": "Mera Terrace Playground",
+    "url": "https://www.nparks.gov.sg/visit/parks/park-detail/mera-terrace-playground",
+    "area": "East",
+    "lat": 1.3473984,
+    "lon": 103.9635199
+  },
+  {
+    "name": "Meragi Road Playground",
+    "url": "https://www.nparks.gov.sg/visit/parks/park-detail/meragi-road-playground",
+    "area": "East",
+    "lat": 1.3443835,
+    "lon": 103.9602827
+  },
+  {
+    "name": "Meyer Road Playground",
+    "url": "https://www.nparks.gov.sg/visit/parks/park-detail/meyer-road-playground",
+    "area": "East",
+    "lat": 1.2985703,
+    "lon": 103.8942038
+  },
+  {
+    "name": "Mimosa Road Playground",
+    "url": "https://www.nparks.gov.sg/visit/parks/park-detail/mimosa-road-playground",
+    "area": "Central",
+    "lat": 1.3842722,
+    "lon": 103.8628709
+  },
+  {
+    "name": "Mimosa Terrace Playground",
+    "url": "https://www.nparks.gov.sg/visit/parks/park-detail/mimosa-terrace-playground",
+    "area": "Central",
+    "lat": 1.3840295,
+    "lon": 103.8604272
+  },
+  {
+    "name": "Mimosa Walk Playground",
+    "url": "https://www.nparks.gov.sg/visit/parks/park-detail/mimosa-walk-playground",
+    "area": "Central",
+    "lat": 1.3830834,
+    "lon": 103.861451
+  },
+  {
+    "name": "Mount Emily Park",
+    "url": "https://www.nparks.gov.sg/visit/parks/park-detail/mount-emily-park",
+    "area": "Central",
+    "lat": 1.3044508339,
+    "lon": 103.8476399129
+  },
+  {
+    "name": "Mount Faber Park",
+    "url": "https://www.nparks.gov.sg/visit/parks/park-detail/mount-faber-park",
+    "area": "South",
+    "lat": 1.275281,
+    "lon": 103.818222
+  },
+  {
+    "name": "Mount Sinai Plain Playground",
+    "url": "https://www.nparks.gov.sg/visit/parks/park-detail/mount-sinai-plain-playground",
+    "area": "West",
+    "lat": 1.3157278,
+    "lon": 103.7812114
+  },
+  {
+    "name": "Mountbatten Road/Old Airport Road Open Space",
+    "url": "https://www.nparks.gov.sg/visit/parks/park-detail/mountbatten-road-old-airport-road-open-space",
+    "area": "East",
+    "lat": 1.305812,
+    "lon": 103.8832499
+  },
+  {
+    "name": "Mugliston Park Playground",
+    "url": "https://www.nparks.gov.sg/visit/parks/park-detail/mugliston-park-playground",
+    "area": "Central",
+    "lat": 1.3854212,
+    "lon": 103.8778927
+  },
+  {
+    "name": "Namly Park",
+    "url": "https://www.nparks.gov.sg/visit/parks/park-detail/namly-park",
+    "area": "West",
+    "lat": 1.3233717,
+    "lon": 103.7979232
+  },
+  {
+    "name": "Neram Crescent Playground",
+    "url": "https://www.nparks.gov.sg/visit/parks/park-detail/neram-crescent-playground",
+    "area": "Central",
+    "lat": 1.3855886,
+    "lon": 103.8657442
+  },
+  {
+    "name": "Nim Crescent Open Space",
+    "url": "https://www.nparks.gov.sg/visit/parks/park-detail/nim-crescent-open-space",
+    "area": "Central",
+    "lat": 1.3830686,
+    "lon": 103.8668426
+  },
+  {
+    "name": "Nim Meadow Park",
+    "url": "https://www.nparks.gov.sg/visit/parks/park-detail/nim-meadow-park",
+    "area": "Central",
+    "lat": 1.3786386,
+    "lon": 103.8633381
+  },
+  {
+    "name": "North Bridge Garden",
+    "url": "https://www.nparks.gov.sg/visit/parks/park-detail/north-bridge-garden",
+    "area": "Central",
+    "lat": 1.3041267,
+    "lon": 103.8621836
+  },
+  {
+    "name": "North Eastern Riverine Loop",
+    "url": "https://pcn.nparks.gov.sg/the-pcn-experience/nerl/",
+    "area": "",
+    "lat": null,
+    "lon": null
+  },
+  {
+    "name": "Northern Explorer Loop",
+    "url": "https://pcn.nparks.gov.sg/the-pcn-experience/nel/",
+    "area": "",
+    "lat": null,
+    "lon": null
+  },
+  {
+    "name": "Novena Park",
+    "url": "https://www.nparks.gov.sg/visit/parks/park-detail/novena-park",
+    "area": "Central",
+    "lat": 1.322292028,
+    "lon": 103.8428185334
+  },
+  {
+    "name": "Novena Rise Park",
+    "url": "https://www.nparks.gov.sg/visit/parks/park-detail/novena-rise-park",
+    "area": "Central",
+    "lat": 1.3246991474,
+    "lon": 103.8429017519
+  },
+  {
+    "name": "Oasis@Mulberry Park",
+    "url": "https://www.nparks.gov.sg/visit/parks/park-detail/oasis-mulberry-park",
+    "area": "Central",
+    "lat": 1.3327984,
+    "lon": 103.8784323
+  },
+  {
+    "name": "Old Upper Thomson Park Connector",
+    "url": "https://pcn.nparks.gov.sg/old-upper-thomson-pc/",
+    "area": "",
+    "lat": null,
+    "lon": null
+  },
+  {
+    "name": "Onan Road Green Space",
+    "url": "https://www.nparks.gov.sg/visit/parks/park-detail/onan-road-green-space",
+    "area": "East",
+    "lat": 1.3100971,
+    "lon": 103.9007194
+  },
+  {
+    "name": "one-north Park",
+    "url": "https://www.nparks.gov.sg/visit/parks/park-detail/one-north-park",
+    "area": "West",
+    "lat": 1.3030535258,
+    "lon": 103.7907730723
+  },
+  {
+    "name": "Opera Estate Football Field",
+    "url": "https://www.nparks.gov.sg/visit/parks/park-detail/opera-estate-football-field",
+    "area": "East",
+    "lat": 1.320101,
+    "lon": 103.924455999
+  },
+  {
+    "name": "Orchard Fountain Corner",
+    "url": "https://www.nparks.gov.sg/visit/parks/park-detail/orchard-fountain-corner",
+    "area": "South",
+    "lat": 1.301587,
+    "lon": 103.8376109999
+  },
+  {
+    "name": "Orchid Village Playground",
+    "url": "https://www.nparks.gov.sg/visit/parks/park-detail/orchid-village-playground",
+    "area": "West",
+    "lat": 1.3357266,
+    "lon": 103.8017778
+  },
+  {
+    "name": "Pandan Gardens Park Connector",
+    "url": "https://pcn.nparks.gov.sg/pandan-gardens-pc/",
+    "area": "",
+    "lat": null,
+    "lon": null
+  },
+  {
+    "name": "Pang Sua Park Connector",
+    "url": "https://pcn.nparks.gov.sg/pang-sua-pc/",
+    "area": "",
+    "lat": null,
+    "lon": null
+  },
+  {
+    "name": "Park @ Sembawang Alley",
+    "url": "https://www.nparks.gov.sg/visit/parks/park-detail/park---sembawang-alley",
+    "area": "North",
+    "lat": 1.4487238,
+    "lon": 103.8190031
+  },
+  {
+    "name": "Park Villas Terrace Playground",
+    "url": "https://www.nparks.gov.sg/visit/parks/park-detail/park-villas-terrace-playground",
+    "area": "East",
+    "lat": 1.3689819999,
+    "lon": 103.880039
+  },
+  {
+    "name": "Parry Avenue Interim Park",
+    "url": "https://www.nparks.gov.sg/visit/parks/park-detail/parry-avenue-interim-park",
+    "area": "East",
+    "lat": 1.3640729999,
+    "lon": 103.881277999
+  },
+  {
+    "name": "Parry Road Playground",
+    "url": "https://www.nparks.gov.sg/visit/parks/park-detail/parry-road-playground",
+    "area": "East",
+    "lat": 1.366029,
+    "lon": 103.877504
+  },
+  {
+    "name": "Pasir Panjang Park",
+    "url": "https://www.nparks.gov.sg/visit/parks/park-detail/pasir-panjang-park",
+    "area": "South",
+    "lat": 1.27562937,
+    "lon": 103.7920199612
+  },
+  {
+    "name": "Pasir Ris Park",
+    "url": "https://www.nparks.gov.sg/visit/parks/park-detail/pasir-ris-park",
+    "area": "East",
+    "lat": 1.378684,
+    "lon": 103.9521729999
+  },
+  {
+    "name": "Pasir Ris Park Connector",
+    "url": "https://pcn.nparks.gov.sg/pasir-ris-pc/",
+    "area": "",
+    "lat": null,
+    "lon": null
+  },
+  {
+    "name": "Pasir Ris Town Park",
+    "url": "https://www.nparks.gov.sg/visit/parks/park-detail/pasir-ris-town-park",
+    "area": "East",
+    "lat": 1.37169,
+    "lon": 103.9523779999
+  },
+  {
+    "name": "Pavilion Park Playground",
+    "url": "https://www.nparks.gov.sg/visit/parks/park-detail/pavilion-park-playground",
+    "area": "West",
+    "lat": 1.3722856747,
+    "lon": 103.7519772922
+  },
+  {
+    "name": "Pavilion Playground II",
+    "url": "https://www.nparks.gov.sg/visit/parks/park-detail/pavilion-playground-ii",
+    "area": "West",
+    "lat": 1.3682502412,
+    "lon": 103.7533137758
+  },
+  {
+    "name": "Paya Lebar Crescent Open Space",
+    "url": "https://www.nparks.gov.sg/visit/parks/park-detail/paya-lebar-crescent-open-space",
+    "area": "East",
+    "lat": 1.3490128,
+    "lon": 103.8835761
+  },
+  {
+    "name": "Paya Lebar Park Connector",
+    "url": "https://pcn.nparks.gov.sg/paya-lebar-pc/",
+    "area": "",
+    "lat": null,
+    "lon": null
+  },
+  {
+    "name": "Paya Lebar Road Park",
+    "url": "https://www.nparks.gov.sg/visit/parks/park-detail/paya-lebar-road-park",
+    "area": "East",
+    "lat": null,
+    "lon": null
+  },
+  {
+    "name": "Pearl's Hill City Park",
+    "url": "https://www.nparks.gov.sg/visit/parks/park-detail/pearls-hill-city-park",
+    "area": "South",
+    "lat": 1.2836837,
+    "lon": 103.8400483
+  },
+  {
+    "name": "Pebble Garden",
+    "url": "https://www.nparks.gov.sg/visit/parks/park-detail/pebble-garden",
+    "area": "North",
+    "lat": 1.4506414,
+    "lon": 103.8294905
+  },
+  {
+    "name": "Pek Kio Park",
+    "url": "https://www.nparks.gov.sg/visit/parks/park-detail/pek-kio-park",
+    "area": "Central",
+    "lat": 1.316071,
+    "lon": 103.8492087
+  },
+  {
+    "name": "Pelton Canal Park Connector",
+    "url": "https://pcn.nparks.gov.sg/pelton-canal-pc/",
+    "area": "",
+    "lat": null,
+    "lon": null
+  },
+  {
+    "name": "Pemimpin Place Playground",
+    "url": "https://www.nparks.gov.sg/visit/parks/park-detail/pemimpin-place-playground",
+    "area": "Central",
+    "lat": 1.3533155,
+    "lon": 103.8427575
+  },
+  {
+    "name": "Penang Road Open Space",
+    "url": "https://www.nparks.gov.sg/visit/parks/park-detail/penang-road-open-space",
+    "area": "",
+    "lat": 1.3000969999,
+    "lon": 103.841238
+  },
+  {
+    "name": "Pesari Walk Playground",
+    "url": "https://www.nparks.gov.sg/visit/parks/park-detail/pesari-walk-playground",
+    "area": "East",
+    "lat": 1.3244336,
+    "lon": 103.9539859
+  },
+  {
+    "name": "Phoenix Heights Playground",
+    "url": "https://www.nparks.gov.sg/visit/parks/park-detail/phoenix-heights-playground",
+    "area": "West",
+    "lat": 1.375802,
+    "lon": 103.75727
+  },
+  {
+    "name": "Platina Road Park",
+    "url": "https://www.nparks.gov.sg/visit/parks/park-detail/platina-road-park",
+    "area": "North",
+    "lat": 1.4275621,
+    "lon": 103.8261127
+  },
+  {
+    "name": "Play Corridor Park Connector",
+    "url": "https://pcn.nparks.gov.sg/play-corridor-pc/",
+    "area": "",
+    "lat": null,
+    "lon": null
+  },
+  {
+    "name": "Poh Huat Road Playground",
+    "url": "https://www.nparks.gov.sg/visit/parks/park-detail/poh-huat-road-playground",
+    "area": "East",
+    "lat": 1.366937,
+    "lon": 103.8816109999
+  },
+  {
+    "name": "Pulau Ubin",
+    "url": "https://pulau-ubin.nparks.gov.sg/",
+    "area": "Offshore islands",
+    "lat": null,
+    "lon": null
+  },
+  {
+    "name": "Punggol Heritage Trail",
+    "url": "https://www.nparks.gov.sg/visit/parks/park-detail/punggol-heritage-trail",
+    "area": "North",
+    "lat": 1.410923,
+    "lon": 103.909075
+  },
+  {
+    "name": "Punggol Park",
+    "url": "https://www.nparks.gov.sg/visit/parks/park-detail/punggol-park",
+    "area": "East",
+    "lat": 1.376939,
+    "lon": 103.898646
+  },
+  {
+    "name": "Punggol Park Connector",
+    "url": "https://pcn.nparks.gov.sg/punggol-pc/",
+    "area": "",
+    "lat": null,
+    "lon": null
+  },
+  {
+    "name": "Punggol Point Park",
+    "url": "https://www.nparks.gov.sg/visit/parks/park-detail/punggol-point-park",
+    "area": "East",
+    "lat": 1.4210656,
+    "lon": 103.9108479
+  },
+  {
+    "name": "Punggol Promenade Nature Walk",
+    "url": "https://pcn.nparks.gov.sg/punggol-promenade-nature-walk/",
+    "area": "",
+    "lat": null,
+    "lon": null
+  },
+  {
+    "name": "Punggol Promenade Punggol Point Walk",
+    "url": "https://pcn.nparks.gov.sg/punggol-promenade-punggol-point-walk/",
+    "area": "",
+    "lat": null,
+    "lon": null
+  },
+  {
+    "name": "Punggol Promenade Riverside Walk",
+    "url": "https://pcn.nparks.gov.sg/punggol-promenade-riverside-walk/",
+    "area": "",
+    "lat": null,
+    "lon": null
+  },
+  {
+    "name": "Punggol Waterway Park",
+    "url": "https://www.nparks.gov.sg/visit/parks/park-detail/punggol-waterway-park",
+    "area": "East",
+    "lat": 1.4109969999,
+    "lon": 103.904815
+  },
+  {
+    "name": "Raffles Place Park",
+    "url": "https://www.nparks.gov.sg/visit/parks/park-detail/raffles-place-park",
+    "area": "South",
+    "lat": 1.284244,
+    "lon": 103.851335
+  },
+  {
+    "name": "Rail Corridor",
+    "url": "https://railcorridor.nparks.gov.sg/",
+    "area": "Central",
+    "lat": null,
+    "lon": null
+  },
+  {
+    "name": "Realty Park",
+    "url": "https://www.nparks.gov.sg/visit/parks/park-detail/realty-park",
+    "area": "East",
+    "lat": 1.3679636626,
+    "lon": 103.8903645026
+  },
+  {
+    "name": "Richards Avenue Park",
+    "url": "https://www.nparks.gov.sg/visit/parks/park-detail/richards-avenue-park",
+    "area": "East",
+    "lat": 1.360929,
+    "lon": 103.8821289999
+  },
+  {
+    "name": "Rifle Range Nature Park",
+    "url": "https://www.nparks.gov.sg/visit/parks/park-detail/rifle-range-nature-park",
+    "area": "West",
+    "lat": 1.3446623207,
+    "lon": 103.779766914
+  },
+  {
+    "name": "Riverside Park Connector",
+    "url": "https://pcn.nparks.gov.sg/riverside-pc/",
+    "area": "",
+    "lat": null,
+    "lon": null
+  },
+  {
+    "name": "Rochor Canal Park Connector",
+    "url": "https://pcn.nparks.gov.sg/rochor-canal-pc/",
+    "area": "",
+    "lat": null,
+    "lon": null
+  },
+  {
+    "name": "Rowell Road Open Space",
+    "url": "https://www.nparks.gov.sg/visit/parks/park-detail/rowell-road-open-space",
+    "area": "Central",
+    "lat": 1.309712,
+    "lon": 103.8534348
+  },
+  {
+    "name": "Rower's Bay",
+    "url": "https://pcn.nparks.gov.sg/rowers-bay/",
+    "area": "",
+    "lat": null,
+    "lon": null
+  },
+  {
+    "name": "Saint Anne's Wood Playground",
+    "url": "https://www.nparks.gov.sg/visit/parks/park-detail/saint-anne's-wood-playground",
+    "area": "East",
+    "lat": 1.3916399999,
+    "lon": 103.903736
+  },
+  {
+    "name": "Saraca Road Playground",
+    "url": "https://www.nparks.gov.sg/visit/parks/park-detail/saraca-road-playground",
+    "area": "Central",
+    "lat": 1.386669,
+    "lon": 103.8586415
+  },
+  {
+    "name": "Savoy Park Playground",
+    "url": "https://www.nparks.gov.sg/visit/parks/park-detail/savoy-park-playground",
+    "area": "West",
+    "lat": 1.3161139456,
+    "lon": 103.7830996513
+  },
+  {
+    "name": "Sea Breeze Avenue Park",
+    "url": "https://www.nparks.gov.sg/visit/parks/park-detail/sea-breeze-avenue-park",
+    "area": "East",
+    "lat": 1.3385663,
+    "lon": 103.9519708
+  },
+  {
+    "name": "Sea Breeze Garden Playground",
+    "url": "https://www.nparks.gov.sg/visit/parks/park-detail/sea-breeze-garden-playground",
+    "area": "East",
+    "lat": 1.3377098,
+    "lon": 103.9508659
+  },
+  {
+    "name": "Seletar Terrace Park",
+    "url": "https://www.nparks.gov.sg/visit/parks/park-detail/seletar-terrace-park",
+    "area": "Central",
+    "lat": 1.3814675,
+    "lon": 103.8687752
+  },
+  {
+    "name": "Seletar West Park Connector",
+    "url": "https://pcn.nparks.gov.sg/seletar-west-pc/",
+    "area": "",
+    "lat": null,
+    "lon": null
+  },
+  {
+    "name": "Sembawang Hot Spring Park",
+    "url": "https://www.nparks.gov.sg/visit/parks/park-detail/sembawang-hot-spring-park",
+    "area": "North",
+    "lat": 1.4341690043,
+    "lon": 103.8226468902
+  },
+  {
+    "name": "Sembawang Park",
+    "url": "https://www.nparks.gov.sg/visit/parks/park-detail/sembawang-park",
+    "area": "North",
+    "lat": 1.461503,
+    "lon": 103.8368449999
+  },
+  {
+    "name": "Sembawang Park Connector",
+    "url": "https://pcn.nparks.gov.sg/sembawang-pc/",
+    "area": "",
+    "lat": null,
+    "lon": null
+  },
+  {
+    "name": "Sengkang Riverside Park",
+    "url": "https://www.nparks.gov.sg/visit/parks/park-detail/sengkang-riverside-park",
+    "area": "North",
+    "lat": 1.3995031894,
+    "lon": 103.8842368003
+  },
+  {
+    "name": "Sennett Avenue Open Space",
+    "url": "https://www.nparks.gov.sg/visit/parks/park-detail/sennett-avenue-open-space",
+    "area": "East",
+    "lat": 1.3188039164,
+    "lon": 103.9393938521
+  },
+  {
+    "name": "Sennett Avenue Playground",
+    "url": "https://www.nparks.gov.sg/visit/parks/park-detail/sennett-avenue-playground",
+    "area": "East",
+    "lat": 1.317013042,
+    "lon": 103.93621237
+  },
+  {
+    "name": "Sennett Linear Park",
+    "url": "https://www.nparks.gov.sg/visit/parks/park-detail/sennett-linear-park",
+    "area": "East",
+    "lat": 1.3175811151,
+    "lon": 103.9359636882
+  },
+  {
+    "name": "Serangoon Park Connector",
+    "url": "https://pcn.nparks.gov.sg/serangoon-pc/",
+    "area": "",
+    "lat": null,
+    "lon": null
+  },
+  {
+    "name": "Serenade Walk Playground",
+    "url": "https://www.nparks.gov.sg/visit/parks/park-detail/serenade-walk-playground",
+    "area": "North",
+    "lat": 1.3797642,
+    "lon": 103.8346441
+  },
+  {
+    "name": "Shangri-La Playground",
+    "url": "https://www.nparks.gov.sg/visit/parks/park-detail/shangri-la-playground",
+    "area": "North",
+    "lat": 1.3710974,
+    "lon": 103.8324134
+  },
+  {
+    "name": "Shelford Road Playground",
+    "url": "https://www.nparks.gov.sg/visit/parks/park-detail/shelford-road-playground",
+    "area": "West",
+    "lat": 1.3283541,
+    "lon": 103.8104869
+  },
+  {
+    "name": "Sian Tuan Interim Park",
+    "url": "https://www.nparks.gov.sg/visit/parks/park-detail/sian-tuan-interim-park",
+    "area": "West",
+    "lat": 1.342622,
+    "lon": 103.863115
+  },
+  {
+    "name": "Siang Kuang Avenue Interim Park",
+    "url": "https://www.nparks.gov.sg/visit/parks/park-detail/siang-kuang-avenue-interim-park",
+    "area": "Central",
+    "lat": 1.3298263,
+    "lon": 103.8730497
+  },
+  {
+    "name": "Siglap Linear Park",
+    "url": "https://www.nparks.gov.sg/visit/parks/park-detail/siglap-linear-park",
+    "area": "East",
+    "lat": 1.314379842,
+    "lon": 103.927408636
+  },
+  {
+    "name": "Siglap Park Connector",
+    "url": "https://pcn.nparks.gov.sg/siglap-pc/",
+    "area": "",
+    "lat": null,
+    "lon": null
+  },
+  {
+    "name": "Simei Park Connector",
+    "url": "https://pcn.nparks.gov.sg/simei-pc/",
+    "area": "",
+    "lat": null,
+    "lon": null
+  },
+  {
+    "name": "Simpang Kiri Park Connector",
+    "url": "https://pcn.nparks.gov.sg/simpang-kiri-pc/",
+    "area": "",
+    "lat": null,
+    "lon": null
+  },
+  {
+    "name": "Sims Ave Park Connector",
+    "url": "https://pcn.nparks.gov.sg/sims-ave-pc/",
+    "area": "",
+    "lat": null,
+    "lon": null
+  },
+  {
+    "name": "Singapore Botanic Gardens",
+    "url": "https://sbg.nparks.gov.sg/",
+    "area": "Central",
+    "lat": null,
+    "lon": null
+  },
+  {
+    "name": "Singapore River Promenade",
+    "url": "https://pcn.nparks.gov.sg/singapore-river-promenade/",
+    "area": "",
+    "lat": null,
+    "lon": null
+  },
+  {
+    "name": "Sisters' Islands Marine Park",
+    "url": "https://www.nparks.gov.sg/visit/parks/park-detail/sisters-islands-marine-park",
+    "area": "Offshore islands",
+    "lat": 1.2140583333,
+    "lon": 103.8348055555
+  },
+  {
+    "name": "Sixth Avenue Playground",
+    "url": "https://www.nparks.gov.sg/visit/parks/park-detail/sixth-avenue-playground",
+    "area": "Central",
+    "lat": 1.322436,
+    "lon": 103.7912806
+  },
+  {
+    "name": "Somme Road Playground",
+    "url": "https://www.nparks.gov.sg/visit/parks/park-detail/somme-road-playground",
+    "area": "Central",
+    "lat": 1.309712,
+    "lon": 103.8534348
+  },
+  {
+    "name": "Soo Chow Walk Playground",
+    "url": "https://www.nparks.gov.sg/visit/parks/park-detail/soo-chow-walk-playground",
+    "area": "Central",
+    "lat": 1.3536808,
+    "lon": 103.832038
+  },
+  {
+    "name": "Springleaf Avenue Playground",
+    "url": "https://www.nparks.gov.sg/visit/parks/park-detail/springleaf-avenue-playground",
+    "area": "North",
+    "lat": 1.4008793,
+    "lon": 103.8224586
+  },
+  {
+    "name": "Springleaf Garden Park",
+    "url": "https://www.nparks.gov.sg/visit/parks/park-detail/springleaf-garden-park",
+    "area": "North",
+    "lat": 1.3980464,
+    "lon": 103.822331
+  },
+  {
+    "name": "Springleaf Nature Park",
+    "url": "https://www.nparks.gov.sg/visit/parks/park-detail/springleaf-nature-park",
+    "area": "North",
+    "lat": 1.4011589724,
+    "lon": 103.8174686543
+  },
+  {
+    "name": "Springleaf Park Connector",
+    "url": "https://pcn.nparks.gov.sg/springleaf-pc/",
+    "area": "",
+    "lat": null,
+    "lon": null
+  },
+  {
+    "name": "Springside Park",
+    "url": "https://www.nparks.gov.sg/visit/parks/park-detail/springside-park",
+    "area": "North",
+    "lat": 1.4057468,
+    "lon": 103.8209351
+  },
+  {
+    "name": "St Michael's Fitness Corner",
+    "url": "https://www.nparks.gov.sg/visit/parks/park-detail/st-michael's-fitness-corner",
+    "area": "Central",
+    "lat": 1.326481,
+    "lon": 103.865114
+  },
+  {
+    "name": "St Michael's Playground",
+    "url": "https://www.nparks.gov.sg/visit/parks/park-detail/st-michael's-playground",
+    "area": "Central",
+    "lat": 1.326217,
+    "lon": 103.864863
+  },
+  {
+    "name": "St Nicholas View Playground",
+    "url": "https://www.nparks.gov.sg/visit/parks/park-detail/st-nicholas-view-playground",
+    "area": "North",
+    "lat": 1.3717061,
+    "lon": 103.832815
+  },
+  {
+    "name": "Stadium Park Connector",
+    "url": "https://pcn.nparks.gov.sg/stadium-pc/",
+    "area": "",
+    "lat": null,
+    "lon": null
+  },
+  {
+    "name": "Stratton Walk Playground",
+    "url": "https://www.nparks.gov.sg/visit/parks/park-detail/stratton-walk-playground",
+    "area": "Central",
+    "lat": 1.3791625,
+    "lon": 103.8669368
+  },
+  {
+    "name": "Sun Plaza Park",
+    "url": "https://www.nparks.gov.sg/visit/parks/park-detail/sun-plaza-park",
+    "area": "East",
+    "lat": 1.359264,
+    "lon": 103.944482
+  },
+  {
+    "name": "Sunbird Circle Playground",
+    "url": "https://www.nparks.gov.sg/visit/parks/park-detail/sunbird-circle-playground",
+    "area": "East",
+    "lat": 1.3390949,
+    "lon": 103.9582862
+  },
+  {
+    "name": "Sungei Api Api Park",
+    "url": "https://www.nparks.gov.sg/visit/parks/park-detail/sungei-api-api-park",
+    "area": "East",
+    "lat": 1.3789154566,
+    "lon": 103.9460603145
+  },
+  {
+    "name": "Sungei Buloh Wetland Reserve",
+    "url": "https://www.nparks.gov.sg/visit/parks/park-detail/sungei-buloh-wetland-reserve",
+    "area": "North",
+    "lat": 1.440184,
+    "lon": 103.7353223
+  },
+  {
+    "name": "Sungei Serangoon Park Connector",
+    "url": "https://pcn.nparks.gov.sg/sungei-serangoon-pc/",
+    "area": "",
+    "lat": null,
+    "lon": null
+  },
+  {
+    "name": "Sungei Simpang Kanan Park Connector",
+    "url": "https://pcn.nparks.gov.sg/sungei-simpang-kanan-pc/",
+    "area": "",
+    "lat": null,
+    "lon": null
+  },
+  {
+    "name": "Sunrise Close Park",
+    "url": "https://www.nparks.gov.sg/visit/parks/park-detail/sunrise-close-playground",
+    "area": "Central",
+    "lat": 1.387033,
+    "lon": 103.857483
+  },
+  {
+    "name": "Sunrise Drive Playground I",
+    "url": "https://www.nparks.gov.sg/visit/parks/park-detail/sunrise-drive-playground-i",
+    "area": "Central",
+    "lat": 1.388273,
+    "lon": 103.857406
+  },
+  {
+    "name": "Sunrise Drive Playground II",
+    "url": "https://www.nparks.gov.sg/visit/parks/park-detail/sunrise-drive-playground-ii",
+    "area": "Central",
+    "lat": 1.390274,
+    "lon": 103.855188
+  },
+  {
+    "name": "Sunrise Place Park",
+    "url": "https://www.nparks.gov.sg/visit/parks/park-detail/sunrise-place-playground",
+    "area": "Central",
+    "lat": 1.386943,
+    "lon": 103.856601
+  },
+  {
+    "name": "Sunrise Terrace Open Space",
+    "url": "https://www.nparks.gov.sg/visit/parks/park-detail/sunrise-terrace-open-space",
+    "area": "Central",
+    "lat": 1.388232,
+    "lon": 103.856106
+  },
+  {
+    "name": "Sunrise Way Playground",
+    "url": "https://www.nparks.gov.sg/visit/parks/park-detail/sunrise-way-playground",
+    "area": "Central",
+    "lat": 1.387647,
+    "lon": 103.856654
+  },
+  {
+    "name": "Sunset Heights Open Space",
+    "url": "https://www.nparks.gov.sg/visit/parks/park-detail/sunset-heights-open-space",
+    "area": "West",
+    "lat": 1.342622,
+    "lon": 103.863115
+  },
+  {
+    "name": "Sunset Way Park",
+    "url": "https://www.nparks.gov.sg/visit/parks/park-detail/sunset-way-park",
+    "area": "West",
+    "lat": 1.3277033,
+    "lon": 103.7647964
+  },
+  {
+    "name": "Sunset Way Playground",
+    "url": "https://www.nparks.gov.sg/visit/parks/park-detail/sunset-way-playground",
+    "area": "West",
+    "lat": 1.3266245,
+    "lon": 103.7663294
+  },
+  {
+    "name": "Surin Avenue Neighbourhood Park",
+    "url": "https://www.nparks.gov.sg/visit/parks/park-detail/surin-avenue-neighbourhood-park",
+    "area": "East",
+    "lat": 1.3555579999,
+    "lon": 103.884109
+  },
+  {
+    "name": "Tai Hwan Terrace Playground",
+    "url": "https://www.nparks.gov.sg/visit/parks/park-detail/tai-hwan-terrace-playground",
+    "area": "East",
+    "lat": 1.356359,
+    "lon": 103.8603949999
+  },
+  {
+    "name": "Tai Keng Gardens Playground",
+    "url": "https://www.nparks.gov.sg/visit/parks/park-detail/tai-keng-gardens-playground",
+    "area": "",
+    "lat": 1.3460709999,
+    "lon": 103.884998
+  },
+  {
+    "name": "Tai Keng Place Playground",
+    "url": "https://www.nparks.gov.sg/visit/parks/park-detail/tai-keng-place-playground",
+    "area": "East",
+    "lat": 1.3449732,
+    "lon": 103.8847757
+  },
+  {
+    "name": "Taman Kembangan Playground",
+    "url": "https://www.nparks.gov.sg/visit/parks/park-detail/taman-kembangan-playground",
+    "area": "East",
+    "lat": 1.3250034,
+    "lon": 103.9144022
+  },
+  {
+    "name": "Taman Mas Merah Playground",
+    "url": "https://www.nparks.gov.sg/visit/parks/park-detail/taman-mas-merah-playground",
+    "area": "West",
+    "lat": 1.308746,
+    "lon": 103.764706
+  },
+  {
+    "name": "Taman Permata Park",
+    "url": "https://www.nparks.gov.sg/visit/parks/park-detail/taman-permata-park",
+    "area": "Central",
+    "lat": 1.3499063,
+    "lon": 103.834825
+  },
+  {
+    "name": "Tamarind Road Playground",
+    "url": "https://www.nparks.gov.sg/visit/parks/park-detail/tamarind-road-playground",
+    "area": "Central",
+    "lat": 1.3896942,
+    "lon": 103.8601945
+  },
+  {
+    "name": "Tampines Boulevard Park",
+    "url": "https://www.nparks.gov.sg/visit/parks/park-detail/tampines-boulevard-park",
+    "area": "East",
+    "lat": 1.3637423,
+    "lon": 103.9407322
+  },
+  {
+    "name": "Tampines Eco Green",
+    "url": "https://www.nparks.gov.sg/visit/parks/park-detail/tampines-eco-green",
+    "area": "East",
+    "lat": 1.363915,
+    "lon": 103.94869
+  },
+  {
+    "name": "Tampines Park Connector",
+    "url": "https://pcn.nparks.gov.sg/tampines-pc/",
+    "area": "",
+    "lat": null,
+    "lon": null
+  },
+  {
+    "name": "Tampines-Loyang Park Connector",
+    "url": "https://pcn.nparks.gov.sg/tampines-loyang-pc/",
+    "area": "",
+    "lat": null,
+    "lon": null
+  },
+  {
+    "name": "Tanah Merah Playground",
+    "url": "https://www.nparks.gov.sg/visit/parks/park-detail/tanah-merah-playground",
+    "area": "East",
+    "lat": 1.3289415,
+    "lon": 103.946947
+  },
+  {
+    "name": "Tanah Puteh Park",
+    "url": "https://www.nparks.gov.sg/visit/parks/park-detail/tanah-puteh-park",
+    "area": "East",
+    "lat": 1.3158700543,
+    "lon": 103.9313777546
+  },
+  {
+    "name": "Tanjong Katong Road South Playground",
+    "url": "https://www.nparks.gov.sg/visit/parks/park-detail/tanjong-katong-road-south-playground",
+    "area": "East",
+    "lat": 1.3002548,
+    "lon": 103.8972928
+  },
+  {
+    "name": "Tanjong Rhu Promenade",
+    "url": "https://pcn.nparks.gov.sg/tanjong-rhu-promenade-pc/",
+    "area": "",
+    "lat": null,
+    "lon": null
+  },
+  {
+    "name": "Tavistock Avenue Playground",
+    "url": "https://www.nparks.gov.sg/visit/parks/park-detail/tavistock-avenue-playground",
+    "area": "East",
+    "lat": 1.3702069999,
+    "lon": 103.8653579999
+  },
+  {
+    "name": "Teacher's Estate Playground",
+    "url": "https://www.nparks.gov.sg/visit/parks/park-detail/teacher's-estate-playground",
+    "area": "North",
+    "lat": 1.3820088,
+    "lon": 103.829206
+  },
+  {
+    "name": "Telok Ayer Green",
+    "url": "https://www.nparks.gov.sg/visit/parks/park-detail/telok-ayer-green",
+    "area": "South",
+    "lat": 1.2814649999,
+    "lon": 103.847644
+  },
+  {
+    "name": "Telok Ayer Park",
+    "url": "https://www.nparks.gov.sg/visit/parks/park-detail/telok-ayer-park",
+    "area": "South",
+    "lat": 1.2780868695,
+    "lon": 103.846654778
+  },
+  {
+    "name": "Telok Blangah Hill Park",
+    "url": "https://www.nparks.gov.sg/visit/parks/park-detail/telok-blangah-hill-park",
+    "area": "South",
+    "lat": 1.278845,
+    "lon": 103.810545
+  },
+  {
+    "name": "Telok Kurau Park",
+    "url": "https://www.nparks.gov.sg/visit/parks/park-detail/telok-kurau-park",
+    "area": "East",
+    "lat": 1.315365,
+    "lon": 103.9142859999
+  },
+  {
+    "name": "Terang Bulan Avenue Interim Park",
+    "url": "https://www.nparks.gov.sg/visit/parks/park-detail/terang-bulan-avenue-interim-park",
+    "area": "East",
+    "lat": 1.3216108626,
+    "lon": 103.9215062971
+  },
+  {
+    "name": "The Inglewood Playground",
+    "url": "https://www.nparks.gov.sg/visit/parks/park-detail/the-inglewood-playground",
+    "area": "Central",
+    "lat": 1.361014,
+    "lon": 103.830174
+  },
+  {
+    "name": "Thomson Green Playground",
+    "url": "https://www.nparks.gov.sg/visit/parks/park-detail/thomson-green-playground",
+    "area": "North",
+    "lat": 1.378694,
+    "lon": 103.8325994
+  },
+  {
+    "name": "Thomson Nature Park",
+    "url": "https://www.nparks.gov.sg/visit/parks/park-detail/thomson-nature-park",
+    "area": "North",
+    "lat": 1.3827261189,
+    "lon": 103.821966683
+  },
+  {
+    "name": "Thomson Park",
+    "url": "https://www.nparks.gov.sg/visit/parks/park-detail/thomson-park",
+    "area": "Central",
+    "lat": 1.3546751,
+    "lon": 103.8345185
+  },
+  {
+    "name": "Thomson Road Playground",
+    "url": "https://www.nparks.gov.sg/visit/parks/park-detail/thomson-road-playground",
+    "area": "Central",
+    "lat": 1.3161528537,
+    "lon": 103.8438516291
+  },
+  {
+    "name": "Thomson Walk Playground",
+    "url": "https://www.nparks.gov.sg/visit/parks/park-detail/thomson-walk-playground",
+    "area": "North",
+    "lat": 1.3759568,
+    "lon": 103.8324924
+  },
+  {
+    "name": "Thong Soon Green Playground",
+    "url": "https://www.nparks.gov.sg/visit/parks/park-detail/thong-soon-green-playground",
+    "area": "North",
+    "lat": 1.400026,
+    "lon": 103.8183191
+  },
+  {
+    "name": "Thrift Drive Open Space",
+    "url": "https://www.nparks.gov.sg/visit/parks/park-detail/thrift-drive-open-space",
+    "area": "Central",
+    "lat": 1.3438662,
+    "lon": 103.8832266
+  },
+  {
+    "name": "Tiong Bahru Park",
+    "url": "https://www.nparks.gov.sg/visit/parks/park-detail/tiong-bahru-park",
+    "area": "South",
+    "lat": 1.287617,
+    "lon": 103.824027
+  },
+  {
+    "name": "Toa Payoh Town Park",
+    "url": "https://www.nparks.gov.sg/visit/parks/park-detail/toa-payoh-town-park",
+    "area": "Central",
+    "lat": 1.3305519035,
+    "lon": 103.847914458
+  },
+  {
+    "name": "Toh Close Interim Park",
+    "url": "https://www.nparks.gov.sg/visit/parks/park-detail/toh-close-interim-park",
+    "area": "East",
+    "lat": 1.3638989,
+    "lon": 103.970732
+  },
+  {
+    "name": "Tras Link Park",
+    "url": "https://www.nparks.gov.sg/visit/parks/park-detail/tras-link-park",
+    "area": "South",
+    "lat": 1.2764515,
+    "lon": 103.8437766
+  },
+  {
+    "name": "Turnhouse Park",
+    "url": "https://www.nparks.gov.sg/visit/parks/park-detail/turnhouse-park",
+    "area": "East",
+    "lat": 1.3899401,
+    "lon": 103.9789854
+  },
+  {
+    "name": "Ulu Pandan Park Connector",
+    "url": "https://pcn.nparks.gov.sg/ulu-pandan-pc/",
+    "area": "",
+    "lat": null,
+    "lon": null
+  },
+  {
+    "name": "Ulu Sembawang Park Connector",
+    "url": "https://pcn.nparks.gov.sg/ulu-sembawang-pc/",
+    "area": "",
+    "lat": null,
+    "lon": null
+  },
+  {
+    "name": "University Road Park",
+    "url": "https://www.nparks.gov.sg/visit/parks/park-detail/university-road-park",
+    "area": "West",
+    "lat": 1.3254485,
+    "lon": 103.8176644
+  },
+  {
+    "name": "Upper Paya Lebar Interim Park",
+    "url": "https://www.nparks.gov.sg/visit/parks/park-detail/upper-paya-lebar-interim-park",
+    "area": "East",
+    "lat": 1.3435832,
+    "lon": 103.8824581
+  },
+  {
+    "name": "Upper Peirce Reservoir Park",
+    "url": "https://www.nparks.gov.sg/visit/parks/park-detail/upper-peirce-reservoir-park",
+    "area": "North",
+    "lat": 1.3722094069,
+    "lon": 103.8126705418
+  },
+  {
+    "name": "Upper Seletar Reservoir Park",
+    "url": "https://www.nparks.gov.sg/visit/parks/park-detail/upper-seletar-reservoir-park",
+    "area": "North",
+    "lat": 1.4000469,
+    "lon": 103.806627
+  },
+  {
+    "name": "Upper Serangoon Park",
+    "url": "https://www.nparks.gov.sg/visit/parks/park-detail/upper-serangoon-park",
+    "area": "East",
+    "lat": 1.3516276,
+    "lon": 103.8752087
+  },
+  {
+    "name": "Upper Thomson Park Connector",
+    "url": "https://pcn.nparks.gov.sg/upper-thomson-pc/",
+    "area": "",
+    "lat": null,
+    "lon": null
+  },
+  {
+    "name": "Venus Green",
+    "url": "https://www.nparks.gov.sg/visit/parks/park-detail/venus-green",
+    "area": "Central",
+    "lat": 1.358642,
+    "lon": 103.827269
+  },
+  {
+    "name": "Victoria Park Playground",
+    "url": "https://www.nparks.gov.sg/visit/parks/park-detail/victoria-park-playground",
+    "area": "West",
+    "lat": 1.3219362,
+    "lon": 103.8018249
+  },
+  {
+    "name": "Villa Verde Park",
+    "url": "https://www.nparks.gov.sg/visit/parks/park-detail/villa-verde-park",
+    "area": "West",
+    "lat": 1.389549,
+    "lon": 103.751411
+  },
+  {
+    "name": "War Memorial Park",
+    "url": "https://www.nparks.gov.sg/visit/parks/park-detail/war-memorial-park",
+    "area": "South",
+    "lat": 1.292825,
+    "lon": 103.854818
+  },
+  {
+    "name": "Waringin Park Playground",
+    "url": "https://www.nparks.gov.sg/visit/parks/park-detail/waringin-park-playground",
+    "area": "East",
+    "lat": 1.3228608,
+    "lon": 103.9193198
+  },
+  {
+    "name": "Waterboat House Garden",
+    "url": "https://www.nparks.gov.sg/visit/parks/park-detail/waterboat-house-garden",
+    "area": "South",
+    "lat": 1.2873199999,
+    "lon": 103.853473
+  },
+  {
+    "name": "Watten Heights Playground",
+    "url": "https://www.nparks.gov.sg/visit/parks/park-detail/watten-heights-playground",
+    "area": "West",
+    "lat": 1.3322093,
+    "lon": 103.8084047
+  },
+  {
+    "name": "West Coast Green Playground",
+    "url": "https://www.nparks.gov.sg/visit/parks/park-detail/west-coast-green-playground",
+    "area": "West",
+    "lat": 1.315703,
+    "lon": 103.756292
+  },
+  {
+    "name": "West Coast Park",
+    "url": "https://www.nparks.gov.sg/visit/parks/park-detail/west-coast-park",
+    "area": "West",
+    "lat": 1.2961532936,
+    "lon": 103.762999953
+  },
+  {
+    "name": "West Coast Park Connector",
+    "url": "https://pcn.nparks.gov.sg/west-coast-pc/",
+    "area": "",
+    "lat": null,
+    "lon": null
+  },
+  {
+    "name": "West Coast Place Playground",
+    "url": "https://www.nparks.gov.sg/visit/parks/park-detail/west-coast-place-playground",
+    "area": "West",
+    "lat": 1.31421,
+    "lon": 103.758555
+  },
+  {
+    "name": "Western Adventure Loop",
+    "url": "https://pcn.nparks.gov.sg/the-pcn-experience/wal/",
+    "area": "",
+    "lat": null,
+    "lon": null
+  },
+  {
+    "name": "Westville Playground",
+    "url": "https://www.nparks.gov.sg/visit/parks/park-detail/westville-playground",
+    "area": "West",
+    "lat": 1.375802,
+    "lon": 103.75727
+  },
+  {
+    "name": "Westwood Park Playground",
+    "url": "https://www.nparks.gov.sg/visit/parks/park-detail/westwood-park-playground",
+    "area": "West",
+    "lat": 1.375802,
+    "lon": 103.75727
+  },
+  {
+    "name": "Whampoa Park Connector",
+    "url": "https://pcn.nparks.gov.sg/whampoa-pc/",
+    "area": "",
+    "lat": null,
+    "lon": null
+  },
+  {
+    "name": "Wilkinson Interim Park",
+    "url": "https://www.nparks.gov.sg/visit/parks/park-detail/wilkinson-interim-park",
+    "area": "East",
+    "lat": 1.3017092,
+    "lon": 103.8871666
+  },
+  {
+    "name": "Windsor Nature Park",
+    "url": "https://www.nparks.gov.sg/visit/parks/park-detail/windsor-nature-park",
+    "area": "North",
+    "lat": 1.3600298185,
+    "lon": 103.8269461862
+  },
+  {
+    "name": "Woodlands (Ave 12) Park Connector",
+    "url": "https://pcn.nparks.gov.sg/woodlands-ave-12-pc/",
+    "area": "",
+    "lat": null,
+    "lon": null
+  },
+  {
+    "name": "Woodlands (Ave 2) Park Connector",
+    "url": "https://pcn.nparks.gov.sg/woodlands-ave-2-pc/",
+    "area": "",
+    "lat": null,
+    "lon": null
+  },
+  {
+    "name": "Woodlands (Ave 3) Park Connector",
+    "url": "https://pcn.nparks.gov.sg/woodlands-ave-3-pc/",
+    "area": "",
+    "lat": null,
+    "lon": null
+  },
+  {
+    "name": "Woodlands (Ave 5) Park Connector",
+    "url": "https://pcn.nparks.gov.sg/woodlands-ave-5-pc/",
+    "area": "",
+    "lat": null,
+    "lon": null
+  },
+  {
+    "name": "Woodlands (Ave 7) Park Connector",
+    "url": "https://pcn.nparks.gov.sg/woodlands-ave-7-pc/",
+    "area": "",
+    "lat": null,
+    "lon": null
+  },
+  {
+    "name": "Woodlands (SLE) Park Connector",
+    "url": "https://pcn.nparks.gov.sg/woodlands-sle-pc/",
+    "area": "",
+    "lat": null,
+    "lon": null
+  },
+  {
+    "name": "Woodlands Healing Garden",
+    "url": "https://www.nparks.gov.sg/visit/parks/park-detail/woodlands-healing-garden",
+    "area": "North",
+    "lat": 1.4256064,
+    "lon": 103.7930729
+  },
+  {
+    "name": "Woodlands Street 13 Park Connector",
+    "url": "https://pcn.nparks.gov.sg/woodlands-st-13-pc/",
+    "area": "",
+    "lat": null,
+    "lon": null
+  },
+  {
+    "name": "Woodlands Town Park East",
+    "url": "https://www.nparks.gov.sg/visit/parks/park-detail/woodlands-town-park-east",
+    "area": "North",
+    "lat": 1.4365239999,
+    "lon": 103.7792259999
+  },
+  {
+    "name": "Woodlands Waterfront Park",
+    "url": "https://www.nparks.gov.sg/visit/parks/park-detail/woodlands-waterfront-park",
+    "area": "North",
+    "lat": 1.452699999,
+    "lon": 103.780115
+  },
+  {
+    "name": "Yarrow Park",
+    "url": "https://www.nparks.gov.sg/visit/parks/park-detail/yarrow-park",
+    "area": "East",
+    "lat": 1.3154269216,
+    "lon": 103.9215026252
+  },
+  {
+    "name": "Yio Chu Kang Gardens Playground",
+    "url": "https://www.nparks.gov.sg/visit/parks/park-detail/yio-chu-kang-gardens-playground",
+    "area": "Central",
+    "lat": 1.3806802,
+    "lon": 103.8374879
+  },
+  {
+    "name": "Yishun Neighbourhood Park",
+    "url": "https://www.nparks.gov.sg/visit/parks/park-detail/yishun-neighbourhood-park",
+    "area": "North",
+    "lat": 1.4376219999,
+    "lon": 103.8350769999
+  },
+  {
+    "name": "Yishun Park",
+    "url": "https://www.nparks.gov.sg/visit/parks/park-detail/yishun-park",
+    "area": "North",
+    "lat": 1.424376,
+    "lon": 103.8426099999
+  },
+  {
+    "name": "Yishun Park Connector",
+    "url": "https://pcn.nparks.gov.sg/yishun-pc/",
+    "area": "",
+    "lat": null,
+    "lon": null
+  },
+  {
+    "name": "Yishun Pond Park",
+    "url": "https://www.nparks.gov.sg/visit/parks/park-detail/yishun-pond-park",
+    "area": "North",
+    "lat": 1.427597,
+    "lon": 103.839487
+  },
+  {
+    "name": "Youth Olympic Park",
+    "url": "https://www.nparks.gov.sg/visit/parks/park-detail/youth-olympic-park",
+    "area": "South",
+    "lat": 1.28849,
+    "lon": 103.860639
+  },
+  {
+    "name": "Yunnan Park",
+    "url": "https://www.nparks.gov.sg/visit/parks/park-detail/yunnan-park",
+    "area": "West",
+    "lat": 1.337494,
+    "lon": 103.692913
+  },
+  {
+    "name": "Zhenghua Nature Park",
+    "url": "https://www.nparks.gov.sg/visit/parks/park-detail/zhenghua-nature-park",
+    "area": "West",
+    "lat": 1.3680372,
+    "lon": 103.7782358
+  }
+]

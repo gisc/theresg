@@ -1,0 +1,57 @@
+[
+  {
+    "name": "Faber Island Gardens Park",
+    "officialUrl": "https://www.nparks.gov.sg/visit/parks/park-detail/faber-island-gardens-park",
+    "address": "Junction of Upper Thomson Rd and Island Gardens Walk"
+  },
+  {
+    "name": "Jalan Daud Interim Park",
+    "officialUrl": "https://www.nparks.gov.sg/visit/parks/park-detail/jalan-daud-interim-park",
+    "address": "Along Jalan Daud"
+  },
+  {
+    "name": "Pavilion Park Playground",
+    "officialUrl": "https://www.nparks.gov.sg/visit/parks/park-detail/pavilion-park-playground",
+    "address": "Bounded by Pavilion Circle and Bukit Batok Road"
+  },
+  {
+    "name": "Sea Breeze Avenue Park",
+    "officialUrl": "https://www.nparks.gov.sg/visit/parks/park-detail/sea-breeze-avenue-park",
+    "address": "At the end of Sea Breeze Walk"
+  },
+  {
+    "name": "Sunrise Drive Playground I",
+    "officialUrl": "https://www.nparks.gov.sg/visit/parks/park-detail/sunrise-drive-playground-i",
+    "address": "Along Sunrise Drive"
+  },
+  {
+    "name": "Sunset Heights Open Space",
+    "officialUrl": "https://www.nparks.gov.sg/visit/parks/park-detail/sunset-heights-open-space",
+    "address": "Along Sunset Heights"
+  },
+  {
+    "name": "Sunset Way Park",
+    "officialUrl": "https://www.nparks.gov.sg/visit/parks/park-detail/sunset-way-park",
+    "address": "Along Sunset Way"
+  },
+  {
+    "name": "Sunset Way Playground",
+    "officialUrl": "https://www.nparks.gov.sg/visit/parks/park-detail/sunset-way-playground",
+    "address": "At the juction of Sunset Way and Sunset Drive"
+  },
+  {
+    "name": "Tamarind Road Playground",
+    "officialUrl": "https://www.nparks.gov.sg/visit/parks/park-detail/tamarind-road-playground",
+    "address": "Along Tamarind Road"
+  },
+  {
+    "name": "Westville Playground",
+    "officialUrl": "https://www.nparks.gov.sg/visit/parks/park-detail/westville-playground",
+    "address": "Within Westwood estate along Westwiid Cres"
+  },
+  {
+    "name": "Westwood Park Playground",
+    "officialUrl": "https://www.nparks.gov.sg/visit/parks/park-detail/westwood-park-playground",
+    "address": "Within Westwood estate along Westwiid Cres"
+  }
+]
