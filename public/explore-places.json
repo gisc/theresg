@@ -1,0 +1,123 @@
+{
+  "checkedAt": "2026-10-01",
+  "previewOnly": false,
+  "items": [
+    {
+      "name": "Bishan-Ang Mo Kio Park",
+      "id": "BISHAN-ANG MO KIO PARK (POND GARDENS)",
+      "category": "Parks",
+      "area": "Central",
+      "description": "A riverside park for a slower afternoon.",
+      "address": "Along Bishan Road and Ang Mo Kio Ave 1",
+      "officialUrl": "https://www.nparks.gov.sg/visit/parks/park-detail/bishan-ang-mo-kio-park",
+      "transportStations": [
+        "Bright Hill",
+        "Bishan"
+      ],
+      "note": "NParks describes access via the entrance along Ang Mo Kio Ave 1 from Bright Hill MRT. The old entrance at the Ang Mo Kio Ave 1/Marymount Road junction is closed; use the new entrance. The bridge near Dragonfly Pond is closed for works until 4 December 2026. Check current park notices.",
+      "checkedAt": "2026-10-01",
+      "previewImage": "/img/explore/bishan.webp"
+    },
+    {
+      "name": "East Coast Park",
+      "id": "EAST COAST PARK AREA C",
+      "category": "Parks",
+      "area": "East",
+      "description": "Seaside spaces for walking and spending time outdoors.",
+      "address": "East Coast Park, Singapore",
+      "officialUrl": "https://www.nparks.gov.sg/visit/parks/park-detail/east-coast-park/",
+      "transportStations": [
+        "Marine Parade"
+      ],
+      "note": "Choose the park area you want to visit. The options here serve Marine Cove / Area C, not the entire park. Bus 401 runs only on Saturdays, Sundays and public holidays. Check current NParks notices before visiting.",
+      "checkedAt": "2026-10-01",
+      "previewImage": "/img/explore/east-coast.webp",
+      "mrtOptions": [
+        {
+          "name": "Marine Parade",
+          "entrance": "",
+          "access": "For the Marine Cove / Area C visit point: pedestrian access continues via the Marine Parade underpass and East Coast Park Service Road. Use signed pedestrian crossings; no station exit or walking time is guaranteed."
+        }
+      ],
+      "bus": {
+        "code": "92289",
+        "name": "Marine Cove",
+        "access": "East Coast Park Service Road, Area C. Service 401 operates Saturdays, Sundays and public holidays only; no weekday service."
+      },
+      "transportSources": [
+        "https://www.sbstransit.com.sg/Service/BusService?ServiceNo=401",
+        "https://www.nparks.gov.sg/visit/parks/east-coast-park/amenities/marine-cove"
+      ]
+    },
+    {
+      "name": "West Coast Park",
+      "id": "WEST COAST PARK",
+      "category": "Parks",
+      "area": "West",
+      "description": "Open spaces and play areas along the west coast.",
+      "address": "West Coast Park, Singapore",
+      "officialUrl": "https://www.nparks.gov.sg/visit/parks/park-detail/west-coast-park",
+      "transportStations": [
+        "Clementi",
+        "Haw Par Villa"
+      ],
+      "note": "Bus stop 17291 West Coast Pk serves the eastern park section along West Coast Highway, not every park area. Services 175 and 176 were confirmed by the live LTA-backed arrivals feed. Clementi and Haw Par Villa are official station options with onward travel needed. Check current NParks notices.",
+      "checkedAt": "2026-10-01",
+      "previewImage": "/img/explore/west-coast.webp",
+      "bus": {
+        "code": "17291",
+        "name": "West Coast Pk",
+        "access": "West Coast Highway beside the eastern park section. Services 175 and 176. Choose your park area and follow signed pedestrian access; do not cross the highway except at a permitted crossing."
+      },
+      "transportSources": [
+        "https://www.there.sg/api/bus-arrivals?stopCode=17291",
+        "https://www.sbstransit.com.sg/Service/BusService?ServiceNo=175"
+      ]
+    },
+    {
+      "name": "Pasir Ris Park",
+      "id": "PASIR RIS PK",
+      "category": "Parks",
+      "area": "East",
+      "description": "A coastal park with spaces for play and nature.",
+      "address": "From Pasir Ris Road to Jalan Loyang Besar",
+      "officialUrl": "https://www.nparks.gov.sg/visit/parks/park-detail/pasir-ris-park",
+      "transportStations": [
+        "Pasir Ris"
+      ],
+      "note": "NParks names access via Elias Road and Pasir Ris Green and lists Pasir Ris MRT as a nearby station. Check the official park map and notices for your chosen area.",
+      "checkedAt": "2026-10-01",
+      "previewImage": "/img/explore/pasir-ris.webp"
+    },
+    {
+      "name": "Geylang East Library",
+      "id": "Geylang East Public Library",
+      "category": "Libraries",
+      "area": "East",
+      "description": "A neighbourhood space to read, learn and unwind.",
+      "address": "50 Geylang East Ave 1, Singapore 389777",
+      "officialUrl": "https://www.nlb.gov.sg/main/visit-us/our-libraries-and-locations/libraries/geylang-east-library",
+      "transportStations": [
+        "Aljunied"
+      ],
+      "note": "Name, address and MRT access checked against the current NLB page. Hours and temporary closures are not shown as live data.",
+      "checkedAt": "2026-10-01",
+      "previewImage": "/img/explore/geylang-library.webp"
+    },
+    {
+      "name": "library@harbourfront",
+      "id": "Harbour Front Public Library",
+      "category": "Libraries",
+      "area": "South",
+      "description": "A neighbourhood space to read, learn and unwind.",
+      "address": "1 Harbourfront Walk, VivoCity #03-05 (Lobby F), Singapore 098585",
+      "officialUrl": "https://www.nlb.gov.sg/main/visit-us/our-libraries-and-locations/libraries/library-harbourfront",
+      "transportStations": [
+        "HarbourFront"
+      ],
+      "note": "Name, address and MRT access checked against the current NLB page. Hours and temporary closures are not shown as live data.",
+      "checkedAt": "2026-10-01",
+      "previewImage": "/img/explore/harbourfront-library.webp"
+    }
+  ]
+}

@@ -1,320 +1,35 @@
 <script setup lang="ts">
-definePageMeta({
-	title: 'Explore',
-});
-
-useSeoMeta({
-	title: 'Explore',
-});
-
-interface AttractionLine {
-	code: string;
-	color: string;
-}
-interface MrtAccess {
-	name: string;
-	lines: AttractionLine[];
-	entrance: string;
-	access: string;
-}
-interface AttractionItem {
-	name: string;
-	img?: string;
-	address: string;
-	mrt?: { name: string; lines: AttractionLine[]; dist: number };
-	mrtOptions?: MrtAccess[];
-	bus?: { code: string; name: string; dist: number };
-	note?: string;
-}
-interface AttractionData {
-	source: string;
-	asOf: string;
-	count: number;
-	items: AttractionItem[];
-}
-
-const { data } = await useLazyFetch<AttractionData>('/attractions.json', {
-	server: false,
-});
-
-function fmtDist(m: number): string {
-	return m < 950 ? `${Math.round(m / 10) * 10} m` : `${(m / 1000).toFixed(1)} km`;
-}
-
-const query = ref('');
-const filtered = computed(() => {
-	const q = query.value.trim().toLowerCase();
-	const items = data.value?.items ?? [];
-	if (!q) return items;
-	return items.filter(
-		(i) => i.name.toLowerCase().includes(q) || i.address.toLowerCase().includes(q),
-	);
-});
+definePageMeta({ title: 'Explore' });
+useSeoMeta({ title: 'Explore' });
+interface Place { name: string; category: string; area?: string; description?: string; address: string; lat?: number; lon?: number; img?: string; previewImage?:string; mrt?: {name:string;dist:number}; mrtOptions?: {name:string;entrance:string;access:string}[]; bus?:{code:string;name:string;dist?:number;access?:string}; transportStations?:string[]; transportSources?:string[]; officialUrl?:string; datasetUrl?:string; note?:string; checkedAt?:string; gate?:string; distance?:number; }
+const { data: attractions } = await useLazyFetch<{items:Place[]}>('/attractions.json', {server:false});
+const { data: additions } = await useLazyFetch<{items:Place[]}>('/explore-places.json', {server:false});
+const { data: rail } = await useLazyFetch<{lines:{code:string;color:string;stations:{name:string;lat:number;lon:number}[]}[]}>('/mrt-lines.json', {server:false});
+const query=ref(''); const suggestionsOpen=ref(false); const activeSuggestion=ref(-1); const category=ref('All'); const expanded=ref<string|null>(null); const limit=ref(12);
+function fmt(m:number){return m<1000?`${Math.round(m/10)*10} m`:`${(m/1000).toFixed(1)} km`;}
+const places=computed(()=>[...(additions.value?.items??[]),...(attractions.value?.items??[]).map(p=>({...p,category:'Attractions'}))]);
+const suggestions=computed(()=>{const q=query.value.toLowerCase().trim();if(!q)return [];return places.value.filter(p=>(category.value==='All'||p.category===category.value)&&`${p.name} ${p.address} ${p.area??''} ${p.category}`.toLowerCase().includes(q)).slice(0,6);});
+function chooseSuggestion(p:Place){query.value=p.name;suggestionsOpen.value=false;activeSuggestion.value=-1;}
+function searchKeys(e:KeyboardEvent){if(e.key==='Escape'){suggestionsOpen.value=false;return;}if(e.key==='ArrowDown'||e.key==='ArrowUp'){e.preventDefault();suggestionsOpen.value=true;const n=suggestions.value.length;if(n)activeSuggestion.value=(activeSuggestion.value+(e.key==='ArrowDown'?1:-1)+n)%n;}if(e.key==='Enter'&&suggestionsOpen.value&&activeSuggestion.value>=0){e.preventDefault();const p=suggestions.value[activeSuggestion.value];if(p)chooseSuggestion(p);}}
+function blurSearch(){setTimeout(()=>{suggestionsOpen.value=false;},150);}
+const filtered=computed(()=>places.value.filter(p=>(category.value==='All'||p.category===category.value)&&`${p.name} ${p.address} ${p.area??''} ${p.category}`.toLowerCase().includes(query.value.toLowerCase().trim())).map(p=>({...p,distance:undefined})));
+watch([query,category],()=>{limit.value=12;expanded.value=null;});
+function lineChips(name:string){return rail.value?.lines.filter(l=>l.stations.some(s=>s.name===name))??[];}
+function mrtOptions(p:Place){return p.mrtOptions??(p.transportStations??(p.mrt?[p.mrt.name]:[])).map(name=>({name,entrance:'',access:p.category==='Attractions'?'': 'Official station option; onward travel may be needed. Check the official visit information.'}));}
 </script>
-
 <template>
-	<div class="bg">
-		<div class="pg">
-			<m3e-heading class="heading" variant="headline" size="large">Explore</m3e-heading>
+<div class="bg"><main class="pg">
+<h1>Explore</h1><p class="intro">Places to enjoy, nearby or across Singapore.</p>
+<div class="controls"><div class="search-wrap"><input v-model="query" type="search" placeholder="Search places" aria-label="Search places" role="combobox" aria-autocomplete="list" aria-controls="place-suggestions" :aria-expanded="suggestionsOpen && suggestions.length>0" :aria-activedescendant="activeSuggestion>=0 ? `suggestion-${activeSuggestion}` : undefined" @input="suggestionsOpen=true;activeSuggestion=-1" @focus="suggestionsOpen=true" @blur="blurSearch" @keydown="searchKeys"/><ul v-if="suggestionsOpen && suggestions.length" id="place-suggestions" class="suggestions" role="listbox" aria-label="Matching places"><li v-for="(p,i) in suggestions" :id="`suggestion-${i}`" :key="p.name" role="option" :aria-selected="activeSuggestion===i" @mousedown.prevent="chooseSuggestion(p)" @touchend.prevent="chooseSuggestion(p)" @click="chooseSuggestion(p)"><span>{{p.name}}</span><small>{{p.category}}</small></li></ul></div><div class="control-row"><select v-model="category" aria-label="Category"><option>All</option><option>Attractions</option><option>Libraries</option><option>Parks</option></select></div></div>
 
-			<m3e-card>
-				<m3e-heading slot="header" variant="title" size="large">
-					{{ data?.count ?? 23 }} major attractions
-				</m3e-heading>
-				<div slot="content" class="intro">
-					<p>
-						A curated list of Singapore's major attractions with addresses, MRT access
-						(including entrance options where available) and the nearest bus stop.
-						Distances are straight-line from the listed address, not walking distance.
-					</p>
-					<p>
-						The Mandai wildlife parks (Singapore Zoo, Night Safari, River Wonders, Bird
-						Paradise, Rainforest Wild Asia) are best reached by the M2 Mandai Khatib Bus
-						shuttle from Khatib MRT (NS14) - the geographically nearest stations have no
-						practical walking route. Sentosa attractions are reached via HarbourFront
-						MRT (NE1/CC29), then the Sentosa Express, cable car or bus.
-					</p>
-				</div>
-			</m3e-card>
-
-			<input
-				v-model="query"
-				class="filter"
-				type="search"
-				placeholder="Filter by name or address"
-				aria-label="Filter attractions"
-			/>
-
-			<m3e-card>
-				<m3e-list slot="content" variant="segmented">
-					<m3e-list-item v-for="item in filtered" :key="item.name">
-						{{ item.name }}
-						<img
-							v-if="item.img"
-							class="art"
-							:src="`/img/attractions/${item.img}-640.webp`"
-							:srcset="`/img/attractions/${item.img}-320.webp 320w, /img/attractions/${item.img}-640.webp 640w`"
-							sizes="(max-width: 767px) 100vw, 640px"
-							:alt="`Illustration of ${item.name}`"
-							width="640"
-							height="360"
-							loading="lazy"
-							decoding="async"
-						/>
-						<div slot="supporting-text" class="supporting">
-							<span class="addr">{{ item.address }}</span>
-							<span v-if="item.mrt && !item.mrtOptions" class="near">
-								<span
-									v-for="ln in item.mrt.lines"
-									:key="ln.code"
-									class="chip"
-									:style="{ backgroundColor: ln.color }"
-									>{{ ln.code }}</span
-								>
-								{{ item.mrt.name }} · {{ fmtDist(item.mrt.dist) }}
-							</span>
-							<div v-if="item.mrtOptions" class="access-options">
-								<span class="access-label">MRT options</span>
-								<div
-									v-for="option in item.mrtOptions"
-									:key="option.name"
-									class="access-row"
-								>
-									<span class="near">
-										<span
-											v-for="ln in option.lines"
-											:key="ln.code"
-											class="chip"
-											:style="{ backgroundColor: ln.color }"
-											>{{ ln.code }}</span
-										>
-										<strong>{{ option.name }}</strong
-										><template v-if="option.entrance">
-											· {{ option.entrance }}</template
-										><br />
-										<span class="access-hint">{{ option.access }}</span>
-									</span>
-									<NuxtLink
-										class="go-btn mrt"
-										:to="`/mrt?to=${encodeURIComponent(option.name)}`"
-										>Go</NuxtLink
-									>
-								</div>
-							</div>
-							<span v-if="item.bus" class="near">
-								Bus stop {{ item.bus.code }} ({{ item.bus.name }}) ·
-								{{ fmtDist(item.bus.dist) }}
-							</span>
-							<span v-if="item.mrt && !item.mrtOptions" class="go-row">
-								<NuxtLink
-									class="go-btn mrt"
-									:to="`/mrt?to=${encodeURIComponent(item.mrt.name)}`"
-								>
-									<Icon name="material-symbols:train" />
-									Go by MRT
-								</NuxtLink>
-							</span>
-							<span v-if="item.note" class="near note">{{ item.note }}</span>
-						</div>
-					</m3e-list-item>
-					<m3e-list-item v-if="data && !filtered.length"> No matches. </m3e-list-item>
-				</m3e-list>
-			</m3e-card>
-			<DataCredits />
-		</div>
-	</div>
+<p class="preview-note">Original illustrations, not verified entrance views. Check official visit information for current access.</p>
+<p class="count">{{filtered.length}} places</p>
+<div class="places"><article v-for="p in filtered.slice(0,limit)" :key="p.name" class="place"><div class="place-top"><figure class="thumb"><img :src="p.previewImage ?? `/img/attractions/${p.img}-320.webp`" :alt="`Illustration for ${p.name}, not an entrance photo`" width="320" height="180"/><figcaption>Illustration</figcaption></figure><div class="card-copy"><span class="meta">{{p.category}}{{p.area?' · '+p.area:''}}</span><h2>{{p.name}}</h2><p class="description">{{p.description??p.address}}</p></div><button class="go" :aria-expanded="expanded===p.name" @click="expanded=expanded===p.name?null:p.name">{{expanded===p.name?'Close':'Go there'}}</button></div>
+<div v-if="expanded===p.name" class="details"><img v-if="p.img || p.previewImage" :src="p.previewImage ?? `/img/attractions/${p.img}-640.webp`" :alt="`Illustration of ${p.name}`" width="640" height="360"/><p v-if="p.img || p.previewImage" class="status">Illustration, not a verified entrance image.</p><p>{{p.address}}</p><p v-if="p.note">{{p.note}}</p><div v-for="m in mrtOptions(p)" :key="m.name" class="transport"><div><span v-for="line in lineChips(m.name)" :key="line.code" class="chip" :style="{background:line.color}">{{line.code}}</span><strong>{{m.name}}</strong><p>{{m.entrance}} {{m.access}}</p></div><NuxtLink :to="`/mrt?to=${encodeURIComponent(m.name)}`" class="go">Go by MRT</NuxtLink></div><div v-if="p.bus" class="transport"><div><strong>{{p.bus.name}}</strong><p>Stop {{p.bus.code}}<template v-if="p.bus.dist!==undefined"> · {{fmt(p.bus.dist)}} from listed point, not walking distance</template><template v-if="p.bus.access"> · {{p.bus.access}}</template></p></div><NuxtLink :to="`/bus?stop=${p.bus.code}`" class="go">Bus arrivals</NuxtLink></div><p v-if="!p.bus && p.category!=='Attractions'" class="status">Bus-stop access is not verified for this listing. Check official visit information.</p><p v-if="p.officialUrl"><a :href="p.officialUrl" target="_blank" rel="noopener noreferrer">Official visit information</a> · Checked {{p.checkedAt}}</p><p v-if="p.transportSources?.length" class="status">Transport checked {{p.checkedAt}} · <a v-for="(url,i) in p.transportSources" :key="url" :href="url" target="_blank" rel="noopener noreferrer">{{i ? " / " : ""}}Source {{i+1}}</a></p><p v-if="p.datasetUrl" class="status"><a :href="p.datasetUrl" target="_blank" rel="noopener noreferrer">Location dataset</a> · indicative point, not a verified entrance</p></div></article></div>
+<p v-if="!filtered.length" role="status">No matches. Try another category or search.</p><button v-if="filtered.length>limit" class="more" @click="limit+=12">Show more</button>
+<p class="source">Park and library information checked against official NParks and NLB visit pages on 1 October 2026. Individual source links are in the place details. Illustrations are original concept art, not agency photos or verified entrance images.</p><DataCredits/>
+</main></div>
 </template>
-
-<style lang="css" scoped>
-.bg {
-	width: 100%;
-	height: 100%;
-	box-sizing: border-box;
-	background-color: var(--md-sys-color-surface-container);
-}
-
-.pg {
-	width: 100%;
-	height: 100%;
-	min-height: 0;
-	overflow-y: auto;
-	background-color: var(--md-sys-color-surface);
-	border-radius: 32px;
-	box-sizing: border-box;
-	display: flex;
-	flex-direction: column;
-	padding: 16px;
-	gap: 16px;
-}
-
-.pg::-webkit-scrollbar {
-	display: none;
-}
-
-.heading {
-	color: var(--md-sys-color-on-surface);
-}
-
-.intro p {
-	margin: 8px 0;
-	font-size: 14px;
-	line-height: 1.5;
-	color: var(--md-sys-color-on-surface);
-}
-.intro a {
-	font-size: 13px;
-	color: var(--md-sys-color-primary);
-}
-
-.art {
-	display: block;
-	width: 100%;
-	max-width: 640px;
-	height: auto;
-	aspect-ratio: 16 / 9;
-	margin: 6px 0 4px;
-	border-radius: 12px;
-	background-color: var(--md-sys-color-surface-container);
-}
-
-.supporting {
-	display: flex;
-	flex-direction: column;
-	gap: 2px;
-}
-.near {
-	font-size: 12px;
-	color: var(--md-sys-color-on-surface-variant);
-}
-.note {
-	color: var(--md-sys-color-primary);
-}
-.go-row {
-	display: flex;
-	justify-content: flex-end;
-	gap: 8px;
-	margin-top: 4px;
-}
-.go-btn {
-	display: inline-flex;
-	align-items: center;
-	gap: 4px;
-	padding: 4px 12px;
-	border-radius: 16px;
-	font-size: 12px;
-	font-weight: 600;
-	line-height: 18px;
-	text-decoration: none;
-	color: #ffffff;
-}
-.go-btn.mrt {
-	background-color: var(--sg-brand);
-}
-
-.chip {
-	display: inline-block;
-	padding: 0 5px;
-	margin-right: 3px;
-	border-radius: 4px;
-	font-size: 11px;
-	font-weight: 700;
-	line-height: 16px;
-	color: #ffffff;
-}
-
-.filter {
-	box-sizing: border-box;
-	width: 100%;
-	padding: 12px 16px;
-	font-size: 15px;
-	font-family: inherit;
-	color: var(--md-sys-color-on-surface);
-	background: var(--md-sys-color-surface-container-low);
-	border: 1px solid var(--md-sys-color-outline-variant);
-	border-radius: 999px;
-	outline: none;
-}
-.filter:focus {
-	border-color: var(--md-sys-color-primary);
-}
-
-@media (max-width: 767px) {
-	.pg {
-		border-radius: 0;
-		padding: 14px 14px calc(14px + env(safe-area-inset-bottom));
-		gap: 14px;
-	}
-}
-
-.access-options {
-	display: grid;
-	gap: 5px;
-	margin-top: 5px;
-}
-.access-label {
-	font-size: 12px;
-	font-weight: 650;
-	color: var(--md-sys-color-on-surface-variant);
-}
-.access-row {
-	display: flex;
-	align-items: center;
-	gap: 8px;
-	justify-content: space-between;
-	padding: 7px 9px;
-	border-radius: 10px;
-	background: var(--md-sys-color-surface-container);
-}
-.access-row .near {
-	line-height: 1.5;
-}
-.access-row .chip {
-	margin-right: 2px;
-}
-.access-hint {
-	margin-left: 2px;
-}
-.access-row .go-btn {
-	flex: none;
-}
+<style scoped>
+.bg{height:100%;width:100%;background:var(--md-sys-color-surface-container)}.pg{height:100%;box-sizing:border-box;overflow:auto;padding:24px;background:var(--md-sys-color-surface);border-radius:32px;color:var(--md-sys-color-on-surface)}h1{margin:0;font-size:30px;font-weight:500}.intro{margin:8px 0 20px;font-size:15px}.controls{max-width:720px}.controls input,.controls select{font:inherit;color:inherit;background:var(--md-sys-color-surface-container-lowest);border:1px solid var(--md-sys-color-outline-variant);border-radius:12px;min-height:46px;padding:10px 12px;box-sizing:border-box;width:100%;min-width:0}.control-row{display:grid;grid-template-columns:1fr;gap:8px;margin-top:8px}.search-wrap{position:relative}.suggestions{position:absolute;z-index:5;top:100%;left:0;right:0;list-style:none;margin:4px 0 0;padding:5px;background:var(--md-sys-color-surface-container-lowest);border:1px solid var(--md-sys-color-outline-variant);border-radius:12px;box-shadow:0 5px 16px #0002}.suggestions li{display:flex;justify-content:space-between;gap:8px;align-items:center;padding:12px 9px;border-radius:7px;cursor:pointer;font-size:14px}.suggestions li:hover,.suggestions li[aria-selected=true]{background:var(--md-sys-color-surface-container)}.suggestions small{font-size:11px;color:var(--md-sys-color-on-surface-variant)}.preview-note{font-size:12px;color:var(--md-sys-color-on-surface-variant);margin:12px 0}.count{font-size:12px;margin:16px 0 10px;color:var(--md-sys-color-on-surface-variant)}.places{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;align-items:start}.place{border:1px solid var(--md-sys-color-outline-variant);border-radius:18px;background:var(--md-sys-color-surface-container-lowest);padding:16px}.place-top{display:grid;grid-template-columns:88px minmax(0,1fr);gap:8px 12px;align-items:start}.thumb{margin:0;grid-row:1 / span 2}.thumb img{display:block;width:88px;height:58px;object-fit:cover;border-radius:9px}.thumb figcaption{font-size:10px;color:var(--md-sys-color-on-surface-variant);margin-top:4px}.card-copy{min-width:0}.place-top>.go{grid-column:2;justify-self:end}.place-top h2{margin-top:3px}.meta,.distance{font-size:12px;color:var(--md-sys-color-on-surface-variant)}h2{font-size:17px;margin:5px 0;font-weight:650}.description{font-size:13px;line-height:1.45;margin:0}.go,.more{display:inline-flex;align-items:center;justify-content:center;flex-shrink:0;min-height:44px;box-sizing:border-box;background:var(--sg-brand-strong);color:#fff;border:0;border-radius:10px;padding:10px 12px;font:inherit;font-size:13px;font-weight:600;text-decoration:none;cursor:pointer}.details{border-top:1px solid var(--md-sys-color-outline-variant);margin-top:14px;padding-top:14px;font-size:13px;line-height:1.5}.details img{width:100%;height:auto;border-radius:12px}.transport{display:flex;align-items:center;justify-content:space-between;gap:12px;border-top:1px solid var(--md-sys-color-outline-variant);padding:10px 0}.transport p{margin:4px 0}.status,.source{font-size:12px;line-height:1.5;color:var(--md-sys-color-on-surface-variant)}.chip{display:inline-block;padding:2px 5px;border-radius:5px;color:#fff;font-size:11px;margin-right:5px;font-weight:700}.gate{padding:10px;background:var(--md-sys-color-surface-container);border-radius:8px}.more{display:flex;margin:18px auto}.source{margin:22px 0}a{color:var(--sg-brand-text)}.go{color:#fff}:is(button,input,select,a):focus-visible{outline:3px solid var(--sg-brand-text);outline-offset:3px}@media(min-width:768px){.place-top{grid-template-columns:88px minmax(0,1fr) auto;align-items:center}.thumb{grid-row:1}.place-top>.go{grid-column:3;align-self:center}}@media(max-width:767px){.pg{padding:18px 14px;border-radius:0}.places{grid-template-columns:1fr}.place{padding:14px}.intro{margin-bottom:16px}.search-wrap{position:relative}.suggestions{position:absolute;z-index:5;top:100%;left:0;right:0;list-style:none;margin:4px 0 0;padding:5px;background:var(--md-sys-color-surface-container-lowest);border:1px solid var(--md-sys-color-outline-variant);border-radius:12px;box-shadow:0 5px 16px #0002}.suggestions li{display:flex;justify-content:space-between;gap:8px;align-items:center;padding:12px 9px;border-radius:7px;cursor:pointer;font-size:14px}.suggestions li:hover,.suggestions li[aria-selected=true]{background:var(--md-sys-color-surface-container)}.suggestions small{font-size:11px;color:var(--md-sys-color-on-surface-variant)}.preview-note{line-height:1.5}}
 </style>
