@@ -24,6 +24,31 @@ interface HawkerData {
 	items: HawkerItem[];
 }
 
+interface CultureItem {
+	id: string;
+	name: string;
+	tag: string;
+	area: string;
+	img: string;
+	address: string;
+	story: string;
+	tips: string[];
+	mrt: { name: string; lines: HawkerLine[]; meters: number; minutes: number }[];
+	mapsUrl: string;
+	sources: { label: string; url: string }[];
+}
+interface CultureData {
+	title: string;
+	intro: string;
+	banner: string;
+	note: string;
+	items: CultureItem[];
+	video: { title: string; author: string; url: string };
+}
+const { data: culture } = await useLazyFetch<CultureData>('/food-culture.json', {
+	server: false,
+});
+
 const { data } = await useLazyFetch<HawkerData>('/hawker-centres.json', {
 	server: false,
 });
@@ -47,6 +72,65 @@ const filtered = computed(() => {
 	<div class="bg">
 		<div class="pg">
 			<m3e-heading class="heading" variant="headline" size="large">Food</m3e-heading>
+
+			<m3e-card v-if="culture">
+				<m3e-heading slot="header" variant="title" size="large">
+					{{ culture.title }}
+				</m3e-heading>
+				<div slot="content" class="culture">
+					<img class="banner" :src="culture.banner" alt="" loading="lazy" />
+					<p class="intro-text">{{ culture.intro }}</p>
+					<p class="note">{{ culture.note }} Walking times are map estimates from the station.</p>
+					<article v-for="c in culture.items" :key="c.id" class="spot">
+						<img class="spot-img" :src="c.img" alt="" loading="lazy" />
+						<span class="tag">{{ c.tag }} · {{ c.area }}</span>
+						<h3 class="spot-name">{{ c.name }}</h3>
+						<span class="addr">{{ c.address }}</span>
+						<p class="intro-text">{{ c.story }}</p>
+						<ul class="tips">
+							<li v-for="t in c.tips" :key="t">{{ t }}</li>
+						</ul>
+						<span v-for="m in c.mrt" :key="m.name" class="near">
+							<span
+								v-for="ln in m.lines"
+								:key="ln.code"
+								class="chip"
+								:style="{ backgroundColor: ln.color }"
+								>{{ ln.code }}</span
+							>
+							{{ m.name }} · about {{ fmtDist(m.meters) }}, {{ m.minutes }} min walk
+						</span>
+						<span class="src">
+							Sources:
+							<a
+								v-for="s in c.sources"
+								:key="s.url"
+								:href="s.url"
+								target="_blank"
+								rel="noopener"
+								>{{ s.label }}</a
+							>
+						</span>
+						<span class="go-row">
+							<a class="go-btn alt" :href="c.mapsUrl" target="_blank" rel="noopener">
+								<Icon name="material-symbols:map" />
+								Map
+							</a>
+							<NuxtLink
+								class="go-btn mrt"
+								:to="`/mrt?to=${encodeURIComponent(c.mrt[0]!.name)}`"
+							>
+								<Icon name="material-symbols:train" />
+								Go by MRT
+							</NuxtLink>
+						</span>
+					</article>
+					<a class="video" :href="culture.video.url" target="_blank" rel="noopener">
+						<Icon name="material-symbols:play-circle" />
+						<span>Watch: {{ culture.video.title }} · {{ culture.video.author }} (YouTube)</span>
+					</a>
+				</div>
+			</m3e-card>
 
 			<m3e-card>
 				<m3e-heading slot="header" variant="title" size="large">
@@ -190,6 +274,21 @@ const filtered = computed(() => {
 .go-btn.mrt {
 	background-color: var(--sg-brand);
 }
+
+.culture { display: flex; flex-direction: column; gap: 12px; }
+.banner, .spot-img { width: 100%; max-height: 280px; aspect-ratio: 16 / 9; object-fit: cover; border-radius: 16px; display: block; }
+.intro-text { margin: 0; font-size: 14px; line-height: 1.5; color: var(--md-sys-color-on-surface); }
+.spot { display: flex; flex-direction: column; gap: 6px; padding-top: 12px; border-top: 1px solid var(--md-sys-color-outline-variant); }
+.spot-name { margin: 0; font-size: 17px; font-weight: 700; color: var(--md-sys-color-on-surface); }
+.tag { align-self: flex-start; padding: 0 10px; border-radius: 10px; font-size: 11px; font-weight: 700; line-height: 20px; color: var(--md-sys-color-on-primary-container); background: var(--md-sys-color-primary-container); }
+.addr { font-size: 12px; color: var(--md-sys-color-on-surface-variant); }
+.note { margin: 0; font-size: 12px; font-style: italic; color: var(--md-sys-color-on-surface-variant); }
+.tips { margin: 0; padding-left: 18px; font-size: 13px; line-height: 1.5; color: var(--md-sys-color-on-surface-variant); }
+.src { font-size: 12px; color: var(--md-sys-color-on-surface-variant); }
+.src a { margin-left: 8px; color: var(--md-sys-color-primary); }
+.go-btn.alt { background-color: var(--md-sys-color-secondary); }
+.video :deep(svg), .video svg { flex: none; width: 22px; height: 22px; }
+.video { display: flex; align-items: center; gap: 8px; font-size: 13px; color: var(--md-sys-color-primary); text-decoration: none; }
 
 .chip {
 	display: inline-block;

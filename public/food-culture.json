@@ -1,0 +1,118 @@
+{
+  "title": "Local food culture highlights",
+  "intro": "Food spots tied to Singapore's everyday food culture: family-run stalls and long-standing makers behind dishes locals grew up with. We'll keep adding more.",
+  "asOf": "2026-10-01",
+  "banner": "/img/food/joochiat.webp",
+  "items": [
+    {
+      "id": "mohgan-prata",
+      "name": "Mr & Mrs Mohgan Super Crispy Roti Prata",
+      "tag": "Prata",
+      "img": "/img/food/prata.webp",
+      "address": "300 Joo Chiat Rd, Tin Yeang Restaurant, Singapore 427551",
+      "story": "A prata couple known for crisp, thin prata with chicken curry, run from a stall inside Tin Yeang Restaurant. Time Out reported in 2019 that the Mohgans had run prata for over thirty years, first down the road at Crane Road.",
+      "tips": [
+        "Listings show morning opening hours and a Wednesday closure. The video title says it sells out by noon, so go early and check before you travel.",
+        "Not halal-certified (Eatbook, 2026)."
+      ],
+      "lat": 1.3097383,
+      "lon": 103.902078,
+      "mrt": [
+        {
+          "name": "Marine Parade",
+          "lines": [
+            {
+              "code": "TE",
+              "color": "#9D5B25"
+            }
+          ],
+          "meters": 1110,
+          "minutes": 15
+        },
+        {
+          "name": "Eunos",
+          "lines": [
+            {
+              "code": "EW",
+              "color": "#009645"
+            }
+          ],
+          "meters": 1450,
+          "minutes": 20
+        }
+      ],
+      "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Mr+%26+Mrs+Mohgan+Super+Crispy+Roti+Prata&query_place_id=ChIJuQA8ehEY2jERkKcv-uEtqAc",
+      "sources": [
+        {
+          "label": "Time Out",
+          "url": "https://www.timeout.com/singapore/restaurants/hawker-spotlight-mr-and-mrs-mohgans-crispy-prata"
+        },
+        {
+          "label": "Eatbook",
+          "url": "https://eatbook.sg/mr-and-mrs-mohgan-super-crispy-roti-prata/"
+        }
+      ],
+      "area": "Joo Chiat"
+    },
+    {
+      "id": "kway-guan-huat",
+      "name": "Kway Guan Huat Joo Chiat Popiah",
+      "tag": "Popiah",
+      "img": "/img/food/popiah.webp",
+      "address": "95 Joo Chiat Rd, Singapore 427389",
+      "story": "Popiah skin made the traditional way, by spreading dough on a hot pan in one smooth motion. The Straits Times reports the shop at 95 Joo Chiat Road was founded in 1938 and is now run by the third generation. The shop describes a family recipe from Fujian and offers popiah tours.",
+      "tips": [
+        "The shophouse was rebuilt in a Peranakan style in 2018, according to the shop.",
+        "Check opening hours and tour bookings with the shop before you go."
+      ],
+      "lat": 1.3140549,
+      "lon": 103.8992913,
+      "mrt": [
+        {
+          "name": "Eunos",
+          "lines": [
+            {
+              "code": "EW",
+              "color": "#009645"
+            }
+          ],
+          "meters": 1050,
+          "minutes": 15
+        },
+        {
+          "name": "Paya Lebar",
+          "lines": [
+            {
+              "code": "CC",
+              "color": "#FA9E0D"
+            },
+            {
+              "code": "EW",
+              "color": "#009645"
+            }
+          ],
+          "meters": 1060,
+          "minutes": 15
+        }
+      ],
+      "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Kway+Guan+Huat+Joochiat+Popiah&query_place_id=ChIJR0m4GhEY2jERpg23ao4RJxA",
+      "sources": [
+        {
+          "label": "Straits Times, 2024",
+          "url": "https://www.straitstimes.com/singapore/famous-popiah-and-peranakan-kueh-chang-in-katong-joo-chiat-feature-in-nhb-s-latest-heritage-galleries"
+        },
+        {
+          "label": "Shop history",
+          "url": "https://www.joochiatpopiah.com/our-history"
+        }
+      ],
+      "area": "Joo Chiat"
+    }
+  ],
+  "video": {
+    "title": "I Finally Try Singapore's LEGENDARY Roti Prata (sold out by noon!)",
+    "author": "Ghib Ojisan",
+    "url": "https://youtu.be/mHjkkSRgjE8"
+  },
+  "note": "Illustrations are concept art. The scenes, people and dishes are not photos of these shops or their food."
+}
