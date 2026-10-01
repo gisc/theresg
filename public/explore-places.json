@@ -26,19 +26,10 @@
       "description": "Seaside spaces for walking and spending time outdoors.",
       "address": "East Coast Park, Singapore",
       "officialUrl": "https://www.nparks.gov.sg/visit/parks/park-detail/east-coast-park/",
-      "transportStations": [
-        "Marine Parade"
-      ],
-      "note": "Choose the park area you want to visit. The options here serve Marine Cove / Area C, not the entire park. Bus 401 runs only on Saturdays, Sundays and public holidays. Check current NParks notices before visiting.",
+      "transportStations": [],
+      "note": "Choose the park area you want to visit. Bus stop 92289 Marine Cove serves Marine Cove / Area C on East Coast Park Service Road, not the entire park. Service 401 runs only on Saturdays, Sundays and public holidays. Check current NParks notices before visiting.",
       "checkedAt": "2026-10-01",
       "previewImage": "/img/explore/east-coast.webp",
-      "mrtOptions": [
-        {
-          "name": "Marine Parade",
-          "entrance": "",
-          "access": "For the Marine Cove / Area C visit point: pedestrian access continues via the Marine Parade underpass and East Coast Park Service Road. Use signed pedestrian crossings; no station exit or walking time is guaranteed."
-        }
-      ],
       "bus": {
         "code": "92289",
         "name": "Marine Cove",
@@ -61,17 +52,17 @@
         "Clementi",
         "Haw Par Villa"
       ],
-      "note": "Bus stop 17291 West Coast Pk serves the eastern park section along West Coast Highway, not every park area. Services 175 and 176 were confirmed by the live LTA-backed arrivals feed. Clementi and Haw Par Villa are official station options with onward travel needed. Check current NParks notices.",
+      "note": "Bus stop 17291 West Coast Pk is along West Coast Highway. Services 175 and 176 were confirmed by the live LTA-backed arrivals feed. Clementi and Haw Par Villa are official station options with onward travel needed. Check current NParks notices.",
       "checkedAt": "2026-10-01",
       "previewImage": "/img/explore/west-coast.webp",
       "bus": {
         "code": "17291",
         "name": "West Coast Pk",
-        "access": "West Coast Highway beside the eastern park section. Services 175 and 176. Choose your park area and follow signed pedestrian access; do not cross the highway except at a permitted crossing."
+        "access": "West Coast Highway. Services 175 and 176. Choose your park area and follow signed pedestrian access; do not cross the highway except at a permitted crossing."
       },
       "transportSources": [
-        "https://www.there.sg/api/bus-arrivals?stopCode=17291",
-        "https://www.sbstransit.com.sg/Service/BusService?ServiceNo=175"
+        "https://www.sbstransit.com.sg/Service/BusService?Dir=2&ServiceNo=175&ServiceType=Basic",
+        "https://svc.simplygo.com.sg/eservice/eguide/service_route.php?service=176"
       ]
     },
     {
