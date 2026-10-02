@@ -13,9 +13,9 @@ import {
 	type Leg,
 } from '~~/shared/utils/journey';
 
-definePageMeta({ title: 'Plan a trip' });
+definePageMeta({ title: 'Go There' });
 useSeoMeta({
-	title: 'Plan a trip: bus and MRT',
+	title: 'Go There: bus and MRT',
 	robots: 'noindex, nofollow',
 });
 
@@ -259,7 +259,15 @@ async function resolvePostal(side: 'from' | 'to') {
 		next.set(place.id, links);
 		postalLinks.value = next;
 		if (ref_.value?.id === place.id) {
-			ref_.value = { id: place.id, name: `${tidyAddress(r.address, code)} (${code})`, sub: `Postal code ${code}`, kind: 'postal', lat: r.lat, lon: r.lon };
+			const named = !place.name.startsWith('Postal code');
+			ref_.value = {
+				id: place.id,
+				name: named ? place.name : `${tidyAddress(r.address, code)} (${code})`,
+				sub: `Postal code ${code}`,
+				kind: 'postal',
+				lat: r.lat,
+				lon: r.lon,
+			};
 		}
 	} catch (e) {
 		const status = (e as { statusCode?: number }).statusCode;
@@ -361,11 +369,16 @@ function dataAsOf() {
 <template>
 	<div class="bg">
 		<div class="pg">
-			<m3e-heading class="heading" variant="headline" size="large">Plan a trip</m3e-heading>
+			<m3e-heading class="heading" variant="headline" size="large">Go There</m3e-heading>
 			<m3e-card>
 				<div slot="content" class="planner">
 					<div class="fields">
-						<div class="flabel">From</div>
+						<div class="from-row">
+							<div class="flabel">From</div>
+							<button type="button" class="live-btn" :disabled="!ready || locationBusy" @click="useLocation">
+								{{ locationBusy ? 'Finding your location...' : 'Use my location' }}
+							</button>
+						</div>
 						<JourneyPlaceInput
 							v-model="from"
 							label="Station, bus stop, place or postal code"
@@ -377,11 +390,6 @@ function dataAsOf() {
 						</m3e-icon-button>
 						<div class="flabel">To</div>
 						<JourneyPlaceInput v-model="to" label="Station, bus stop, place or postal code" :places="places" @focused="loadExtra()" />
-					</div>
-					<div class="location-row">
-						<button type="button" class="live-btn" :disabled="!ready || locationBusy" @click="useLocation">
-							{{ locationBusy ? 'Finding your location...' : 'Use my location' }}
-						</button>
 					</div>
 					<p class="hint" role="status" aria-live="polite">{{ locationMsg || 'Use your location as From after granting permission, or enter a start manually. Your coordinates are sent to this site and OneMap to find walking routes, but are not saved as a preference.' }}</p>
 					<p v-if="postalMsg.from || postalMsg.to" class="hint err">{{ postalMsg.from || postalMsg.to }}</p>
@@ -475,8 +483,8 @@ function dataAsOf() {
 </template>
 
 <style lang="css" scoped>
-.location-row { display: flex; justify-content: flex-end; }
-.location-row button:disabled { opacity: 0.6; cursor: wait; }
+.from-row { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
+.from-row button:disabled { opacity: 0.6; cursor: wait; }
 .bg {
 	width: 100%;
 	height: 100%;

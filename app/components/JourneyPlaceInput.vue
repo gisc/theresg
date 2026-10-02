@@ -33,6 +33,29 @@ watch(
 	{ immediate: true },
 );
 
+// Names that are not in the local lists (schools, malls, offices) are looked up through OneMap.
+interface RemoteHit { name: string; address: string; postal: string; lat: number; lon: number }
+const remote = ref<{ q: string; hits: JourneyPlace[] }>({ q: '', hits: [] });
+const tidy = (s: string) => s.toLowerCase().replace(/(^|[\s(/-])([a-z])/g, (_m, a, b) => a + b.toUpperCase());
+let remoteTimer: ReturnType<typeof setTimeout> | undefined;
+watch(query, (value) => {
+	clearTimeout(remoteTimer);
+	const q = value.trim();
+	if (q.length < 3 || /^\d{6}$/.test(q) || q === props.modelValue?.name) return;
+	remoteTimer = setTimeout(async () => {
+		try {
+			const hits = await $fetch<RemoteHit[]>('/api/place-search', { query: { q } });
+			if (query.value.trim() !== q) return;
+			remote.value = {
+				q,
+				hits: hits.map((h) => ({ id: `pc:${h.postal}`, name: tidy(h.name), sub: tidy(h.address), kind: 'postal' as const, lat: h.lat, lon: h.lon })),
+			};
+		} catch {
+			remote.value = { q: '', hits: [] };
+		}
+	}, 300);
+});
+
 const matches = computed(() => {
 	const q = query.value.trim().toLowerCase();
 	if (q.length < 2 || q === props.modelValue?.name.toLowerCase()) return [];
@@ -47,7 +70,9 @@ const matches = computed(() => {
 		else if (hay.includes(q)) contains.push(p);
 		if (starts.length >= 8) break;
 	}
-	return [...starts, ...contains].slice(0, 8);
+	const local = [...starts, ...contains].slice(0, 8);
+	const extra = remote.value.q.toLowerCase() === q ? remote.value.hits.filter((h) => !local.some((l) => l.id === h.id)) : [];
+	return [...local, ...extra].slice(0, 10);
 });
 
 const kindLabel: Record<JourneyPlace['kind'], string> = {

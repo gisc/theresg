@@ -1,19 +1,13 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-labelledby="t">
-  <title id="t">ThereSG - bus and MRT train mark</title>
-  <circle cx="32" cy="32" r="30" fill="#ffffff"/>
-  <g>
-    <rect x="10" y="14" width="20" height="27" rx="5" fill="#E62333"/>
-    <rect x="13.4" y="17.8" width="13.2" height="8.6" rx="2" fill="#ffffff"/>
-    <circle cx="15.4" cy="33.6" r="1.9" fill="#ffffff"/>
-    <circle cx="24.6" cy="33.6" r="1.9" fill="#ffffff"/>
-    <rect x="12" y="41" width="16" height="3.4" rx="1.7" fill="#E62333"/>
-  </g>
-  <g>
-    <path d="M37.5 14 h11.5 a5 5 0 0 1 5 5 v12.5 l-4.3 8.6 h-12.4 l-4.3 -8.6 v-12.5 a5 5 0 0 1 5 -5 z" fill="#E62333"/>
-    <rect x="37" y="17.8" width="13.2" height="7.6" rx="2" fill="#ffffff"/>
-    <circle cx="39" cy="32.4" r="1.9" fill="#ffffff"/>
-    <circle cx="48.2" cy="32.4" r="1.9" fill="#ffffff"/>
-    <line x1="37.5" y1="44" x2="34.5" y2="49" stroke="#E62333" stroke-width="3" stroke-linecap="round"/>
-    <line x1="50" y1="44" x2="53" y2="49" stroke="#E62333" stroke-width="3" stroke-linecap="round"/>
-  </g>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="ThereSG">
+<title>ThereSG</title>
+<rect width="64" height="64" rx="14" fill="#fff"/>
+<svg x="7" y="7" width="50" height="50" viewBox="70 102 372 372">
+
+<defs><mask id="arch" maskUnits="userSpaceOnUse" x="0" y="0" width="512" height="512"><path d="M126 210 Q256 142 386 210" fill="none" stroke="white" stroke-width="46" stroke-linecap="round"/></mask></defs>
+<path d="M126 210 Q256 142 386 210" fill="none" stroke="#FFB800" stroke-width="46" stroke-linecap="round"/>
+<path d="M256 184 V400" fill="none" stroke="#0076C8" stroke-width="46" stroke-linecap="round"/>
+<!-- Intersection: multiply blend in sRGB. #0076C8 x #FFB800 = #005500. -->
+<path d="M256 100 V300" fill="none" stroke="#005500" stroke-width="46" mask="url(#arch)"/>
+<!-- S and G outlined from KaushanScript-Regular, SIL OFL 1.1. Font not embedded. -->
+<g fill="#D9262C" stroke="#D9262C" stroke-linejoin="round" stroke-linecap="round"><path d="M753 674Q756 657 757.5 650.5Q759 644 759 633Q759 600 744.5 571.5Q730 543 705 531Q685 558 656.0 577.5Q627 597 592.5 609.5Q558 622 521.0 628.0Q484 634 449 634Q414 634 383.5 628.5Q353 623 329.5 613.5Q306 604 292.5 590.0Q279 576 279 558Q282 536 306.0 513.5Q330 491 365.0 469.5Q400 448 442.5 427.0Q485 406 526 387Q577 363 614.0 342.5Q651 322 675.0 297.5Q699 273 711.0 242.0Q723 211 723 167Q723 116 706.0 71.5Q689 27 656.5 -6.0Q624 -39 578.0 -57.5Q532 -76 475 -76Q419 -76 354.0 -59.0Q289 -42 232.5 -12.5Q176 17 138.5 55.5Q101 94 101 137Q101 157 112.5 188.0Q124 219 154 253Q157 223 186.5 182.0Q216 141 275 106Q330 74 388.5 59.5Q447 45 498 45Q554 45 589.0 59.0Q624 73 644.0 92.5Q664 112 672.0 132.0Q680 152 681 164Q680 184 662.5 202.5Q645 221 615.5 238.5Q586 256 547.0 274.0Q508 292 466 310Q403 338 357.5 362.5Q312 387 282.5 412.5Q253 438 239.5 466.0Q226 494 226 530Q226 586 260.0 636.0Q294 686 358 712Q390 726 426.5 732.0Q463 738 498 738Q564 738 627.0 720.0Q690 702 753 674Z" transform="translate(93.19 363.30) scale(0.16708 -0.16708)" stroke-width="17.96"/><path d="M655 318Q681 318 696.0 300.0Q711 282 711 250Q711 242 710.0 233.5Q709 225 707 219Q686 224 661 225Q655 181 629.0 132.5Q603 84 566.0 41.5Q529 -1 485.0 -33.0Q441 -65 398 -76Q264 -73 202.5 -6.5Q141 60 141 201Q141 304 179.0 400.5Q217 497 280.0 572.0Q343 647 424.5 692.5Q506 738 594 738Q663 738 701.5 709.0Q740 680 740 627Q740 592 723.5 562.0Q707 532 669 497Q646 504 629.0 521.5Q612 539 608 562Q642 587 656.0 608.0Q670 629 670 658Q670 704 615 704Q570 704 518.5 670.5Q467 637 415 574Q341 485 307.0 390.5Q273 296 273 178Q273 134 282.0 98.0Q291 62 306.0 35.0Q321 8 341.5 -8.0Q362 -24 386 -26Q418 -19 450.0 6.5Q482 32 508.5 66.5Q535 101 553.5 140.5Q572 180 576 216Q548 210 522.5 204.5Q497 199 474 199Q444 199 421.5 214.0Q399 229 391 255Q409 265 443.5 276.0Q478 287 517.0 296.5Q556 306 593.5 312.0Q631 318 655 318Z" transform="translate(268.44 363.30) scale(0.16708 -0.16708)" stroke-width="17.96"/></g></svg>
 </svg>
