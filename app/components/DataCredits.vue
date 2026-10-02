@@ -21,6 +21,15 @@
 			terms of the Singapore Open Data Licence version 1.0.
 		</p>
 		<p>
+			Contains information from
+			<a href="https://www.onemap.gov.sg" target="_blank" rel="noopener">OneMap</a>
+			(postal code search and walking routes) &copy; Singapore Land Authority, accessed on 2
+			October 2026 from onemap.gov.sg, which is made available under the terms of the
+			<a href="https://www.onemap.gov.sg/legal/opendatalicence.html" target="_blank" rel="noopener"
+				>Singapore Open Data Licence version 1.0</a
+			>.
+		</p>
+		<p>
 			Hawker centre listings from
 			<a
 				href="https://www.nea.gov.sg/docs/default-source/hawker-centres-documents/list-of-hcs_-17-august-2026.pdf"
@@ -41,7 +50,7 @@
 			contributors.
 		</p>
 		<p>
-			ThereSG is not affiliated with or endorsed by LTA, NEA, NParks or any government
+			ThereSG is not affiliated with or endorsed by LTA, NEA, NParks, SLA or any government
 			agency.
 		</p>
 	</footer>

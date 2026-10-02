@@ -20,6 +20,7 @@ ThereSG is built with the help of AI tools.
 
 ## Data attribution
 
+- Contains information from [OneMap](https://www.onemap.gov.sg) (postal code search and walking routes) (c) Singapore Land Authority, accessed on 2 October 2026 from onemap.gov.sg, which is made available under the terms of the [Singapore Open Data Licence version 1.0](https://www.onemap.gov.sg/legal/opendatalicence.html).
 - Contains information from [LTA DataMall](https://datamall.lta.gov.sg)
   accessed on 26 September 2026 from datamall.lta.gov.sg which is made
   available under the terms of the
@@ -48,7 +49,7 @@ npm install
 npm run dev
 ```
 
-`NUXT_DATAMALL_API_KEY` must be set for the live data API routes. A push to
+`NUXT_DATAMALL_API_KEY` must be set for the live data API routes. Postal code lookup needs `NUXT_ONEMAP_EMAIL` and `NUXT_ONEMAP_PASSWORD` (a free OneMap API account); without them it reports postal codes as unavailable. A push to
 `main` rebuilds the Docker image through GitHub Actions; on the Olares host,
 apply the new build with Settings > Applications > ThereSG > Stop, then
 Resume.
