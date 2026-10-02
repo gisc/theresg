@@ -59,8 +59,10 @@ export type RouteIndex = Record<string, Record<string, string[]>>;
 export async function getRouteIndex(): Promise<RouteIndex> {
 	// Local development without a DataMall key can point at a saved snapshot.
 	if (import.meta.dev && process.env.THERESG_DEV_BUS_NETWORK) {
-		const { readFile } = await import('node:fs/promises');
-		return JSON.parse(await readFile(process.env.THERESG_DEV_BUS_NETWORK, 'utf8')).services;
+		const { readFile, stat } = await import('node:fs/promises');
+		const file = process.env.THERESG_DEV_BUS_NETWORK;
+		devSnapshotAt = (await stat(file)).mtimeMs;
+		return JSON.parse(await readFile(file, 'utf8')).services;
 	}
 	if (!routeIndex || Date.now() - loadedAt > 24 * 60 * 60 * 1000) {
 		pending ??= loadRoutes()
@@ -77,6 +79,13 @@ export async function getRouteIndex(): Promise<RouteIndex> {
 	return routeIndex!;
 }
 
+let devSnapshotAt = 0;
+
 export function routeIndexLoadedAt(): number {
-	return loadedAt;
+	return devSnapshotAt || loadedAt;
+}
+
+/** Where the index really came from, so the page can label it truthfully. */
+export function routeIndexSource(): 'datamall' | 'dev-snapshot' {
+	return devSnapshotAt ? 'dev-snapshot' : 'datamall';
 }

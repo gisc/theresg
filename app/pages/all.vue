@@ -35,13 +35,14 @@ const places = ref<JourneyPlace[]>([]);
 const extraLoaded = ref(false);
 let graph: JourneyGraph | null = null;
 const dataDate = ref<number | null>(null);
+const dataSource = ref<'datamall' | 'dev-snapshot'>('datamall');
 
 onMounted(async () => {
 	try {
 		const [stopsFc, mrt, net] = await Promise.all([
 			$fetch<{ features: StopFeature[] }>('/bus-stops.json'),
 			$fetch<MrtJson>('/mrt-lines.json'),
-			$fetch<{ updatedAt: number; services: Record<string, Record<string, string[]>> }>('/api/bus-network'),
+			$fetch<{ updatedAt: number; source: 'datamall' | 'dev-snapshot'; services: Record<string, Record<string, string[]>> }>('/api/bus-network'),
 		]);
 		const stops: JStop[] = stopsFc.features.map((f) => ({
 			code: f.properties.code,
@@ -57,6 +58,7 @@ onMounted(async () => {
 			services: net.services,
 		});
 		dataDate.value = net.updatedAt;
+		dataSource.value = net.source;
 		const out: JourneyPlace[] = [];
 		for (const st of graph.stations) {
 			out.push({
@@ -245,8 +247,9 @@ function dataAsOf() {
 									<template v-if="l.mode === 'walk'">
 										<span class="badge walk"><Icon name="material-symbols:directions-walk" /></span>
 										<div class="leg-body">
-											<div class="leg-title">Walk {{ Math.round(l.meters / 10) * 10 }} m <span class="dim">({{ mins(l.minutes) }})</span></div>
+											<div class="leg-title">Walk about {{ Math.round(l.meters / 10) * 10 }} m <span class="dim">({{ mins(l.minutes) }})</span></div>
 											<div class="dim">{{ l.from }} to {{ l.to }}</div>
+											<div class="dim">Approximate, not a checked route</div>
 										</div>
 									</template>
 									<template v-else-if="l.mode === 'bus'">
@@ -289,7 +292,10 @@ function dataAsOf() {
 							Times are planning estimates from distances and average waits, not live or timetable data
 							(walk {{ ASSUMPTIONS.walkMetersPerMin }} m/min, bus wait ~{{ ASSUMPTIONS.busWaitMin }} min, MRT wait ~{{ ASSUMPTIONS.mrtWaitMin }} min).
 							Use "Live arrivals here" for the next bus. Combined bus and MRT fares are not calculated.
-							<template v-if="dataAsOf()">Bus routes loaded from LTA DataMall on {{ dataAsOf() }}.</template>
+							Walking is approximate: straight-line distance plus 50%, not a checked pedestrian route, so a
+							walk may be longer or need crossings, overhead bridges or detours. Check the walk on a map before you rely on it.
+							<template v-if="dataSource === 'datamall'">Bus routes: LTA DataMall, loaded {{ dataAsOf() }}.</template>
+							<strong v-else>PREVIEW ONLY: bus routes here come from a sample snapshot (data.busrouter.sg, {{ dataAsOf() }}), not live LTA DataMall.</strong>
 						</p>
 					</template>
 					<p v-else-if="ready" class="hint">Choose a start and a destination to see bus, MRT and mixed routes.</p>

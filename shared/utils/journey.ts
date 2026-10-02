@@ -75,7 +75,7 @@ export interface Endpoint extends JPoint {
 // Planning constants (all minutes / metres). Exposed so the UI can state them.
 export const ASSUMPTIONS = {
 	walkMetersPerMin: 70,
-	walkDetour: 1.25,
+	walkDetour: 1.5,
 	busWaitMin: 6,
 	busKmh: 17,
 	busExpressKmh: 38,
@@ -84,9 +84,9 @@ export const ASSUMPTIONS = {
 	mrtKmh: 55,
 	mrtDwellMin: 0.5,
 	interchangeMin: 2,
-	maxAccessStopM: 500,
-	maxAccessStationM: 900,
-	maxTransferM: 300,
+	maxAccessStopM: 400,
+	maxAccessStationM: 700,
+	maxTransferM: 250,
 };
 
 export function distM(a: JPoint, b: JPoint): number {
@@ -474,7 +474,7 @@ function signature(o: JourneyOption): string {
 export function planJourneys(graph: JourneyGraph, from: Endpoint, to: Endpoint): JourneyOption[] {
 	const out: JourneyOption[] = [];
 	const direct = distM(from, to);
-	if (direct <= 900) {
+	if (direct <= 700) {
 		const meters = direct * ASSUMPTIONS.walkDetour;
 		out.push({
 			label: 'Walk',
