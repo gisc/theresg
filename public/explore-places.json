@@ -25,7 +25,9 @@
       "checkedAt": "2026-10-01",
       "closed": true,
       "note": "Ang Mo Kio Library will be closed from 1 Aug 2026 for relocation. Visit the self-service Browse-n-Borrow kiosk and Sit-n-Read Node at level 4 of AMK Hub, or nearby libraries to continue accessing library resources. Information checked on 1 October 2026; check NLB for changes.",
-      "previewImage": "/img/explore/directory/86364f19a1a3.svg"
+      "previewImage": "/img/explore/directory/86364f19a1a3.svg",
+      "lat": 1.374791,
+      "lon": 103.845583
     },
     {
       "name": "Bedok Library",
@@ -63,7 +65,9 @@
       "transportSources": [
         "https://www.google.com/maps/search/?api=1&query=Bedok&query_place_id=ChIJq_0PDLMi2jERb6799gqyk2E",
         "https://www.google.com/maps/search/?api=1&query=Bedok+Library&query_place_id=ChIJp82Vu0w92jER70H7i4t8wfk"
-      ]
+      ],
+      "lat": 1.326864,
+      "lon": 103.93213
     },
     {
       "name": "Bishan Library",
@@ -99,7 +103,9 @@
       "transportSources": [
         "https://www.google.com/maps/search/?api=1&query=Bishan&query_place_id=ChIJ32t26hYX2jER6dCRixHVBJM",
         "https://www.google.com/maps/search/?api=1&query=Bishan+Library&query_place_id=ChIJ_yBIIRQX2jERvEDz9aXhFoU"
-      ]
+      ],
+      "lat": 1.349833,
+      "lon": 103.848877
     },
     {
       "name": "Bukit Batok Library",
@@ -141,7 +147,9 @@
       "transportSources": [
         "https://www.google.com/maps/search/?api=1&query=Bukit+Batok&query_place_id=ChIJy37FHD8Q2jERQrs731bZT5Y",
         "https://www.google.com/maps/search/?api=1&query=Bukit+Batok+Library&query_place_id=ChIJxzbY1z4Q2jERJ6mezML68e8"
-      ]
+      ],
+      "lat": 1.350021,
+      "lon": 103.749216
     },
     {
       "name": "Bukit Panjang Library",
@@ -180,7 +188,9 @@
       "transportSources": [
         "https://www.google.com/maps/search/?api=1&query=Bukit+Panjang+MRT%2FLRT+station&query_place_id=ChIJARTcUrsR2jERUUjcHJScUz8",
         "https://www.google.com/maps/search/?api=1&query=Bukit+Panjang+Library&query_place_id=ChIJAQAASKMR2jER1rsyt_ipOM0"
-      ]
+      ],
+      "lat": 1.37992,
+      "lon": 103.764357
     },
     {
       "name": "Central Arts Library",
@@ -220,7 +230,9 @@
       "transportSources": [
         "https://www.google.com/maps/search/?api=1&query=Bugis&query_place_id=ChIJuz41c7AZ2jERgl25Ot0ZuJw",
         "https://www.google.com/maps/search/?api=1&query=Central+Arts+Library&query_place_id=ChIJoY4dT48Z2jERxqOY4ctNDw0"
-      ]
+      ],
+      "lat": 1.297568,
+      "lon": 103.854254
     },
     {
       "name": "Central Library",
@@ -257,7 +269,9 @@
       "transportSources": [
         "https://www.google.com/maps/search/?api=1&query=Bugis&query_place_id=ChIJuz41c7AZ2jERgl25Ot0ZuJw",
         "https://www.google.com/maps/search/?api=1&query=Central+Library&query_place_id=ChIJJfVEO6UZ2jERq7ZasSTiEgg"
-      ]
+      ],
+      "lat": 1.297568,
+      "lon": 103.854254
     },
     {
       "name": "Cheng San Library",
@@ -268,7 +282,9 @@
       "checkedAt": "2026-10-01",
       "closed": true,
       "note": "Cheng San Library is currently closed for renovations. Visit NLB’s Browse-n-Borrow kiosk at Hougang Mall, Level 1. It offers a curated selection of English and Mother Tongue Language books for all ages for loans and allows reservations to be collected. Returns and payments are not supported. The nearest libraries are Punggol Library, Sengkang Library and Serangoon Library. Information checked on 1 October 2026; check NLB for changes.",
-      "previewImage": "/img/explore/directory/22269ed75157.svg"
+      "previewImage": "/img/explore/directory/22269ed75157.svg",
+      "lat": 1.372491,
+      "lon": 103.893774
     },
     {
       "name": "Chinatown Library",
@@ -311,7 +327,9 @@
       "transportSources": [
         "https://www.google.com/maps/search/?api=1&query=Chinatown+MRT+station&query_place_id=ChIJIZy2pXQZ2jERLkykYs_kU9E",
         "https://www.google.com/maps/search/?api=1&query=Chinatown+Library&query_place_id=ChIJ2zOiSwsZ2jERY2Wt9PYlO_A"
-      ]
+      ],
+      "lat": 1.284999,
+      "lon": 103.844697
     },
     {
       "name": "Choa Chu Kang Library",
@@ -353,7 +371,9 @@
       "transportSources": [
         "https://www.google.com/maps/search/?api=1&query=Choa+Chu+Kang&query_place_id=ChIJCZRupukR2jERCglyJsNXaHE",
         "https://www.google.com/maps/search/?api=1&query=Choa+Chu+Kang+Library&query_place_id=ChIJ5-Dtl-kR2jERllI9-1NpYVY"
-      ]
+      ],
+      "lat": 1.384975,
+      "lon": 103.745012
     },
     {
       "name": "Clementi Library",
@@ -392,7 +412,9 @@
       "transportSources": [
         "https://www.google.com/maps/search/?api=1&query=Clementi+MRT+station&query_place_id=ChIJ3xyNSo4a2jERqNGwk8wG_NA",
         "https://www.google.com/maps/search/?api=1&query=Clementi+Library&query_place_id=ChIJAQBALo4a2jERvRLiVO2P_1U"
-      ]
+      ],
+      "lat": 1.314967,
+      "lon": 103.76427
     },
     {
       "name": "Geylang East Library",
@@ -431,7 +453,9 @@
       "transportSources": [
         "https://www.google.com/maps/search/?api=1&query=Aljunied&query_place_id=ChIJO7BsLzsY2jER-OVKkQKKm64",
         "https://www.google.com/maps/search/?api=1&query=Geylang+East+Library&query_place_id=ChIJQyTTUCMY2jERunI_GcAyOug"
-      ]
+      ],
+      "lat": 1.317383,
+      "lon": 103.885865
     },
     {
       "name": "Harbourfront Library",
@@ -475,7 +499,9 @@
       "transportSources": [
         "https://www.google.com/maps/search/?api=1&query=HarbourFront&query_place_id=ChIJw6zYBuIb2jERDN-_wbHk1t8",
         "https://www.google.com/maps/search/?api=1&query=Harbourfront+Library&query_place_id=ChIJDcJs9UEZ2jER4dKm3CUVyMk"
-      ]
+      ],
+      "lat": 1.264293,
+      "lon": 103.822305
     },
     {
       "name": "Jurong Library",
@@ -511,7 +537,9 @@
       "transportSources": [
         "https://www.google.com/maps/search/?api=1&query=Jurong+East&query_place_id=ChIJL52pCg8Q2jERgiWsODe3X9I",
         "https://www.google.com/maps/search/?api=1&query=Jurong+Library&query_place_id=ChIJraqq-gUQ2jERYpaqvOqNXdk"
-      ]
+      ],
+      "lat": 1.332885,
+      "lon": 103.73949
     },
     {
       "name": "Jurong West Library",
@@ -548,7 +576,9 @@
       "transportSources": [
         "https://www.google.com/maps/search/?api=1&query=Boon+Lay&query_place_id=ChIJZZ5e1JIP2jER3nPOBF7LjTI",
         "https://www.google.com/maps/search/?api=1&query=Jurong+West+Library&query_place_id=ChIJF3XNQ5MP2jERXeUO2D_OtYY"
-      ]
+      ],
+      "lat": 1.340561,
+      "lon": 103.704527
     },
     {
       "name": "Marine Parade Library",
@@ -595,7 +625,9 @@
       "transportSources": [
         "https://www.google.com/maps/search/?api=1&query=Bugis&query_place_id=ChIJuz41c7AZ2jERgl25Ot0ZuJw",
         "https://www.google.com/maps/search/?api=1&query=National+Library+%2F+Lee+Kong+Chian+Reference+Library&query_place_id=ChIJKaGsJKUZ2jERxa8yhKrdPfI"
-      ]
+      ],
+      "lat": 1.297568,
+      "lon": 103.854254
     },
     {
       "name": "Orchard Library",
@@ -606,7 +638,9 @@
       "checkedAt": "2026-10-01",
       "closed": true,
       "note": "The SG60 Heart&Soul Experience concluded on 31 Dec 2025. Orchard Library is now closed for renovations. The libraries nearest to Orchard Library are Central Library and Toa Payoh Library. Information checked on 1 October 2026; check NLB for changes.",
-      "previewImage": "/img/explore/directory/d4fb438796d1.svg"
+      "previewImage": "/img/explore/directory/d4fb438796d1.svg",
+      "lat": 1.300489,
+      "lon": 103.839325
     },
     {
       "name": "Pasir Ris Library",
@@ -653,7 +687,9 @@
       "transportSources": [
         "https://www.google.com/maps/search/?api=1&query=Pasir+Ris&query_place_id=ChIJzTCPALA92jERbKZCdNiIgNA",
         "https://www.google.com/maps/search/?api=1&query=Pasir+Ris+Library&query_place_id=ChIJt32_-6892jERnWIg-gesfQ0"
-      ]
+      ],
+      "lat": 1.37245,
+      "lon": 103.949716
     },
     {
       "name": "Punggol Library",
@@ -692,7 +728,9 @@
       "transportSources": [
         "https://www.google.com/maps/search/?api=1&query=Sam+Kee&query_place_id=ChIJY9_ykfoV2jERiznXFOKYH2Y",
         "https://www.google.com/maps/search/?api=1&query=Punggol+Library&query_place_id=ChIJqXkLmG0V2jER4iQB7SY4hfk"
-      ]
+      ],
+      "lat": 1.408728,
+      "lon": 103.905155
     },
     {
       "name": "Queenstown Library",
@@ -703,7 +741,9 @@
       "checkedAt": "2026-10-01",
       "closed": true,
       "note": "Queenstown Library is currently closed for renovations. The nearest libraries are Clementi Library, Harbourfront Library, and Jurong Library. Information checked on 1 October 2026; check NLB for changes.",
-      "previewImage": "/img/explore/directory/f96bf90b840e.svg"
+      "previewImage": "/img/explore/directory/f96bf90b840e.svg",
+      "lat": 1.298648,
+      "lon": 103.805446
     },
     {
       "name": "Sembawang Library",
@@ -747,7 +787,9 @@
       "transportSources": [
         "https://www.google.com/maps/search/?api=1&query=Sembawang&query_place_id=ChIJWUPdyWIT2jERxPOWpY4QJ5A",
         "https://www.google.com/maps/search/?api=1&query=Sembawang+Library&query_place_id=ChIJW6IeMH0T2jERiY_tOOMSWeI"
-      ]
+      ],
+      "lat": 1.448195,
+      "lon": 103.819502
     },
     {
       "name": "Sengkang Library",
@@ -787,7 +829,9 @@
       "transportSources": [
         "https://www.google.com/maps/search/?api=1&query=Sengkang&query_place_id=ChIJuaN4bRIW2jERsZRWMegbqjU",
         "https://www.google.com/maps/search/?api=1&query=Sengkang+Library&query_place_id=ChIJc5DHexIW2jERw5Y42SBlW9Q"
-      ]
+      ],
+      "lat": 1.392053,
+      "lon": 103.895071
     },
     {
       "name": "Serangoon Library",
@@ -826,7 +870,9 @@
       "transportSources": [
         "https://www.google.com/maps/search/?api=1&query=Serangoon&query_place_id=ChIJP6_oVKEX2jER8tuSBXrr2es",
         "https://www.google.com/maps/search/?api=1&query=Serangoon+Library&query_place_id=ChIJxyAVvKYX2jERaDNkoSoZUEs"
-      ]
+      ],
+      "lat": 1.350769,
+      "lon": 103.872296
     },
     {
       "name": "Singapore Botanic Gardens’ Library",
@@ -837,7 +883,9 @@
       "checkedAt": "2026-10-01",
       "closed": true,
       "note": "The Singapore Botanic Gardens' Library is closed to facilitate the digitalisation of Herbarium and Library & Archive collections from 16 Sept 2024 to 2027. Information checked on 1 October 2026; check NLB for changes.",
-      "previewImage": "/img/explore/directory/cd4b96bd83df.svg"
+      "previewImage": "/img/explore/directory/cd4b96bd83df.svg",
+      "lat": 1.310387,
+      "lon": 103.81632
     },
     {
       "name": "Tampines Library",
@@ -874,7 +922,9 @@
       "transportSources": [
         "https://www.google.com/maps/search/?api=1&query=Tampines&query_place_id=ChIJQ2PMxhE92jERiewBne0iww8",
         "https://www.google.com/maps/search/?api=1&query=Tampines+Library&query_place_id=ChIJ8V6JYQ492jERAjykK83B_KU"
-      ]
+      ],
+      "lat": 1.353134,
+      "lon": 103.940408
     },
     {
       "name": "Toa Payoh Library",
@@ -918,7 +968,9 @@
       "transportSources": [
         "https://www.google.com/maps/search/?api=1&query=Toa+Payoh&query_place_id=ChIJ48Ai4mYX2jER5M71MMdN5NY",
         "https://www.google.com/maps/search/?api=1&query=Toa+Payoh+Library&query_place_id=ChIJx-7QmZYX2jERht7ofTYcNs0"
-      ]
+      ],
+      "lat": 1.333517,
+      "lon": 103.8505
     },
     {
       "name": "Woodlands Library",
@@ -955,7 +1007,9 @@
       "transportSources": [
         "https://www.google.com/maps/search/?api=1&query=Woodlands&query_place_id=ChIJUxRTh6gT2jERt8YBJbwhN4k",
         "https://www.google.com/maps/search/?api=1&query=Woodlands+Library&query_place_id=ChIJqVqJA6YT2jERen84koMFzGM"
-      ]
+      ],
+      "lat": 1.435018,
+      "lon": 103.786931
     },
     {
       "name": "Yishun Library",
@@ -992,7 +1046,9 @@
       "transportSources": [
         "https://www.google.com/maps/search/?api=1&query=Yishun&query_place_id=ChIJc6Z8jG8U2jERv8M81RFvr7Q",
         "https://www.google.com/maps/search/?api=1&query=Yishun+Library&query_place_id=ChIJBacVCGMU2jERaAbVrqntPzU"
-      ]
+      ],
+      "lat": 1.429698,
+      "lon": 103.835776
     },
     {
       "name": "Admiralty Park",
