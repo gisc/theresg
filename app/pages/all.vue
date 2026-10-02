@@ -36,6 +36,24 @@ const ready = ref(false);
 const places = ref<JourneyPlace[]>([]);
 const extraLoaded = ref(false);
 let unsnapped = new Set<string>();
+// Explicit holds override legacy walk links as well as the new approach records.
+const heldVenueIds = new Set<string>(["p:Brooks Park", "p:Bulim Park", "p:Changi Beach Park", "p:Changi Boardwalk", "p:Faber Heights Park", "p:Greenwood Crescent Playground", "p:Holland Green Linear Park", "p:Holland Green Playground", "p:Lilac Drive Playground", "p:Mimosa Walk Playground", "p:Neram Crescent Playground", "p:Nim Crescent Open Space", "p:Orchid Village Playground", "p:Saraca Road Playground", "p:Seletar Terrace Park", "p:Springleaf Avenue Playground", "a:Bird Paradise", "a:Jewel Changi Airport", "p:Harbourfront Library"]);
+interface ReviewedLink {capturedAtDate?:string;id:string;meters:number;pathReviewed:boolean;source:'OneMap';sourceUrl:string;geometry:[number,number][];geometryFormat:'lat-lon';direction:'transit-to-venue';instructions:unknown[]}
+interface ReviewedAccess { checkedAt:string;id:string; name:string; entranceName:string; entranceReviewed:boolean; buildingApproachReviewed:boolean; lat:number; lon:number; accessScope:'building-approach'|'park-approach';accessNote:string;officialUrl:string; links:ReviewedLink[] }
+const venueAccess = shallowRef(new Map<string, ReviewedAccess>());
+const approvedVenueLinks = shallowRef(new Map<string, {id:string;meters:number}[]>());
+async function loadReviewedAccess() {
+ const data = await $fetch<{items:ReviewedAccess[]}>('/venue-access.json').catch(()=>({items:[]}));
+ if(!rawInput||!graph)return;
+ const valid=new Set([...rawInput.stops.map(s=>`b:${s.code}`),...graph.stations.map(s=>`m:${s.name}`)]);
+ const access=new Map<string,ReviewedAccess>();const links=new Map<string,{id:string;meters:number}[]>();
+ for(const it of data.items){
+  if(heldVenueIds.has(it.id)||!/^[aph]:.+/.test(it.id)||!((it.accessScope==='building-approach'||it.accessScope==='park-approach')&&it.buildingApproachReviewed)||!isInSingapore({lat:it.lat,lon:it.lon}))continue;
+  const usable=it.links.filter(l=>l.pathReviewed&&l.source==='OneMap'&&valid.has(l.id)&&Number.isFinite(l.meters)&&l.meters>0&&l.meters<=2000&&l.geometryFormat==='lat-lon'&&l.geometry?.length>1&&l.geometry.every(p=>isInSingapore({lat:p[0],lon:p[1]})));
+  if(!usable.length)continue;access.set(it.id,it);links.set(it.id,usable);
+ }
+ venueAccess.value=access;approvedVenueLinks.value=links;
+}
 let graph: JourneyGraph | null = null;
 let rawInput: Omit<JNetworkInput, 'when'> | null = null;
 let builtFor = '';
@@ -58,6 +76,7 @@ function ensureGraph() {
 	const key = `${w.day}${Math.floor(w.minutes / 5)}`;
 	if (key === builtFor && graph) return;
 	graph = new JourneyGraph({ ...rawInput, when: { minutes: w.minutes, day: w.day } });
+ for(const id of heldVenueIds)graph.setPlaceLinks(id, []);
 	builtFor = key;
 }
 const dataDate = ref<number | null>(null);
@@ -109,6 +128,7 @@ onMounted(async () => {
 		}
 		places.value = out;
 		ready.value = true;
+		await loadReviewedAccess();
 		await applyQuery();
 		// Reuse an existing grant, but never prompt until the visitor asks.
 		if (!from.value && !route.query.from && navigator.permissions) {
@@ -134,14 +154,20 @@ async function loadExtra() {
 		const push = (items: PlacesFile['items'], kind: JourneyPlace['kind'], sub: string, prefix: string) => {
 			for (const it of items) {
 				if (typeof it.lat !== 'number' || typeof it.lon !== 'number' || it.closed) continue;
-				if (unsnapped.has(`${prefix}:${it.name}`)) continue;
+				if (heldVenueIds.has(`${prefix}:${it.name}`)) continue;
+				if (unsnapped.has(`${prefix}:${it.name}`) && !venueAccess.value.has(`${prefix}:${it.name}`)) continue;
 				add.push({ id: `${prefix}:${it.name}`, name: it.name, sub, kind, lat: it.lat, lon: it.lon });
 			}
 		};
 		push(h.items, 'hawker', 'Hawker centre', 'h');
 		push(a.items, 'attraction', 'Attraction', 'a');
 		push(e.items, 'park', 'Park', 'p');
-		places.value = [...add, ...places.value];
+		for(const it of venueAccess.value.values()){
+ const existing=add.find(p=>p.id===it.id);
+ if(existing){existing.lat=it.lat;existing.lon=it.lon;existing.sub=it.entranceName;}
+ else add.push({id:it.id,name:it.name,sub:it.entranceName,kind:it.id.startsWith('a:')?'attraction':it.id.startsWith('h:')?'hawker':'park',lat:it.lat,lon:it.lon});
+}
+places.value = [...add, ...places.value];
 	} catch {
 		extraLoaded.value = false;
 	}
@@ -149,6 +175,8 @@ async function loadExtra() {
 
 const from = ref<JourneyPlace | null>(null);
 const to = ref<JourneyPlace | null>(null);
+const heldSelection = computed(()=>[from.value,to.value].find(p=>p && heldVenueIds.has(p.id)) ?? null);
+function heldPlace(id:string):JourneyPlace{return {id,name:id.slice(id.indexOf(':')+1),sub:'Walking connection unavailable',kind:id.startsWith('a:')?'attraction':'park',lat:0,lon:0};}
 
 // Location is a one-shot, fresh fix. It is not stored on the device or watched.
 const locationBusy = ref(false);
@@ -294,14 +322,22 @@ watch(to, () => {
 // /all?from=<station or stop name>&to=<name> pre-fills the fields.
 const route = useRoute();
 async function applyQuery() {
-	if (route.query.from || route.query.to) await loadExtra();
+	if (route.query.from || route.query.to || route.query.toId) await loadExtra();
 	const find = (q: unknown) => {
 		if (typeof q !== 'string' || !q) return null;
 		const l = q.toLowerCase();
+ const held=[...heldVenueIds].find(id=>id.slice(id.indexOf(':')+1).toLowerCase()===l);
+ if(held)return heldPlace(held);
 		return places.value.find((p) => p.name.toLowerCase() === l || p.id === `b:${l}`) ?? null;
 	};
 	if (!from.value) from.value = find(route.query.from);
 	if (!to.value) {
+  const requestedId=route.query.toId;
+  if(typeof requestedId==='string'){
+   // Explicit venue IDs never fall through to a same-named stop or station.
+   to.value=heldVenueIds.has(requestedId)?heldPlace(requestedId):places.value.find(p=>p.id===requestedId && /^[aph]:/.test(p.id))??null;
+   return;
+  }
 		const q = route.query.to;
 		const nm = route.query.toName;
 		if (typeof q === 'string' && /^\d{6}$/.test(q)) {
@@ -327,11 +363,16 @@ function swap() {
 
 const options = computed<JourneyOption[] | null>(() => {
 	if (!ready.value || !from.value || !to.value) return null;
-	if (from.value.id === to.value.id) return [];
+	if (heldVenueIds.has(from.value.id) || heldVenueIds.has(to.value.id)) return null;
+ if (from.value.id === to.value.id) return [];
 	clock.value; // re-plan when the clock moves on
 	ensureGraph();
 	if (!graph) return null;
-	// A postal code is only plannable once its walking links have arrived.
+	for(const p of [from.value,to.value]){
+ const links=approvedVenueLinks.value.get(p.id);
+ if(links)graph.setPlaceLinks(p.id,links);
+}
+// A postal code is only plannable once its walking links have arrived.
 	for (const p of [from.value, to.value]) {
 		if (p.id.startsWith('pc:') || p.kind === 'here') {
 			const links = postalLinks.value.get(p.id);
@@ -342,6 +383,26 @@ const options = computed<JourneyOption[] | null>(() => {
 	return planJourneys(graph, from.value, to.value);
 });
 
+// Match reviewed endpoint legs without flattening source/geometry into distance alone.
+function reviewedWalk(l: Leg) {
+ if(l.mode!=='walk')return null;
+ for(const p of [from.value,to.value]){
+  if(!p)continue;const a=venueAccess.value.get(p.id);if(!a)continue;
+  const arriving=l.to===a.name;const leaving=l.from===a.name;
+  if(!arriving&&!leaving)continue;
+  const transit=arriving?l.from:l.to;
+  const link=a.links.find(x=>x.pathReviewed&&(x.id===`m:${transit}`||x.originName===transit));
+  if(!link)continue;
+  return {access:a,link,geometry:arriving?link.geometry:[...link.geometry].reverse()};
+ }
+ return null;
+}
+function walkPathPoints(l:Leg){
+ const g=reviewedWalk(l)?.geometry;if(!g?.length)return '';
+ const xs=g.map(p=>p[1]*Math.cos(1.35*Math.PI/180)),ys=g.map(p=>-p[0]);
+ const minX=Math.min(...xs),minY=Math.min(...ys),span=Math.max(Math.max(...xs)-minX,Math.max(...ys)-minY,0.00001);
+ return g.map((p,i)=>`${10+180*(xs[i]!-minX)/span},${10+180*(ys[i]!-minY)/span}`).join(' ');
+}
 const whenLabel = computed(() => sgWhen(clock.value));
 // Rail and most buses do not run overnight; warn rather than imply a trip is possible.
 const offHours = computed(() => whenLabel.value.minutes >= 60 && whenLabel.value.minutes < 5 * 60 + 30);
@@ -441,7 +502,12 @@ function dataAsOf() {
 										<div class="leg-body">
 											<div class="leg-title">Walk about {{ Math.round(l.meters / 10) * 10 }} m <span class="dim">({{ mins(l.minutes) }})</span></div>
 											<div class="dim">{{ l.from }} to {{ l.to }}</div>
-											<div class="dim">Path distance from {{ isPostalName(l.from) || isPostalName(l.to) ? 'OneMap' : 'OpenStreetMap' }}</div>
+											<div v-if="reviewedWalk(l)" class="dim">{{ reviewedWalk(l)!.access.entranceName }}. {{ reviewedWalk(l)!.access.accessScope==='park-approach' ? 'Mapped park point, not a checked entrance or step-free route.' : 'Indoor/floor and station travel not included.' }}</div>
+                                            <details v-if="reviewedWalk(l)"><summary>Access and source details</summary><div class="dim">{{ reviewedWalk(l)!.access.accessNote }} <a :href="reviewedWalk(l)!.access.officialUrl" target="_blank" rel="noopener">Official access details</a></div>
+                                            <details v-if="reviewedWalk(l)"><summary>Mapped approach outline</summary><svg viewBox="0 0 200 200" width="160" height="160" role="img" :aria-label="`Mapped approach from ${l.from} to ${l.to}; route outline only, not a street map`"><polyline :points="walkPathPoints(l)" fill="none" stroke="currentColor" stroke-width="3"/><circle :cx="walkPathPoints(l).split(' ')[0]?.split(',')[0]" :cy="walkPathPoints(l).split(' ')[0]?.split(',')[1]" r="4"/></svg>
+                                            <div v-if="reviewedWalk(l)" class="dim">Route outline only. No turn-by-turn instructions are supplied.</div></details>
+                                            <div v-if="reviewedWalk(l)" class="dim"><a :href="reviewedWalk(l)!.link.sourceUrl" target="_blank" rel="noopener">Check mapped walk on OneMap</a> · <a href="https://www.onemap.gov.sg/legal/opendatalicence.html" target="_blank" rel="noopener">Singapore Open Data Licence</a> · captured {{ reviewedWalk(l)!.link.capturedAtDate || reviewedWalk(l)!.access.checkedAt }}</div></details>
+                                            <div class="dim">Path distance from {{ reviewedWalk(l) || isPostalName(l.from) || isPostalName(l.to) ? 'OneMap' : 'OpenStreetMap' }}</div>
 										</div>
 									</template>
 									<template v-else-if="l.mode === 'bus'">
@@ -482,9 +548,9 @@ function dataAsOf() {
 						</div>
 						<p v-if="options.length" class="note">
 							Times are planning estimates from distances and average waits, not live or timetable data
-							(walk {{ ASSUMPTIONS.walkMetersPerMin }} m/min, bus wait ~{{ ASSUMPTIONS.busWaitMin }} min, MRT wait ~{{ ASSUMPTIONS.mrtWaitMin }} min).
+							(building-approach walks exclude indoor/floor travel; walk {{ ASSUMPTIONS.walkMetersPerMin }} m/min, bus wait ~{{ ASSUMPTIONS.busWaitMin }} min, MRT wait ~{{ ASSUMPTIONS.mrtWaitMin }} min).
 							Use "Live arrivals here" for the next bus. Combined bus and MRT fares are not calculated.
-							Walking distances are measured along OpenStreetMap footpaths and roads (map data of 26 Sep 2026), or by OneMap for postal codes and your location, not
+							Walking distances are measured along OpenStreetMap footpaths and roads (map data of 26 Sep 2026), or by OneMap for reviewed building/park approaches, postal codes and your location, not
 							surveyed on site: they do not know about closed paths, works, weather or whether a route is sheltered. Check a walk on a map
 							before you rely on it. Buses shown are those scheduled to run at {{ whenLabel.label }} Singapore time
 							(public holidays follow Sunday timings, which this page cannot detect).
@@ -493,6 +559,7 @@ function dataAsOf() {
 							<strong v-else>PREVIEW ONLY: bus routes here come from a sample snapshot (data.busrouter.sg, {{ dataAsOf() }}), not live LTA DataMall, and its operating hours are placeholders except 73T.</strong>
 						</p>
 					</template>
+					<p v-else-if="ready && heldSelection" class="hint" role="status">Walking connection to {{ heldSelection.name }} is unavailable in this planner because its access path has not been verified. No route is offered. Choose another destination or check the venue's official directions.</p>
 					<p v-else-if="ready" class="hint">Choose a start and a destination to see bus, MRT and mixed routes.</p>
 				</div>
 			</m3e-card>
