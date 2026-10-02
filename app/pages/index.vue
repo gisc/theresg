@@ -55,7 +55,7 @@ const { toggleBlue } = useBlueTheme();
 						<span class="tile-desc">Hawker &amp; eats nearby</span>
 					</NuxtLink>
 					<NuxtLink class="tile" to="/places">
-						<Icon name="material-symbols:photo-camera-outline" />
+						<Icon name="material-symbols:location-on-outline" />
 						<span class="tile-title">Places</span>
 						<span class="tile-desc">Parks, libraries &amp; attractions</span>
 					</NuxtLink>
