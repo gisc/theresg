@@ -211,7 +211,7 @@ async function useLocation() {
 		next.set(id, links);
 		postalLinks.value = next;
 		from.value = { id, name: 'My current location', sub: 'Current location', kind: 'here', lat, lon };
-		locationMsg.value = 'Using your current location. Tap again to refresh, or enter a different start.';
+		locationMsg.value = 'Using your current location. Tap Clear location to remove it, or enter a different start.';
 	} catch (e) {
 		if (revision !== originRevision) return;
 		const code = (e as { code?: number }).code;
@@ -391,9 +391,8 @@ function dataAsOf() {
 						<div class="from-row">
 							<div class="flabel">From</div>
 							<div class="from-actions">
-								<button v-if="from?.kind === 'here' || to?.kind === 'here'" type="button" class="live-btn" @click="clearLocation">Clear location</button>
-								<button type="button" class="live-btn" :disabled="!ready || locationBusy" @click="useLocation">
-									{{ locationBusy ? 'Finding your location...' : 'Use my location' }}
+								<button type="button" class="live-btn" :disabled="!ready || locationBusy" @click="from?.kind === 'here' || to?.kind === 'here' ? clearLocation() : useLocation()">
+									{{ locationBusy ? 'Finding your location...' : from?.kind === 'here' || to?.kind === 'here' ? 'Clear location' : 'Use my location' }}
 								</button>
 							</div>
 						</div>
