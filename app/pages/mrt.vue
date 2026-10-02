@@ -21,7 +21,7 @@ const disruptionAlerts = computed(() => alerts.value.filter((m) => !isPlannedAle
 <template>
 	<div class="bg">
 		<div class="pg">
-			<m3e-heading class="heading" variant="headline" size="large">MRT</m3e-heading>
+			<div class="mrt-header"><m3e-heading class="heading" variant="headline" size="large">MRT</m3e-heading><span class="planner-title">Plan your journey</span></div>
 			<MrtRoutePlanner />
 			<MrtCrowdLevels />
 			<m3e-card>
@@ -110,7 +110,7 @@ const disruptionAlerts = computed(() => alerts.value.filter((m) => !isPlannedAle
 	display: none;
 }
 
-.heading {
+.mrt-header{display:flex;align-items:center;justify-content:space-between;gap:12px}.planner-title{font-size:18px;font-weight:500;text-align:right}.heading {
 	color: var(--md-sys-color-on-surface);
 }
 
