@@ -13,6 +13,9 @@ export default defineNuxtConfig({
 		name: 'ThereSG',
 	},
 
+	// /all (integrated bus + MRT planner) is not promoted yet: keep it out of the sitemap.
+	sitemap: { exclude: ['/all'] },
+
 	css: ['~/assets/css/main.css'],
 
 	future: {
