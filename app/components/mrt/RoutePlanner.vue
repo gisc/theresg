@@ -78,14 +78,10 @@ function codesFor(name: string): StationInfo | undefined {
 
 <template>
 	<m3e-card>
-		<m3e-heading slot="header" variant="title" size="large">Plan your journey</m3e-heading>
 		<div slot="content" class="planner">
 			<div class="fields">
-				<MrtStationAutocomplete v-model="from" label="From" :stations="stations" />
-				<m3e-icon-button class="swap" aria-label="Swap from and to" @click="swap">
-					<Icon name="material-symbols:swap-vert" />
-				</m3e-icon-button>
-				<MrtStationAutocomplete v-model="to" label="To" :stations="stations" />
+				<label class="field"><span class="flabel">From</span><MrtStationAutocomplete v-model="from" label="From" :stations="stations" /></label>
+				<div class="field"><div class="to-row"><span class="flabel">To</span><m3e-icon-button class="swap" aria-label="Swap from and to" @click="swap"><Icon name="material-symbols:swap-vert" /></m3e-icon-button></div><MrtStationAutocomplete v-model="to" label="To" :stations="stations" /></div>
 			</div>
 
 			<div v-if="from && to && segments" class="result">
@@ -175,7 +171,7 @@ function codesFor(name: string): StationInfo | undefined {
 	box-sizing: border-box;
 }
 
-.swap {
+.field{display:flex;flex-direction:column;gap:8px;min-width:0}.flabel{font-size:14px;font-weight:500}.to-row{display:flex;align-items:center;justify-content:space-between;min-height:20px;position:relative}.to-row .swap{position:absolute;right:-8px;top:-10px}.swap {
 	align-self: flex-end;
 	flex-shrink: 0;
 }
@@ -287,10 +283,10 @@ function codesFor(name: string): StationInfo | undefined {
 @media (min-width: 768px) {
 	.fields {
 		flex-direction: row;
-		align-items: center;
+		align-items: stretch;
 	}
 
-	.fields > .ac {
+	.fields > .field {
 		flex: 1;
 	}
 }
