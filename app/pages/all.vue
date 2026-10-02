@@ -60,7 +60,7 @@ function ensureGraph() {
 	builtFor = key;
 }
 const dataDate = ref<number | null>(null);
-const dataSource = ref<'datamall' | 'dev-snapshot'>('datamall');
+const dataSource = ref<'datamall' | 'datamall-snapshot' | 'dev-snapshot'>('datamall');
 
 onMounted(async () => {
 	clockTimer = setInterval(() => (clock.value = Date.now()), 60_000);
@@ -68,7 +68,7 @@ onMounted(async () => {
 		const [stopsFc, mrt, net, walk] = await Promise.all([
 			$fetch<{ features: StopFeature[] }>('/bus-stops.json'),
 			$fetch<MrtJson>('/mrt-lines.json'),
-			$fetch<{ updatedAt: number; source: 'datamall' | 'dev-snapshot'; services: Record<string, Record<string, string[]>>; dist?: JNetworkInput['dist']; hours?: JNetworkInput['hours'] }>('/api/bus-network'),
+			$fetch<{ updatedAt: number; source: 'datamall' | 'datamall-snapshot' | 'dev-snapshot'; services: Record<string, Record<string, string[]>>; dist?: JNetworkInput['dist']; hours?: JNetworkInput['hours'] }>('/api/bus-network'),
 			$fetch<{ ids: string[]; links: Record<string, number[]>; unsnapped: string[]; source: string }>('/walk-links.json'),
 		]);
 		const stops: JStop[] = stopsFc.features.map((f) => ({
@@ -305,6 +305,7 @@ function dataAsOf() {
 							before you rely on it. Buses shown are those scheduled to run at {{ whenLabel.label }} Singapore time
 							(public holidays follow Sunday timings, which this page cannot detect).
 							<template v-if="dataSource === 'datamall'">Bus routes: LTA DataMall, loaded {{ dataAsOf() }}.</template>
+							<strong v-else-if="dataSource === 'datamall-snapshot'">PREVIEW: bus routes and operating hours are a saved copy of LTA DataMall BusRoutes fetched on {{ dataAsOf() }}. The live site will fetch them daily.</strong>
 							<strong v-else>PREVIEW ONLY: bus routes here come from a sample snapshot (data.busrouter.sg, {{ dataAsOf() }}), not live LTA DataMall, and its operating hours are placeholders except 73T.</strong>
 						</p>
 					</template>

@@ -76,6 +76,7 @@ async function loadRoutes() {
 }
 
 let devSnapshotAt = 0;
+let devSource: 'dev-snapshot' | 'datamall-snapshot' = 'dev-snapshot';
 
 /** Whole-network route index, loaded from DataMall at most once a day and shared by every route endpoint. */
 export async function getRouteIndex(): Promise<RouteIndex> {
@@ -85,6 +86,7 @@ export async function getRouteIndex(): Promise<RouteIndex> {
 		const file = process.env.THERESG_DEV_BUS_NETWORK;
 		devSnapshotAt = (await stat(file)).mtimeMs;
 		const snap = JSON.parse(await readFile(file, 'utf8'));
+		devSource = snap.source === 'datamall-snapshot' ? 'datamall-snapshot' : 'dev-snapshot';
 		routeDetail = { dist: snap.dist ?? {}, hours: snap.hours ?? {} };
 		return snap.services;
 	}
@@ -112,6 +114,6 @@ export function routeIndexLoadedAt(): number {
 }
 
 /** Where the index really came from, so the page can label it truthfully. */
-export function routeIndexSource(): 'datamall' | 'dev-snapshot' {
-	return devSnapshotAt ? 'dev-snapshot' : 'datamall';
+export function routeIndexSource(): 'datamall' | 'datamall-snapshot' | 'dev-snapshot' {
+	return devSnapshotAt ? devSource : 'datamall';
 }
