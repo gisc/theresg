@@ -31,6 +31,10 @@ spec:
               value: "{{ .Values.postgres.password }}"
             - name: NUXT_DATAMALL_API_KEY
               value: "{{ .Values.olaresEnv.NUXT_DATAMALL_API_KEY }}"
+            - name: NUXT_ONEMAP_EMAIL
+              value: "{{ .Values.olaresEnv.NUXT_ONEMAP_EMAIL }}"
+            - name: NUXT_ONEMAP_PASSWORD
+              value: "{{ .Values.olaresEnv.NUXT_ONEMAP_PASSWORD }}"
 ---
 apiVersion: v1
 kind: Service

@@ -10,7 +10,7 @@ metadata:
   title: ThereSG
   description: Singapore bus arrivals, bus routes and train service alerts in one web app
   icon: https://app.cdn.olares.com/appstore/default/defaulticon.webp
-  version: 0.1.1
+  version: 0.1.2
   categories:
     - Utilities
 
@@ -37,9 +37,17 @@ envs:
     required: true
     type: password
     editable: true
+  - envName: NUXT_ONEMAP_EMAIL
+    required: false
+    type: string
+    editable: true
+  - envName: NUXT_ONEMAP_PASSWORD
+    required: false
+    type: password
+    editable: true
 
 spec:
-  versionName: '0.1.1'
+  versionName: '0.1.2'
   requiredCpu: 250m
   limitedCpu: 1000m
   requiredMemory: 256Mi
@@ -51,7 +59,7 @@ spec:
   fullDescription: |
     Singapore bus arrivals, bus routes and train service alerts in one web app using the LTA DataMall API.
   upgradeDescription: |
-    Initial release.
+    Adds postal code lookup for the trip planner (OneMap account settings).
   developer: Soong Chee Gi
   website: https://github.com/gisc/theresg
   sourceCode: https://github.com/gisc/theresg
