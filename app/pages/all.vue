@@ -144,6 +144,75 @@ async function loadExtra() {
 const from = ref<JourneyPlace | null>(null);
 const to = ref<JourneyPlace | null>(null);
 
+// Postal codes: OneMap gives the address and point, then walking distances to nearby stops
+// and stations come from OneMap's pedestrian router (not straight-line guesses).
+const postalLinks = shallowRef(new Map<string, { id: string; meters: number }[]>());
+const postalMsg = reactive<{ from: string; to: string }>({ from: '', to: '' });
+const postalBusy = ref(false);
+function distM(aLat: number, aLon: number, bLat: number, bLon: number) {
+	const p = Math.PI / 180;
+	const x = Math.sin(((bLat - aLat) * p) / 2) ** 2 + Math.cos(aLat * p) * Math.cos(bLat * p) * Math.sin(((bLon - aLon) * p) / 2) ** 2;
+	return 2 * 6371000 * Math.asin(Math.sqrt(x));
+}
+function tidyAddress(address: string, code: string) {
+	const base = address.replace(new RegExp(`\\s*SINGAPORE\\s*${code}$`, 'i'), '');
+	return base.toLowerCase().replace(/(^|[\s(-])([a-z])/g, (_, a: string, b: string) => a + b.toUpperCase());
+}
+// Walking legs next to a postal code come from OneMap's pedestrian router, the others from OpenStreetMap paths.
+const isPostalName = (n: string) => [from.value, to.value].some((p) => p?.kind === 'postal' && p.name === n);
+async function resolvePostal(side: 'from' | 'to') {
+	const ref_ = side === 'from' ? from : to;
+	const place = ref_.value;
+	if (!place || !place.id.startsWith('pc:') || postalLinks.value.has(place.id) || !rawInput) return;
+	const code = place.id.slice(3);
+	postalMsg[side] = '';
+	postalBusy.value = true;
+	try {
+		const r = await $fetch<{ address: string; lat: number; lon: number }>('/api/postal', { query: { code } });
+		const near = <T extends { lat: number; lon: number }>(items: T[], n: number) =>
+			items
+				.map((it) => ({ it, d: distM(r.lat, r.lon, it.lat, it.lon) }))
+				.filter((x) => x.d <= 1500)
+				.sort((a, b) => a.d - b.d)
+				.slice(0, n)
+				.map((x) => x.it);
+		const targets = [
+			...near(rawInput.stops, 10).map((s) => ({ id: `b:${s.code}`, lat: s.lat, lon: s.lon })),
+			...near(graph!.stations, 5).map((s) => ({ id: `m:${s.name}`, lat: s.lat, lon: s.lon })),
+		];
+		if (!targets.length) {
+			postalMsg[side] = `No bus stop or station within 1.5 km of ${r.address}.`;
+			return;
+		}
+		const w = await $fetch<{ links: { id: string; meters: number }[] }>('/api/postal-walk', { method: 'POST', body: { lat: r.lat, lon: r.lon, targets } });
+		const next = new Map(postalLinks.value);
+		next.set(place.id, w.links);
+		postalLinks.value = next;
+		if (ref_.value?.id === place.id) {
+			ref_.value = { id: place.id, name: `${tidyAddress(r.address, code)} (${code})`, sub: `Postal code ${code}`, kind: 'postal', lat: r.lat, lon: r.lon };
+		}
+	} catch (e) {
+		const status = (e as { statusCode?: number }).statusCode;
+		postalMsg[side] =
+			status === 404
+				? `Postal code ${code} was not found.`
+				: status === 429
+					? 'Too many lookups, try again in a minute.'
+					: 'Postal code lookup is unavailable right now. Try a station, bus stop or place name.';
+		if (ref_.value?.id === place.id) ref_.value = null;
+	} finally {
+		postalBusy.value = false;
+	}
+}
+watch(from, () => {
+	postalMsg.from = '';
+	resolvePostal('from');
+});
+watch(to, () => {
+	postalMsg.to = '';
+	resolvePostal('to');
+});
+
 // /all?from=<station or stop name>&to=<name> pre-fills the fields.
 const route = useRoute();
 async function applyQuery() {
@@ -168,7 +237,16 @@ const options = computed<JourneyOption[] | null>(() => {
 	if (from.value.id === to.value.id) return [];
 	clock.value; // re-plan when the clock moves on
 	ensureGraph();
-	return graph ? planJourneys(graph, from.value, to.value) : null;
+	if (!graph) return null;
+	// A postal code is only plannable once its walking links have arrived.
+	for (const p of [from.value, to.value]) {
+		if (p.id.startsWith('pc:')) {
+			const links = postalLinks.value.get(p.id);
+			if (!links) return null;
+			graph.setPlaceLinks(p.id, links);
+		}
+	}
+	return planJourneys(graph, from.value, to.value);
 });
 
 const whenLabel = computed(() => sgWhen(clock.value));
@@ -215,20 +293,23 @@ function dataAsOf() {
 		<div class="pg">
 			<m3e-heading class="heading" variant="headline" size="large">Plan a trip</m3e-heading>
 			<m3e-card>
-				<m3e-heading slot="header" variant="title" size="large">Bus and MRT together</m3e-heading>
 				<div slot="content" class="planner">
 					<div class="fields">
+						<div class="flabel">From</div>
 						<JourneyPlaceInput
 							v-model="from"
-							label="From (station, bus stop or place)"
+							label="Station, bus stop, place or postal code"
 							:places="places"
 							@focused="loadExtra()"
 						/>
 						<m3e-icon-button class="swap" aria-label="Swap from and to" @click="swap">
 							<Icon name="material-symbols:swap-vert" />
 						</m3e-icon-button>
-						<JourneyPlaceInput v-model="to" label="To (station, bus stop or place)" :places="places" @focused="loadExtra()" />
+						<div class="flabel">To</div>
+						<JourneyPlaceInput v-model="to" label="Station, bus stop, place or postal code" :places="places" @focused="loadExtra()" />
 					</div>
+					<p v-if="postalMsg.from || postalMsg.to" class="hint err">{{ postalMsg.from || postalMsg.to }}</p>
+					<p v-else-if="postalBusy" class="hint">Looking up postal code...</p>
 					<p v-if="loadError" class="hint err">{{ loadError }}</p>
 					<p v-else-if="!ready" class="hint">Loading routes...</p>
 
@@ -257,7 +338,7 @@ function dataAsOf() {
 										<div class="leg-body">
 											<div class="leg-title">Walk about {{ Math.round(l.meters / 10) * 10 }} m <span class="dim">({{ mins(l.minutes) }})</span></div>
 											<div class="dim">{{ l.from }} to {{ l.to }}</div>
-											<div class="dim">Path distance from OpenStreetMap</div>
+											<div class="dim">Path distance from {{ isPostalName(l.from) || isPostalName(l.to) ? 'OneMap' : 'OpenStreetMap' }}</div>
 										</div>
 									</template>
 									<template v-else-if="l.mode === 'bus'">
@@ -300,7 +381,7 @@ function dataAsOf() {
 							Times are planning estimates from distances and average waits, not live or timetable data
 							(walk {{ ASSUMPTIONS.walkMetersPerMin }} m/min, bus wait ~{{ ASSUMPTIONS.busWaitMin }} min, MRT wait ~{{ ASSUMPTIONS.mrtWaitMin }} min).
 							Use "Live arrivals here" for the next bus. Combined bus and MRT fares are not calculated.
-							Walking distances are measured along OpenStreetMap footpaths and roads (map data of 26 Sep 2026), not
+							Walking distances are measured along OpenStreetMap footpaths and roads (map data of 26 Sep 2026), or by OneMap for postal codes, not
 							surveyed on site: they do not know about closed paths, works, weather or whether a route is sheltered. Check a walk on a map
 							before you rely on it. Buses shown are those scheduled to run at {{ whenLabel.label }} Singapore time
 							(public holidays follow Sunday timings, which this page cannot detect).
@@ -430,6 +511,10 @@ function dataAsOf() {
 .badge.bus {
 	background: #1a1a1a;
 	color: #fff;
+}
+.flabel {
+	font-weight: 600;
+	font-size: 0.9rem;
 }
 .badge.walk {
 	background: var(--md-sys-color-surface-container-highest);

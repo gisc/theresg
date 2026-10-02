@@ -290,6 +290,12 @@ export class JourneyGraph {
 	private walkIds: string[] = [];
 	private walkIndex = new Map<string, number>();
 	private walkLinks: Record<string, number[]> = {};
+	private placeLinks = new Map<string, { id: string; meters: number }[]>();
+
+	/** Walking links for a place that is not in walk-links.json (e.g. a postal code), from a pedestrian router. ids are `b:<code>` or `m:<name>`. */
+	setPlaceLinks(placeId: string, links: { id: string; meters: number }[]) {
+		this.placeLinks.set(placeId, links);
+	}
 
 	/** Where a journey may start or end: the stop or station itself, or the stops and stations walkable from a place. */
 	access(p: Endpoint, allowBus: boolean, allowRail: boolean) {
@@ -300,14 +306,15 @@ export class JourneyGraph {
 			if (node !== undefined) out.push({ node, cost: 0, meters: 0 });
 			return out;
 		}
+		const extra = this.placeLinks.get(p.id);
 		const i = this.walkIndex.get(p.id);
 		const flat = i === undefined ? undefined : this.walkLinks[String(i)];
-		if (!flat) return out;
+		if (!flat && !extra) return out;
 		const stops: typeof out = [];
 		const stations: typeof out = [];
-		for (let k = 0; k < flat.length; k += 2) {
-			const id = this.walkIds[flat[k]!]!;
-			const m = flat[k + 1]!;
+		const pairs: [string, number][] = extra ? extra.map((l) => [l.id, l.meters]) : [];
+		if (!extra && flat) for (let k = 0; k < flat.length; k += 2) pairs.push([this.walkIds[flat[k]!]!, flat[k + 1]!]);
+		for (const [id, m] of pairs) {
 			if (id.startsWith('b:') && allowBus) {
 				const node = this.stopNode.get(id.slice(2));
 				if (node !== undefined) stops.push({ node, cost: m / A.walkMetersPerMin, meters: m });

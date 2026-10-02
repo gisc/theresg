@@ -45,4 +45,11 @@ assert.equal(runningAt('2335,2345,2335,2345,2335,2345', noon), false);
 assert.equal(runningAt('2335,2345,2335,2345,2335,2345', { minutes: 23 * 60 + 40, day: 'WD' }), true);
 assert.equal(runningAt('2335,0020,-,-,-,-', { minutes: 10, day: 'WD' }), true);
 assert.equal(runningAt('0530,2350,-,-,-,-', { minutes: 600, day: 'SAT' }), false);
+// A postal-code point gets walking links from a pedestrian router, set at runtime.
+const g2 = mk();
+const pc = { id: 'pc:123456', name: 'pc', lat: 1.3, lon: 103.8 };
+assert.deepEqual(planJourneys(g2, pc, d), []);
+g2.setPlaceLinks('pc:123456', [{ id: 'b:00001', meters: 555 }]);
+const rp = planJourneys(g2, pc, d);
+assert.ok(rp[0]!.legs.some((l) => l.mode === 'walk' && Math.round(l.meters) === 555));
 console.log('journey assertions passed');

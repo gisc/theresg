@@ -3,7 +3,7 @@ export interface JourneyPlace {
 	id: string;
 	name: string;
 	sub: string;
-	kind: 'mrt' | 'bus' | 'hawker' | 'attraction' | 'park' | 'here';
+	kind: 'mrt' | 'bus' | 'hawker' | 'attraction' | 'park' | 'here' | 'postal';
 	lat: number;
 	lon: number;
 	codes?: { code: string; color: string; textColor: string }[];
@@ -36,6 +36,8 @@ watch(
 const matches = computed(() => {
 	const q = query.value.trim().toLowerCase();
 	if (q.length < 2 || q === props.modelValue?.name.toLowerCase()) return [];
+	// A 6-digit number is a Singapore postal code: offer a lookup (resolved by the page).
+	if (/^\d{6}$/.test(q)) return [{ id: `pc:${q}`, name: `Postal code ${q}`, sub: 'Look up address', kind: 'postal', lat: 0, lon: 0 }];
 	const starts: JourneyPlace[] = [];
 	const contains: JourneyPlace[] = [];
 	for (const p of props.places) {
@@ -55,6 +57,7 @@ const kindLabel: Record<JourneyPlace['kind'], string> = {
 	attraction: 'Attraction',
 	park: 'Park or library',
 	here: 'My location',
+	postal: 'Postal code',
 };
 
 function onInput(event: Event) {
