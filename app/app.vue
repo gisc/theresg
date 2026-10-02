@@ -86,7 +86,7 @@ useSeoMeta({
 					:selected.prop="routePath.startsWith('/places')"
 					@click="router.push('/places')"
 				>
-					<Icon slot="icon" name="material-symbols:attractions" />
+					<Icon slot="icon" name="material-symbols:location-on-outline" />
 					Places
 				</m3e-nav-item>
 			</m3e-nav-rail>
@@ -132,7 +132,7 @@ useSeoMeta({
 				:selected.prop="routePath.startsWith('/places')"
 				@click="router.push('/places')"
 			>
-				<Icon slot="icon" name="material-symbols:attractions" />
+				<Icon slot="icon" name="material-symbols:location-on-outline" />
 				Places
 			</m3e-nav-item>
 		</m3e-nav-bar>
