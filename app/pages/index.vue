@@ -25,6 +25,15 @@ const { toggleBlue } = useBlueTheme();
 				</p>
 				<p class="quote">Life is a journey. <button type="button" class="enjoy" aria-label="Toggle blue theme" @click="toggleBlue()">Enjoy</button> the ride. :)</p>
 				<div class="tile-grid">
+					<NuxtLink class="tile" to="/all">
+						<svg class="route-icon" viewBox="-27 -16 54 48" width="30" height="26" fill="none" aria-hidden="true">
+							<path d="M-18 24 C-18 -4 18 22 18 -6" stroke="currentColor" stroke-width="4.5" stroke-linecap="round" />
+							<circle cx="-18" cy="24" r="7" fill="currentColor" />
+							<circle cx="18" cy="-6" r="7" class="route-ring" stroke="currentColor" stroke-width="4.5" />
+						</svg>
+						<span class="tile-title">Go There</span>
+						<span class="tile-desc">Bus, MRT &amp; walking routes</span>
+					</NuxtLink>
 					<NuxtLink class="tile" to="/bus">
 						<Icon name="material-symbols:directions-bus-outline" />
 						<span class="tile-title">Bus</span>
@@ -230,6 +239,12 @@ const { toggleBlue } = useBlueTheme();
 	border-radius: 18px;
 	padding: 13px 12px;
 	text-decoration: none;
+}
+.route-ring { fill: var(--md-sys-color-surface-container-lowest); }
+.tile .route-icon {
+	width: 30px;
+	height: 26px;
+	color: var(--sg-brand-text);
 }
 .tile .iconify {
 	width: 26px;
