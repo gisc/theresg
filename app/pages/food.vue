@@ -37,6 +37,12 @@ interface CultureItem {
 	mapsUrl: string;
 	sources: { label: string; url: string }[];
 }
+// Go there opens the Commute planner with this place as the destination, found by its postal code.
+function goThere(name: string, address: string) {
+	const code = address.match(/\b(\d{6})\b/)?.[1];
+	return code ? `/all?to=${code}&toName=${encodeURIComponent(name)}` : null;
+}
+
 interface CultureData {
 	title: string;
 	intro: string;
@@ -112,6 +118,10 @@ const filtered = computed(() => {
 							>
 						</span>
 						<span class="go-row">
+							<NuxtLink v-if="goThere(c.name, c.address)" class="go-btn route" :to="goThere(c.name, c.address)!">
+								<Icon name="material-symbols:route" />
+								Go there
+							</NuxtLink>
 							<a class="go-btn alt" :href="c.mapsUrl" target="_blank" rel="noopener">
 								<Icon name="material-symbols:map" />
 								Map
@@ -121,7 +131,7 @@ const filtered = computed(() => {
 								:to="`/mrt?to=${encodeURIComponent(c.mrt[0]!.name)}`"
 							>
 								<Icon name="material-symbols:train" />
-								Go by MRT
+								By MRT
 							</NuxtLink>
 						</span>
 					</article>
@@ -182,13 +192,18 @@ const filtered = computed(() => {
 								Bus stop {{ item.bus.code }} ({{ item.bus.name }}) ·
 								{{ fmtDist(item.bus.dist) }}
 							</span>
-							<span v-if="item.mrt" class="go-row">
+							<span v-if="item.mrt || goThere(item.name, item.address)" class="go-row">
+								<NuxtLink v-if="goThere(item.name, item.address)" class="go-btn route" :to="goThere(item.name, item.address)!">
+									<Icon name="material-symbols:route" />
+									Go there
+								</NuxtLink>
 								<NuxtLink
+									v-if="item.mrt"
 									class="go-btn mrt"
 									:to="`/mrt?to=${encodeURIComponent(item.mrt.name)}`"
 								>
 									<Icon name="material-symbols:train" />
-									Go by MRT
+									By MRT
 								</NuxtLink>
 							</span>
 						</span>
@@ -270,6 +285,9 @@ const filtered = computed(() => {
 	line-height: 18px;
 	text-decoration: none;
 	color: #ffffff;
+}
+.go-btn.route {
+	background-color: var(--sg-brand-strong);
 }
 .go-btn.mrt {
 	background-color: var(--sg-brand);

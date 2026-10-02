@@ -301,7 +301,15 @@ async function applyQuery() {
 		return places.value.find((p) => p.name.toLowerCase() === l || p.id === `b:${l}`) ?? null;
 	};
 	if (!from.value) from.value = find(route.query.from);
-	if (!to.value) to.value = find(route.query.to);
+	if (!to.value) {
+		const q = route.query.to;
+		const nm = route.query.toName;
+		if (typeof q === 'string' && /^\d{6}$/.test(q)) {
+			// A postal-code destination with a display name, e.g. from Food "Go there".
+			const name = typeof nm === 'string' && nm.trim() ? nm.trim().slice(0, 80) : `Postal code ${q}`;
+			to.value = { id: `pc:${q}`, name, sub: `Postal code ${q}`, kind: 'postal', lat: 0, lon: 0 };
+		} else to.value = find(q);
+	}
 }
 
 function swap() {
