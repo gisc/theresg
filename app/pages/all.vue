@@ -6,6 +6,7 @@ import {
 	JourneyGraph,
 	planJourneys,
 	type JLine,
+	type JNetworkInput,
 	type JourneyOption,
 	type JStop,
 	type Leg,
@@ -33,16 +34,42 @@ const loadError = ref('');
 const ready = ref(false);
 const places = ref<JourneyPlace[]>([]);
 const extraLoaded = ref(false);
+let unsnapped = new Set<string>();
 let graph: JourneyGraph | null = null;
+let rawInput: Omit<JNetworkInput, 'when'> | null = null;
+let builtFor = '';
+const clock = ref(Date.now());
+let clockTimer: ReturnType<typeof setInterval> | undefined;
+onBeforeUnmount(() => clearInterval(clockTimer));
+
+// Singapore time and day type (public holidays follow Sunday timings but cannot be detected here).
+function sgWhen(ms: number): { minutes: number; day: 'WD' | 'SAT' | 'SUN'; label: string } {
+	const f = new Intl.DateTimeFormat('en-SG', { timeZone: 'Asia/Singapore', weekday: 'short', hour: 'numeric', minute: 'numeric', hourCycle: 'h23' }).formatToParts(new Date(ms));
+	const g = (t: string) => f.find((p) => p.type === t)?.value ?? '';
+	const wd = g('weekday');
+	const minutes = Number(g('hour')) * 60 + Number(g('minute'));
+	const day = wd === 'Sat' ? 'SAT' : wd === 'Sun' ? 'SUN' : 'WD';
+	return { minutes, day, label: `${g('hour').padStart(2, '0')}:${g('minute').padStart(2, '0')}` };
+}
+function ensureGraph() {
+	if (!rawInput) return;
+	const w = sgWhen(clock.value);
+	const key = `${w.day}${Math.floor(w.minutes / 5)}`;
+	if (key === builtFor && graph) return;
+	graph = new JourneyGraph({ ...rawInput, when: { minutes: w.minutes, day: w.day } });
+	builtFor = key;
+}
 const dataDate = ref<number | null>(null);
 const dataSource = ref<'datamall' | 'dev-snapshot'>('datamall');
 
 onMounted(async () => {
+	clockTimer = setInterval(() => (clock.value = Date.now()), 60_000);
 	try {
-		const [stopsFc, mrt, net] = await Promise.all([
+		const [stopsFc, mrt, net, walk] = await Promise.all([
 			$fetch<{ features: StopFeature[] }>('/bus-stops.json'),
 			$fetch<MrtJson>('/mrt-lines.json'),
-			$fetch<{ updatedAt: number; source: 'datamall' | 'dev-snapshot'; services: Record<string, Record<string, string[]>> }>('/api/bus-network'),
+			$fetch<{ updatedAt: number; source: 'datamall' | 'dev-snapshot'; services: Record<string, Record<string, string[]>>; dist?: JNetworkInput['dist']; hours?: JNetworkInput['hours'] }>('/api/bus-network'),
+			$fetch<{ ids: string[]; links: Record<string, number[]>; unsnapped: string[]; source: string }>('/walk-links.json'),
 		]);
 		const stops: JStop[] = stopsFc.features.map((f) => ({
 			code: f.properties.code,
@@ -51,18 +78,23 @@ onMounted(async () => {
 			lon: f.geometry.coordinates[0],
 			lat: f.geometry.coordinates[1],
 		}));
-		graph = new JourneyGraph({
+		rawInput = {
 			stops,
 			lines: mrt.lines,
 			extraEdges: mrt.extraEdges,
 			services: net.services,
-		});
+			dist: net.dist,
+			hours: net.hours,
+			walk: { ids: walk.ids, links: walk.links },
+		};
+		ensureGraph();
+		unsnapped = new Set(walk.unsnapped);
 		dataDate.value = net.updatedAt;
 		dataSource.value = net.source;
 		const out: JourneyPlace[] = [];
-		for (const st of graph.stations) {
+		for (const st of graph!.stations) {
 			out.push({
-				id: `mrt:${st.name}`,
+				id: `m:${st.name}`,
 				name: st.name,
 				sub: '',
 				kind: 'mrt',
@@ -72,7 +104,7 @@ onMounted(async () => {
 			});
 		}
 		for (const s of stops) {
-			out.push({ id: `bus:${s.code}`, name: s.name, sub: `${s.road} - stop ${s.code}`, kind: 'bus', lat: s.lat, lon: s.lon });
+			out.push({ id: `b:${s.code}`, name: s.name, sub: `${s.road} - stop ${s.code}`, kind: 'bus', lat: s.lat, lon: s.lon });
 		}
 		places.value = out;
 		ready.value = true;
@@ -96,6 +128,7 @@ async function loadExtra() {
 		const push = (items: PlacesFile['items'], kind: JourneyPlace['kind'], sub: string, prefix: string) => {
 			for (const it of items) {
 				if (typeof it.lat !== 'number' || typeof it.lon !== 'number' || it.closed) continue;
+				if (unsnapped.has(`${prefix}:${it.name}`)) continue;
 				add.push({ id: `${prefix}:${it.name}`, name: it.name, sub, kind, lat: it.lat, lon: it.lon });
 			}
 		};
@@ -110,28 +143,15 @@ async function loadExtra() {
 
 const from = ref<JourneyPlace | null>(null);
 const to = ref<JourneyPlace | null>(null);
-const locating = ref(false);
-const locationNote = ref('');
-
-async function useMyLocation() {
-	locating.value = true;
-	locationNote.value = '';
-	const c = await getSingaporeCoords();
-	locating.value = false;
-	if (!c) {
-		locationNote.value = 'Could not get a location in Singapore. Pick a start by name.';
-		return;
-	}
-	from.value = { id: 'here', name: 'My location', sub: '', kind: 'here', lat: c.lat, lon: c.lon };
-}
 
 // /all?from=<station or stop name>&to=<name> pre-fills the fields.
 const route = useRoute();
-function applyQuery() {
+async function applyQuery() {
+	if (route.query.from || route.query.to) await loadExtra();
 	const find = (q: unknown) => {
 		if (typeof q !== 'string' || !q) return null;
 		const l = q.toLowerCase();
-		return places.value.find((p) => p.name.toLowerCase() === l || p.id === `bus:${l}`) ?? null;
+		return places.value.find((p) => p.name.toLowerCase() === l || p.id === `b:${l}`) ?? null;
 	};
 	if (!from.value) from.value = find(route.query.from);
 	if (!to.value) to.value = find(route.query.to);
@@ -144,24 +164,16 @@ function swap() {
 }
 
 const options = computed<JourneyOption[] | null>(() => {
-	if (!ready.value || !graph || !from.value || !to.value) return null;
+	if (!ready.value || !from.value || !to.value) return null;
 	if (from.value.id === to.value.id) return [];
-	return planJourneys(graph, from.value, to.value);
+	clock.value; // re-plan when the clock moves on
+	ensureGraph();
+	return graph ? planJourneys(graph, from.value, to.value) : null;
 });
 
+const whenLabel = computed(() => sgWhen(clock.value));
 // Rail and most buses do not run overnight; warn rather than imply a trip is possible.
-const offHours = computed(() => {
-	const parts = new Intl.DateTimeFormat('en-SG', {
-		timeZone: 'Asia/Singapore',
-		hour: 'numeric',
-		minute: 'numeric',
-		hourCycle: 'h23',
-	}).formatToParts(new Date());
-	const h = Number(parts.find((p) => p.type === 'hour')?.value);
-	const m = Number(parts.find((p) => p.type === 'minute')?.value);
-	const mins = h * 60 + m;
-	return mins >= 60 && mins < 5 * 60 + 30;
-});
+const offHours = computed(() => whenLabel.value.minutes >= 60 && whenLabel.value.minutes < 5 * 60 + 30);
 
 const live = reactive<Record<string, { loading: boolean; text: string }>>({});
 async function checkLive(leg: Extract<Leg, { mode: 'bus' }>) {
@@ -210,17 +222,13 @@ function dataAsOf() {
 							v-model="from"
 							label="From (station, bus stop or place)"
 							:places="places"
-							can-use-location
 							@focused="loadExtra()"
-							@use-location="useMyLocation()"
 						/>
 						<m3e-icon-button class="swap" aria-label="Swap from and to" @click="swap">
 							<Icon name="material-symbols:swap-vert" />
 						</m3e-icon-button>
 						<JourneyPlaceInput v-model="to" label="To (station, bus stop or place)" :places="places" @focused="loadExtra()" />
 					</div>
-					<p v-if="locating" class="hint">Finding your location...</p>
-					<p v-if="locationNote" class="hint">{{ locationNote }}</p>
 					<p v-if="loadError" class="hint err">{{ loadError }}</p>
 					<p v-else-if="!ready" class="hint">Loading routes...</p>
 
@@ -249,7 +257,7 @@ function dataAsOf() {
 										<div class="leg-body">
 											<div class="leg-title">Walk about {{ Math.round(l.meters / 10) * 10 }} m <span class="dim">({{ mins(l.minutes) }})</span></div>
 											<div class="dim">{{ l.from }} to {{ l.to }}</div>
-											<div class="dim">Approximate, not a checked route</div>
+											<div class="dim">Path distance from OpenStreetMap</div>
 										</div>
 									</template>
 									<template v-else-if="l.mode === 'bus'">
@@ -292,10 +300,12 @@ function dataAsOf() {
 							Times are planning estimates from distances and average waits, not live or timetable data
 							(walk {{ ASSUMPTIONS.walkMetersPerMin }} m/min, bus wait ~{{ ASSUMPTIONS.busWaitMin }} min, MRT wait ~{{ ASSUMPTIONS.mrtWaitMin }} min).
 							Use "Live arrivals here" for the next bus. Combined bus and MRT fares are not calculated.
-							Walking is approximate: straight-line distance plus 50%, not a checked pedestrian route, so a
-							walk may be longer or need crossings, overhead bridges or detours. Check the walk on a map before you rely on it.
+							Walking distances are measured along OpenStreetMap footpaths and roads (map data of 26 Sep 2026), not
+							surveyed on site: they do not know about closed paths, works, weather or whether a route is sheltered. Check a walk on a map
+							before you rely on it. Buses shown are those scheduled to run at {{ whenLabel.label }} Singapore time
+							(public holidays follow Sunday timings, which this page cannot detect).
 							<template v-if="dataSource === 'datamall'">Bus routes: LTA DataMall, loaded {{ dataAsOf() }}.</template>
-							<strong v-else>PREVIEW ONLY: bus routes here come from a sample snapshot (data.busrouter.sg, {{ dataAsOf() }}), not live LTA DataMall.</strong>
+							<strong v-else>PREVIEW ONLY: bus routes here come from a sample snapshot (data.busrouter.sg, {{ dataAsOf() }}), not live LTA DataMall, and its operating hours are placeholders except 73T.</strong>
 						</p>
 					</template>
 					<p v-else-if="ready" class="hint">Choose a start and a destination to see bus, MRT and mixed routes.</p>

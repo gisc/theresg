@@ -29,6 +29,13 @@ export interface JNetworkInput {
 	extraEdges: { from: string; to: string; line: string }[];
 	/** service -> direction -> ordered stop codes */
 	services: Record<string, Record<string, string[]>>;
+	/** Optional DataMall extras: cumulative km per stop and "WDf,WDl,SATf,SATl,SUNf,SUNl" (HHMM) per stop. */
+	dist?: Record<string, Record<string, (number | null)[]>>;
+	hours?: Record<string, Record<string, string[]>>;
+	/** Plan for this Singapore time; services not running at their boarding stop then are left out. */
+	when?: { minutes: number; day: 'WD' | 'SAT' | 'SUN' };
+	/** Precomputed pedestrian distances (public/walk-links.json). */
+	walk: { ids: string[]; links: Record<string, number[]> };
 }
 
 export type Leg =
@@ -70,12 +77,13 @@ export interface JourneyOption {
 
 export interface Endpoint extends JPoint {
 	name: string;
+	/** `b:<stop code>`, `m:<station name>` or a place id from walk-links.json. */
+	id: string;
 }
 
 // Planning constants (all minutes / metres). Exposed so the UI can state them.
 export const ASSUMPTIONS = {
 	walkMetersPerMin: 70,
-	walkDetour: 1.5,
 	busWaitMin: 6,
 	busKmh: 17,
 	busExpressKmh: 38,
@@ -84,10 +92,23 @@ export const ASSUMPTIONS = {
 	mrtKmh: 55,
 	mrtDwellMin: 0.5,
 	interchangeMin: 2,
-	maxAccessStopM: 400,
-	maxAccessStationM: 700,
-	maxTransferM: 250,
 };
+
+/** Is a service scheduled to reach this stop at the given time? Missing or "-" times count as not running. */
+export function runningAt(h: string | undefined, when: { minutes: number; day: 'WD' | 'SAT' | 'SUN' }): boolean {
+	if (!h) return true;
+	const f = h.split(',');
+	const o = when.day === 'WD' ? 0 : when.day === 'SAT' ? 2 : 4;
+	const a = f[o];
+	const b = f[o + 1];
+	if (!a || !b || a === '-' || b === '-') return false;
+	const m = (x: string) => Number(x.slice(0, 2)) * 60 + Number(x.slice(2));
+	const first = m(a);
+	const last = m(b);
+	const t = when.minutes;
+	// A last bus after midnight (e.g. first 2335, last 0020) wraps the clock.
+	return first <= last ? t >= first && t <= last : t >= first || t <= last;
+}
 
 export function distM(a: JPoint, b: JPoint): number {
 	const rad = Math.PI / 180;
@@ -126,8 +147,6 @@ export class JourneyGraph {
 	stops: JStop[];
 	lineByCode = new Map<string, JLine>();
 	serviceSeq = new Map<string, string[]>();
-	private stopGrid = new Map<string, JStop[]>();
-	private stationGrid = new Map<string, JStation[]>();
 	private stopByCode = new Map<string, JStop>();
 
 	constructor(input: JNetworkInput) {
@@ -144,7 +163,6 @@ export class JourneyGraph {
 		for (const s of input.stops) {
 			this.stopByCode.set(s.code, s);
 			this.stopNode.set(s.code, add({ type: 'stop', stop: s }));
-			this.addGrid(this.stopGrid, s, s);
 		}
 
 		// Stations by name (interchanges share a node).
@@ -170,7 +188,6 @@ export class JourneyGraph {
 		for (const st of byName.values()) {
 			this.stations.push(st);
 			this.stationNode.set(st.name, add({ type: 'station', station: st, name: st.name }));
-			this.addGrid(this.stationGrid, st, st);
 		}
 
 		// Rail: one node per (line, station); edges follow the line order.
@@ -214,83 +231,94 @@ export class JourneyGraph {
 		// Bus: one node per (service, direction, position).
 		for (const [svc, dirs] of Object.entries(input.services)) {
 			for (const [dir, codes] of Object.entries(dirs)) {
-				const seq = codes.filter((c) => this.stopByCode.has(c));
-				if (seq.length < 2) continue;
+				const keep: number[] = [];
+				codes.forEach((c, k) => {
+					if (this.stopByCode.has(c)) keep.push(k);
+				});
+				if (keep.length < 2) continue;
+				const seq = keep.map((k) => codes[k]!);
 				this.serviceSeq.set(`${svc}|${dir}`, seq);
+				const dists = input.dist?.[svc]?.[dir];
+				const hrs = input.hours?.[svc]?.[dir];
 				let prev = -1;
+				let prevK = -1;
 				for (let i = 0; i < seq.length; i++) {
+					const k = keep[i]!;
 					const stop = this.stopByCode.get(seq[i]!)!;
 					const v = add({ type: 'bus', service: svc, dir, index: i, stop });
 					const p = this.stopNode.get(stop.code)!;
-					link(p, v, A.busWaitMin, 'busBoard');
+					if (!input.when || !hrs || runningAt(hrs[k], input.when)) link(p, v, A.busWaitMin, 'busBoard');
 					link(v, p, 0, 'busAlight');
 					if (prev >= 0) {
 						const ps = this.meta[prev]!.stop!;
-						const m = distM(ps, stop) * 1.3;
+						const d1 = dists?.[k];
+						const d0 = dists?.[prevK];
+						const m =
+							typeof d1 === 'number' && typeof d0 === 'number' && d1 > d0
+								? (d1 - d0) * 1000
+								: distM(ps, stop) * 1.3;
 						// Close stops: street speed. Long gaps are expressway running.
 						const kmh = A.busKmh + (A.busExpressKmh - A.busKmh) * Math.min(1, Math.max(0, (m - 800) / 1700));
 						link(prev, v, (m / 1000 / kmh) * 60 + A.busDwellMin, 'busRide');
 					}
 					prev = v;
+					prevK = k;
 				}
 			}
 		}
 
-		// Walking links: stop<->stop (transfer), stop<->station.
-		for (const s of input.stops) {
-			const sn = this.stopNode.get(s.code)!;
-			for (const o of this.near(this.stopGrid, s, A.maxTransferM)) {
-				if (o.code === s.code) continue;
-				const d = distM(s, o) * A.walkDetour;
-				link(sn, this.stopNode.get(o.code)!, d / A.walkMetersPerMin, 'walk', d);
-			}
-			for (const st of this.near(this.stationGrid, s, A.maxTransferM)) {
-				const d = distM(s, st) * A.walkDetour;
-				const stn = this.stationNode.get(st.name)!;
-				link(sn, stn, d / A.walkMetersPerMin, 'walk', d);
-				link(stn, sn, d / A.walkMetersPerMin, 'walk', d);
+		// Walking links come from precomputed OpenStreetMap pedestrian distances.
+		const nodeOf = (id: string): number | undefined =>
+			id.startsWith('b:') ? this.stopNode.get(id.slice(2)) : id.startsWith('m:') ? this.stationNode.get(id.slice(2)) : undefined;
+		this.walkIds = input.walk.ids;
+		this.walkIndex = new Map(input.walk.ids.map((id, i) => [id, i]));
+		this.walkLinks = input.walk.links;
+		for (const [key, flat] of Object.entries(input.walk.links)) {
+			const fromId = input.walk.ids[Number(key)]!;
+			const a = nodeOf(fromId);
+			if (a === undefined) continue;
+			for (let k = 0; k < flat.length; k += 2) {
+				const b = nodeOf(input.walk.ids[flat[k]!]!);
+				if (b === undefined || b === a) continue;
+				const m = flat[k + 1]!;
+				// +1 min per transfer walk for finding the next stop; this also discourages chains of walks.
+				link(a, b, m / A.walkMetersPerMin + 1, 'walk', m);
 			}
 		}
 	}
 
-	private addGrid<T>(grid: Map<string, T[]>, p: JPoint, v: T) {
-		const k = `${Math.floor(p.lat * 100)},${Math.floor(p.lon * 100)}`;
-		(grid.get(k) ?? grid.set(k, []).get(k)!).push(v);
-	}
-	private near<T extends JPoint>(grid: Map<string, T[]>, p: JPoint, radiusM: number): T[] {
-		// 0.01 degree is roughly 1.1 km, so radii up to ~1 km need the 3x3 block only.
-		const r = Math.ceil(radiusM / 1100);
-		const la = Math.floor(p.lat * 100);
-		const lo = Math.floor(p.lon * 100);
-		const out: T[] = [];
-		for (let i = -r; i <= r; i++)
-			for (let j = -r; j <= r; j++)
-				for (const v of grid.get(`${la + i},${lo + j}`) ?? [])
-					if (distM(p, v) <= radiusM) out.push(v);
-		return out;
-	}
+	private walkIds: string[] = [];
+	private walkIndex = new Map<string, number>();
+	private walkLinks: Record<string, number[]> = {};
 
-	/** Access links from a free-form point to the nearest stops and stations. */
-	access(p: JPoint, allowBus: boolean, allowRail: boolean) {
+	/** Where a journey may start or end: the stop or station itself, or the stops and stations walkable from a place. */
+	access(p: Endpoint, allowBus: boolean, allowRail: boolean) {
 		const A = ASSUMPTIONS;
 		const out: { node: number; cost: number; meters: number }[] = [];
-		if (allowBus) {
-			const stops = this.near(this.stopGrid, p, A.maxAccessStopM)
-				.map((s) => ({ s, d: distM(p, s) * A.walkDetour }))
-				.sort((a, b) => a.d - b.d)
-				.slice(0, 8);
-			for (const { s, d } of stops)
-				out.push({ node: this.stopNode.get(s.code)!, cost: d / A.walkMetersPerMin, meters: d });
+		if (p.id.startsWith('b:') || p.id.startsWith('m:')) {
+			const node = p.id.startsWith('b:') ? this.stopNode.get(p.id.slice(2)) : this.stationNode.get(p.id.slice(2));
+			if (node !== undefined) out.push({ node, cost: 0, meters: 0 });
+			return out;
 		}
-		if (allowRail) {
-			const sts = this.near(this.stationGrid, p, A.maxAccessStationM)
-				.map((s) => ({ s, d: distM(p, s) * A.walkDetour }))
-				.sort((a, b) => a.d - b.d)
-				.slice(0, 4);
-			for (const { s, d } of sts)
-				out.push({ node: this.stationNode.get(s.name)!, cost: d / A.walkMetersPerMin, meters: d });
+		const i = this.walkIndex.get(p.id);
+		const flat = i === undefined ? undefined : this.walkLinks[String(i)];
+		if (!flat) return out;
+		const stops: typeof out = [];
+		const stations: typeof out = [];
+		for (let k = 0; k < flat.length; k += 2) {
+			const id = this.walkIds[flat[k]!]!;
+			const m = flat[k + 1]!;
+			if (id.startsWith('b:') && allowBus) {
+				const node = this.stopNode.get(id.slice(2));
+				if (node !== undefined) stops.push({ node, cost: m / A.walkMetersPerMin, meters: m });
+			} else if (id.startsWith('m:') && allowRail) {
+				const node = this.stationNode.get(id.slice(2));
+				if (node !== undefined) stations.push({ node, cost: m / A.walkMetersPerMin, meters: m });
+			}
 		}
-		return out;
+		stops.sort((a, b) => a.meters - b.meters);
+		stations.sort((a, b) => a.meters - b.meters);
+		return [...stops.slice(0, 8), ...stations.slice(0, 4)];
 	}
 
 	search(from: Endpoint, to: Endpoint, allowBus: boolean, allowRail: boolean): JourneyOption | null {
@@ -473,18 +501,6 @@ function signature(o: JourneyOption): string {
 /** Best mixed route plus bus-only and MRT-only alternatives when they differ. */
 export function planJourneys(graph: JourneyGraph, from: Endpoint, to: Endpoint): JourneyOption[] {
 	const out: JourneyOption[] = [];
-	const direct = distM(from, to);
-	if (direct <= 700) {
-		const meters = direct * ASSUMPTIONS.walkDetour;
-		out.push({
-			label: 'Walk',
-			minutes: Math.round(meters / ASSUMPTIONS.walkMetersPerMin),
-			legs: [{ mode: 'walk', meters, minutes: meters / ASSUMPTIONS.walkMetersPerMin, from: from.name, to: to.name }],
-			transfers: 0,
-			walkMeters: meters,
-			modes: [],
-		});
-	}
 	const mixed = graph.search(from, to, true, true);
 	const bus = graph.search(from, to, true, false);
 	const mrt = graph.search(from, to, false, true);
@@ -505,8 +521,10 @@ export function planJourneys(graph: JourneyGraph, from: Endpoint, to: Endpoint):
 	const ref = mixed?.minutes ?? Infinity;
 	const sensible = (o: JourneyOption | null) =>
 		o && o.transfers <= 2 && o.minutes <= ref * 1.6 + 10 ? o : null;
-	add(sensible(mrt), 'MRT only');
-	add(sensible(bus), 'Bus only');
+	// Alternatives are only worth showing when they use different modes from the fastest option.
+	const key = (o: JourneyOption | null) => o?.modes.join('+') ?? '';
+	if (key(mrt) !== key(mixed)) add(sensible(mrt), 'MRT only');
+	if (key(bus) !== key(mixed)) add(sensible(bus), 'Bus only');
 	return out;
 }
 

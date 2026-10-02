@@ -5,17 +5,33 @@ interface RouteRow {
 	Direction: number;
 	StopSequence: number;
 	BusStopCode: string;
+	Distance?: number | null;
+	WD_FirstBus?: string;
+	WD_LastBus?: string;
+	SAT_FirstBus?: string;
+	SAT_LastBus?: string;
+	SUN_FirstBus?: string;
+	SUN_LastBus?: string;
 }
 
-let routeIndex: Record<string, Record<string, string[]>> | undefined;
+export type RouteIndex = Record<string, Record<string, string[]>>;
+export interface RouteDetail {
+	/** service -> direction -> cumulative km from the first stop, per stop */
+	dist: Record<string, Record<string, (number | null)[]>>;
+	/** service -> direction -> per stop "WDfirst,WDlast,SATfirst,SATlast,SUNfirst,SUNlast" (HHMM scheduled arrival at that stop) */
+	hours: Record<string, Record<string, string[]>>;
+}
+
+let routeIndex: RouteIndex | undefined;
+let routeDetail: RouteDetail | undefined;
 let loadedAt = 0;
-let pending: Promise<Record<string, Record<string, string[]>>> | undefined;
+let pending: Promise<RouteIndex> | undefined;
 
 async function loadRoutes() {
 	const apiKey = process.env.NUXT_DATAMALL_API_KEY;
 	if (!apiKey)
 		throw createError({ statusCode: 503, statusMessage: 'Bus route data unavailable' });
-	const index: Record<string, Record<string, { seq: number; code: string }[]>> = {};
+	const rowsBy: Record<string, Record<string, RouteRow[]>> = {};
 	let skip = 0;
 	// DataMall returns 500 records at a time. Read batches in parallel and stop at the first short page.
 	while (skip < 100000) {
@@ -32,28 +48,34 @@ async function loadRoutes() {
 		);
 		for (const { value } of pages) {
 			for (const row of value) {
-				const directions = (index[row.ServiceNo] ??= {});
-				(directions[row.Direction] ??= []).push({
-					seq: row.StopSequence,
-					code: row.BusStopCode,
-				});
+				const directions = (rowsBy[row.ServiceNo] ??= {});
+				(directions[row.Direction] ??= []).push(row);
 			}
 		}
 		skip += pages.length * 500;
 		if (pages.some((page) => page.value.length < 500)) break;
 	}
-	const result: Record<string, Record<string, string[]>> = {};
-	for (const [service, directions] of Object.entries(index)) {
+	const result: RouteIndex = {};
+	const detail: RouteDetail = { dist: {}, hours: {} };
+	const t = (v?: string) => (v && /^\d{4}$/.test(v.trim()) ? v.trim() : '-');
+	for (const [service, directions] of Object.entries(rowsBy)) {
 		result[service] = {};
+		detail.dist[service] = {};
+		detail.hours[service] = {};
 		for (const [direction, rows] of Object.entries(directions)) {
-			result[service][direction] = rows.sort((a, b) => a.seq - b.seq).map((r) => r.code);
+			rows.sort((a, b) => a.StopSequence - b.StopSequence);
+			result[service][direction] = rows.map((r) => r.BusStopCode);
+			detail.dist[service][direction] = rows.map((r) => (typeof r.Distance === 'number' ? r.Distance : null));
+			detail.hours[service][direction] = rows.map((r) =>
+				[r.WD_FirstBus, r.WD_LastBus, r.SAT_FirstBus, r.SAT_LastBus, r.SUN_FirstBus, r.SUN_LastBus].map(t).join(','),
+			);
 		}
 	}
+	routeDetail = detail;
 	return result;
 }
 
-
-export type RouteIndex = Record<string, Record<string, string[]>>;
+let devSnapshotAt = 0;
 
 /** Whole-network route index, loaded from DataMall at most once a day and shared by every route endpoint. */
 export async function getRouteIndex(): Promise<RouteIndex> {
@@ -62,7 +84,9 @@ export async function getRouteIndex(): Promise<RouteIndex> {
 		const { readFile, stat } = await import('node:fs/promises');
 		const file = process.env.THERESG_DEV_BUS_NETWORK;
 		devSnapshotAt = (await stat(file)).mtimeMs;
-		return JSON.parse(await readFile(file, 'utf8')).services;
+		const snap = JSON.parse(await readFile(file, 'utf8'));
+		routeDetail = { dist: snap.dist ?? {}, hours: snap.hours ?? {} };
+		return snap.services;
 	}
 	if (!routeIndex || Date.now() - loadedAt > 24 * 60 * 60 * 1000) {
 		pending ??= loadRoutes()
@@ -79,7 +103,9 @@ export async function getRouteIndex(): Promise<RouteIndex> {
 	return routeIndex!;
 }
 
-let devSnapshotAt = 0;
+export function getRouteDetail(): RouteDetail {
+	return routeDetail ?? { dist: {}, hours: {} };
+}
 
 export function routeIndexLoadedAt(): number {
 	return devSnapshotAt || loadedAt;

@@ -32,6 +32,8 @@ ThereSG is built with the help of AI tools.
 - Hawker centre listings from
   [NEA's directory of markets & hawker centres](https://www.nea.gov.sg/docs/default-source/hawker-centres-documents/list-of-hcs_-17-august-2026.pdf)
   (PDF, 17 August 2026).
+- Walking distances on /all are precomputed (`scripts/build-walk-links.py`, output `public/walk-links.json`) from
+  [OpenStreetMap](https://www.openstreetmap.org/copyright) contributors' footpaths and roads (BBBike Singapore extract, 26 Sep 2026), ODbL.
 - Maps by [OpenFreeMap](https://openfreemap.org) ©
   [OpenMapTiles](https://www.openmaptiles.org/), with data from
   [OpenStreetMap](https://www.openstreetmap.org/copyright) contributors.
