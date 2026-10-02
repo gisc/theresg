@@ -312,6 +312,11 @@ async function applyQuery() {
 	}
 }
 
+function clearLocation() {
+	// Drops the current-location start; the watcher on `from` cancels any pending fix and clears the message.
+	if (from.value?.kind === 'here') from.value = null;
+}
+
 function swap() {
 	const f = from.value;
 	from.value = to.value;
@@ -383,9 +388,12 @@ function dataAsOf() {
 					<div class="fields">
 						<div class="from-row">
 							<div class="flabel">From</div>
-							<button type="button" class="live-btn" :disabled="!ready || locationBusy" @click="useLocation">
-								{{ locationBusy ? 'Finding your location...' : 'Use my location' }}
-							</button>
+							<div class="from-actions">
+								<button v-if="from?.kind === 'here'" type="button" class="live-btn" @click="clearLocation">Clear location</button>
+								<button type="button" class="live-btn" :disabled="!ready || locationBusy" @click="useLocation">
+									{{ locationBusy ? 'Finding your location...' : 'Use my location' }}
+								</button>
+							</div>
 						</div>
 						<JourneyPlaceInput
 							v-model="from"
@@ -393,10 +401,12 @@ function dataAsOf() {
 							:places="places"
 							@focused="onFromFocused()"
 						/>
-						<m3e-icon-button class="swap" aria-label="Swap from and to" @click="swap">
-							<Icon name="material-symbols:swap-vert" />
-						</m3e-icon-button>
-						<div class="flabel">To</div>
+						<div class="from-row">
+							<div class="flabel">To</div>
+							<m3e-icon-button class="swap" aria-label="Swap from and to" @click="swap">
+								<Icon name="material-symbols:swap-vert" />
+							</m3e-icon-button>
+						</div>
 						<JourneyPlaceInput v-model="to" label="Station, bus stop, place or postal code" :places="places" @focused="loadExtra()" />
 					</div>
 					<p class="hint" role="status" aria-live="polite">{{ locationMsg || 'Use your location as From after granting permission, or enter a start manually. Your coordinates are sent to this site and OneMap to find walking routes, but are not saved as a preference.' }}</p>
@@ -491,6 +501,7 @@ function dataAsOf() {
 </template>
 
 <style lang="css" scoped>
+.from-actions { display: flex; align-items: center; gap: 8px; }
 .from-row { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
 .from-row button:disabled { opacity: 0.6; cursor: wait; }
 .bg {
@@ -530,7 +541,7 @@ function dataAsOf() {
 	gap: 8px;
 }
 .swap {
-	align-self: flex-end;
+	flex: none;
 }
 .hint {
 	margin: 0;
