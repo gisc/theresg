@@ -314,7 +314,9 @@ async function applyQuery() {
 
 function clearLocation() {
 	// Drops the current-location start; the watcher on `from` cancels any pending fix and clears the message.
+	// After a swap the location can sit in To, so clear whichever end holds it.
 	if (from.value?.kind === 'here') from.value = null;
+	if (to.value?.kind === 'here') to.value = null;
 }
 
 function swap() {
@@ -389,7 +391,7 @@ function dataAsOf() {
 						<div class="from-row">
 							<div class="flabel">From</div>
 							<div class="from-actions">
-								<button v-if="from?.kind === 'here'" type="button" class="live-btn" @click="clearLocation">Clear location</button>
+								<button v-if="from?.kind === 'here' || to?.kind === 'here'" type="button" class="live-btn" @click="clearLocation">Clear location</button>
 								<button type="button" class="live-btn" :disabled="!ready || locationBusy" @click="useLocation">
 									{{ locationBusy ? 'Finding your location...' : 'Use my location' }}
 								</button>
