@@ -236,31 +236,40 @@ const { toggleBlue } = useBlueTheme();
 }
 
 .tile {
-	display: flex;
-	flex-direction: column;
-	gap: 3px;
+	display: grid;
+	grid-template-columns: 1fr auto;
+	align-items: center;
+	column-gap: 8px;
+	row-gap: 2px;
 	background: var(--md-sys-color-surface-container-lowest);
 	border: 1px solid var(--md-sys-color-surface-variant);
 	border-radius: 18px;
-	padding: 13px 12px;
+	padding: 11px 12px;
 	text-decoration: none;
 }
+/* Icon sits to the right of the title; the description spans the full width below. */
+.tile .route-icon,
+.tile .iconify {
+	grid-column: 2;
+	grid-row: 1;
+}
+.tile-title { grid-column: 1; grid-row: 1; }
+.tile-desc { grid-column: 1 / -1; grid-row: 2; }
 .route-ring { fill: var(--md-sys-color-surface-container-lowest); }
 .tile .route-icon {
-	width: 30px;
-	height: 26px;
+	width: 26px;
+	height: 23px;
 	color: var(--sg-brand-text);
 }
 .tile .iconify {
-	width: 26px;
-	height: 26px;
+	width: 24px;
+	height: 24px;
 	color: var(--sg-brand-text);
 }
 .tile-title {
 	font-weight: 700;
 	font-size: 14px;
 	color: var(--md-sys-color-on-surface);
-	margin-top: 5px;
 }
 .tile-desc {
 	font-size: 11.5px;
