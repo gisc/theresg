@@ -31,7 +31,7 @@ const { toggleBlue } = useBlueTheme();
 							<circle cx="-18" cy="24" r="7" fill="currentColor" />
 							<circle cx="18" cy="-6" r="7" class="route-ring" stroke="currentColor" stroke-width="4.5" />
 						</svg>
-						<span class="tile-title">Go There</span>
+						<span class="tile-title">Commute</span>
 						<span class="tile-desc">Bus, MRT &amp; walking routes</span>
 					</NuxtLink>
 					<NuxtLink class="tile" to="/bus">

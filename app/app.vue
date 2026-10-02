@@ -98,11 +98,19 @@ useSeoMeta({
 				Home
 			</m3e-nav-item>
 			<m3e-nav-item
-				:selected.prop="routePath.startsWith('/bus')"
-				@click="router.push('/bus')"
+				:selected.prop="routePath.startsWith('/all')"
+				@click="router.push('/all')"
 			>
-				<Icon slot="icon" name="material-symbols:directions-bus-outline" />
-				Bus
+				<svg slot="icon" viewBox="-27 -16 54 48" width="27" height="24" fill="none" aria-hidden="true">
+					<mask id="nav-route-ring" maskUnits="userSpaceOnUse" x="-27" y="-16" width="54" height="48">
+						<rect x="-27" y="-16" width="54" height="48" fill="#fff" />
+						<circle cx="18" cy="-6" r="7" fill="#000" />
+					</mask>
+					<path d="M-18 24 C-18 -4 18 22 18 -6" stroke="currentColor" stroke-width="4.5" stroke-linecap="round" mask="url(#nav-route-ring)" />
+					<circle cx="-18" cy="24" r="7" fill="currentColor" />
+					<circle cx="18" cy="-6" r="7" stroke="currentColor" stroke-width="4.5" />
+				</svg>
+				Commute
 			</m3e-nav-item>
 			<m3e-nav-item
 				:selected.prop="routePath.startsWith('/mrt')"
