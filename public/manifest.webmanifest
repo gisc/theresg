@@ -9,12 +9,12 @@
 	"theme_color": "#E62333",
 	"icons": [
 		{
-			"src": "/icons/icon.svg",
+			"src": "/icons/icon.svg?v=3",
 			"sizes": "any",
 			"type": "image/svg+xml"
 		},
 		{
-			"src": "/icons/maskable.svg",
+			"src": "/icons/maskable.svg?v=3",
 			"sizes": "any",
 			"type": "image/svg+xml",
 			"purpose": "maskable"
