@@ -1,9 +1,34 @@
 # ThereSG
 
-A one-stop public transport hub for Singapore: live bus arrivals, an MRT
-journey planner with estimated fares, train and traffic alerts, platform crowd
-levels, bicycle parking and park connectors, hawker centre listings, and
-tourist attractions. Live at [www.there.sg](https://www.there.sg).
+Get around and experience Singapore.
+
+ThereSG helps you discover places to go, food to try and things to do across
+Singapore, then plan how to get there. It has grown beyond a transport hub
+and tourist-attraction directory into a site for everyday outings and local
+experiences, from parks and libraries to hawker food, neighbourhood activities
+and performances.
+
+Visit [www.there.sg](https://www.there.sg).
+
+## Explore Singapore
+
+- **Places:** Find parks, libraries and attractions, with location details,
+  official visit information and transport options where available.
+- **Food:** Explore hawker centres, local food culture and places to eat.
+- **Events:** Browse official calendars for library programmes, neighbourhood
+  activities, park events, garden concerts and performances. Check dates, fees and
+  registration on the official sites; this is not a combined live event feed.
+- **Commute:** Plan bus, MRT and walking journeys to support your outings,
+  with estimated MRT fares and mapped walking approaches where supported.
+- **Bus and MRT:** Check live bus arrivals, station crowd levels and train
+  service information.
+- **Bike and Alerts:** Find bicycle parking and park connectors, and check
+  service and traffic updates.
+
+Transport remains part of ThereSG, helping connect the places and experiences
+rather than defining the whole site. Coverage varies: walking connections are
+not available for every destination, and map-estimated routes are not verified
+step-free access routes.
 
 ## Credits and licence
 
