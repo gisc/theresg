@@ -31,7 +31,7 @@ useSeoMeta({
 		'Live bus arrivals, MRT planner and fares, service alerts, crowd levels, bicycle parking, hawker food and attractions across Singapore.',
 	ogType: 'website',
 	ogUrl: 'https://www.there.sg',
-	ogImage: 'https://www.there.sg/img/og-cover-v2.png',
+	ogImage: 'https://www.there.sg/img/og-cover-v3.png',
 	twitterCard: 'summary_large_image',
 });
 </script>
