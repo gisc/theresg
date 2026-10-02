@@ -10,7 +10,7 @@ metadata:
   title: ThereSG
   description: Singapore bus arrivals, bus routes and train service alerts in one web app
   icon: https://app.cdn.olares.com/appstore/default/defaulticon.webp
-  version: 0.1.2
+  version: 0.1.3
   categories:
     - Utilities
 
@@ -47,7 +47,7 @@ envs:
     editable: true
 
 spec:
-  versionName: '0.1.2'
+  versionName: '0.1.3'
   requiredCpu: 250m
   limitedCpu: 1000m
   requiredMemory: 256Mi
