@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { isInSingapore } from '~/composables/location';
 import type { JourneyPlace } from '~/components/JourneyPlaceInput.vue';
 import type { BusArrivalsResponse } from '~~/shared/types/BusArrivalsResponse';
 import {
@@ -108,7 +109,12 @@ onMounted(async () => {
 		}
 		places.value = out;
 		ready.value = true;
-		applyQuery();
+		await applyQuery();
+		// Reuse an existing grant, but never prompt until the visitor asks.
+		if (!from.value && !route.query.from && navigator.permissions) {
+			const permission = await navigator.permissions.query({ name: 'geolocation' }).catch(() => null);
+			if (permission?.state === 'granted' && !from.value) useLocation();
+		}
 	} catch {
 		loadError.value = 'Route data is unavailable right now. Try again in a minute.';
 	}
@@ -144,6 +150,81 @@ async function loadExtra() {
 const from = ref<JourneyPlace | null>(null);
 const to = ref<JourneyPlace | null>(null);
 
+// Location is a one-shot, fresh fix. It is not stored on the device or watched.
+const locationBusy = ref(false);
+const locationMsg = ref('');
+let originRevision = 0;
+watch(from, () => { originRevision++; locationMsg.value = ''; }, { flush: 'sync' });
+function onFromFocused() {
+	originRevision++; // A manual choice always wins over a pending location request.
+	loadExtra();
+}
+async function walkingLinks(lat: number, lon: number) {
+	if (!rawInput || !graph) throw new Error('Route data is not ready');
+	const near = <T extends { lat: number; lon: number }>(items: T[], n: number) => items
+		.map((it) => ({ it, d: distM(lat, lon, it.lat, it.lon) }))
+		.filter((x) => x.d <= 1500).sort((a, b) => a.d - b.d).slice(0, n).map((x) => x.it);
+	const targets = [
+		...near(rawInput.stops, 10).map((s) => ({ id: `b:${s.code}`, lat: s.lat, lon: s.lon })),
+		...near(graph.stations, 5).map((s) => ({ id: `m:${s.name}`, lat: s.lat, lon: s.lon })),
+	];
+	if (!targets.length) return [];
+	const result = await $fetch<{ links: { id: string; meters: number }[] }>('/api/postal-walk', {
+		method: 'POST', body: { lat, lon, targets },
+	});
+	return result.links;
+}
+async function useLocation() {
+	if (locationBusy.value || !ready.value) return;
+	locationMsg.value = '';
+	if (!navigator.geolocation) {
+		locationMsg.value = 'Location is not supported in this browser. Enter a start manually.';
+		return;
+	}
+	locationBusy.value = true;
+	const revision = originRevision;
+	try {
+		const fix = await new Promise<GeolocationPosition>((resolve, reject) => {
+			navigator.geolocation.getCurrentPosition(resolve, reject, {
+				enableHighAccuracy: true, timeout: 10000, maximumAge: 60000,
+			});
+		});
+		if (revision !== originRevision) return;
+		if (Date.now() - fix.timestamp > 120000 || fix.coords.accuracy > 250) {
+			locationMsg.value = 'Your location is too old or imprecise. Try again or enter a start manually.';
+			return;
+		}
+		const lat = fix.coords.latitude;
+		const lon = fix.coords.longitude;
+		if (!Number.isFinite(lat) || !Number.isFinite(lon) || !isInSingapore({ lat, lon }) || lat >= 1.48) {
+			locationMsg.value = 'This planner covers Singapore. Enter a Singapore start manually.';
+			return;
+		}
+		const links = await walkingLinks(lat, lon);
+		if (revision !== originRevision) return;
+		if (!links.length) {
+			locationMsg.value = 'No walkable bus stop or MRT station was found nearby. Enter a start manually.';
+			return;
+		}
+		const id = `here:${lat.toFixed(6)},${lon.toFixed(6)}`;
+		const next = new Map(postalLinks.value);
+		next.set(id, links);
+		postalLinks.value = next;
+		from.value = { id, name: 'My current location', sub: 'Current location', kind: 'here', lat, lon };
+		locationMsg.value = 'Using your current location. Tap again to refresh, or enter a different start.';
+	} catch (e) {
+		if (revision !== originRevision) return;
+		const code = (e as { code?: number }).code;
+		locationMsg.value = code === 1
+			? 'Location permission was declined. Enter a start manually, or allow location in your browser settings.'
+			: code === 2 || code === 3
+				? 'Could not get your location. Try again or enter a start manually.'
+				: 'Walking routes from your location are unavailable right now. Try again or enter a start manually.';
+	} finally {
+		locationBusy.value = false;
+	}
+}
+
 // Postal codes: OneMap gives the address and point, then walking distances to nearby stops
 // and stations come from OneMap's pedestrian router (not straight-line guesses).
 const postalLinks = shallowRef(new Map<string, { id: string; meters: number }[]>());
@@ -159,7 +240,7 @@ function tidyAddress(address: string, code: string) {
 	return base.toLowerCase().replace(/(^|[\s(-])([a-z])/g, (_, a: string, b: string) => a + b.toUpperCase());
 }
 // Walking legs next to a postal code come from OneMap's pedestrian router, the others from OpenStreetMap paths.
-const isPostalName = (n: string) => [from.value, to.value].some((p) => p?.kind === 'postal' && p.name === n);
+const isPostalName = (n: string) => [from.value, to.value].some((p) => (p?.kind === 'postal' || p?.kind === 'here') && p.name === n);
 async function resolvePostal(side: 'from' | 'to') {
 	const ref_ = side === 'from' ? from : to;
 	const place = ref_.value;
@@ -169,24 +250,13 @@ async function resolvePostal(side: 'from' | 'to') {
 	postalBusy.value = true;
 	try {
 		const r = await $fetch<{ address: string; lat: number; lon: number }>('/api/postal', { query: { code } });
-		const near = <T extends { lat: number; lon: number }>(items: T[], n: number) =>
-			items
-				.map((it) => ({ it, d: distM(r.lat, r.lon, it.lat, it.lon) }))
-				.filter((x) => x.d <= 1500)
-				.sort((a, b) => a.d - b.d)
-				.slice(0, n)
-				.map((x) => x.it);
-		const targets = [
-			...near(rawInput.stops, 10).map((s) => ({ id: `b:${s.code}`, lat: s.lat, lon: s.lon })),
-			...near(graph!.stations, 5).map((s) => ({ id: `m:${s.name}`, lat: s.lat, lon: s.lon })),
-		];
-		if (!targets.length) {
-			postalMsg[side] = `No bus stop or station within 1.5 km of ${r.address}.`;
-			return;
+		const links = await walkingLinks(r.lat, r.lon);
+		if (!links.length) {
+			postalMsg[side] = `No walkable bus stop or station found near ${r.address}.`;
 		}
-		const w = await $fetch<{ links: { id: string; meters: number }[] }>('/api/postal-walk', { method: 'POST', body: { lat: r.lat, lon: r.lon, targets } });
+
 		const next = new Map(postalLinks.value);
-		next.set(place.id, w.links);
+		next.set(place.id, links);
 		postalLinks.value = next;
 		if (ref_.value?.id === place.id) {
 			ref_.value = { id: place.id, name: `${tidyAddress(r.address, code)} (${code})`, sub: `Postal code ${code}`, kind: 'postal', lat: r.lat, lon: r.lon };
@@ -240,7 +310,7 @@ const options = computed<JourneyOption[] | null>(() => {
 	if (!graph) return null;
 	// A postal code is only plannable once its walking links have arrived.
 	for (const p of [from.value, to.value]) {
-		if (p.id.startsWith('pc:')) {
+		if (p.id.startsWith('pc:') || p.kind === 'here') {
 			const links = postalLinks.value.get(p.id);
 			if (!links) return null;
 			graph.setPlaceLinks(p.id, links);
@@ -300,7 +370,7 @@ function dataAsOf() {
 							v-model="from"
 							label="Station, bus stop, place or postal code"
 							:places="places"
-							@focused="loadExtra()"
+							@focused="onFromFocused()"
 						/>
 						<m3e-icon-button class="swap" aria-label="Swap from and to" @click="swap">
 							<Icon name="material-symbols:swap-vert" />
@@ -308,6 +378,12 @@ function dataAsOf() {
 						<div class="flabel">To</div>
 						<JourneyPlaceInput v-model="to" label="Station, bus stop, place or postal code" :places="places" @focused="loadExtra()" />
 					</div>
+					<div class="location-row">
+						<button type="button" class="live-btn" :disabled="!ready || locationBusy" @click="useLocation">
+							{{ locationBusy ? 'Finding your location...' : 'Use my location' }}
+						</button>
+					</div>
+					<p class="hint" role="status" aria-live="polite">{{ locationMsg || 'Use your location as From after granting permission, or enter a start manually. Your coordinates are sent to this site and OneMap to find walking routes, but are not saved as a preference.' }}</p>
 					<p v-if="postalMsg.from || postalMsg.to" class="hint err">{{ postalMsg.from || postalMsg.to }}</p>
 					<p v-else-if="postalBusy" class="hint">Looking up postal code...</p>
 					<p v-if="loadError" class="hint err">{{ loadError }}</p>
@@ -381,7 +457,7 @@ function dataAsOf() {
 							Times are planning estimates from distances and average waits, not live or timetable data
 							(walk {{ ASSUMPTIONS.walkMetersPerMin }} m/min, bus wait ~{{ ASSUMPTIONS.busWaitMin }} min, MRT wait ~{{ ASSUMPTIONS.mrtWaitMin }} min).
 							Use "Live arrivals here" for the next bus. Combined bus and MRT fares are not calculated.
-							Walking distances are measured along OpenStreetMap footpaths and roads (map data of 26 Sep 2026), or by OneMap for postal codes, not
+							Walking distances are measured along OpenStreetMap footpaths and roads (map data of 26 Sep 2026), or by OneMap for postal codes and your location, not
 							surveyed on site: they do not know about closed paths, works, weather or whether a route is sheltered. Check a walk on a map
 							before you rely on it. Buses shown are those scheduled to run at {{ whenLabel.label }} Singapore time
 							(public holidays follow Sunday timings, which this page cannot detect).
@@ -399,6 +475,8 @@ function dataAsOf() {
 </template>
 
 <style lang="css" scoped>
+.location-row { display: flex; justify-content: flex-end; }
+.location-row button:disabled { opacity: 0.6; cursor: wait; }
 .bg {
 	width: 100%;
 	height: 100%;
