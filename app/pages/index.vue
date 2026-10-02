@@ -54,10 +54,15 @@ const { toggleBlue } = useBlueTheme();
 						<span class="tile-title">Food</span>
 						<span class="tile-desc">Hawker &amp; eats nearby</span>
 					</NuxtLink>
-					<NuxtLink class="tile" to="/explore">
+					<NuxtLink class="tile" to="/places">
 						<Icon name="material-symbols:photo-camera-outline" />
-						<span class="tile-title">Explore</span>
-						<span class="tile-desc">Attractions &amp; guides</span>
+						<span class="tile-title">Places</span>
+						<span class="tile-desc">Parks, libraries &amp; attractions</span>
+					</NuxtLink>
+					<NuxtLink class="tile" to="/events">
+						<Icon name="material-symbols:event-outline" />
+						<span class="tile-title">Events</span>
+						<span class="tile-desc">Local happenings &amp; programmes</span>
 					</NuxtLink>
 					<NuxtLink class="tile" to="/alerts">
 						<Icon name="material-symbols:warning-outline" />
