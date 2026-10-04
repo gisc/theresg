@@ -53,6 +53,7 @@ interface CultureData {
 }
 const { data: culture } = await useLazyFetch<CultureData>('/food-culture.json', {
 	server: false,
+	cache: 'no-cache',
 });
 
 const { data } = await useLazyFetch<HawkerData>('/hawker-centres.json', {
