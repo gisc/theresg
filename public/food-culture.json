@@ -5,6 +5,61 @@
   "banner": "/img/food/joochiat.webp",
   "items": [
     {
+      "id": "neighbourwok-hokkien-mee",
+      "name": "The Neighbourwok",
+      "tag": "Hokkien mee",
+      "img": "/img/food/hokkien-mee.webp",
+      "address": "177 Bukit Batok West Ave 8, Get Together Coffeeshop, Singapore 650177",
+      "story": "A coffeeshop stall in Bukit Batok known for wet-style Hokkien prawn mee. In the creator's video, a group shares a big plate with large prawns and each gives it an A or A+. The stall's own page lists its address as the Get Together Coffeeshop.",
+      "tips": [
+        "The video is the creator's own taste test, so treat the grades as one group's opinion.",
+        "Check opening hours and queues with the stall before you travel."
+      ],
+      "lat": 1.3463485,
+      "lon": 103.7417238,
+      "mrt": [
+        {
+          "name": "Bukit Batok",
+          "lines": [
+            {
+              "code": "NS",
+              "color": "#D42E12"
+            }
+          ],
+          "meters": 1060,
+          "minutes": 15
+        },
+        {
+          "name": "Chinese Garden",
+          "lines": [
+            {
+              "code": "EW",
+              "color": "#009645"
+            }
+          ],
+          "meters": 1860,
+          "minutes": 27
+        }
+      ],
+      "mapsUrl": "https://www.google.com/maps/search/?api=1&query=The+Neighbourwok+177+Bukit+Batok+West+Ave+8+Get+Together+Coffeeshop",
+      "sources": [
+        {
+          "label": "Stall page",
+          "url": "https://theneighbourwok.oddle.me/en_SG/stores"
+        },
+        {
+          "label": "foodpanda listing",
+          "url": "https://www.foodpanda.sg/restaurant/a5py/the-neighbourwok-177-bukit-batok-west-avenue-8"
+        }
+      ],
+      "area": "Bukit Batok",
+      "video": {
+        "title": "Best Hokkien in Singapore!",
+        "author": "1M65",
+        "url": "https://youtube.com/shorts/dcmF9kSN3kE"
+      }
+    },
+    {
       "id": "mohgan-prata",
       "name": "Mr & Mrs Mohgan Super Crispy Roti Prata",
       "tag": "Prata",
@@ -52,7 +107,12 @@
           "url": "https://eatbook.sg/mr-and-mrs-mohgan-super-crispy-roti-prata/"
         }
       ],
-      "area": "Joo Chiat"
+      "area": "Joo Chiat",
+      "video": {
+        "title": "I Finally Try Singapore's LEGENDARY Roti Prata (sold out by noon!)",
+        "author": "Ghib Ojisan",
+        "url": "https://youtu.be/mHjkkSRgjE8"
+      }
     },
     {
       "id": "kway-guan-huat",
@@ -109,10 +169,5 @@
       "area": "Joo Chiat"
     }
   ],
-  "video": {
-    "title": "I Finally Try Singapore's LEGENDARY Roti Prata (sold out by noon!)",
-    "author": "Ghib Ojisan",
-    "url": "https://youtu.be/mHjkkSRgjE8"
-  },
   "note": "Illustrations are concept art. The scenes, people and dishes are not photos of these shops or their food."
 }

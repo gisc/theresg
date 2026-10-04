@@ -36,6 +36,7 @@ interface CultureItem {
 	mrt: { name: string; lines: HawkerLine[]; meters: number; minutes: number }[];
 	mapsUrl: string;
 	sources: { label: string; url: string }[];
+	video?: { title: string; author: string; url: string };
 }
 // Go there opens the Commute planner with this place as the destination, found by its postal code.
 function goThere(name: string, address: string) {
@@ -49,7 +50,6 @@ interface CultureData {
 	banner: string;
 	note: string;
 	items: CultureItem[];
-	video: { title: string; author: string; url: string };
 }
 const { data: culture } = await useLazyFetch<CultureData>('/food-culture.json', {
 	server: false,
@@ -117,6 +117,10 @@ const filtered = computed(() => {
 								>{{ s.label }}</a
 							>
 						</span>
+						<a v-if="c.video" class="video" :href="c.video.url" target="_blank" rel="noopener">
+							<Icon name="material-symbols:play-circle" />
+							<span>Watch: {{ c.video.title }} · {{ c.video.author }} (YouTube)</span>
+						</a>
 						<span class="go-row">
 							<NuxtLink v-if="goThere(c.name, c.address)" class="go-btn route" :to="goThere(c.name, c.address)!">
 								<Icon name="material-symbols:route" />
@@ -135,10 +139,6 @@ const filtered = computed(() => {
 							</NuxtLink>
 						</span>
 					</article>
-					<a class="video" :href="culture.video.url" target="_blank" rel="noopener">
-						<Icon name="material-symbols:play-circle" />
-						<span>Watch: {{ culture.video.title }} · {{ culture.video.author }} (YouTube)</span>
-					</a>
 				</div>
 			</m3e-card>
 
