@@ -53,7 +53,7 @@ export function mentionedDates(content: string, now = Date.now()): number[] {
 	const monthRe =
 		/\b(jan|feb|mar|apr|may|june?|july?|aug|sept?|oct|nov|dec)[a-z]*\.?\s*(\d{4})?/gi;
 	for (const m of content.matchAll(monthRe)) {
-		const month = MONTH_INDEX[m[1].toLowerCase().slice(0, 3)];
+		const month = MONTH_INDEX[m[1]!.toLowerCase().slice(0, 3)];
 		if (month === undefined) continue;
 		const year = m[2] ? Number(m[2]) : inferYear(month, now);
 		// Day numbers just before the month name, e.g. "20 and 27 Sep", "20, 27 Sep", "27 Sep"
