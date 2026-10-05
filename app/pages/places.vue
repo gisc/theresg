@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { createHeldVenueIds, isReviewedApproach, usableReviewedLinks, type ReviewedAccessCandidate } from '~~/shared/utils/venue-access';
 definePageMeta({ title: 'Places' });
 useSeoMeta({ title: 'Places' });
 interface Place { name: string; category: string; area?: string; description?: string; address: string; lat?: number; lon?: number; img?: string; previewImage?:string; mrt?: {name:string;dist:number}; mrtOptions?: {name:string;entrance:string;access:string}[]; bus?:{code:string;name:string;dist?:number;access?:string}; transportStations?:string[]; transportSources?:string[]; officialUrl?:string; datasetUrl?:string; note?:string; checkedAt?:string; gate?:string; distance?:number; closed?:boolean; transportPending?:boolean; walkRoute?:{url:string;meters:number;minutes:number;endpoint:string;steps:string[];warnings:string[];kind:string}; }
@@ -9,16 +10,17 @@ interface WalkFile { ids:string[]; links:Record<string,number[]>; unsnapped:stri
 const { data: walks } = await useLazyFetch<WalkFile>('/walk-links.json', {server:false});
 const { data: stops } = await useLazyFetch<{features:{properties:{code:string}}[]}>('/bus-stops.json', {server:false});
 // Match the current planner's reviewed approach and explicit hold gates by stable venue ID.
-const heldVenueIds=new Set<string>(["p:Brooks Park", "p:Bulim Park", "p:Changi Beach Park", "p:Changi Boardwalk", "p:Faber Heights Park", "p:Greenwood Crescent Playground", "p:Holland Green Linear Park", "p:Holland Green Playground", "p:Lilac Drive Playground", "p:Mimosa Walk Playground", "p:Neram Crescent Playground", "p:Nim Crescent Open Space", "p:Orchid Village Playground", "p:Saraca Road Playground", "p:Seletar Terrace Park", "p:Springleaf Avenue Playground", "a:Bird Paradise", "a:Jewel Changi Airport", "p:Harbourfront Library"]);
-const {data:reviewedAccess}=await useLazyFetch<{items:{id:string;lat:number;lon:number;buildingApproachReviewed:boolean;accessScope:string;links:{id:string;pathReviewed:boolean;source:string;meters:number;geometryFormat:string;geometry:[number,number][]}[] }[]}>('/venue-access.json',{server:false});
-const inSingapore=(p:{lat:number;lon:number})=>Number.isFinite(p.lat)&&Number.isFinite(p.lon)&&p.lat>=1.15&&p.lat<=1.5&&p.lon>=103.58&&p.lon<=104.1;
+const heldVenueIds = createHeldVenueIds();
+const { data: reviewedAccess } = await useLazyFetch<{ items: ReviewedAccessCandidate[] }>('/venue-access.json', { server: false });
 const commuteIds=computed(()=>{
  const w=walks.value;if(!w||!stops.value||!rail.value||!attractions.value||!additions.value||!reviewedAccess.value)return new Set<string>();
  const unsnapped=new Set(w.unsnapped);const index=new Map(w.ids.map((id,i)=>[id,i]));
  const valid=new Set([...stops.value.features.map(s=>`b:${s.properties.code}`),...rail.value.lines.flatMap(l=>l.stations.filter(s=>typeof s.lat==='number').map(s=>`m:${s.name}`))]);
  const ids=new Set<string>();
- for(const r of reviewedAccess.value.items){if(heldVenueIds.has(r.id)||!r.buildingApproachReviewed||!['building-approach','park-approach'].includes(r.accessScope)||!inSingapore(r))continue;
- if(r.links.some(l=>l.pathReviewed&&l.source==='OneMap'&&valid.has(l.id)&&Number.isFinite(l.meters)&&l.meters>0&&l.meters<=2000&&l.geometryFormat==='lat-lon'&&l.geometry?.length>1&&l.geometry.every(p=>inSingapore({lat:p[0],lon:p[1]}))))ids.add(r.id);}
+	for (const access of reviewedAccess.value.items) {
+		if (!isReviewedApproach(access, heldVenueIds)) continue;
+		if (usableReviewedLinks(access.links, valid).length) ids.add(access.id);
+	}
  for(const [items,prefix] of [[attractions.value.items,'a'],[additions.value.items,'p']] as const){for(const p of items){const id=`${prefix}:${p.name}`;if(p.closed||heldVenueIds.has(id)||typeof p.lat!=='number'||typeof p.lon!=='number'||unsnapped.has(id))continue;const i=index.get(id);if(i===undefined)continue;const links=w.links[String(i)]??[];if(links.some((target,k)=>k%2===0&&valid.has(w.ids[target]??'')))ids.add(id);}}
  return ids;
 });
