@@ -1,5 +1,7 @@
 <script setup lang="ts">
+import { sgWhen } from '~~/shared/utils/singapore-time';
 import { isInSingapore } from '~/composables/location';
+import { createHeldVenueIds, isReviewedApproach, usableReviewedLinks, type ReviewedAccess } from '~~/shared/utils/venue-access';
 import type { JourneyPlace } from '~/components/JourneyPlaceInput.vue';
 import type { BusArrivalsResponse } from '~~/shared/types/BusArrivalsResponse';
 import {
@@ -37,22 +39,28 @@ const places = ref<JourneyPlace[]>([]);
 const extraLoaded = ref(false);
 let unsnapped = new Set<string>();
 // Explicit holds override legacy walk links as well as the new approach records.
-const heldVenueIds = new Set<string>(["p:Brooks Park", "p:Bulim Park", "p:Changi Beach Park", "p:Changi Boardwalk", "p:Faber Heights Park", "p:Greenwood Crescent Playground", "p:Holland Green Linear Park", "p:Holland Green Playground", "p:Lilac Drive Playground", "p:Mimosa Walk Playground", "p:Neram Crescent Playground", "p:Nim Crescent Open Space", "p:Orchid Village Playground", "p:Saraca Road Playground", "p:Seletar Terrace Park", "p:Springleaf Avenue Playground", "a:Bird Paradise", "a:Jewel Changi Airport", "p:Harbourfront Library"]);
-interface ReviewedLink {capturedAtDate?:string;id:string;meters:number;pathReviewed:boolean;source:'OneMap';sourceUrl:string;geometry:[number,number][];geometryFormat:'lat-lon';direction:'transit-to-venue';instructions:unknown[]}
-interface ReviewedAccess { checkedAt:string;id:string; name:string; entranceName:string; entranceReviewed:boolean; buildingApproachReviewed:boolean; lat:number; lon:number; accessScope:'building-approach'|'park-approach';accessNote:string;officialUrl:string; links:ReviewedLink[] }
+const heldVenueIds = createHeldVenueIds();
 const venueAccess = shallowRef(new Map<string, ReviewedAccess>());
 const approvedVenueLinks = shallowRef(new Map<string, {id:string;meters:number}[]>());
 async function loadReviewedAccess() {
- const data = await $fetch<{items:ReviewedAccess[]}>('/venue-access.json').catch(()=>({items:[]}));
- if(!rawInput||!graph)return;
- const valid=new Set([...rawInput.stops.map(s=>`b:${s.code}`),...graph.stations.map(s=>`m:${s.name}`)]);
- const access=new Map<string,ReviewedAccess>();const links=new Map<string,{id:string;meters:number}[]>();
- for(const it of data.items){
-  if(heldVenueIds.has(it.id)||!/^[aph]:.+/.test(it.id)||!((it.accessScope==='building-approach'||it.accessScope==='park-approach')&&it.buildingApproachReviewed)||!isInSingapore({lat:it.lat,lon:it.lon}))continue;
-  const usable=it.links.filter(l=>l.pathReviewed&&l.source==='OneMap'&&valid.has(l.id)&&Number.isFinite(l.meters)&&l.meters>0&&l.meters<=2000&&l.geometryFormat==='lat-lon'&&l.geometry?.length>1&&l.geometry.every(p=>isInSingapore({lat:p[0],lon:p[1]})));
-  if(!usable.length)continue;access.set(it.id,it);links.set(it.id,usable);
- }
- venueAccess.value=access;approvedVenueLinks.value=links;
+	const data = await $fetch<{ items: ReviewedAccess[] }>('/venue-access.json').catch(() => ({ items: [] }));
+	if (!rawInput || !graph) return;
+	const valid = new Set([
+		...rawInput.stops.map((stop) => `b:${stop.code}`),
+		...graph.stations.map((station) => `m:${station.name}`),
+	]);
+	const access = new Map<string, ReviewedAccess>();
+	const links = new Map<string, { id: string; meters: number }[]>();
+	for (const item of data.items) {
+		// The planner also requires a venue-shaped ID. Places keeps its existing gate.
+		if (!/^[aph]:.+/.test(item.id) || !isReviewedApproach(item, heldVenueIds, isInSingapore)) continue;
+		const usable = usableReviewedLinks(item.links, valid, isInSingapore);
+		if (!usable.length) continue;
+		access.set(item.id, item);
+		links.set(item.id, usable);
+	}
+	venueAccess.value = access;
+	approvedVenueLinks.value = links;
 }
 let graph: JourneyGraph | null = null;
 let rawInput: Omit<JNetworkInput, 'when'> | null = null;
@@ -61,15 +69,6 @@ const clock = ref(Date.now());
 let clockTimer: ReturnType<typeof setInterval> | undefined;
 onBeforeUnmount(() => clearInterval(clockTimer));
 
-// Singapore time and day type (public holidays follow Sunday timings but cannot be detected here).
-function sgWhen(ms: number): { minutes: number; day: 'WD' | 'SAT' | 'SUN'; label: string } {
-	const f = new Intl.DateTimeFormat('en-SG', { timeZone: 'Asia/Singapore', weekday: 'short', hour: 'numeric', minute: 'numeric', hourCycle: 'h23' }).formatToParts(new Date(ms));
-	const g = (t: string) => f.find((p) => p.type === t)?.value ?? '';
-	const wd = g('weekday');
-	const minutes = Number(g('hour')) * 60 + Number(g('minute'));
-	const day = wd === 'Sat' ? 'SAT' : wd === 'Sun' ? 'SUN' : 'WD';
-	return { minutes, day, label: `${g('hour').padStart(2, '0')}:${g('minute').padStart(2, '0')}` };
-}
 function ensureGraph() {
 	if (!rawInput) return;
 	const w = sgWhen(clock.value);
