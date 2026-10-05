@@ -36,7 +36,8 @@ watch(
 		const coords = await getSingaporeCoords();
 		if (!coords || from.value) return;
 		const entries = net.lines.flatMap((line) =>
-			line.stations.map((s) => ({ name: s.name, lat: s.lat, lon: s.lon })),
+			line.stations.flatMap((s) => s.lat != null && s.lon != null
+				? [{ name: s.name, lat: s.lat, lon: s.lon }] : []),
 		);
 		const nearest = nearestByCoords(entries, (e) => ({ lat: e.lat, lon: e.lon }), coords);
 		if (!nearest || from.value) return;
@@ -144,7 +145,7 @@ function codesFor(name: string): StationInfo | undefined {
 						</ol>
 						<p v-if="i < segments.length - 1" class="transfer">
 							Transfer at {{ segment.stations[segment.stations.length - 1] }} to the
-							{{ segments[i + 1].line.name }}
+							{{ segments[i + 1]!.line.name }}
 						</p>
 					</div>
 				</template>
