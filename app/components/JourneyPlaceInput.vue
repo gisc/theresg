@@ -56,7 +56,7 @@ watch(query, (value) => {
 	}, 300);
 });
 
-const matches = computed(() => {
+const matches = computed<JourneyPlace[]>(() => {
 	const q = query.value.trim().toLowerCase();
 	if (q.length < 2 || q === props.modelValue?.name.toLowerCase()) return [];
 	// A 6-digit number is a Singapore postal code: offer a lookup (resolved by the page).
