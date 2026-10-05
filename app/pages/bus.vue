@@ -26,7 +26,7 @@ const routeDirections = ref<Record<string, string[]>>({});
 const { data: serviceList, status: serviceStatus } = useFetch<string[]>('/api/bus-service-lookup', {
 	default: () => [],
 });
-const { data: geojson } = await useLazyFetch('/bus-stops.json', {
+const { data: geojson } = await useLazyFetch<Geojson>('/bus-stops.json', {
 	server: false,
 });
 
@@ -49,7 +49,7 @@ watch(
 		const features = (geojson.value as Geojson | null)?.features ?? [];
 		const nearest = nearestByCoords(
 			features,
-			(f) => ({ lat: f.geometry.coordinates[1], lon: f.geometry.coordinates[0] }),
+			(f) => ({ lat: f.geometry.coordinates[1]!, lon: f.geometry.coordinates[0]! }),
 			coords,
 		);
 		if (nearest && !route.query.stop) pickStop(nearest.properties);
@@ -237,7 +237,7 @@ const center = {
 const zoom = 10;
 // Bus arrivals only cover Singapore, so keep the map within the country.
 const minZoom = 10;
-const maxBounds = [
+const maxBounds: [[number, number], [number, number]] = [
 	[103.55, 1.15], // south-west
 	[104.1, 1.5], // north-east
 ];
