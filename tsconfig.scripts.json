@@ -1,6 +1,12 @@
 {
-	"include": ["scripts/**/*"],
+	"include": [
+		"scripts/**/*"
+	],
 	"compilerOptions": {
-		"types": ["node"]
+		"types": [
+			"node"
+		],
+		"esModuleInterop": true,
+		"incremental": false
 	}
 }
