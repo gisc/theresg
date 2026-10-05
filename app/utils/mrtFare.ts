@@ -75,8 +75,8 @@ export function routeDistanceKm(
 	let metres = 0;
 	for (const segment of segments) {
 		for (let i = 0; i < segment.stations.length - 1; i++) {
-			const a = coords.get(segment.stations[i]);
-			const b = coords.get(segment.stations[i + 1]);
+			const a = coords.get(segment.stations[i]!);
+			const b = coords.get(segment.stations[i + 1]!);
 			if (!a || !b) {
 				return null;
 			}
