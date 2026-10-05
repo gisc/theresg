@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import type { FeatureCollection, Point } from 'geojson';
 import type { BicycleParking } from '~~/shared/types/BicycleParking';
 
 definePageMeta({
@@ -23,7 +24,7 @@ const mapInstance = ref<any>(null);
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const bikeMapRef = useTemplateRef<any>('bikeMap');
 
-const { data: pcn } = await useLazyFetch('/pcn.json', {
+const { data: pcn } = await useLazyFetch<FeatureCollection>('/pcn.json', {
 	server: false,
 });
 
@@ -78,7 +79,7 @@ function setPoint(p: UserCoords, label: 'location' | 'map') {
 	fetchParking(p);
 }
 
-const parkingGeojson = computed(() => ({
+const parkingGeojson = computed<FeatureCollection<Point>>(() => ({
 	type: 'FeatureCollection',
 	features: parking.value.map((spot) => ({
 		type: 'Feature',
@@ -90,7 +91,7 @@ const parkingGeojson = computed(() => ({
 	})),
 }));
 
-const pointGeojson = computed(() => ({
+const pointGeojson = computed<FeatureCollection<Point>>(() => ({
 	type: 'FeatureCollection',
 	features: point.value
 		? [
@@ -134,7 +135,7 @@ const center = {
 };
 const zoom = 11;
 const minZoom = 10;
-const maxBounds = [
+const maxBounds: [[number, number], [number, number]] = [
 	[103.55, 1.15], // south-west
 	[104.1, 1.5], // north-east
 ];
