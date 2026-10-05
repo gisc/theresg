@@ -18,6 +18,10 @@ const sources = [
 <article class="event-card">
 <img src="/img/haw-ror-villa-illustration.webp" alt="Illustration of a lantern-lit Chinese garden gateway with mist and playful ghost silhouettes" class="event-image" />
 <div class="event-copy"><h3>Haw Ror Villa 5</h3><p class="event-meta">Haw Par Villa · 8 Oct–15 Nov 2026, select nights</p><p>Four scare zones, a puzzle hunt and a maze experience at Hell's Museum's Halloween event.</p><div class="event-footer"><a href="https://cnalifestyle.channelnewsasia.com/living/haw-ror-villa-5-halloween-589881" class="go" target="_blank" rel="noopener noreferrer">Read more ↗</a><NuxtLink to="/all?toId=a%3AHaw%20Par%20Villa" class="go">Commute</NuxtLink><NuxtLink to="/mrt?to=Haw%20Par%20Villa" class="go">By MRT</NuxtLink></div></div>
+</article>
+<article class="event-card" style="margin-top:16px">
+<img src="/img/sgim-illustration.webp" alt="Concept illustration of runners on a Marina Bay waterfront road at sunrise with the National Stadium dome and city skyline behind" class="event-image" />
+<div class="event-copy"><h3>2026 BYD Singapore International Marathon</h3><p class="event-meta">4-6 Dec 2026 · BYD Marathon Sun 6 Dec: start F1 Pit Building, finish National Stadium</p><p>Singapore's national marathon weekend, from the 42.195km BYD Marathon to the 10KM, 5KM and Kids Dash. BYD Marathon availability differs across the organiser's pages, so check current registration. The events page says 10KM, 5KM and Kids Dash registration runs to 31 Oct 2026, or until full, while the homepage still says registration closes 30 Sep. Free early MRT runs on race morning from 2:30am.</p><p class="event-meta">Concept illustration, not the race route.</p><div class="event-footer"><a href="https://singaporeinternationalmarathon.com/" class="go" target="_blank" rel="noopener noreferrer">Read more ↗</a><NuxtLink to="/mrt?to=Stadium" class="go">By MRT</NuxtLink></div></div>
 </article></section>
 <h2 class="directories-heading">Event directories</h2>
 <div class="sources"><article v-for="source in sources" :key="source.url" class="source">
