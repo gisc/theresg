@@ -79,10 +79,10 @@ function buildGraph(network: MrtNetwork): Map<string, GraphEdge[]> {
 	for (const line of network.lines) {
 		const names = line.stations.map((s) => s.name);
 		for (let i = 0; i < names.length - 1; i++) {
-			addEdge(names[i], names[i + 1], line.code);
+			addEdge(names[i]!, names[i + 1]!, line.code);
 		}
 		if (line.loop && names.length > 1) {
-			addEdge(names[names.length - 1], names[0], line.code);
+			addEdge(names[names.length - 1]!, names[0]!, line.code);
 		}
 	}
 
@@ -178,7 +178,7 @@ export function findRoute(
 	const segments: RouteSegment[] = [];
 
 	for (let i = 0; i < hopLines.length; i++) {
-		const lineCode = hopLines[i];
+		const lineCode = hopLines[i]!;
 		const line = lineByCode.get(lineCode);
 		if (!line) {
 			continue;
@@ -186,12 +186,12 @@ export function findRoute(
 
 		const last = segments[segments.length - 1];
 		if (last && last.line.code === lineCode) {
-			last.stations.push(stations[i + 1]);
+			last.stations.push(stations[i + 1]!);
 			last.stops += 1;
 		} else {
 			segments.push({
 				line,
-				stations: [stations[i], stations[i + 1]],
+				stations: [stations[i]!, stations[i + 1]!],
 				towards: null,
 				stops: 1,
 			});
@@ -204,12 +204,12 @@ export function findRoute(
 			continue;
 		}
 		const names = segment.line.stations.map((s) => s.name);
-		const fromIdx = names.indexOf(segment.stations[0]);
-		const toIdx = names.indexOf(segment.stations[segment.stations.length - 1]);
+		const fromIdx = names.indexOf(segment.stations[0]!);
+		const toIdx = names.indexOf(segment.stations[segment.stations.length - 1]!);
 		if (fromIdx !== -1 && toIdx !== -1) {
-			segment.towards = fromIdx < toIdx ? names[names.length - 1] : names[0];
+			segment.towards = fromIdx < toIdx ? names[names.length - 1]! : names[0]!;
 		}
 	}
 
 	return segments;
-}
+					}
