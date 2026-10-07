@@ -1,0 +1,13 @@
+import assert from 'node:assert/strict';
+import { airBand, airIsStale, parseAirSeries } from '../shared/utils/air-quality';
+for (const [value, label] of [[0,'Good'],[50,'Good'],[51,'Moderate'],[100,'Moderate'],[101,'Unhealthy'],[200,'Unhealthy'],[201,'Very unhealthy'],[300,'Very unhealthy'],[301,'Hazardous']] as const) assert.equal(airBand('psi',value)?.label,label);
+for (const [value, label] of [[0,'Normal'],[55,'Normal'],[56,'Elevated'],[150,'Elevated'],[151,'High'],[250,'High'],[251,'Very high']] as const) assert.equal(airBand('pm25',value)?.label,label);
+assert.equal(airBand('pm25',null),null);assert.equal(airBand('psi',NaN),null);assert.equal(airBand('psi',-1),null);
+const now=Date.parse('2026-10-06T18:50:00+08:00');
+assert.equal(airIsStale('2026-10-06T18:00:00+08:00',now),false);
+assert.equal(airIsStale('2026-10-06T15:00:00+08:00',now),true);
+assert.equal(airIsStale('bad',now),true);
+assert.equal(parseAirSeries({code:1},'psi'),null);
+const body={code:0,data:{items:[{timestamp:'2026-10-06T18:00:00+08:00',readings:{psi_twenty_four_hourly:{north:109,south:0,central:135,east:'bad',west:-1}}}]}};
+assert.deepEqual(parseAirSeries(body,'psi')?.values,{north:109,south:0,east:null,west:null,central:135});
+assert.equal(parseAirSeries(body,'pm25'),null);

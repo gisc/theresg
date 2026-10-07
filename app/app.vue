@@ -45,6 +45,7 @@ useSeoMeta({
 			<span slot="title" class="brand" role="link" tabindex="0" @click="router.push('/')" @keydown.enter="router.push('/')"><img src="/icons/logo.svg?v=3" alt="" width="32" height="32" /><span>ThereSG</span></span>
 		</m3e-app-bar>
 		<ServiceAlertBanner />
+		<AirQualityOverlay />
 		<div class="bottom">
 			<m3e-nav-rail ref="navRail" class="nav-rail">
 				<m3e-nav-item :selected.prop="routePath === '/'" @click="router.push('/')">
