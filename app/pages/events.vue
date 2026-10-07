@@ -2,6 +2,7 @@
 definePageMeta({ title: 'Events' });
 useSeoMeta({ title: 'Events', description: 'Find library programmes, community events, park activities and performances through official Singapore calendars.' });
 const sources = [
+ { name: 'AI community', icon: 'material-symbols:psychology-outline', description: 'Lorong AI talks, workshops and community events. Check each listing for venue and registration.', publisher: 'Lorong AI on Luma', url: 'https://luma.com/lorong-ai' },
  { name: 'Libraries', icon: 'material-symbols:local-library-outline', description: 'Talks, workshops and learning programmes.', publisher: 'NLB GoLibrary', url: 'https://nlb.libcal.com/calendar/public' },
  { name: 'Neighbourhoods', icon: 'material-symbols:groups-outline', description: 'Community club and neighbourhood activities.', publisher: 'onePA', url: 'https://www.onepa.gov.sg/events/neighbourhood-events' },
  { name: 'Parks', icon: 'material-symbols:park-outline', description: 'Walks, workshops and events in green spaces.', publisher: 'NParks', url: 'https://www.nparks.gov.sg/visit/events' },
