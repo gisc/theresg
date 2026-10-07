@@ -1,9 +1,61 @@
 {
   "title": "Local food culture highlights",
   "intro": "Food spots tied to Singapore's everyday food culture: family-run stalls and long-standing makers behind dishes locals grew up with. We'll keep adding more.",
-  "asOf": "2026-10-01",
+  "asOf": "2026-10-06",
   "banner": "/img/food/joochiat.webp",
   "items": [
+    {
+      "id": "new-horse-noodles",
+      "name": "New Horse Noodles",
+      "tag": "Hakka yong tau foo",
+      "area": "Chinatown",
+      "img": "/img/food/new-horse-noodles.webp",
+      "address": "335 Smith St, Chinatown Complex Food Centre #02-148 (Red Zone), Singapore 050335",
+      "story": "Brothers Scott and Troy Lee left finance careers to open this Hakka yong tau foo stall, learning from an 85-year-old hawker in Malacca. Their handmade pieces come with Malaysian-style dark-sauce dry noodles. They have announced a final business day of 25 October 2026.",
+      "closesOn": "2026-10-25",
+      "closureLabel": "Last day: Sunday, 25 Oct 2026",
+      "closedLabel": "Past announced last day: 25 Oct 2026",
+      "closureSource": "https://cnalifestyle.channelnewsasia.com/dining/new-horse-noodles-closing-chinatown-complex-ex-fintech-hawkers-589951",
+      "tips": [
+        "Reported hours: Sat-Wed, 9:30am-2pm; closed Thu/Fri. The owners advise coming before 1pm. Check with the stall before travelling.",
+        "The S$6.50 noodle-and-yong-tau-foo set is the article-reported price, not a live menu quote.",
+        "Contains pork; the filling also includes seafood."
+      ],
+      "lat": 1.2819373,
+      "lon": 103.8434289,
+      "mrt": [
+        {
+          "name": "Chinatown",
+          "lines": [
+            {
+              "code": "NE",
+              "color": "#9900AA"
+            },
+            {
+              "code": "DT",
+              "color": "#005EC4"
+            }
+          ],
+          "meters": 466,
+          "minutes": 7
+        }
+      ],
+      "mapsUrl": "https://www.google.com/maps/search/?api=1&query=New+Horse+Noodles&query_place_id=ChIJJ8r9RZMZ2jER5Sp55Ae5LoA",
+      "sources": [
+        {
+          "label": "CNA 5 Oct",
+          "url": "https://cnalifestyle.channelnewsasia.com/dining/new-horse-noodles-closing-chinatown-complex-ex-fintech-hawkers-589951"
+        },
+        {
+          "label": "8days 3 Oct",
+          "url": "https://www.8days.sg/eatanddrink/hawkerfood/new-horse-noodles-closing-chinatown-complex-fintech-hawkers-864101"
+        },
+        {
+          "label": "HungryGoWhere 2 Oct",
+          "url": "https://hungrygowhere.com/food-news/new-horse-noodles/"
+        }
+      ]
+    },
     {
       "id": "neighbourwok-hokkien-mee",
       "name": "The Neighbourwok",

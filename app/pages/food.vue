@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { foodIsClosed } from '~~/shared/utils/food-closure';
 definePageMeta({
 	title: 'Food',
 });
@@ -36,6 +37,10 @@ interface CultureItem {
 	mrt: { name: string; lines: HawkerLine[]; meters: number; minutes: number }[];
 	mapsUrl: string;
 	sources: { label: string; url: string }[];
+	closesOn?: string;
+	closureLabel?: string;
+	closedLabel?: string;
+	closureSource?: string;
 	video?: { title: string; author: string; url: string };
 }
 // Go there opens the Commute planner with this place as the destination, found by its postal code.
@@ -63,6 +68,16 @@ const { data } = await useLazyFetch<HawkerData>('/hawker-centres.json', {
 function fmtDist(m: number): string {
 	return m < 950 ? `${Math.round(m / 10) * 10} m` : `${(m / 1000).toFixed(1)} km`;
 }
+
+// Refresh across Singapore midnight for visitors who keep the page open.
+const now = ref(Date.now());
+let closureTimer: ReturnType<typeof setInterval> | undefined;
+onMounted(() => {
+	now.value = Date.now();
+	closureTimer = setInterval(() => { now.value = Date.now(); }, 60_000);
+});
+onUnmounted(() => { if (closureTimer) clearInterval(closureTimer); });
+const isClosed = (item: CultureItem) => foodIsClosed(item.closesOn, now.value);
 
 const query = ref('');
 const filtered = computed(() => {
@@ -92,8 +107,12 @@ const filtered = computed(() => {
 						<img class="spot-img" :src="c.img" alt="" loading="lazy" />
 						<span class="tag">{{ c.tag }} · {{ c.area }}</span>
 						<h3 class="spot-name">{{ c.name }}</h3>
+						<a v-if="c.closesOn" class="closure" :href="c.closureSource" target="_blank" rel="noopener">
+							{{ isClosed(c) ? c.closedLabel : c.closureLabel }}
+						</a>
 						<span class="addr">{{ c.address }}</span>
 						<p class="intro-text">{{ c.story }}</p>
+						<p v-if="isClosed(c)" class="note">Kept here as a food-culture story, not a current dining recommendation. Hours and prices below are historical.</p>
 						<ul class="tips">
 							<li v-for="t in c.tips" :key="t">{{ t }}</li>
 						</ul>
@@ -123,7 +142,7 @@ const filtered = computed(() => {
 							<span>Watch: {{ c.video.title }} · {{ c.video.author }} (YouTube)</span>
 						</a>
 						<span class="go-row">
-							<NuxtLink v-if="goThere(c.name, c.address)" class="go-btn route" :to="goThere(c.name, c.address)!">
+							<NuxtLink v-if="!isClosed(c) && goThere(c.name, c.address)" class="go-btn route" :to="goThere(c.name, c.address)!">
 								<Icon name="material-symbols:route" />
 								Go there
 							</NuxtLink>
@@ -132,6 +151,7 @@ const filtered = computed(() => {
 								Map
 							</a>
 							<NuxtLink
+								v-if="!isClosed(c) && c.mrt.length"
 								class="go-btn mrt"
 								:to="`/mrt?to=${encodeURIComponent(c.mrt[0]!.name)}`"
 							>
@@ -300,6 +320,7 @@ const filtered = computed(() => {
 .spot { display: flex; flex-direction: column; gap: 6px; padding-top: 12px; border-top: 1px solid var(--md-sys-color-outline-variant); }
 .spot-name { margin: 0; font-size: 17px; font-weight: 700; color: var(--md-sys-color-on-surface); }
 .tag { align-self: flex-start; padding: 0 10px; border-radius: 10px; font-size: 11px; font-weight: 700; line-height: 20px; color: var(--md-sys-color-on-primary-container); background: var(--md-sys-color-primary-container); }
+.closure { align-self: flex-start; color: var(--md-sys-color-primary); font-size: 13px; font-weight: 700; }
 .addr { font-size: 12px; color: var(--md-sys-color-on-surface-variant); }
 .note { margin: 0; font-size: 12px; font-style: italic; color: var(--md-sys-color-on-surface-variant); }
 .tips { margin: 0; padding-left: 18px; font-size: 13px; line-height: 1.5; color: var(--md-sys-color-on-surface-variant); }
