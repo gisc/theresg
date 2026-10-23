@@ -1,7 +1,7 @@
 {
   "title": "Local food culture highlights",
   "intro": "Food spots tied to Singapore's everyday food culture: family-run stalls and long-standing makers behind dishes locals grew up with. We'll keep adding more.",
-  "asOf": "2026-10-06",
+  "asOf": "2026-10-23",
   "banner": "/img/food/joochiat.webp",
   "items": [
     {
@@ -219,6 +219,165 @@
         }
       ],
       "area": "Joo Chiat"
+    },
+    {
+      "id": "ole-ole-bumbu",
+      "name": "Ole Ole Bumbu",
+      "tag": "Lontong & nasi padang",
+      "area": "Marine Terrace",
+      "img": "/img/food/ole-ole-bumbu.webp",
+      "address": "50A Marine Terrace, Marine Terrace Market & Food Centre #01-307, Singapore 441050",
+      "story": "Eliza and her family run this neighbourhood stall, where warm greetings are part of the daily routine. In OGS's film, she prepares old-school lontong with turnip, jackfruit and dried prawns, and shares how cooking and her regular customers keep her going.",
+      "tips": [
+        "OGS's pinned comment lists 6am to about 2pm, or until sold out. Opening days are not stated; check before travelling.",
+        "Dry mee siam appears in the film but is not available every day. Ask what is cooking that morning.",
+        "The lontong contains dried prawns. No current menu prices or halal-certification status are confirmed here."
+      ],
+      "lat": 1.3057863,
+      "lon": 103.9156258,
+      "mrt": [
+        {
+          "name": "Marine Terrace",
+          "lines": [
+            {
+              "code": "TE",
+              "color": "#9D5B25"
+            }
+          ],
+          "meters": 850,
+          "minutes": 11
+        }
+      ],
+      "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Ole+Ole+Bumbu&query_place_id=ChIJN29Xxp8i2jERLKql8Y_1IA0",
+      "sources": [
+        {
+          "label": "OGS video",
+          "url": "https://youtu.be/yOj_jROIk48"
+        },
+        {
+          "label": "CNA (2021)",
+          "url": "https://cnalifestyle.channelnewsasia.com/dining/best-local-food-singapore-lontong-ole-ole-bumbu-281841"
+        }
+      ],
+      "video": {
+        "title": "Why People Travel Across Singapore For This Hawker",
+        "author": "OGS",
+        "url": "https://youtu.be/yOj_jROIk48"
+      }
+    },
+    {
+      "id": "tian-yue-ci-hang",
+      "name": "Tian Yue Ci Hang Vegetarian Food 天月慈航素食",
+      "tag": "Vegetarian cai fan",
+      "img": "/img/food/tian-yue-ci-hang.webp",
+      "address": "33 Ubi Ave 3, Hoha Eating House, Vertex #01-35, Singapore 408868",
+      "story": "A vegetarian economic-rice (cai fan) stall inside Hoha Eating House in the Ubi industrial estate. Regulars describe a wide selection of freshly cooked dishes made without alliums, with vegan dishes on the regular menu and occasional specials such as lor mee and laksa that appear without a fixed schedule.",
+      "tips": [
+        "Hours: weekday mornings to early afternoon, closed Sat and Sun. Google Maps lists opening at 6am; HappyCow lists 6:30am-1:30pm, and dishes often sell out from about 1:30pm without being replenished. Check before travelling.",
+        "Vegetarian stall with vegan dishes - not everything is vegan, so ask. Google shows a $1-10 price band; no current menu prices are verified."
+      ],
+      "lat": 1.3336921,
+      "lon": 103.8945709,
+      "mrt": [
+        {
+          "name": "Ubi",
+          "lines": [
+            {
+              "code": "DT",
+              "color": "#005EC4"
+            }
+          ],
+          "meters": 939,
+          "minutes": 12
+        },
+        {
+          "name": "MacPherson",
+          "lines": [
+            {
+              "code": "CC",
+              "color": "#FA9E0D"
+            },
+            {
+              "code": "DT",
+              "color": "#005EC4"
+            }
+          ],
+          "meters": 1110,
+          "minutes": 15
+        }
+      ],
+      "mapsUrl": "https://www.google.com/maps/search/?api=1&query=%E5%A4%A9%E6%9C%88%E6%85%88%E8%88%AA%E7%B4%A0%E9%A3%9F+Tian+Yue+Ci+Hang+Vegetarian+Food&query_place_id=ChIJE52estEX2jER6iG-sEM5YRU",
+      "sources": [
+        {
+          "label": "HappyCow",
+          "url": "https://www.happycow.net/reviews/tian-yue-ci-hang-vegetarian-food-central-singapore-442082"
+        },
+        {
+          "label": "Google Maps",
+          "url": "https://www.google.com/maps/search/?api=1&query=%E5%A4%A9%E6%9C%88%E6%85%88%E8%88%AA%E7%B4%A0%E9%A3%9F+Tian+Yue+Ci+Hang+Vegetarian+Food&query_place_id=ChIJE52estEX2jER6iG-sEM5YRU"
+        }
+      ],
+      "area": "Ubi"
+    },
+    {
+      "id": "terumbu-orang-laut",
+      "name": "Terumbu by Orang Laut SG",
+      "tag": "Southern Islander pop-up",
+      "img": "/img/food/terumbu-orang-laut.webp",
+      "address": "6 Eu Tong Sen St, Chef X, Clarke Quay Central #03-103/104, Singapore 059817",
+      "story": "The first walk-in cafe from Orang Laut SG, the community group that has sold Southern Islander food mostly through weekend deliveries since 2020. Founder Firdaus Sani is a fourth-generation islander whose family was relocated from Pulau Semakau in 1977; at Terumbu (\"coral reefs\") his mother Noorani Rani cooks family recipes passed down from his grandmother, with a small community gallery on the Southern Islands alongside. The menu is anchored by the Pulau Bowl - asam pedas reef fish, sotong hitam and sambal udang over jasmine rice - and bubur lambuk tenggiri, a mackerel porridge that was an everyday island dish.",
+      "closesOn": "2026-12-22",
+      "closureLabel": "Last day: Tuesday, 22 Dec 2026",
+      "closedLabel": "Past announced last day: 22 Dec 2026",
+      "closureSource": "https://www.fareastmalls.com.sg/en/discover/terumbu-by-orang-laut",
+      "tips": [
+        "Hours: Tue-Sat 11am-9pm, closed Sun and Mon, per the mall's page.",
+        "Reported prices: Pulau Bowl S$15.90; bubur lambuk tenggiri S$11.90 with prawns or squid, S$13.90 with both. From CNA and the mall's page, not a live menu quote.",
+        "End date differs by source: the mall's page says 22 Dec, CNA says 26 Dec. This card uses the mall's date; confirm before visiting in the final week.",
+        "The reef fish served can change with what islander fishermen catch."
+      ],
+      "lat": 1.2891465,
+      "lon": 103.8467157,
+      "mrt": [
+        {
+          "name": "Clarke Quay",
+          "lines": [
+            {
+              "code": "NE",
+              "color": "#9900AA"
+            }
+          ],
+          "meters": 140,
+          "minutes": 1
+        },
+        {
+          "name": "Fort Canning",
+          "lines": [
+            {
+              "code": "DT",
+              "color": "#005EC4"
+            }
+          ],
+          "meters": 496,
+          "minutes": 7
+        }
+      ],
+      "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Chef+X+%40+Clarke+Quay+Central&query_place_id=ChIJewkdTwAZ2jERdjJ78NpfTuA",
+      "sources": [
+        {
+          "label": "CNA 20 Oct",
+          "url": "https://cnalifestyle.channelnewsasia.com/dining/orang-laut-food-terumbu-chef-x-clarke-quay-590571"
+        },
+        {
+          "label": "Far East Malls",
+          "url": "https://www.fareastmalls.com.sg/en/discover/terumbu-by-orang-laut"
+        },
+        {
+          "label": "Orang Laut SG",
+          "url": "https://oranglaut.sg/"
+        }
+      ],
+      "area": "Clarke Quay"
     }
   ],
   "note": "Illustrations are concept art. The scenes, people and dishes are not photos of these shops or their food."
